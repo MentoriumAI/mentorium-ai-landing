@@ -1,0 +1,19 @@
+# Required Images for Mentorium Landing Page
+
+## Brand Assets
+1. logo.svg (or logo.png) - Mentorium logo for header (150x40px)
+
+## Hero Section
+2. hero-illustration.svg - Main hero illustration (600x400px)
+
+## Integration Logos
+3. moodle-logo.svg - Moodle LMS logo (150x50px)
+4. blackboard-logo.svg - Blackboard LMS logo (150x50px)
+5. google-docs-logo.svg - Google Docs logo (150x50px)
+6. microsoft-word-logo.svg - Microsoft Word logo (150x50px)
+
+## Testimonials
+7. testimonial-1.jpg - Photo of Dr. Ana Martínez (80x80px)
+8. testimonial-2.jpg - Photo of Prof. Carlos Ruiz (80x80px)
+
+Note: All images should be optimized for web use. SVG files are preferred for logos and illustrations. Photos should be in JPG format with appropriate compression.
