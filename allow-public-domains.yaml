@@ -1,0 +1,11 @@
+name: projects/429971818562/policies/iam.allowedPolicyMemberDomains
+spec:
+  inheritFromParent: true
+  rules:
+  - allowAll: false
+  - values:
+      allowedValues:
+      # Add your corporate domains here if present, plus the public principal:
+      # - under:organizations/YOUR_ORG_ID (optional; keep existing)
+      # - domain:mentorium.ai        (example; keep existing)
+      - principalSet://goog/public:all

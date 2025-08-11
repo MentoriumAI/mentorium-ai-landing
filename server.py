@@ -21,4 +21,9 @@ def run(port=8000):
 
 
 if __name__ == '__main__':
-    run()
+    # Read port from environment (useful in containers and Cloud Run)
+    try:
+        port = int(os.environ.get("PORT", 8000))
+    except ValueError:
+        port = 8000
+    run(port)
