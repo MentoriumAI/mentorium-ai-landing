@@ -2,10 +2,9 @@ name: Deploy to Cloud Run
 
 on:
   push:
-    tags:
-      - 'dev-v*'      # Tags like dev-v1.0.0 deploy to dev
-      - 'prod-v*'     # Tags like prod-v1.0.0 deploy to prod
-      - 'v*'          # Tags like v1.0.0 deploy to prod (production release)
+    branches:
+      - develop       # All commits to develop branch deploy to dev
+      - main          # All commits to main branch deploy to prod
 
 env:
   SERVICE_NAME: landing
@@ -28,14 +27,14 @@ jobs:
       - name: Determine deployment environment
         id: env
         run: |
-          if [[ ${{ github.ref }} == refs/tags/dev-v* ]]; then
+          if [[ ${{ github.ref }} == refs/heads/develop ]]; then
             echo "environment=dev" >> $GITHUB_OUTPUT
             echo "project_id=mentorium-ai-dev" >> $GITHUB_OUTPUT
             echo "service_account=cicd-dev-sa@mentorium-ai-dev.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
             echo "workload_identity_provider=projects/${{ env.DEV_PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
             echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-dev/dev" >> $GITHUB_OUTPUT
             echo "service_name=mentorium-landing-dev" >> $GITHUB_OUTPUT
-          elif [[ ${{ github.ref }} == refs/tags/prod-v* || ${{ github.ref }} == refs/tags/v* ]]; then
+          elif [[ ${{ github.ref }} == refs/heads/main ]]; then
             echo "environment=prod" >> $GITHUB_OUTPUT
             echo "project_id=mentorium-ai-prod" >> $GITHUB_OUTPUT
             echo "service_account=cicd-prod-sa@mentorium-ai-prod.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
@@ -43,7 +42,7 @@ jobs:
             echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-prod/mentorium-prod" >> $GITHUB_OUTPUT
             echo "service_name=mentorium-landing-prod" >> $GITHUB_OUTPUT
           else
-            echo "No deployment environment for this ref" >> $GITHUB_OUTPUT
+            echo "No deployment environment for this branch: ${{ github.ref }}" >> $GITHUB_OUTPUT
             exit 1
           fi
 
@@ -60,20 +59,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Extract version from tag
+      - name: Show deployment info
+        run: |
+          echo "🚀 Starting deployment..."
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Environment: ${{ needs.determine-environment.outputs.environment }}"
+          echo "Service: ${{ needs.determine-environment.outputs.service_name }}"
+
+      - name: Generate version from commit
         id: version
         run: |
-          # Extract version from tag (remove dev- or prod- prefix)
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          if [[ $TAG_NAME == dev-v* ]]; then
-            VERSION=${TAG_NAME#dev-v}
-          elif [[ $TAG_NAME == prod-v* ]]; then
-            VERSION=${TAG_NAME#prod-v}
+          # Generate version from branch and commit SHA
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          COMMIT_SHA=${GITHUB_SHA:0:7}
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          
+          if [[ $BRANCH_NAME == "develop" ]]; then
+            VERSION="dev-${TIMESTAMP}-${COMMIT_SHA}"
+          elif [[ $BRANCH_NAME == "main" ]]; then
+            VERSION="prod-${TIMESTAMP}-${COMMIT_SHA}"
           else
-            VERSION=${TAG_NAME#v}
+            VERSION="${BRANCH_NAME}-${TIMESTAMP}-${COMMIT_SHA}"
           fi
+          
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "commit_sha=$COMMIT_SHA" >> $GITHUB_OUTPUT
 
       - name: Authenticate to Google Cloud
         id: auth
@@ -142,9 +154,13 @@ jobs:
         run: |
           if [[ "${{ needs.build-and-deploy.result }}" == "success" ]]; then
             echo "✅ Successfully deployed ${{ env.SERVICE_NAME }} to ${{ needs.determine-environment.outputs.environment }}"
-            echo "Version: ${{ needs.build-and-deploy.outputs.version }}"
+            echo "Branch: ${{ github.ref_name }}"
+            echo "Commit: ${{ github.sha }}"
+            echo "Version: ${{ needs.build-and-deploy.outputs.version || 'latest' }}"
             echo "Environment: ${{ needs.determine-environment.outputs.environment }}"
           else
             echo "❌ Deployment failed for ${{ env.SERVICE_NAME }} to ${{ needs.determine-environment.outputs.environment }}"
+            echo "Branch: ${{ github.ref_name }}"
+            echo "Commit: ${{ github.sha }}"
             exit 1
           fi
