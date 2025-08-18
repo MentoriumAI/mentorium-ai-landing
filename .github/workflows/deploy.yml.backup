@@ -1,0 +1,148 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    tags:
+      - 'dev-v*'      # Tags like dev-v1.0.0 deploy to dev
+      - 'prod-v*'     # Tags like prod-v1.0.0 deploy to prod
+      - 'v*'          # Tags like v1.0.0 deploy to prod (production release)
+
+env:
+  SERVICE_NAME: landing
+  IMAGE_NAME: landing
+  REGION: us-central1
+
+jobs:
+  determine-environment:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.env.outputs.environment }}
+      project_id: ${{ steps.env.outputs.project_id }}
+      service_account: ${{ steps.env.outputs.service_account }}
+      workload_identity_provider: ${{ steps.env.outputs.workload_identity_provider }}
+      artifact_registry: ${{ steps.env.outputs.artifact_registry }}
+      service_name: ${{ steps.env.outputs.service_name }}
+    steps:
+      - name: Determine deployment environment
+        id: env
+        run: |
+          if [[ ${{ github.ref }} == refs/tags/dev-v* ]]; then
+            echo "environment=dev" >> $GITHUB_OUTPUT
+            echo "project_id=mentorium-ai-dev" >> $GITHUB_OUTPUT
+            echo "service_account=cicd-dev-sa@mentorium-ai-dev.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
+            echo "workload_identity_provider=projects/123456789/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
+            echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-dev/dev" >> $GITHUB_OUTPUT
+            echo "service_name=mentorium-landing-dev" >> $GITHUB_OUTPUT
+          elif [[ ${{ github.ref }} == refs/tags/prod-v* || ${{ github.ref }} == refs/tags/v* ]]; then
+            echo "environment=prod" >> $GITHUB_OUTPUT
+            echo "project_id=mentorium-ai-prod" >> $GITHUB_OUTPUT
+            echo "service_account=cicd-prod-sa@mentorium-ai-prod.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
+            echo "workload_identity_provider=projects/123456789/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
+            echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-prod/mentorium-prod" >> $GITHUB_OUTPUT
+            echo "service_name=mentorium-landing-prod" >> $GITHUB_OUTPUT
+          else
+            echo "No deployment environment for this ref" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+  build-and-deploy:
+    needs: determine-environment
+    runs-on: ubuntu-latest
+    environment: ${{ needs.determine-environment.outputs.environment }}
+    
+    permissions:
+      contents: read
+      id-token: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          # Extract version from tag (remove dev- or prod- prefix)
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          if [[ $TAG_NAME == dev-v* ]]; then
+            VERSION=${TAG_NAME#dev-v}
+          elif [[ $TAG_NAME == prod-v* ]]; then
+            VERSION=${TAG_NAME#prod-v}
+          else
+            VERSION=${TAG_NAME#v}
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ needs.determine-environment.outputs.workload_identity_provider }}
+          service_account: ${{ needs.determine-environment.outputs.service_account }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker to use gcloud as credential helper
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            --tag ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} \
+            --tag ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:latest \
+            .
+
+      - name: Push Docker image to Artifact Registry
+        run: |
+          docker push ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }}
+          docker push ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ needs.determine-environment.outputs.service_name }} \
+            --image=${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} \
+            --region=${{ env.REGION }} \
+            --platform=managed \
+            --port=80 \
+            --cpu=1 \
+            --memory=512Mi \
+            --min-instances=0 \
+            --max-instances=${{ needs.determine-environment.outputs.environment == 'prod' && '5' || '3' }} \
+            --concurrency=1000 \
+            --timeout=300 \
+            --cpu-throttling \
+            --execution-environment=gen2 \
+            --service-account=${{ needs.determine-environment.outputs.service_account }} \
+            --set-env-vars="ENVIRONMENT=${{ needs.determine-environment.outputs.environment }}" \
+            --allow-unauthenticated \
+            --quiet
+
+      - name: Update service traffic
+        run: |
+          gcloud run services update-traffic ${{ needs.determine-environment.outputs.service_name }} \
+            --to-latest \
+            --region=${{ env.REGION }}
+
+      - name: Get service URL
+        run: |
+          SERVICE_URL=$(gcloud run services describe ${{ needs.determine-environment.outputs.service_name }} \
+            --region=${{ env.REGION }} \
+            --format="value(status.url)")
+          echo "Service deployed at: $SERVICE_URL"
+
+  notify-deployment:
+    needs: [determine-environment, build-and-deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Deployment notification
+        run: |
+          if [[ "${{ needs.build-and-deploy.result }}" == "success" ]]; then
+            echo "✅ Successfully deployed ${{ env.SERVICE_NAME }} to ${{ needs.determine-environment.outputs.environment }}"
+            echo "Version: ${{ needs.build-and-deploy.outputs.version }}"
+            echo "Environment: ${{ needs.determine-environment.outputs.environment }}"
+          else
+            echo "❌ Deployment failed for ${{ env.SERVICE_NAME }} to ${{ needs.determine-environment.outputs.environment }}"
+            exit 1
+          fi
