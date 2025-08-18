@@ -16,7 +16,7 @@
         <div class="container">
             <nav class="nav">
                 <a href="/" class="logo">
-                    <img src="/static/images/logo.svg" alt="Mentorium Logo" width="150" height="40">
+                    <span class="logo-text">Mentorium</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
@@ -39,7 +39,10 @@
                     <a href="#demo" class="cta-button">Solicitar Demostración</a>
                 </div>
                 <div class="hero-image">
-                    <img src="/static/images/hero-illustration.svg" alt="Mentorium Platform Illustration" width="600" height="400">
+                    <div class="hero-placeholder">
+                        <i class="fas fa-graduation-cap hero-icon"></i>
+                        <p>Plataforma Educativa Inteligente</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -109,10 +112,22 @@
             <div class="container">
                 <h2>Compatible con tus herramientas favoritas</h2>
                 <div class="integration-logos">
-                    <img src="/static/images/moodle-logo.svg" alt="Moodle" width="150" height="50">
-                    <img src="/static/images/blackboard-logo.svg" alt="Blackboard" width="150" height="50">
-                    <img src="/static/images/google-docs-logo.svg" alt="Google Docs" width="150" height="50">
-                    <img src="/static/images/microsoft-word-logo.svg" alt="Microsoft Word" width="150" height="50">
+                    <div class="integration-item">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Moodle</span>
+                    </div>
+                    <div class="integration-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Blackboard</span>
+                    </div>
+                    <div class="integration-item">
+                        <i class="fab fa-google"></i>
+                        <span>Google Docs</span>
+                    </div>
+                    <div class="integration-item">
+                        <i class="fab fa-microsoft"></i>
+                        <span>Microsoft Word</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -122,14 +137,18 @@
                 <h2>Lo que dicen nuestros usuarios</h2>
                 <div class="testimonials-grid">
                     <div class="testimonial-card">
-                        <img src="/static/images/testimonial-1.jpg" alt="Dr. Ana Martínez" class="testimonial-image">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
                         <blockquote>
                             <p>"Mentorium ha revolucionado la forma en que creamos nuestros materiales educativos. El ahorro de tiempo es increíble."</p>
                             <cite>Dra. Ana Martínez<br>Directora Académica, Universidad Tecnológica</cite>
                         </blockquote>
                     </div>
                     <div class="testimonial-card">
-                        <img src="/static/images/testimonial-2.jpg" alt="Prof. Carlos Ruiz" class="testimonial-image">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
                         <blockquote>
                             <p>"La integración con nuestro LMS existente fue perfecta. La curva de aprendizaje es mínima."</p>
                             <cite>Prof. Carlos Ruiz<br>Coordinador de Innovación Educativa</cite>

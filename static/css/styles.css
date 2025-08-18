@@ -1,125 +1,179 @@
 :root[data-theme="light"] {
-    --text-50: hsl(142, 31%, 95%);
-    --text-100: hsl(136, 29%, 90%);
-    --text-200: hsl(136, 29%, 80%);
-    --text-300: hsl(137, 29%, 70%);
-    --text-400: hsl(137, 30%, 60%);
-    --text-500: hsl(137, 30%, 50%);
-    --text-600: hsl(137, 30%, 40%);
-    --text-700: hsl(137, 29%, 30%);
-    --text-800: hsl(136, 29%, 20%);
-    --text-900: hsl(136, 29%, 10%);
-    --text-950: hsl(135, 31%, 5%);
+    /* Brand Colors */
+    --dark-green: #093b2c;
+    --brunswick-green: #0f4c38;
+    --isabelline: #f7f4ef;
+    --brandeis-blue: #006fea;
+    --sunglow: #fac827;
+    --dark-moss-green: #536c03;
+    --orange-pantone: #fb6113;
 
-    --background-50: hsl(138, 38%, 95%);
-    --background-100: hsl(134, 41%, 90%);
-    --background-200: hsl(135, 39%, 80%);
-    --background-300: hsl(135, 40%, 70%);
-    --background-400: hsl(135, 40%, 60%);
-    --background-500: hsl(135, 40%, 50%);
-    --background-600: hsl(135, 40%, 40%);
-    --background-700: hsl(135, 40%, 30%);
-    --background-800: hsl(135, 39%, 20%);
-    --background-900: hsl(134, 41%, 10%);
-    --background-950: hsl(132, 38%, 5%);
+    /* Text Colors */
+    --text-50: var(--isabelline);
+    --text-100: hsl(38, 33%, 90%);
+    --text-200: hsl(38, 33%, 80%);
+    --text-300: hsl(38, 33%, 70%);
+    --text-400: hsl(38, 33%, 60%);
+    --text-500: hsl(38, 33%, 50%);
+    --text-600: var(--dark-moss-green);
+    --text-700: var(--brunswick-green);
+    --text-800: var(--dark-green);
+    --text-900: #051f18;
+    --text-950: #02110c;
 
-    --primary-50: hsl(135, 31%, 95%);
-    --primary-100: hsl(138, 33%, 90%);
-    --primary-200: hsl(135, 31%, 80%);
-    --primary-300: hsl(136, 32%, 70%);
-    --primary-400: hsl(136, 32%, 60%);
-    --primary-500: hsl(136, 32%, 50%);
-    --primary-600: hsl(136, 32%, 40%);
-    --primary-700: hsl(136, 32%, 30%);
-    --primary-800: hsl(135, 31%, 20%);
-    --primary-900: hsl(138, 33%, 10%);
-    --primary-950: hsl(135, 31%, 5%);
+    /* Background Colors */
+    --background-50: var(--isabelline);
+    --background-100: hsl(38, 33%, 92%);
+    --background-200: hsl(38, 33%, 85%);
+    --background-300: hsl(38, 33%, 78%);
+    --background-400: hsl(38, 33%, 70%);
+    --background-500: hsl(38, 33%, 60%);
+    --background-600: hsl(38, 33%, 50%);
+    --background-700: var(--dark-moss-green);
+    --background-800: var(--brunswick-green);
+    --background-900: var(--dark-green);
+    --background-950: #051f18;
 
-    --secondary-50: hsl(203, 31%, 95%);
-    --secondary-100: hsl(204, 29%, 90%);
-    --secondary-200: hsl(204, 31%, 80%);
-    --secondary-300: hsl(206, 31%, 70%);
-    --secondary-400: hsl(205, 31%, 60%);
-    --secondary-500: hsl(205, 31%, 50%);
-    --secondary-600: hsl(205, 31%, 40%);
-    --secondary-700: hsl(206, 31%, 30%);
-    --secondary-800: hsl(204, 31%, 20%);
-    --secondary-900: hsl(204, 29%, 10%);
-    --secondary-950: hsl(210, 31%, 5%);
+    /* Primary Colors (Brunswick Green family) */
+    --primary-50: hsl(160, 67%, 95%);
+    --primary-100: hsl(160, 67%, 90%);
+    --primary-200: hsl(160, 67%, 80%);
+    --primary-300: hsl(160, 67%, 70%);
+    --primary-400: hsl(160, 67%, 60%);
+    --primary-500: hsl(160, 67%, 50%);
+    --primary-600: var(--brunswick-green);
+    --primary-700: hsl(160, 67%, 25%);
+    --primary-800: var(--dark-green);
+    --primary-900: hsl(162, 74%, 10%);
+    --primary-950: hsl(162, 74%, 5%);
 
-    --accent-50: hsl(171, 54%, 95%);
-    --accent-100: hsl(172, 57%, 90%);
-    --accent-200: hsl(173, 55%, 80%);
-    --accent-300: hsl(172, 56%, 70%);
-    --accent-400: hsl(172, 55%, 60%);
-    --accent-500: hsl(172, 55%, 50%);
-    --accent-600: hsl(172, 55%, 40%);
-    --accent-700: hsl(172, 56%, 30%);
-    --accent-800: hsl(173, 55%, 20%);
-    --accent-900: hsl(172, 57%, 10%);
-    --accent-950: hsl(171, 54%, 5%);
+    /* Secondary Colors (Brandeis Blue family) */
+    --secondary-50: hsl(212, 100%, 95%);
+    --secondary-100: hsl(212, 100%, 90%);
+    --secondary-200: hsl(212, 100%, 80%);
+    --secondary-300: hsl(212, 100%, 70%);
+    --secondary-400: hsl(212, 100%, 60%);
+    --secondary-500: var(--brandeis-blue);
+    --secondary-600: hsl(212, 100%, 40%);
+    --secondary-700: hsl(212, 100%, 30%);
+    --secondary-800: hsl(212, 100%, 20%);
+    --secondary-900: hsl(212, 100%, 10%);
+    --secondary-950: hsl(212, 100%, 5%);
+
+    /* Accent Colors (Sunglow family) */
+    --accent-50: hsl(46, 95%, 95%);
+    --accent-100: hsl(46, 95%, 90%);
+    --accent-200: hsl(46, 95%, 80%);
+    --accent-300: hsl(46, 95%, 70%);
+    --accent-400: hsl(46, 95%, 65%);
+    --accent-500: var(--sunglow);
+    --accent-600: hsl(46, 95%, 50%);
+    --accent-700: hsl(46, 95%, 40%);
+    --accent-800: hsl(46, 95%, 30%);
+    --accent-900: hsl(46, 95%, 20%);
+    --accent-950: hsl(46, 95%, 10%);
+
+    /* Warning/Alert Colors (Orange Pantone family) */
+    --warning-50: hsl(20, 97%, 95%);
+    --warning-100: hsl(20, 97%, 90%);
+    --warning-200: hsl(20, 97%, 80%);
+    --warning-300: hsl(20, 97%, 70%);
+    --warning-400: hsl(20, 97%, 60%);
+    --warning-500: var(--orange-pantone);
+    --warning-600: hsl(20, 97%, 45%);
+    --warning-700: hsl(20, 97%, 35%);
+    --warning-800: hsl(20, 97%, 25%);
+    --warning-900: hsl(20, 97%, 15%);
+    --warning-950: hsl(20, 97%, 8%);
 }
 
 :root[data-theme="dark"] {
-    --text-50: hsl(135, 31%, 5%);
-    --text-100: hsl(136, 29%, 10%);
-    --text-200: hsl(136, 29%, 20%);
-    --text-300: hsl(137, 29%, 30%);
-    --text-400: hsl(137, 30%, 40%);
-    --text-500: hsl(137, 30%, 50%);
-    --text-600: hsl(137, 30%, 60%);
-    --text-700: hsl(137, 29%, 70%);
-    --text-800: hsl(136, 29%, 80%);
-    --text-900: hsl(136, 29%, 90%);
-    --text-950: hsl(142, 31%, 95%);
+    /* Brand Colors */
+    --dark-green: #093b2c;
+    --brunswick-green: #0f4c38;
+    --isabelline: #f7f4ef;
+    --brandeis-blue: #006fea;
+    --sunglow: #fac827;
+    --dark-moss-green: #536c03;
+    --orange-pantone: #fb6113;
 
-    --background-50: hsl(132, 38%, 5%);
-    --background-100: hsl(134, 41%, 10%);
-    --background-200: hsl(135, 39%, 20%);
-    --background-300: hsl(135, 40%, 30%);
-    --background-400: hsl(135, 40%, 40%);
-    --background-500: hsl(135, 40%, 50%);
-    --background-600: hsl(135, 40%, 60%);
-    --background-700: hsl(135, 40%, 70%);
-    --background-800: hsl(135, 39%, 80%);
-    --background-900: hsl(134, 41%, 90%);
-    --background-950: hsl(138, 38%, 95%);
+    /* Text Colors (inverted for dark theme) */
+    --text-50: #02110c;
+    --text-100: #051f18;
+    --text-200: var(--dark-green);
+    --text-300: var(--brunswick-green);
+    --text-400: var(--dark-moss-green);
+    --text-500: hsl(38, 33%, 50%);
+    --text-600: hsl(38, 33%, 60%);
+    --text-700: hsl(38, 33%, 70%);
+    --text-800: hsl(38, 33%, 80%);
+    --text-900: hsl(38, 33%, 90%);
+    --text-950: var(--isabelline);
 
-    --primary-50: hsl(135, 31%, 5%);
-    --primary-100: hsl(138, 33%, 10%);
-    --primary-200: hsl(135, 31%, 20%);
-    --primary-300: hsl(136, 32%, 30%);
-    --primary-400: hsl(136, 32%, 40%);
-    --primary-500: hsl(136, 32%, 50%);
-    --primary-600: hsl(136, 32%, 60%);
-    --primary-700: hsl(136, 32%, 70%);
-    --primary-800: hsl(135, 31%, 80%);
-    --primary-900: hsl(138, 33%, 90%);
-    --primary-950: hsl(135, 31%, 95%);
+    /* Background Colors (inverted for dark theme) */
+    --background-50: #051f18;
+    --background-100: var(--dark-green);
+    --background-200: var(--brunswick-green);
+    --background-300: var(--dark-moss-green);
+    --background-400: hsl(38, 33%, 50%);
+    --background-500: hsl(38, 33%, 60%);
+    --background-600: hsl(38, 33%, 70%);
+    --background-700: hsl(38, 33%, 78%);
+    --background-800: hsl(38, 33%, 85%);
+    --background-900: hsl(38, 33%, 92%);
+    --background-950: var(--isabelline);
 
-    --secondary-50: hsl(210, 31%, 5%);
-    --secondary-100: hsl(204, 29%, 10%);
-    --secondary-200: hsl(204, 31%, 20%);
-    --secondary-300: hsl(206, 31%, 30%);
-    --secondary-400: hsl(205, 31%, 40%);
-    --secondary-500: hsl(205, 31%, 50%);
-    --secondary-600: hsl(205, 31%, 60%);
-    --secondary-700: hsl(206, 31%, 70%);
-    --secondary-800: hsl(204, 31%, 80%);
-    --secondary-900: hsl(204, 29%, 90%);
-    --secondary-950: hsl(203, 31%, 95%);
+    /* Primary Colors (Brunswick Green family - enhanced for dark) */
+    --primary-50: hsl(162, 74%, 5%);
+    --primary-100: hsl(162, 74%, 10%);
+    --primary-200: var(--dark-green);
+    --primary-300: hsl(160, 67%, 25%);
+    --primary-400: var(--brunswick-green);
+    --primary-500: hsl(160, 67%, 50%);
+    --primary-600: hsl(160, 67%, 60%);
+    --primary-700: hsl(160, 67%, 70%);
+    --primary-800: hsl(160, 67%, 80%);
+    --primary-900: hsl(160, 67%, 90%);
+    --primary-950: hsl(160, 67%, 95%);
 
-    --accent-50: hsl(171, 54%, 5%);
-    --accent-100: hsl(172, 57%, 10%);
-    --accent-200: hsl(173, 55%, 20%);
-    --accent-300: hsl(172, 56%, 30%);
-    --accent-400: hsl(172, 55%, 40%);
-    --accent-500: hsl(172, 55%, 50%);
-    --accent-600: hsl(172, 55%, 60%);
-    --accent-700: hsl(172, 56%, 70%);
-    --accent-800: hsl(173, 55%, 80%);
-    --accent-900: hsl(172, 57%, 90%);
-    --accent-950: hsl(171, 54%, 95%);
+    /* Secondary Colors (Brandeis Blue family - enhanced for dark) */
+    --secondary-50: hsl(212, 100%, 5%);
+    --secondary-100: hsl(212, 100%, 10%);
+    --secondary-200: hsl(212, 100%, 20%);
+    --secondary-300: hsl(212, 100%, 30%);
+    --secondary-400: hsl(212, 100%, 40%);
+    --secondary-500: var(--brandeis-blue);
+    --secondary-600: hsl(212, 100%, 60%);
+    --secondary-700: hsl(212, 100%, 70%);
+    --secondary-800: hsl(212, 100%, 80%);
+    --secondary-900: hsl(212, 100%, 90%);
+    --secondary-950: hsl(212, 100%, 95%);
+
+    /* Accent Colors (Sunglow family - enhanced for dark) */
+    --accent-50: hsl(46, 95%, 10%);
+    --accent-100: hsl(46, 95%, 20%);
+    --accent-200: hsl(46, 95%, 30%);
+    --accent-300: hsl(46, 95%, 40%);
+    --accent-400: hsl(46, 95%, 50%);
+    --accent-500: var(--sunglow);
+    --accent-600: hsl(46, 95%, 65%);
+    --accent-700: hsl(46, 95%, 70%);
+    --accent-800: hsl(46, 95%, 80%);
+    --accent-900: hsl(46, 95%, 90%);
+    --accent-950: hsl(46, 95%, 95%);
+
+    /* Warning/Alert Colors (Orange Pantone family - enhanced for dark) */
+    --warning-50: hsl(20, 97%, 8%);
+    --warning-100: hsl(20, 97%, 15%);
+    --warning-200: hsl(20, 97%, 25%);
+    --warning-300: hsl(20, 97%, 35%);
+    --warning-400: hsl(20, 97%, 45%);
+    --warning-500: var(--orange-pantone);
+    --warning-600: hsl(20, 97%, 60%);
+    --warning-700: hsl(20, 97%, 70%);
+    --warning-800: hsl(20, 97%, 80%);
+    --warning-900: hsl(20, 97%, 90%);
+    --warning-950: hsl(20, 97%, 95%);
 }
 
 :root {
@@ -155,6 +209,13 @@
     box-sizing: border-box;
 }
 
+/* Ensure all images are responsive by default */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 html {
     font-size: var(--font-size-base);
     scroll-behavior: smooth;
@@ -181,6 +242,13 @@ body {
     background-color: var(--background-50);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-600);
+    text-decoration: none;
 }
 
 .nav {
@@ -210,12 +278,32 @@ body {
 /* Hero Section */
 .hero {
     padding: var(--spacing-xl) 0;
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    flex-wrap: wrap;
 }
 
 .hero-content {
+    flex: 1;
     max-width: 600px;
-    margin: 0 auto;
+    text-align: left;
+}
+
+.hero-image {
+    flex: 1;
     text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
 }
 
 .hero h1 {
@@ -224,6 +312,39 @@ body {
     margin-bottom: var(--spacing-lg);
     color: var(--text-900);
     line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-700);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.5;
+}
+
+/* Hero placeholder */
+.hero-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-100), var(--secondary-100), var(--accent-100));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    min-height: 300px;
+    text-align: center;
+    border: 2px solid var(--primary-200);
+}
+
+.hero-icon {
+    font-size: 4rem;
+    color: var(--primary-600);
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-placeholder p {
+    font-size: 1.2rem;
+    color: var(--text-700);
+    font-weight: 600;
 }
 
 /* Features Section */
@@ -258,6 +379,7 @@ body {
 
 .feature-card:hover {
     transform: translateY(-4px);
+    border-left: 4px solid var(--secondary-500);
 }
 
 .feature-card i {
@@ -296,6 +418,33 @@ body {
     flex-wrap: wrap;
 }
 
+.integration-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background-color: var(--background-50);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-base);
+    min-width: 120px;
+}
+
+.integration-item:hover {
+    transform: translateY(-2px);
+}
+
+.integration-item i {
+    font-size: 2rem;
+    color: var(--primary-600);
+    margin-bottom: var(--spacing-sm);
+}
+
+.integration-item span {
+    font-weight: 600;
+    color: var(--text-800);
+}
+
 /* Testimonials Section */
 .testimonials {
     padding: var(--spacing-xl) 0;
@@ -314,27 +463,41 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.testimonial-image {
+.testimonial-avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     margin-bottom: var(--spacing-md);
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-500));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md) auto;
+    border: 3px solid var(--accent-500);
+}
+
+.testimonial-avatar i {
+    font-size: 2rem;
+    color: white;
 }
 
 /* CTA Sections */
 .cta-button {
     display: inline-block;
     padding: var(--spacing-md) var(--spacing-lg);
-    background-color: var(--accent-500);
+    background: linear-gradient(135deg, var(--warning-500), var(--accent-500));
     color: white;
     text-decoration: none;
     border-radius: var(--radius-md);
     font-weight: 600;
-    transition: background-color var(--transition-base);
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .cta-button:hover {
-    background-color: var(--accent-600);
+    background: linear-gradient(135deg, var(--warning-600), var(--accent-600));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cta-button-large {
@@ -451,14 +614,275 @@ body {
 
 [data-theme="dark"] .contact-form input:focus,
 [data-theme="dark"] .contact-form textarea:focus {
-    border-color: var(--accent-500);
-    outline: none;
+    border-color: var(--secondary-500);
+    outline: 2px solid var(--accent-500);
+    outline-offset: 2px;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+
+/* Mobile First - Base styles are mobile optimized */
+
+/* Small mobile devices */
+@media (max-width: 480px) {
     :root {
         --container-padding: 1rem;
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 0.75rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2.5rem;
+    }
+
+    /* Navigation improvements */
+    .header {
+        padding: 0.5rem 0;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) 0;
+    }
+
+    .logo img {
+        width: 120px;
+        height: auto;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+        width: 100%;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-sm);
+        transition: background-color var(--transition-base);
+    }
+
+    .nav-links a:hover {
+        background-color: var(--primary-100);
+    }
+
+    /* Hero section improvements */
+    .hero {
+        padding: var(--spacing-lg) 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.1;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.5;
+    }
+
+    .hero-image {
+        margin-top: var(--spacing-lg);
+    }
+
+    .hero-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Typography improvements */
+    .features h2,
+    .benefits h2,
+    .integrations h2,
+    .testimonials h2,
+    .cta-section h2 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-lg);
+        padding: 0 var(--spacing-sm);
+    }
+
+    .feature-card h3,
+    .benefit-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .feature-card p,
+    .benefit-card p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    /* Card improvements */
+    .features-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .feature-card,
+    .benefit-card {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .feature-card i {
+        font-size: 1.75rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    /* Integration logos */
+    .integration-logos {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: center;
+    }
+
+    .integration-item {
+        min-width: 100px;
+        padding: var(--spacing-md);
+    }
+
+    .integration-item i {
+        font-size: 1.5rem;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .testimonial-card {
+        padding: var(--spacing-md);
+        text-align: center;
+    }
+
+    .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .testimonial-avatar i {
+        font-size: 1.5rem;
+    }
+
+    /* CTA improvements */
+    .cta-button {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        text-align: center;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 1rem;
+    }
+
+    .cta-button-large {
+        padding: var(--spacing-lg) var(--spacing-xl);
+        font-size: 1.1rem;
+        margin-top: var(--spacing-md);
+    }
+
+    /* Footer improvements */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .contact-form {
+        max-width: 100%;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 1rem;
+        padding: var(--spacing-md);
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    /* Spacing adjustments */
+    .features,
+    .benefits,
+    .integrations,
+    .testimonials,
+    .cta-section {
+        padding: var(--spacing-xl) 0 var(--spacing-lg);
+    }
+
+    /* Mobile hero layout */
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        text-align: center;
+        order: 1;
+    }
+
+    .hero-image {
+        order: 2;
+        margin-top: var(--spacing-lg);
+    }
+
+    /* Improved touch targets */
+    .nav-links a,
+    .cta-button,
+    .footer-links a,
+    .social-links a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Better text readability */
+    body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    /* Prevent horizontal scrolling */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Improve form usability on mobile */
+    .contact-form input,
+    .contact-form textarea {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: var(--radius-md);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: 2px solid var(--secondary-500);
+        outline-offset: 2px;
+        border-color: var(--primary-500);
+    }
+}
+
+/* Tablet and larger mobile devices */
+@media (min-width: 481px) and (max-width: 768px) {
+    :root {
+        --container-padding: 1.5rem;
     }
 
     .nav {
@@ -467,8 +891,9 @@ body {
     }
 
     .nav-links {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
         gap: var(--spacing-md);
     }
 
@@ -483,12 +908,41 @@ body {
         font-size: 2rem;
     }
 
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
     .integration-logos {
         gap: var(--spacing-lg);
     }
 
-    .integration-logos img {
-        max-width: 120px;
+    .integration-item {
+        min-width: 110px;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large tablets and small desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
