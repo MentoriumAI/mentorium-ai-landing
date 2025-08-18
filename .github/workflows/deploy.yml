@@ -94,9 +94,13 @@ jobs:
         with:
           workload_identity_provider: ${{ needs.determine-environment.outputs.workload_identity_provider }}
           service_account: ${{ needs.determine-environment.outputs.service_account }}
+          create_credentials_file: true
+          export_environment_variables: true
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ needs.determine-environment.outputs.project_id }}
 
       - name: Verify authentication
         run: |
