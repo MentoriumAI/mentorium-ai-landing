@@ -37,7 +37,7 @@ jobs:
             echo "project_number=429971818562" >> $GITHUB_OUTPUT
             echo "service_account=cicd-dev-sa@mentorium-ai-dev.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
             echo "workload_identity_provider=projects/429971818562/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
-            echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-dev/dev" >> $GITHUB_OUTPUT
+            echo "artifact_registry=us-docker.pkg.dev/mentorium-ai-dev/dev" >> $GITHUB_OUTPUT
             # Service base name; prefer env.SERVICE_NAME if provided, else mentorium-<type>
             BASE_NAME="${{ env.SERVICE_NAME }}"
             if [[ -z "$BASE_NAME" ]]; then BASE_NAME="mentorium-${SERVICE_TYPE}"; fi
@@ -48,7 +48,7 @@ jobs:
             echo "project_number=40869640118" >> $GITHUB_OUTPUT
             echo "service_account=cicd-prod-sa@mentorium-ai-prod.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
             echo "workload_identity_provider=projects/40869640118/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
-            echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-prod/mentorium-prod" >> $GITHUB_OUTPUT
+            echo "artifact_registry=us-docker.pkg.dev/mentorium-ai-prod/mentorium-prod" >> $GITHUB_OUTPUT
             BASE_NAME="${{ env.SERVICE_NAME }}"
             if [[ -z "$BASE_NAME" ]]; then BASE_NAME="mentorium-${SERVICE_TYPE}"; fi
             echo "service_name=${BASE_NAME}-prod" >> $GITHUB_OUTPUT
@@ -97,8 +97,6 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ needs.determine-environment.outputs.project_id }}
 
       - name: Verify authentication
         run: |
@@ -108,7 +106,7 @@ jobs:
 
       - name: Configure Docker to use gcloud as credential helper
         run: |
-          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+          gcloud auth configure-docker us-docker.pkg.dev --quiet
 
       - name: Build Docker image
         id: build
@@ -185,7 +183,7 @@ jobs:
             --max-instances="$MAX_INSTANCES" \
             --concurrency="$CONCURRENCY" \
             --execution-environment=gen2 \
-            --service-account="${{ needs.determine-environment.outputs.service_account }}" \
+            --service-account="${{ needs.determine-environment.outputs.project_number }}-compute@developer.gserviceaccount.com" \
             --labels="environment=${{ needs.determine-environment.outputs.environment }},service=$SERVICE_TYPE,version=${{ steps.version.outputs.version }}" \
             --timeout=300 \
             --quiet
