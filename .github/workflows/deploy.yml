@@ -1,4 +1,4 @@
-name: Deploy to Cloud Run
+name: Deploy to Google Cloud Run
 
 on:
   push:
@@ -7,11 +7,10 @@ on:
       - main          # All commits to main branch deploy to prod
 
 env:
-  SERVICE_NAME: landing
-  IMAGE_NAME: landing
   REGION: us-central1
-  DEV_PROJECT_ID: 429971818562
-  PROD_PROJECT_ID: 40869640118
+  # Optionally set SERVICE_NAME to override the Cloud Run service base name.
+  # If not set, the workflow will infer the service type from the repository name.
+  # SERVICE_NAME: mentorium-landing
 
 jobs:
   determine-environment:
@@ -19,53 +18,55 @@ jobs:
     outputs:
       environment: ${{ steps.env.outputs.environment }}
       project_id: ${{ steps.env.outputs.project_id }}
+      project_number: ${{ steps.env.outputs.project_number }}
       service_account: ${{ steps.env.outputs.service_account }}
       workload_identity_provider: ${{ steps.env.outputs.workload_identity_provider }}
       artifact_registry: ${{ steps.env.outputs.artifact_registry }}
       service_name: ${{ steps.env.outputs.service_name }}
     steps:
-      - name: Determine deployment environment
+      - name: Determine environment and configuration
         id: env
         run: |
-          if [[ ${{ github.ref }} == refs/heads/develop ]]; then
+          # Derive service type from repository (mentorium-ai-landing -> landing)
+          REPO_NAME="${GITHUB_REPOSITORY##*/}"
+          SERVICE_TYPE="${REPO_NAME#mentorium-ai-}"
+
+          if [[ "${{ github.ref }}" == refs/heads/develop ]]; then
             echo "environment=dev" >> $GITHUB_OUTPUT
             echo "project_id=mentorium-ai-dev" >> $GITHUB_OUTPUT
+            echo "project_number=429971818562" >> $GITHUB_OUTPUT
             echo "service_account=cicd-dev-sa@mentorium-ai-dev.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
-            echo "workload_identity_provider=projects/${{ env.DEV_PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
+            echo "workload_identity_provider=projects/429971818562/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
             echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-dev/dev" >> $GITHUB_OUTPUT
-            echo "service_name=mentorium-landing-dev" >> $GITHUB_OUTPUT
-          elif [[ ${{ github.ref }} == refs/heads/main ]]; then
+            # Service base name; prefer env.SERVICE_NAME if provided, else mentorium-<type>
+            BASE_NAME="${{ env.SERVICE_NAME }}"
+            if [[ -z "$BASE_NAME" ]]; then BASE_NAME="mentorium-${SERVICE_TYPE}"; fi
+            echo "service_name=${BASE_NAME}-dev" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/heads/main ]]; then
             echo "environment=prod" >> $GITHUB_OUTPUT
             echo "project_id=mentorium-ai-prod" >> $GITHUB_OUTPUT
+            echo "project_number=40869640118" >> $GITHUB_OUTPUT
             echo "service_account=cicd-prod-sa@mentorium-ai-prod.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
-            echo "workload_identity_provider=projects/${{ env.PROD_PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
+            echo "workload_identity_provider=projects/40869640118/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
             echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-prod/mentorium-prod" >> $GITHUB_OUTPUT
-            echo "service_name=mentorium-landing-prod" >> $GITHUB_OUTPUT
+            BASE_NAME="${{ env.SERVICE_NAME }}"
+            if [[ -z "$BASE_NAME" ]]; then BASE_NAME="mentorium-${SERVICE_TYPE}"; fi
+            echo "service_name=${BASE_NAME}-prod" >> $GITHUB_OUTPUT
           else
-            echo "No deployment environment for this branch: ${{ github.ref }}" >> $GITHUB_OUTPUT
+            echo "No deployment environment for this branch: ${{ github.ref }}"
             exit 1
           fi
 
-  build-and-deploy:
+  deploy:
     needs: determine-environment
     runs-on: ubuntu-latest
     environment: ${{ needs.determine-environment.outputs.environment }}
-    
     permissions:
       contents: read
       id-token: write
-      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Show deployment info
-        run: |
-          echo "🚀 Starting deployment..."
-          echo "Branch: ${{ github.ref_name }}"
-          echo "Commit SHA: ${{ github.sha }}"
-          echo "Environment: ${{ needs.determine-environment.outputs.environment }}"
-          echo "Service: ${{ needs.determine-environment.outputs.service_name }}"
 
       - name: Generate version from commit
         id: version
@@ -96,71 +97,128 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ needs.determine-environment.outputs.project_id }}
+
+      - name: Verify authentication
+        run: |
+          gcloud auth list
+          gcloud config get-value project
+          echo "Project Number: ${{ needs.determine-environment.outputs.project_number }}"
 
       - name: Configure Docker to use gcloud as credential helper
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
 
       - name: Build Docker image
+        id: build
         run: |
-          docker build \
-            --tag ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} \
-            --tag ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:latest \
-            .
+          # Determine service type from repository name or environment variable
+          if [[ -n "$SERVICE_NAME" ]]; then
+            SERVICE_TYPE="$SERVICE_NAME"
+          else
+            # Extract service type from repository name
+            REPO_NAME="${GITHUB_REPOSITORY##*/}"
+            SERVICE_TYPE="${REPO_NAME#mentorium-ai-}"
+          fi
+          
+          IMAGE_TAG="${{ needs.determine-environment.outputs.artifact_registry }}/${SERVICE_TYPE}:${{ steps.version.outputs.version }}"
+          LATEST_TAG="${{ needs.determine-environment.outputs.artifact_registry }}/${SERVICE_TYPE}:latest"
+          
+          echo "Building image: $IMAGE_TAG"
+          
+          docker build -t "$IMAGE_TAG" -t "$LATEST_TAG" .
+          
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          echo "SERVICE_TYPE=$SERVICE_TYPE" >> $GITHUB_ENV
+          echo "service_type=$SERVICE_TYPE" >> $GITHUB_OUTPUT
 
       - name: Push Docker image to Artifact Registry
         run: |
-          docker push ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }}
-          docker push ${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:latest
+          echo "Pushing images to Artifact Registry..."
+          docker push "$IMAGE_TAG"
+          docker push "$LATEST_TAG"
+          echo "✅ Images pushed successfully"
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy ${{ needs.determine-environment.outputs.service_name }} \
-            --image=${{ needs.determine-environment.outputs.artifact_registry }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }} \
-            --region=${{ env.REGION }} \
+          # Set service-specific configuration
+          case "$SERVICE_TYPE" in
+            frontend)
+              PORT=3000
+              MEMORY=512Mi
+              MAX_INSTANCES=${{ needs.determine-environment.outputs.environment == 'prod' && '10' || '5' }}
+              CONCURRENCY=80
+              CPU=1
+              ;;
+            backend)
+              PORT=8000
+              MEMORY=1Gi
+              MAX_INSTANCES=${{ needs.determine-environment.outputs.environment == 'prod' && '15' || '10' }}
+              CONCURRENCY=100
+              CPU=1
+              ;;
+            landing)
+              PORT=80
+              MEMORY=512Mi
+              MAX_INSTANCES=${{ needs.determine-environment.outputs.environment == 'prod' && '5' || '3' }}
+              CONCURRENCY=1000
+              CPU=1
+              ;;
+            *)
+              echo "Unknown service type: $SERVICE_TYPE"
+              exit 1
+              ;;
+          esac
+          
+          # Deploy the service
+          gcloud run deploy "${{ needs.determine-environment.outputs.service_name }}" \
+            --image="$IMAGE_TAG" \
             --platform=managed \
-            --port=80 \
-            --cpu=1 \
-            --memory=512Mi \
-            --min-instances=0 \
-            --max-instances=${{ needs.determine-environment.outputs.environment == 'prod' && '5' || '3' }} \
-            --concurrency=1000 \
-            --timeout=300 \
-            --cpu-throttling \
-            --execution-environment=gen2 \
-            --service-account=${{ needs.determine-environment.outputs.service_account }} \
-            --set-env-vars="ENVIRONMENT=${{ needs.determine-environment.outputs.environment }}" \
+            --region="${{ env.REGION }}" \
             --allow-unauthenticated \
+            --port="$PORT" \
+            --memory="$MEMORY" \
+            --cpu="$CPU" \
+            --min-instances=0 \
+            --max-instances="$MAX_INSTANCES" \
+            --concurrency="$CONCURRENCY" \
+            --execution-environment=gen2 \
+            --service-account="${{ needs.determine-environment.outputs.service_account }}" \
+            --labels="environment=${{ needs.determine-environment.outputs.environment }},service=$SERVICE_TYPE,version=${{ steps.version.outputs.version }}" \
+            --timeout=300 \
             --quiet
 
-      - name: Update service traffic
+      - name: Run database migrations (backend only)
+        if: ${{ steps.build.outputs.service_type == 'backend' && needs.determine-environment.outputs.environment == 'prod' }}
         run: |
-          gcloud run services update-traffic ${{ needs.determine-environment.outputs.service_name }} \
-            --to-latest \
-            --region=${{ env.REGION }}
+          echo "Running database migrations for production backend..."
+          # Add your migration commands here
+          # Example:
+          # gcloud run jobs create migrate-job \
+          #   --image="$IMAGE_TAG" \
+          #   --set-env-vars="RUN_MIGRATIONS=true" \
+          #   --region="${{ env.REGION }}" \
+          #   --service-account="${{ needs.determine-environment.outputs.service_account }}"
+          # gcloud run jobs execute migrate-job --region="${{ env.REGION }}"
 
       - name: Get service URL
+        id: service-url
         run: |
-          SERVICE_URL=$(gcloud run services describe ${{ needs.determine-environment.outputs.service_name }} \
-            --region=${{ env.REGION }} \
+          SERVICE_URL=$(gcloud run services describe "${{ needs.determine-environment.outputs.service_name }}" \
+            --region="${{ env.REGION }}" \
             --format="value(status.url)")
-          echo "Service deployed at: $SERVICE_URL"
+          echo "service_url=$SERVICE_URL" >> $GITHUB_OUTPUT
+          echo "🚀 Service deployed at: $SERVICE_URL"
 
-  notify-deployment:
-    needs: [determine-environment, build-and-deploy]
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Deployment notification
+      - name: Deployment summary
         run: |
-          if [[ "${{ needs.build-and-deploy.result }}" == "success" ]]; then
-            echo "✅ Successfully deployed ${{ env.SERVICE_NAME }} to ${{ needs.determine-environment.outputs.environment }}"
-            echo "Branch: ${{ github.ref_name }}"
-            echo "Commit: ${{ github.sha }}"
-            echo "Version: ${{ needs.build-and-deploy.outputs.version || 'latest' }}"
-            echo "Environment: ${{ needs.determine-environment.outputs.environment }}"
-          else
-            echo "❌ Deployment failed for ${{ env.SERVICE_NAME }} to ${{ needs.determine-environment.outputs.environment }}"
-            echo "Branch: ${{ github.ref_name }}"
-            echo "Commit: ${{ github.sha }}"
-            exit 1
-          fi
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: ${{ needs.determine-environment.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Service**: $SERVICE_TYPE" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image**: \`$IMAGE_TAG\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Service URL**: ${{ steps.service-url.outputs.service_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Project**: ${{ needs.determine-environment.outputs.project_id }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Region**: ${{ env.REGION }}" >> $GITHUB_STEP_SUMMARY
