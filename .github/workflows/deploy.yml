@@ -11,6 +11,8 @@ env:
   SERVICE_NAME: landing
   IMAGE_NAME: landing
   REGION: us-central1
+  DEV_PROJECT_ID: 429971818562
+  PROD_PROJECT_ID: 40869640118
 
 jobs:
   determine-environment:
@@ -30,14 +32,14 @@ jobs:
             echo "environment=dev" >> $GITHUB_OUTPUT
             echo "project_id=mentorium-ai-dev" >> $GITHUB_OUTPUT
             echo "service_account=cicd-dev-sa@mentorium-ai-dev.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
-            echo "workload_identity_provider=projects/123456789/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
+            echo "workload_identity_provider=projects/${{ env.DEV_PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
             echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-dev/dev" >> $GITHUB_OUTPUT
             echo "service_name=mentorium-landing-dev" >> $GITHUB_OUTPUT
           elif [[ ${{ github.ref }} == refs/tags/prod-v* || ${{ github.ref }} == refs/tags/v* ]]; then
             echo "environment=prod" >> $GITHUB_OUTPUT
             echo "project_id=mentorium-ai-prod" >> $GITHUB_OUTPUT
             echo "service_account=cicd-prod-sa@mentorium-ai-prod.iam.gserviceaccount.com" >> $GITHUB_OUTPUT
-            echo "workload_identity_provider=projects/123456789/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
+            echo "workload_identity_provider=projects/${{ env.PROD_PROJECT_ID }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider" >> $GITHUB_OUTPUT
             echo "artifact_registry=us-central1-docker.pkg.dev/mentorium-ai-prod/mentorium-prod" >> $GITHUB_OUTPUT
             echo "service_name=mentorium-landing-prod" >> $GITHUB_OUTPUT
           else
