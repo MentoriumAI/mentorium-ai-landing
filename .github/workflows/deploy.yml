@@ -94,6 +94,7 @@ jobs:
         with:
           workload_identity_provider: ${{ needs.determine-environment.outputs.workload_identity_provider }}
           service_account: ${{ needs.determine-environment.outputs.service_account }}
+          project_id: ${{ needs.determine-environment.outputs.project_id }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
