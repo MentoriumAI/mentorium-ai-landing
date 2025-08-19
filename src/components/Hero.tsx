@@ -184,7 +184,7 @@ const Hero = () => {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl animate-float"></div>
       </div>
 
-      <div className="container relative z-20 pt-24 lg:pt-32 px-6 md:px-8 xl:px-0">
+      <div className="container relative z-20 pt-24 lg:pt-32 -mt-8 px-6 md:px-8 xl:px-0">
         <div className="grid lg:grid-cols-2 xl:grid-cols-[1.3fr_0.9fr] gap-12 lg:gap-16 xl:gap-10 items-center">
           {/* Hero Content */}
           <div className="space-y-8 text-center lg:text-left">
