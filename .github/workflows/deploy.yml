@@ -132,13 +132,8 @@ jobs:
 
           # Build full image repository path: <repo>[/<image_name>]
           IMAGE_REPO_BASE="${{ needs.determine-environment.outputs.artifact_registry }}"
-          LAST_SEGMENT="${IMAGE_REPO_BASE##*/}"
-          if [[ -z "${IMAGE_NAME:-}" && "$LAST_SEGMENT" == "$SERVICE_TYPE" ]]; then
-            # Repo already named like the image; don't append image name
-            FULL_IMAGE_REPO="$IMAGE_REPO_BASE"
-          else
-            FULL_IMAGE_REPO="${IMAGE_REPO_BASE}/${RESOLVED_IMAGE_NAME}"
-          fi
+          # Always append the image name; Artifact Registry requires an IMAGE segment
+          FULL_IMAGE_REPO="${IMAGE_REPO_BASE}/${RESOLVED_IMAGE_NAME}"
           IMAGE_TAG="${FULL_IMAGE_REPO}:${{ steps.version.outputs.version }}"
           LATEST_TAG="${FULL_IMAGE_REPO}:latest"
           SHA_TAG="${FULL_IMAGE_REPO}:sha-${{ steps.version.outputs.commit_sha }}"
