@@ -262,11 +262,11 @@ const Hero = () => {
             {/* Fixed-size orbit box to prevent squashing */}
             <div className="relative ml-auto" style={{ width: 820, height: 520 }}>
               {/* Hero Illustration with Orbital Icons */}
-              <div className="absolute inset-0 z-0">
+              <div className="absolute inset-0 z-20">
                 {/* Simplified Orbital Icon System */}
                 <div className="absolute inset-0 pointer-events-none">
                   {/* Debug Ellipse (visible stroke) */}
-                  <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <svg className="absolute inset-0 w-full h-full z-20" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                     <defs>
                       {/* Soft drop shadow to emulate glass depth */}
                       <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
