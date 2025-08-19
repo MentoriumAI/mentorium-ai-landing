@@ -5,13 +5,13 @@ import { cloneElement, isValidElement } from 'react'
 
 const Hero = () => {
   // Precompute orbit icons positioned at equal arc-length intervals
-  const viewW = 600
-  const viewH = 400
-  const cx = 300
-  const cy = 200
+  const viewW = 820
+  const viewH = 520
+  const cx = 410
+  const cy = 260
   // Radii chosen to comfortably surround the centered card inside a 3:2 box
-  const rx = 240
-  const ry = 150
+  const rx = 330
+  const ry = 205
 
   const items = [
     { key: 'book', chipClass: 'shadow-glow-orange', svg: (
@@ -182,17 +182,17 @@ const Hero = () => {
           </div>
 
           {/* Second Column: Illustration + Card */}
-          <div className="relative mx-auto w-full max-w-[600px]">
+          <div className="relative mx-auto w-full max-w-[820px]">
             {/* Fixed-size orbit box to prevent squashing */}
-            <div className="relative mx-auto" style={{ width: 600, height: 400 }}>
+            <div className="relative mx-auto" style={{ width: 820, height: 520 }}>
               {/* Hero Illustration with Orbital Icons */}
               <div className="absolute inset-0 z-0">
                 {/* Simplified Orbital Icon System */}
                 <div className="absolute inset-0 pointer-events-none">
                   {/* Debug Ellipse (visible stroke) */}
-                  <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                     {/* Center near the right column where the card lives */}
-                    <ellipse cx="300" cy="200" rx="240" ry="150" fill="none" stroke="rgba(0, 111, 234, 0.5)" strokeWidth="3" strokeDasharray="6 8" />
+                    <ellipse cx="410" cy="260" rx="330" ry="205" fill="none" stroke="rgba(0, 111, 234, 0.5)" strokeWidth="3" strokeDasharray="6 8" />
                     
                     {/* Icons */}
                     {orbitElements}
@@ -202,7 +202,7 @@ const Hero = () => {
 
               <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
                 {/* Main Card with Frosted Glass */}
-                <div className="frost-main-card p-8 lg:p-12 rounded-3xl">
+                <div className="frost-main-card p-8 lg:p-12 rounded-3xl w-[520px] lg:w-[560px]">
                   <div className="space-y-6">
                     {/* Header */}
                     <div className="flex items-center justify-between">
