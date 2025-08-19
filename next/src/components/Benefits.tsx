@@ -12,7 +12,7 @@ const Benefits = () => {
       description: 'Reduce significativamente el tiempo dedicado a la creación de documentos educativos.',
       stat: '75%',
       statLabel: 'menos tiempo',
-      color: 'text-accent-600'
+      color: 'text-brand-sunglow'
     },
     {
       icon: (
@@ -24,7 +24,7 @@ const Benefits = () => {
       description: 'Estandarización y mejora continua de materiales educativos con IA.',
       stat: '90%',
       statLabel: 'mayor calidad',
-      color: 'text-primary-600'
+      color: 'text-brand-brunswick-green'
     },
     {
       icon: (
@@ -36,7 +36,7 @@ const Benefits = () => {
       description: 'Alineación automática con estándares académicos globales y mejores prácticas.',
       stat: '100%',
       statLabel: 'cumplimiento',
-      color: 'text-secondary-600'
+      color: 'text-brand-brandeis-blue'
     },
     {
       icon: (
@@ -48,24 +48,19 @@ const Benefits = () => {
       description: 'Compatibilidad perfecta con tus herramientas y plataformas educativas actuales.',
       stat: '50+',
       statLabel: 'integraciones',
-      color: 'text-warning-600'
+      color: 'text-brand-orange-pantone'
     }
   ]
 
   return (
-    <section id="beneficios" className="section hero-gradient relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-white/10 rounded-full mix-blend-overlay filter blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-white/10 rounded-full mix-blend-overlay filter blur-3xl"></div>
-      </div>
+    <section id="beneficios" className="section bg-brand-isabelline relative overflow-hidden">
 
       <div className="container relative z-10">
         <div className="text-center mb-16">
-          <h2 className="section-title text-slate-800">
+          <h2 className="section-title">
             Más tiempo para enseñar, menos para gestionar
           </h2>
-          <p className="section-subtitle text-slate-700">
+          <p className="section-subtitle">
             Libera tu potencial educativo con beneficios medibles y resultados comprobados
           </p>
         </div>
@@ -78,10 +73,10 @@ const Benefits = () => {
               style={{ animationDelay: `${index * 150}ms` }}
             >
               {/* Card */}
-              <div className="glass-card h-full p-8 text-center hover:scale-105 transition-all duration-500">
+              <div className="bg-white rounded-xl border border-white/50 shadow-lg h-full p-8 text-center hover:scale-105 transition-all duration-500">
                 {/* Icon */}
                 <div className="mb-6 flex justify-center">
-                  <div className={`${benefit.color} p-3 rounded-2xl bg-white/20 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`${benefit.color} p-3 rounded-2xl bg-gray-50 group-hover:scale-110 transition-transform duration-300`}>
                     {benefit.icon}
                   </div>
                 </div>
@@ -91,17 +86,17 @@ const Benefits = () => {
                   <div className={`text-4xl font-bold ${benefit.color} mb-1`}>
                     {benefit.stat}
                   </div>
-                  <div className="text-sm text-slate-600 font-medium">
+                  <div className="text-sm text-brand-dark-green/70 font-medium">
                     {benefit.statLabel}
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-semibold text-slate-800 mb-3">
+                <h3 className="text-xl font-semibold text-brand-dark-green mb-3">
                   {benefit.title}
                 </h3>
                 
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-brand-dark-green/70 leading-relaxed">
                   {benefit.description}
                 </p>
 
@@ -110,7 +105,7 @@ const Benefits = () => {
               </div>
 
               {/* Floating Indicator */}
-              <div className="absolute -top-3 -right-3 w-6 h-6 bg-gradient-cta rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-0 group-hover:scale-100">
+              <div className="absolute -top-3 -right-3 w-6 h-6 bg-brand-orange-pantone rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-0 group-hover:scale-100">
                 <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -121,11 +116,11 @@ const Benefits = () => {
 
         {/* Bottom Quote */}
         <div className="mt-20 text-center">
-          <blockquote className="glass-card inline-block p-8 max-w-4xl">
-            <p className="text-xl lg:text-2xl text-slate-700 italic leading-relaxed mb-4">
+          <blockquote className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-xl shadow-lg inline-block p-8 max-w-4xl">
+            <p className="text-xl lg:text-2xl text-brand-dark-green italic leading-relaxed mb-4">
               &ldquo;Mentorium no solo automatiza procesos, transforma la manera en que los educadores crean y comparten conocimiento.&rdquo;
             </p>
-            <footer className="text-slate-600 font-medium">
+            <footer className="text-brand-dark-green/70 font-medium">
               — Investigación en Tecnología Educativa, 2024
             </footer>
           </blockquote>

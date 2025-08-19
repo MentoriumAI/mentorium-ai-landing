@@ -53,20 +53,14 @@ const Testimonials = () => {
   ]
 
   return (
-    <section id="testimonios" className="section hero-gradient relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-64 h-64 bg-white/5 rounded-full mix-blend-overlay filter blur-2xl"></div>
-        <div className="absolute bottom-10 right-10 w-64 h-64 bg-white/5 rounded-full mix-blend-overlay filter blur-2xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full mix-blend-overlay filter blur-3xl"></div>
-      </div>
+    <section id="testimonios" className="section bg-brand-isabelline relative overflow-hidden">
 
       <div className="container relative z-10">
         <div className="text-center mb-16">
-          <h2 className="section-title text-slate-800">
+          <h2 className="section-title">
             Lo que dicen nuestros usuarios
           </h2>
-          <p className="section-subtitle text-slate-700">
+          <p className="section-subtitle">
             Más de 500 instituciones educativas confían en Mentorium para transformar su proceso de creación de contenido
           </p>
         </div>
@@ -76,7 +70,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="glass-card p-8 hover:scale-105 transition-all duration-500 group"
+              className="bg-white rounded-xl border border-white/50 shadow-lg p-8 hover:scale-105 transition-all duration-500 group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Rating */}
@@ -84,7 +78,7 @@ const Testimonials = () => {
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <svg
                     key={i}
-                    className="w-5 h-5 text-accent-400"
+                    className="w-5 h-5 text-brand-sunglow"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -94,7 +88,7 @@ const Testimonials = () => {
               </div>
 
               {/* Content */}
-              <blockquote className="text-slate-700 mb-6 leading-relaxed">
+              <blockquote className="text-brand-dark-green/80 mb-6 leading-relaxed">
                 &ldquo;{testimonial.content}&rdquo;
               </blockquote>
 
@@ -104,13 +98,13 @@ const Testimonials = () => {
                   {testimonial.avatar}
                 </div>
                 <div>
-                  <div className="font-semibold text-slate-800 group-hover:text-primary-600 transition-colors duration-300">
+                  <div className="font-semibold text-brand-dark-green group-hover:text-brand-brandeis-blue transition-colors duration-300">
                     {testimonial.name}
                   </div>
-                  <div className="text-sm text-slate-600">
+                  <div className="text-sm text-brand-dark-green/70">
                     {testimonial.role}
                   </div>
-                  <div className="text-sm text-slate-500">
+                  <div className="text-sm text-brand-dark-green/60">
                     {testimonial.institution}
                   </div>
                 </div>
@@ -125,38 +119,38 @@ const Testimonials = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">500+</div>
-            <div className="text-slate-700 font-medium">Instituciones</div>
+            <div className="text-4xl lg:text-5xl font-bold text-brand-brandeis-blue mb-2">500+</div>
+            <div className="text-brand-dark-green font-medium">Instituciones</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">50K+</div>
-            <div className="text-slate-700 font-medium">Usuarios Activos</div>
+            <div className="text-4xl lg:text-5xl font-bold text-brand-orange-pantone mb-2">50K+</div>
+            <div className="text-brand-dark-green font-medium">Usuarios Activos</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">99.8%</div>
-            <div className="text-slate-700 font-medium">Uptime</div>
+            <div className="text-4xl lg:text-5xl font-bold text-brand-dark-moss-green mb-2">99.8%</div>
+            <div className="text-brand-dark-green font-medium">Uptime</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold gradient-text mb-2">4.9/5</div>
-            <div className="text-slate-700 font-medium">Satisfacción</div>
+            <div className="text-4xl lg:text-5xl font-bold text-brand-sunglow mb-2">4.9/5</div>
+            <div className="text-brand-dark-green font-medium">Satisfacción</div>
           </div>
         </div>
 
         {/* Trust Badges */}
         <div className="text-center">
-          <div className="glass-card inline-block p-8">
-            <div className="text-lg font-semibold text-slate-800 mb-4">
+          <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-xl shadow-lg inline-block p-8">
+            <div className="text-lg font-semibold text-brand-dark-green mb-4">
               Certificado y reconocido por:
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-8 text-slate-600">
+            <div className="flex flex-wrap justify-center items-center gap-8 text-brand-dark-green/70">
               <div className="flex items-center space-x-2">
-                <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-brand-dark-moss-green" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>ISO 27001</span>
               </div>
               <div className="flex items-center space-x-2">
-                <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-brand-brandeis-blue" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>GDPR Compliant</span>

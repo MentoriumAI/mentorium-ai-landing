@@ -10,7 +10,7 @@ const Features = () => {
       ),
       title: 'Automatización inteligente',
       description: 'Genera sílabos, referencias y estructuras automáticamente con nuestra tecnología de IA avanzada.',
-      gradient: 'from-primary-500 to-primary-600'
+      color: 'text-brand-brunswick-green'
     },
     {
       icon: (
@@ -20,7 +20,7 @@ const Features = () => {
       ),
       title: 'Personalización con IA',
       description: 'Contenido adaptado a necesidades específicas de cada institución y programa educativo.',
-      gradient: 'from-secondary-500 to-secondary-600'
+      color: 'text-brand-brandeis-blue'
     },
     {
       icon: (
@@ -30,7 +30,7 @@ const Features = () => {
       ),
       title: 'Colaboración en tiempo real',
       description: 'Edición compartida y control de versiones para trabajo en equipo eficiente.',
-      gradient: 'from-accent-500 to-accent-600'
+      color: 'text-brand-sunglow'
     },
     {
       icon: (
@@ -40,7 +40,7 @@ const Features = () => {
       ),
       title: 'Compatibilidad con LMS',
       description: 'Exportación optimizada para Moodle, Blackboard y otras plataformas educativas.',
-      gradient: 'from-warning-500 to-warning-600'
+      color: 'text-brand-orange-pantone'
     },
     {
       icon: (
@@ -50,7 +50,7 @@ const Features = () => {
       ),
       title: 'Diseño moderno y accesible',
       description: 'Interfaces claras y optimizadas para educadores de todos los niveles tecnológicos.',
-      gradient: 'from-primary-500 to-secondary-500'
+      color: 'text-brand-dark-moss-green'
     },
     {
       icon: (
@@ -60,7 +60,7 @@ const Features = () => {
       ),
       title: 'Exportación flexible',
       description: 'Múltiples formatos de salida para adaptarse a cualquier flujo de trabajo educativo.',
-      gradient: 'from-accent-500 to-warning-500'
+      color: 'text-brand-brandeis-blue'
     }
   ]
 
@@ -92,29 +92,29 @@ const Features = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}
-              <div className={`card-icon bg-gradient-to-br ${feature.gradient} group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`card-icon ${feature.color} bg-gray-50 group-hover:scale-110 transition-transform duration-300`}>
                 {feature.icon}
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-semibold text-slate-800 mb-3 group-hover:text-primary-600 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-brand-dark-green mb-3 group-hover:text-brand-brandeis-blue transition-colors duration-300">
                 {feature.title}
               </h3>
               
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-brand-dark-green/70 leading-relaxed">
                 {feature.description}
               </p>
 
               {/* Hover Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 to-secondary-50/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+              <div className="absolute inset-0 bg-brand-isabelline/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             </div>
           ))}
         </div>
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center px-6 py-3 rounded-full glass-card text-primary-700 font-medium">
-            <span className="w-2 h-2 bg-accent-400 rounded-full mr-3 animate-pulse"></span>
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-brand-sunglow/20 text-brand-dark-green font-medium">
+            <span className="w-2 h-2 bg-brand-sunglow rounded-full mr-3 animate-pulse"></span>
             ¿Listo para revolucionar tu proceso educativo?
           </div>
         </div>

@@ -10,7 +10,7 @@
   }
   
   body {
-    @apply bg-brand-isabelline text-slate-900 font-inter antialiased;
+    @apply bg-brand-isabelline text-brand-dark-green font-inter antialiased;
   }
   
   * {
@@ -29,11 +29,11 @@
   
   .section-title {
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4;
-    @apply bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent;
+    @apply text-brand-brunswick-green;
   }
   
   .section-subtitle {
-    @apply text-lg sm:text-xl text-slate-600 text-center max-w-3xl mx-auto mb-12;
+    @apply text-lg sm:text-xl text-brand-dark-green/70 text-center max-w-3xl mx-auto mb-12;
   }
   
   .card {
@@ -43,7 +43,7 @@
   
   .card-icon {
     @apply w-12 h-12 rounded-xl flex items-center justify-center mb-4;
-    @apply bg-gradient-to-br from-primary-500 to-secondary-500 text-white;
+    @apply bg-brand-brunswick-green text-white;
   }
   
   .btn {
@@ -52,12 +52,12 @@
   }
   
   .btn-primary {
-    @apply btn bg-gradient-cta text-white shadow-lg hover:shadow-xl hover:scale-105;
-    @apply focus:ring-warning-500 px-6 py-3 text-base;
+    @apply btn bg-brand-orange-pantone text-white shadow-lg hover:shadow-xl hover:scale-105;
+    @apply focus:ring-warning-500 px-6 py-3 text-base hover:bg-warning-600;
   }
   
   .btn-secondary {
-    @apply btn bg-white text-primary-600 border-2 border-primary-200 hover:bg-primary-50;
+    @apply btn bg-white text-brand-brunswick-green border-2 border-primary-200 hover:bg-primary-50;
     @apply focus:ring-primary-500 px-6 py-3 text-base;
   }
   
@@ -70,7 +70,7 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent;
   }
   
   .glass-card {
@@ -78,13 +78,13 @@
   }
   
   .nav-link {
-    @apply text-slate-700 hover:text-primary-600 font-medium transition-colors duration-200;
+    @apply text-brand-dark-green hover:text-brand-brandeis-blue font-medium transition-colors duration-200;
     @apply relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5;
-    @apply after:bg-primary-600 after:transition-all after:duration-300 hover:after:w-full;
+    @apply after:bg-brand-brandeis-blue after:transition-all after:duration-300 hover:after:w-full;
   }
   
   .hero-gradient {
-    @apply bg-gradient-hero;
+    @apply bg-gradient-subtle;
   }
   
   .feature-grid {
@@ -92,7 +92,7 @@
   }
   
   .testimonial-avatar {
-    @apply w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white font-bold text-xl;
+    @apply w-16 h-16 rounded-full bg-brand-brunswick-green flex items-center justify-center text-white font-bold text-xl;
     @apply ring-4 ring-accent-400/20;
   }
 }

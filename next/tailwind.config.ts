@@ -10,9 +10,10 @@ const config: Config = {
     extend: {
       fontFamily: {
         inter: ['Inter', 'ui-sans-serif', 'system-ui'],
+        serif: ['ui-serif', 'Georgia', 'serif'],
       },
       colors: {
-        // Brand colors
+        // Exact Brand Colors
         brand: {
           'dark-green': '#093b2c',
           'brunswick-green': '#0f4c38',
@@ -22,49 +23,63 @@ const config: Config = {
           'dark-moss-green': '#536c03',
           'orange-pantone': '#fb6113',
         },
-        // Primary palette (greens)
+        // Primary palette (greens) - based on brand greens
         primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
+          50: '#f0fdf6',
+          100: '#dcfce9',
+          200: '#bbf7d2',
           300: '#86efac',
           400: '#4ade80',
           500: '#0f4c38', // brunswick-green
           600: '#093b2c', // dark-green
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-          950: '#052e16',
+          700: '#065f3c',
+          800: '#064e2f',
+          900: '#053d26',
+          950: '#022a1a',
         },
-        // Secondary palette (blues)
+        // Secondary palette (blues) - based on brandeis-blue
         secondary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
+          50: '#eff7ff',
+          100: '#deeeff',
+          200: '#b4ddff',
+          300: '#72c3ff',
+          400: '#26a5ff',
           500: '#006fea', // brandeis-blue
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
+          600: '#0058c7',
+          700: '#0047a1',
+          800: '#003d85',
+          900: '#06366e',
+          950: '#04244a',
         },
-        // Accent palette (yellows)
+        // Accent palette (yellows) - based on sunglow
         accent: {
-          50: '#fefce8',
+          50: '#fffaeb',
           100: '#fef3c7',
-          200: '#fef08a',
-          300: '#fde047',
+          200: '#fee68a',
+          300: '#fdd347',
           400: '#fac827', // sunglow
-          500: '#eab308',
-          600: '#ca8a04',
-          700: '#a16207',
-          800: '#854d0e',
-          900: '#713f12',
-          950: '#422006',
+          500: '#f4b817',
+          600: '#d8950a',
+          700: '#b3720c',
+          800: '#915912',
+          900: '#784713',
+          950: '#452505',
         },
-        // Warning/CTA palette (oranges)
+        // Success palette - based on dark-moss-green
+        success: {
+          50: '#f7fee7',
+          100: '#ecfccb',
+          200: '#d9f99d',
+          300: '#bef264',
+          400: '#a3e635',
+          500: '#84cc16',
+          600: '#536c03', // dark-moss-green
+          700: '#4d7c0f',
+          800: '#3f6212',
+          900: '#365314',
+          950: '#1a2e05',
+        },
+        // CTA/Warning palette - based on orange-pantone
         warning: {
           50: '#fff7ed',
           100: '#ffedd5',
@@ -80,10 +95,9 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #0f4c38, #006fea)',
-        'gradient-accent': 'linear-gradient(135deg, #fac827, #fb6113)',
-        'gradient-hero': 'linear-gradient(135deg, #f0fdf4, #eff6ff, #fefce8)',
-        'gradient-cta': 'linear-gradient(135deg, #fb6113, #fac827)',
+        'gradient-primary': 'linear-gradient(135deg, #0f4c38, #093b2c)',
+        'gradient-cta': 'linear-gradient(135deg, #fb6113, #536c03)',
+        'gradient-subtle': 'linear-gradient(135deg, #f7f4ef, #f0fdf6)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer id="contacto" className="bg-slate-800 text-white relative overflow-hidden">
+    <footer id="contacto" className="bg-brand-dark-green text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -23,7 +23,7 @@ const Footer = () => {
             {/* Contact Info */}
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-                <span className="gradient-text">Contáctanos</span>
+                <span className="text-brand-sunglow">Contáctanos</span>
               </h2>
               <p className="text-xl text-slate-300 mb-8 leading-relaxed">
                 ¿Listo para transformar tu proceso educativo? 
