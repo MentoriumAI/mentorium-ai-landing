@@ -159,16 +159,23 @@ const Hero = () => {
     // Deterministic animation timing per icon
     const dur = 4 + Math.floor(rand01(i + 303) * 4) // 4-7s
     const delay = Math.floor(rand01(i + 404) * 9) * 0.2 // 0,0.2,...,1.6s
+    // Deterministic size variation: make about half of the icons clearly larger
+    const bigPick = rand01(i + 505)
+    const isBig = bigPick < 0.5
+    const scaleRaw = isBig ? 1.4 + 0.4 * rand01(i + 606) : 1.0 // 1.4 - 1.8 when big
+    const scale = round(scaleRaw, 3)
     return (
       <g key={item.key} transform={`translate(${round(x)}, ${round(y)})`} filter="url(#chipShadow)">
-        <g className="orbit-icon" style={{ animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
-          {/* Base tinted chip */}
-          <circle r="28" fill={chipFill} stroke={chipStroke} />
-          {/* Frosted sheen overlay */}
-          <circle r="28" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
-          {/* Subtle inner highlight ring */}
-          <circle r="27" fill="none" stroke="rgba(255,255,255,0.6)" />
-          {sized}
+        <g transform={`scale(${scale})`}>
+          <g className="orbit-icon" style={{ animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
+            {/* Base tinted chip */}
+            <circle r="28" fill={chipFill} stroke={chipStroke} />
+            {/* Frosted sheen overlay */}
+            <circle r="28" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
+            {/* Subtle inner highlight ring */}
+            <circle r="27" fill="none" stroke="rgba(255,255,255,0.6)" />
+            {sized}
+          </g>
         </g>
       </g>
     )
