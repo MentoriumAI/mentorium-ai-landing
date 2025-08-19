@@ -10,7 +10,7 @@ env:
   REGION: us-central1
   # Optionally set SERVICE_NAME to override the Cloud Run service base name.
   # If not set, the workflow will infer the service type from the repository name.
-  # SERVICE_NAME: mentorium-landing
+  SERVICE_NAME: mentorium-ai-landing
   # Optionally set IMAGE_NAME to explicitly control the image name inside Artifact Registry repository.
   # If not set, it defaults to the derived SERVICE_TYPE (e.g., "landing").
   # IMAGE_NAME: landing
@@ -74,6 +74,7 @@ jobs:
       - name: Generate version from commit
         id: version
         run: |
+          set -Eeuo pipefail
           # Generate version from branch and commit SHA
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
           COMMIT_SHA=${GITHUB_SHA:0:7}
@@ -104,25 +105,23 @@ jobs:
 
       - name: Verify authentication
         run: |
+          set -Eeuo pipefail
           gcloud auth list
           gcloud config get-value project
           echo "Project Number: ${{ needs.determine-environment.outputs.project_number }}"
 
       - name: Configure Docker to use gcloud as credential helper
         run: |
+          set -Eeuo pipefail
           gcloud auth configure-docker us-docker.pkg.dev --quiet
 
       - name: Build Docker image
         id: build
         run: |
-          # Determine service type from repository name or environment variable
-          if [[ -n "$SERVICE_NAME" ]]; then
-            SERVICE_TYPE="$SERVICE_NAME"
-          else
-            # Extract service type from repository name
-            REPO_NAME="${GITHUB_REPOSITORY##*/}"
-            SERVICE_TYPE="${REPO_NAME#mentorium-ai-}"
-          fi
+          set -Eeuo pipefail
+          # Determine service type strictly from repository name (e.g., mentorium-ai-landing -> landing)
+          REPO_NAME="${GITHUB_REPOSITORY##*/}"
+          SERVICE_TYPE="${REPO_NAME#mentorium-ai-}"
           
           # Resolve image name (defaults to SERVICE_TYPE if IMAGE_NAME not provided)
           if [[ -n "$IMAGE_NAME" ]]; then
@@ -131,9 +130,15 @@ jobs:
             RESOLVED_IMAGE_NAME="$SERVICE_TYPE"
           fi
 
-          # Build full image repository path: <repo>/<image_name>
+          # Build full image repository path: <repo>[/<image_name>]
           IMAGE_REPO_BASE="${{ needs.determine-environment.outputs.artifact_registry }}"
-          FULL_IMAGE_REPO="${IMAGE_REPO_BASE}/${RESOLVED_IMAGE_NAME}"
+          LAST_SEGMENT="${IMAGE_REPO_BASE##*/}"
+          if [[ -z "$IMAGE_NAME" && "$LAST_SEGMENT" == "$SERVICE_TYPE" ]]; then
+            # Repo already named like the image; don't append image name
+            FULL_IMAGE_REPO="$IMAGE_REPO_BASE"
+          else
+            FULL_IMAGE_REPO="${IMAGE_REPO_BASE}/${RESOLVED_IMAGE_NAME}"
+          fi
           IMAGE_TAG="${FULL_IMAGE_REPO}:${{ steps.version.outputs.version }}"
           LATEST_TAG="${FULL_IMAGE_REPO}:latest"
           SHA_TAG="${FULL_IMAGE_REPO}:sha-${{ steps.version.outputs.commit_sha }}"
@@ -163,6 +168,7 @@ jobs:
 
       - name: Push Docker image to Artifact Registry
         run: |
+          set -Eeuo pipefail
           echo "Pushing images to Artifact Registry..."
           docker push "$IMAGE_TAG"
           docker push "$LATEST_TAG"
@@ -170,8 +176,27 @@ jobs:
           docker push "$BRANCH_TAG"
           echo "✅ Images pushed successfully"
 
-      - name: Deploy to Cloud Run
+      - name: Verify image exists and resolve digest
+        id: digest
         run: |
+          set -Eeuo pipefail
+          echo "Verifying remote image manifest for $IMAGE_TAG"
+          # Verify manifest exists remotely (fails the step if missing)
+          docker manifest inspect "$IMAGE_TAG" >/dev/null
+          # Extract first RepoDigest (includes registry/repo@sha256:...)
+          DIGEST_REF=$(docker inspect --format='{{index .RepoDigests 0}}' "$IMAGE_TAG")
+          if [[ -z "$DIGEST_REF" ]]; then
+            echo "Failed to resolve image digest for $IMAGE_TAG" >&2
+            exit 1
+          fi
+          echo "Resolved digest: $DIGEST_REF"
+          echo "image_digest=$DIGEST_REF" >> $GITHUB_OUTPUT
+          echo "IMAGE_DIGEST=$DIGEST_REF" >> $GITHUB_ENV
+
+      - name: Deploy to Cloud Run
+        if: ${{ success() }}
+        run: |
+          set -Eeuo pipefail
           # Set service-specific configuration
           case "$SERVICE_TYPE" in
             frontend)
@@ -201,9 +226,9 @@ jobs:
               ;;
           esac
           
-          # Deploy the service
+          # Deploy the exact image by digest to avoid tag drift
           gcloud run deploy "${{ needs.determine-environment.outputs.service_name }}" \
-            --image="$IMAGE_TAG" \
+            --image="$IMAGE_DIGEST" \
             --platform=managed \
             --region="${{ env.REGION }}" \
             --allow-unauthenticated \
@@ -251,6 +276,7 @@ jobs:
           echo "- **Image (latest)**: \`$LATEST_TAG\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Image (sha)**: \`$SHA_TAG\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Image (branch)**: \`$BRANCH_TAG\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Deployed Digest**: \`${{ steps.digest.outputs.image_digest }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Service URL**: ${{ steps.service-url.outputs.service_url }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Project**: ${{ needs.determine-environment.outputs.project_id }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Region**: ${{ env.REGION }}" >> $GITHUB_STEP_SUMMARY
