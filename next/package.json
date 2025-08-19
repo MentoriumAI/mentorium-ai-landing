@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start -p ${PORT:-8080}",
+    "start": "next start -p ${PORT:-80}",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "build:production": "npm run lint && npm run type-check && npm run build"

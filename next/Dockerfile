@@ -22,7 +22,7 @@ WORKDIR /app
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=8080
+ENV PORT=80
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create nextjs user
@@ -41,11 +41,11 @@ RUN npm ci --only=production --no-audit --no-fund && npm cache clean --force
 USER nextjs
 
 # Expose port
-EXPOSE 8080
+EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:8080/ || exit 1
+  CMD curl -f http://localhost:80/ || exit 1
 
 # Start the application
 CMD ["npm", "start"]
