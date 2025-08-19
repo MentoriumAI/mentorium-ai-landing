@@ -1,12 +1,12 @@
 "use client"
 
 import Link from 'next/link'
-import { cloneElement, type ReactElement, type SVGProps, useState, useEffect } from 'react'
+import { cloneElement, type ReactElement, type SVGProps, useState, useEffect, useCallback, useMemo } from 'react'
 import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const Hero = () => {
   // Brand color variants used randomly (but deterministically) per icon
-  const colorConfigs = [
+  const colorConfigs = useMemo(() => [
     {
       name: 'blue',
       iconClass: 'text-brand-brandeis-blue',
@@ -31,7 +31,7 @@ const Hero = () => {
       chipFill: 'rgba(15, 76, 56, 0.12)',
       chipStroke: 'rgba(15, 76, 56, 0.24)'
     }
-  ] as const
+  ], [])
 
   // Client-side state for randomized colors to avoid hydration mismatch
   const [topRowColors, setTopRowColors] = useState(colorConfigs)
@@ -95,21 +95,21 @@ const Hero = () => {
   const n = items.length
 
   // Shuffle function using client-side randomization for color assignments
-  const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffleArray = useCallback(<T,>(array: T[]): T[] => {
     const shuffled = [...array]
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
     return shuffled
-  }
+  }, [])
 
   // Client-side effect to randomize colors after hydration
   useEffect(() => {
     setIsClient(true)
     setTopRowColors(shuffleArray([...colorConfigs]))
     setBottomRowColors(shuffleArray([...colorConfigs]))
-  }, [])
+  }, [colorConfigs, shuffleArray])
 
   // Fixed icon arrangements for mobile (same icons, different colors)
   const topRowItems = items.slice(0, 4) // First 4 icons always
