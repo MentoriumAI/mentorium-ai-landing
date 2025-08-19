@@ -11,6 +11,9 @@ env:
   # Optionally set SERVICE_NAME to override the Cloud Run service base name.
   # If not set, the workflow will infer the service type from the repository name.
   # SERVICE_NAME: mentorium-landing
+  # Optionally set IMAGE_NAME to explicitly control the image name inside Artifact Registry repository.
+  # If not set, it defaults to the derived SERVICE_TYPE (e.g., "landing").
+  # IMAGE_NAME: landing
 
 jobs:
   determine-environment:
@@ -121,23 +124,50 @@ jobs:
             SERVICE_TYPE="${REPO_NAME#mentorium-ai-}"
           fi
           
-          IMAGE_TAG="${{ needs.determine-environment.outputs.artifact_registry }}/${SERVICE_TYPE}:${{ steps.version.outputs.version }}"
-          LATEST_TAG="${{ needs.determine-environment.outputs.artifact_registry }}/${SERVICE_TYPE}:latest"
+          # Resolve image name (defaults to SERVICE_TYPE if IMAGE_NAME not provided)
+          if [[ -n "$IMAGE_NAME" ]]; then
+            RESOLVED_IMAGE_NAME="$IMAGE_NAME"
+          else
+            RESOLVED_IMAGE_NAME="$SERVICE_TYPE"
+          fi
+
+          # Build full image repository path: <repo>/<image_name>
+          IMAGE_REPO_BASE="${{ needs.determine-environment.outputs.artifact_registry }}"
+          FULL_IMAGE_REPO="${IMAGE_REPO_BASE}/${RESOLVED_IMAGE_NAME}"
+          IMAGE_TAG="${FULL_IMAGE_REPO}:${{ steps.version.outputs.version }}"
+          LATEST_TAG="${FULL_IMAGE_REPO}:latest"
+          SHA_TAG="${FULL_IMAGE_REPO}:sha-${{ steps.version.outputs.commit_sha }}"
+          BRANCH_TAG="${FULL_IMAGE_REPO}:branch-${{ steps.version.outputs.branch }}"
           
           echo "Building image: $IMAGE_TAG"
           
-          docker build -t "$IMAGE_TAG" -t "$LATEST_TAG" .
+          docker build \
+            --label org.opencontainers.image.source="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
+            --label org.opencontainers.image.revision="${GITHUB_SHA}" \
+            --label org.opencontainers.image.version="${{ steps.version.outputs.version }}" \
+            --label org.opencontainers.image.created="$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --label org.opencontainers.image.title="$RESOLVED_IMAGE_NAME" \
+            -t "$IMAGE_TAG" -t "$LATEST_TAG" .
+
+          # Add additional tags pointing to the same image digest
+          docker tag "$IMAGE_TAG" "$SHA_TAG"
+          docker tag "$IMAGE_TAG" "$BRANCH_TAG"
           
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+          echo "SHA_TAG=$SHA_TAG" >> $GITHUB_ENV
+          echo "BRANCH_TAG=$BRANCH_TAG" >> $GITHUB_ENV
           echo "SERVICE_TYPE=$SERVICE_TYPE" >> $GITHUB_ENV
           echo "service_type=$SERVICE_TYPE" >> $GITHUB_OUTPUT
+          echo "image_name=$RESOLVED_IMAGE_NAME" >> $GITHUB_OUTPUT
 
       - name: Push Docker image to Artifact Registry
         run: |
           echo "Pushing images to Artifact Registry..."
           docker push "$IMAGE_TAG"
           docker push "$LATEST_TAG"
+          docker push "$SHA_TAG"
+          docker push "$BRANCH_TAG"
           echo "✅ Images pushed successfully"
 
       - name: Deploy to Cloud Run
@@ -217,7 +247,10 @@ jobs:
           echo "- **Environment**: ${{ needs.determine-environment.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Service**: $SERVICE_TYPE" >> $GITHUB_STEP_SUMMARY
           echo "- **Version**: ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Image**: \`$IMAGE_TAG\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image (version)**: \`$IMAGE_TAG\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image (latest)**: \`$LATEST_TAG\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image (sha)**: \`$SHA_TAG\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image (branch)**: \`$BRANCH_TAG\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Service URL**: ${{ steps.service-url.outputs.service_url }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Project**: ${{ needs.determine-environment.outputs.project_id }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Region**: ${{ env.REGION }}" >> $GITHUB_STEP_SUMMARY
