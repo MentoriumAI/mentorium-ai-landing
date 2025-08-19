@@ -317,3 +317,15 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
+
+/* Smooth orbit rotation for the hero ellipse + icons */
+@keyframes orbitSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.orbit-spin-slow {
+  animation: orbitSpin 60s linear infinite;
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+}

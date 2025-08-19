@@ -12,6 +12,12 @@ const Hero = () => {
   // Radii chosen to comfortably surround the centered card inside a 3:2 box
   const rx = 330
   const ry = 205
+  // Configurable radial jitter range (fraction of radius): set between -0.10 and 0.10 e.g.
+  const jitterMin = 0.05
+  const jitterMax = 0.10
+  // Configurable angular jitter range in degrees (relative to Y-axis placement)
+  const angleJitterMinDeg = -8
+  const angleJitterMaxDeg = 8
 
   const items = [
     { key: 'book', chipClass: 'shadow-glow-orange', svg: (
@@ -93,16 +99,71 @@ const Hero = () => {
     return pts[pts.length - 1]
   }
 
+  // Brand color variants used randomly (but deterministically) per icon
+  const colorConfigs = [
+    {
+      name: 'blue',
+      iconClass: 'text-brand-brandeis-blue',
+      chipFill: 'rgba(0, 111, 234, 0.12)',
+      chipStroke: 'rgba(0, 111, 234, 0.25)'
+    },
+    {
+      name: 'yellow',
+      iconClass: 'text-brand-sunglow',
+      chipFill: 'rgba(255, 196, 0, 0.16)',
+      chipStroke: 'rgba(255, 196, 0, 0.25)'
+    },
+    {
+      name: 'orange',
+      iconClass: 'text-brand-orange-pantone',
+      chipFill: 'rgba(251, 97, 19, 0.14)',
+      chipStroke: 'rgba(251, 97, 19, 0.28)'
+    },
+    {
+      name: 'green',
+      iconClass: 'text-brand-brunswick-green',
+      chipFill: 'rgba(15, 76, 56, 0.12)',
+      chipStroke: 'rgba(15, 76, 56, 0.24)'
+    }
+  ] as const
+
+  // Deterministic pseudo-random in [0,1) based on index to avoid hydration mismatch
+  const rand01 = (k: number) => {
+    const s = Math.sin((k + 1) * 12.9898) * 43758.5453
+    return s - Math.floor(s)
+  }
+
+  // Quantize to reduce tiny FP differences between Node (SSR) and browser (CSR)
+  const round = (v: number, p = 3) => {
+    const m = Math.pow(10, p)
+    return Math.round(v * m) / m
+  }
+
   const orbitElements = items.map((item, i) => {
     const theta = (-Math.PI / 2) + (2 * Math.PI * i) / n
-    const x = cx + rx * Math.cos(theta)
-    const y = cy - ry * Math.sin(theta)
+    // Angular jitter within configurable range [angleJitterMinDeg, angleJitterMaxDeg]
+    const angleJitterDeg = angleJitterMinDeg + (angleJitterMaxDeg - angleJitterMinDeg) * rand01(i + 101)
+    const thetaJ = theta + (angleJitterDeg * Math.PI / 180)
+    // Radial jitter within configurable range [jitterMin, jitterMax]
+    const jitter = jitterMin + (jitterMax - jitterMin) * rand01(i)
+    const rScale = 1 + jitter
+    const x = cx + (rx * rScale) * Math.cos(thetaJ)
+    const y = cy - (ry * rScale) * Math.sin(thetaJ)
+    const cfg = colorConfigs[i % colorConfigs.length]
+    const iconClass = cfg.iconClass
+    const chipFill = cfg.chipFill
+    const chipStroke = cfg.chipStroke
     const sized = isValidElement(item.svg)
-      ? cloneElement(item.svg as any, { width: 28, height: 28, x: -14, y: -14 })
+      ? cloneElement(item.svg as any, { width: 28, height: 28, x: -14, y: -14, className: `w-7 h-7 ${iconClass}` })
       : null
     return (
-      <g key={item.key} transform={`translate(${x}, ${y})`}>
-        <circle r="28" fill="rgba(255,255,255,0.7)" stroke="rgba(0,0,0,0.06)" />
+      <g key={item.key} transform={`translate(${round(x)}, ${round(y)})`} filter="url(#chipShadow)">
+        {/* Base tinted chip */}
+        <circle r="28" fill={chipFill} stroke={chipStroke} />
+        {/* Frosted sheen overlay */}
+        <circle r="28" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
+        {/* Subtle inner highlight ring */}
+        <circle r="27" fill="none" stroke="rgba(255,255,255,0.6)" />
         {sized}
       </g>
     )
@@ -182,15 +243,27 @@ const Hero = () => {
           </div>
 
           {/* Second Column: Illustration + Card */}
-          <div className="relative mx-auto w-full max-w-[820px]">
+          <div className="relative ml-auto max-w-[820px]">
             {/* Fixed-size orbit box to prevent squashing */}
-            <div className="relative mx-auto" style={{ width: 820, height: 520 }}>
+            <div className="relative ml-auto" style={{ width: 820, height: 520 }}>
               {/* Hero Illustration with Orbital Icons */}
               <div className="absolute inset-0 z-0">
                 {/* Simplified Orbital Icon System */}
                 <div className="absolute inset-0 pointer-events-none">
                   {/* Debug Ellipse (visible stroke) */}
                   <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <defs>
+                      {/* Soft drop shadow to emulate glass depth */}
+                      <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
+                        <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="rgba(31, 38, 135, 0.20)" floodOpacity="1" />
+                      </filter>
+                      {/* Subtle white gradient for frosted sheen */}
+                      <radialGradient id="chipFrostGrad" cx="30%" cy="30%" r="80%">
+                        <stop offset="0%" stopColor="rgba(255,255,255,0.95)" />
+                        <stop offset="60%" stopColor="rgba(255,255,255,0.70)" />
+                        <stop offset="100%" stopColor="rgba(255,255,255,0.55)" />
+                      </radialGradient>
+                    </defs>
                     {/* Center near the right column where the card lives */}
                     <ellipse cx="410" cy="260" rx="330" ry="205" fill="none" stroke="rgba(0, 111, 234, 0.5)" strokeWidth="3" strokeDasharray="6 8" />
                     
