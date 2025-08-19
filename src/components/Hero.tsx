@@ -266,11 +266,11 @@ const Hero = () => {
                 {/* Simplified Orbital Icon System */}
                 <div className="absolute inset-0 pointer-events-none">
                   {/* Debug Ellipse (visible stroke) */}
-                  <svg className="absolute inset-0 w-full h-full z-20" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <svg className="absolute inset-0 w-full h-full z-20 hero-orbit" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                     <defs>
                       {/* Soft drop shadow to emulate glass depth */}
                       <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
-                        <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="rgba(31, 38, 135, 0.20)" floodOpacity="0.85" />
+                        <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="rgba(31, 38, 135, 0.20)" floodOpacity="0.55" />
                       </filter>
                       {/* Subtle white gradient for frosted sheen */}
                       <radialGradient id="chipFrostGrad" cx="30%" cy="30%" r="80%">

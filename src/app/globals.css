@@ -332,27 +332,35 @@
 
 /* Gentle icon drift (for orbiting chips) */
 @keyframes orbitIconDrift {
-  0%   { transform: translate(0px, 0px) rotate(0deg); }
-  25%  { transform: translate(0px, -8px) rotate(1.5deg); }
-  50%  { transform: translate(0px, 0px) rotate(0deg); }
-  75%  { transform: translate(0px, 8px) rotate(-1.5deg); }
-  100% { transform: translate(0px, 0px) rotate(0deg); }
+  /* sine-like bob: A*sin(t) with A=6px; rotation follows y offset proportionally */
+  0%     { transform: translate(0px,   0.0px) rotate(0deg); }
+  12.5%  { transform: translate(0px,  -4.2px) rotate(0.7deg); }
+  25%    { transform: translate(0px,  -6.0px) rotate(1deg); }
+  37.5%  { transform: translate(0px,  -4.2px) rotate(0.7deg); }
+  50%    { transform: translate(0px,   0.0px) rotate(0deg); }
+  62.5%  { transform: translate(0px,   4.2px) rotate(-0.7deg); }
+  75%    { transform: translate(0px,   6.0px) rotate(-1deg); }
+  87.5%  { transform: translate(0px,   4.2px) rotate(-0.7deg); }
+  100%   { transform: translate(0px,   0.0px) rotate(0deg); }
 }
 
 .orbit-icon {
   animation-name: orbitIconDrift;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: linear; /* ensures uniform phase progression across keyframes */
   animation-iteration-count: infinite;
   animation-duration: 5s; /* can be overridden inline */
   transform-box: fill-box;
   transform-origin: center;
   will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  contain: paint;
 }
 
 /* Breathing animation for main card */
 @keyframes cardBreathe {
   0%   { transform: translateY(0px) scale(1); }
-  50%  { transform: translateY(-14px) scale(1.01); }
+  50%  { transform: translateY(-5px) scale(1.0025); }
   100% { transform: translateY(0px) scale(1); }
 }
 
@@ -376,10 +384,40 @@
 
 .orbit-pulse {
   animation-name: orbitPulse;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   animation-iteration-count: infinite;
   animation-duration: 16s; /* can be overridden inline */
   transform-box: fill-box;
   transform-origin: center;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  contain: paint;
+}
+
+/* Scope the orbit SVG to its own paint containment to reduce invalidation */
+.hero-orbit {
+  contain: paint;
+}
+
+/* Reduced motion: disable animations for accessibility and to save resources */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-icon,
+  .orbit-pulse,
+  .card-breathe {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Breathing animation for main card */
+@keyframes cardBreathe {
+  0%   { transform: translateY(0px) scale(1); }
+  50%  { transform: translateY(-10px) scale(1.005); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+.card-breathe {
+  animation: cardBreathe 8s ease-in-out infinite;
   will-change: transform;
 }
