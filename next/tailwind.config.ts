@@ -78,12 +78,6 @@ const config: Config = {
           900: '#7c2d12',
           950: '#431407',
         },
-        // Background colors
-        background: {
-          primary: '#f7f4ef', // isabelline
-          secondary: '#ffffff',
-          dark: '#093b2c',
-        }
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, #0f4c38, #006fea)',

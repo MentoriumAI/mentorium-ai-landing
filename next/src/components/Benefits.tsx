@@ -123,7 +123,7 @@ const Benefits = () => {
         <div className="mt-20 text-center">
           <blockquote className="glass-card inline-block p-8 max-w-4xl">
             <p className="text-xl lg:text-2xl text-slate-700 italic leading-relaxed mb-4">
-              "Mentorium no solo automatiza procesos, transforma la manera en que los educadores crean y comparten conocimiento."
+              &ldquo;Mentorium no solo automatiza procesos, transforma la manera en que los educadores crean y comparten conocimiento.&rdquo;
             </p>
             <footer className="text-slate-600 font-medium">
               — Investigación en Tecnología Educativa, 2024
