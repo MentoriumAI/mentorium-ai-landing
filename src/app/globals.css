@@ -329,3 +329,34 @@
   transform-origin: 50% 50%;
   transform-box: fill-box;
 }
+
+/* Gentle icon drift (for orbiting chips) */
+@keyframes orbitIconDrift {
+  0%   { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+  25%  { transform: translate(0px, -10px) rotate(2deg) scale(1.02); }
+  50%  { transform: translate(0px, 0px) rotate(0deg) scale(1.03); }
+  75%  { transform: translate(0px, 10px) rotate(-2deg) scale(1.02); }
+  100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+}
+
+.orbit-icon {
+  animation-name: orbitIconDrift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 5s; /* can be overridden inline */
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Breathing animation for main card */
+@keyframes cardBreathe {
+  0%   { transform: translateY(0px) scale(1); }
+  50%  { transform: translateY(-14px) scale(1.01); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+.card-breathe {
+  animation: cardBreathe 8s ease-in-out infinite;
+  will-change: transform;
+}

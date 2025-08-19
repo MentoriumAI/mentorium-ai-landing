@@ -156,15 +156,20 @@ const Hero = () => {
     const sized = isValidElement(item.svg)
       ? cloneElement(item.svg as any, { width: 28, height: 28, x: -14, y: -14, className: `w-7 h-7 ${iconClass}` })
       : null
+    // Deterministic animation timing per icon
+    const dur = 4 + Math.floor(rand01(i + 303) * 4) // 4-7s
+    const delay = Math.floor(rand01(i + 404) * 9) * 0.2 // 0,0.2,...,1.6s
     return (
       <g key={item.key} transform={`translate(${round(x)}, ${round(y)})`} filter="url(#chipShadow)">
-        {/* Base tinted chip */}
-        <circle r="28" fill={chipFill} stroke={chipStroke} />
-        {/* Frosted sheen overlay */}
-        <circle r="28" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
-        {/* Subtle inner highlight ring */}
-        <circle r="27" fill="none" stroke="rgba(255,255,255,0.6)" />
-        {sized}
+        <g className="orbit-icon" style={{ animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
+          {/* Base tinted chip */}
+          <circle r="28" fill={chipFill} stroke={chipStroke} />
+          {/* Frosted sheen overlay */}
+          <circle r="28" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
+          {/* Subtle inner highlight ring */}
+          <circle r="27" fill="none" stroke="rgba(255,255,255,0.6)" />
+          {sized}
+        </g>
       </g>
     )
   })
@@ -274,8 +279,8 @@ const Hero = () => {
               </div>
 
               <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
-                {/* Main Card with Frosted Glass */}
-                <div className="frost-main-card p-8 lg:p-12 rounded-3xl w-[520px] lg:w-[560px]">
+                {/* Main Card with Frosted Glass + Breathing Animation */}
+                <div className="frost-main-card card-breathe p-8 lg:p-12 rounded-3xl w-[520px] lg:w-[560px]">
                   <div className="space-y-6">
                     {/* Header */}
                     <div className="flex items-center justify-between">
@@ -297,22 +302,22 @@ const Hero = () => {
                       <div className="h-3 bg-gradient-to-r from-brand-dark-green/30 to-brand-orange-pantone/40 rounded-full w-3/5"></div>
                     </div>
 
-                    {/* Features with Green/Orange Theme */}
+                    {/* Features with 4 Brand Colors as Bullets: Blue, Yellow, Orange, Green */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-orange-pantone rounded-full shadow-glow-orange"></div>
+                        <div className="w-4 h-4 bg-brand-brandeis-blue rounded-full"></div>
                         <span className="text-sm text-brand-dark-green">IA Integrada</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-brunswick-green rounded-full shadow-glow-green"></div>
+                        <div className="w-4 h-4 bg-brand-sunglow rounded-full"></div>
                         <span className="text-sm text-brand-dark-green">LMS Compatible</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-dark-green rounded-full shadow-glow-green"></div>
+                        <div className="w-4 h-4 bg-brand-orange-pantone rounded-full"></div>
                         <span className="text-sm text-brand-dark-green">Colaborativo</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-orange-pantone rounded-full shadow-glow-orange"></div>
+                        <div className="w-4 h-4 bg-brand-brunswick-green rounded-full"></div>
                         <span className="text-sm text-brand-dark-green">Tiempo Real</span>
                       </div>
                     </div>
