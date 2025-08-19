@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { cloneElement, isValidElement } from 'react'
+import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const Hero = () => {
   // Precompute orbit icons positioned at equal arc-length intervals
@@ -11,13 +12,13 @@ const Hero = () => {
   const cy = 260
   // Radii chosen to comfortably surround the centered card inside a 3:2 box
   const rx = 330
-  const ry = 205
+  const ry = 186
   // Configurable radial jitter range (fraction of radius): set between -0.10 and 0.10 e.g.
   const jitterMin = 0.05
-  const jitterMax = 0.10
+  const jitterMax = 0.08
   // Configurable angular jitter range in degrees (relative to Y-axis placement)
-  const angleJitterMinDeg = -8
-  const angleJitterMaxDeg = 8
+  const angleJitterMinDeg = -10
+  const angleJitterMaxDeg = 10
 
   const items = [
     { key: 'book', chipClass: 'shadow-glow-orange', svg: (
@@ -25,19 +26,11 @@ const Hero = () => {
         <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
       </svg>
     )},
-    { key: 'brain', chipClass: 'shadow-glow-green', svg: (
-      <svg className="w-7 h-7 text-brand-brunswick-green" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M5.5 6a1.5 1.5 0 011.5-1.5h6a1.5 1.5 0 011.5 1.5v1c0 .83-.67 1.5-1.5 1.5H9v1.5h4a1.5 1.5 0 011.5 1.5v1c0 .83-.67 1.5-1.5 1.5H9v1.5h2a1.5 1.5 0 011.5 1.5v1c0 .83-.67 1.5-1.5 1.5H5a1.5 1.5 0 01-1.5-1.5v-10A1.5 1.5 0 015 4.5h.5V6z"/>
-        <circle cx="6" cy="8" r="1"/>
-        <circle cx="8" cy="6" r="1"/>
-        <circle cx="10" cy="8" r="1"/>
-        <circle cx="12" cy="6" r="1"/>
-      </svg>
+    { key: 'sparkles', chipClass: 'shadow-glow-green', svg: (
+      <SparklesIcon />
     )},
     { key: 'bulb', chipClass: 'shadow-glow-orange', svg: (
-      <svg className="w-7 h-7 text-brand-orange-pantone" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 6.343a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464a1 1 0 10-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM6 10a1 1 0 01-1 1H4a1 1 0 110-2h1a1 1 0 011 1zM9 16v1a1 1 0 102 0v-1a1 1 0 10-2 0zM10 12a2 2 0 100-4 2 2 0 000 4z"/>
-      </svg>
+      <LightBulbIcon />
     )},
     { key: 'gear', chipClass: 'shadow-glow-green', svg: (
       <svg className="w-7 h-7 text-brand-brunswick-green" fill="currentColor" viewBox="0 0 20 20">
@@ -185,23 +178,18 @@ const Hero = () => {
   })
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center hero-gradient overflow-hidden">
+    <section id="inicio" className="relative min-h-screen flex items-center hero-gradient overflow-visible">
       {/* Subtle Background Element */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl animate-float"></div>
       </div>
 
-      <div className="container relative z-20 pt-24 lg:pt-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="container relative z-20 pt-24 lg:pt-32 px-6 md:px-8 xl:px-0">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-[1.3fr_0.9fr] gap-12 lg:gap-16 xl:gap-10 items-center">
           {/* Hero Content */}
           <div className="space-y-8 text-center lg:text-left">
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-sunglow/20 text-sm font-medium text-brand-dark-green">
-              ✨ Plataforma SaaS Educativa
-            </div>
-
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight font-serif">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
               <span className="text-brand-dark-green">Reinventando</span>
               <br />
               <span className="text-brand-dark-green">la educación,</span>
@@ -212,7 +200,7 @@ const Hero = () => {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl lg:text-2xl text-brand-dark-green/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-xl lg:text-2xl text-brand-dark-green/80 max-w-3xl xl:max-w-4xl mx-auto lg:mx-0 leading-relaxed">
               Automatiza y optimiza la creación de materiales educativos con 
               <span className="font-semibold text-brand-brandeis-blue"> inteligencia artificial</span>
             </p>
@@ -221,22 +209,18 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link 
                 href="#demo" 
-                className="btn-primary btn-large group"
+                className="btn-primary btn-large group whitespace-nowrap"
               >
-                Solicitar Demostración
-                <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                Solicitar Demo
+                <ArrowRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               
               <Link 
                 href="#caracteristicas" 
-                className="btn-secondary btn-large group"
+                className="btn-secondary btn-large group whitespace-nowrap"
               >
-                Ver Características
-                <svg className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
+                Ver Más
+                <ArrowRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
@@ -258,15 +242,15 @@ const Hero = () => {
           </div>
 
           {/* Second Column: Illustration + Card */}
-          <div className="relative ml-auto max-w-[820px]">
+          <div className="relative justify-self-center mx-auto max-w-[900px]">
             {/* Fixed-size orbit box to prevent squashing */}
-            <div className="relative ml-auto" style={{ width: 820, height: 520 }}>
+            <div className="relative overflow-visible w-[680px] h-[460px] sm:w-[760px] sm:h-[520px] lg:w-[780px] lg:h-[520px] xl:w-[860px] xl:h-[580px]">
               {/* Hero Illustration with Orbital Icons */}
-              <div className="absolute inset-0 z-20">
+              <div className="absolute inset-0 z-20 overflow-visible">
                 {/* Simplified Orbital Icon System */}
-                <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 pointer-events-none overflow-visible">
                   {/* Debug Ellipse (visible stroke) */}
-                  <svg className="absolute inset-0 w-full h-full z-20 hero-orbit" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <svg className="absolute inset-0 w-full h-full z-20 hero-orbit overflow-visible" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                     <defs>
                       {/* Soft drop shadow to emulate glass depth */}
                       <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">

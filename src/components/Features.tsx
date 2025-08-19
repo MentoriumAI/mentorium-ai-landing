@@ -114,7 +114,7 @@ const Features = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <div className="inline-flex items-center px-6 py-3 rounded-full bg-brand-sunglow/20 text-brand-dark-green font-medium">
-            <span className="w-2 h-2 bg-brand-sunglow rounded-full mr-3 animate-pulse"></span>
+            <span className="w-2 h-2 bg-brand-orange-pantone rounded-full mr-3 animate-pulse"></span>
             ¿Listo para revolucionar tu proceso educativo?
           </div>
         </div>
