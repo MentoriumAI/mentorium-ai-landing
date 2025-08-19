@@ -224,9 +224,49 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Mobile Card - Only visible on mobile/tablet */}
-          <div className="lg:hidden flex items-center justify-center py-8 order-2">
-            <div className="frost-main-card card-breathe p-6 sm:p-8 rounded-2xl sm:rounded-3xl w-full max-w-[90%] sm:max-w-[480px] mx-4">
+          {/* Mobile Card with Linear Bubbles - Only visible on mobile/tablet */}
+          <div className="lg:hidden flex flex-col items-center justify-center py-8 order-2 relative">
+            {/* Top Row of Bubbles */}
+            <div className="flex justify-center items-center gap-4 sm:gap-6 mb-6 relative z-10">
+              {items.slice(0, 4).map((item, i) => {
+                const cfg = colorConfigs[i % colorConfigs.length]
+                const iconClass = cfg.iconClass
+                const chipFill = cfg.chipFill
+                const chipStroke = cfg.chipStroke
+                const sized = cloneElement(item.svg as ReactElement<SVGProps<SVGSVGElement>>, {
+                  className: `w-5 h-5 sm:w-6 sm:h-6 ${iconClass}`
+                })
+                // Staggered animation delays for wave effect
+                const delay = i * 0.5 // 0.5s intervals
+                const duration = 3 + (i % 2) // Alternate between 3s and 4s
+                
+                return (
+                  <div
+                    key={`mobile-top-${item.key}`}
+                    className="mobile-bubble-float relative"
+                    style={{ 
+                      animationDelay: `${delay}s`,
+                      animationDuration: `${duration}s`
+                    }}
+                  >
+                    <div 
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-lg mobile-bubble-pulse"
+                      style={{ 
+                        backgroundColor: chipFill,
+                        border: `2px solid ${chipStroke}`,
+                        animationDelay: `${delay + 1}s`,
+                        animationDuration: `${duration + 1}s`
+                      }}
+                    >
+                      {sized}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Main Card */}
+            <div className="frost-main-card card-breathe p-6 sm:p-8 rounded-2xl sm:rounded-3xl w-full max-w-[90%] sm:max-w-[480px] mx-4 relative z-20">
               <div className="space-y-4 sm:space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between">
@@ -268,6 +308,45 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Bottom Row of Bubbles */}
+            <div className="flex justify-center items-center gap-4 sm:gap-6 mt-6 relative z-10">
+              {items.slice(4, 8).map((item, i) => {
+                const cfg = colorConfigs[(i + 4) % colorConfigs.length]
+                const iconClass = cfg.iconClass
+                const chipFill = cfg.chipFill
+                const chipStroke = cfg.chipStroke
+                const sized = cloneElement(item.svg as ReactElement<SVGProps<SVGSVGElement>>, {
+                  className: `w-5 h-5 sm:w-6 sm:h-6 ${iconClass}`
+                })
+                // Staggered animation delays for wave effect, offset from top row
+                const delay = (i * 0.5) + 2 // Start 2s after and 0.5s intervals
+                const duration = 3.5 + (i % 2) // Alternate between 3.5s and 4.5s
+                
+                return (
+                  <div
+                    key={`mobile-bottom-${item.key}`}
+                    className="mobile-bubble-float relative"
+                    style={{ 
+                      animationDelay: `${delay}s`,
+                      animationDuration: `${duration}s`
+                    }}
+                  >
+                    <div 
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-lg mobile-bubble-pulse"
+                      style={{ 
+                        backgroundColor: chipFill,
+                        border: `2px solid ${chipStroke}`,
+                        animationDelay: `${delay + 1.5}s`,
+                        animationDuration: `${duration + 1}s`
+                      }}
+                    >
+                      {sized}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
