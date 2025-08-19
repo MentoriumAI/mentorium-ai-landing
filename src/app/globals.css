@@ -24,16 +24,71 @@
   }
   
   .section {
-    @apply py-16 sm:py-20 lg:py-24;
+    @apply py-12 sm:py-16 lg:py-20 xl:py-24;
   }
   
   .section-title {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    @apply font-bold text-center mb-4 leading-tight;
     @apply text-brand-brunswick-green;
   }
   
   .section-subtitle {
-    @apply text-lg sm:text-xl text-brand-dark-green/70 text-center max-w-3xl mx-auto mb-12;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    @apply text-brand-dark-green/70 text-center max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed;
+  }
+  
+  /* Fluid typography classes */
+  .text-fluid-sm {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+  
+  .text-fluid-base {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+  }
+  
+  .text-fluid-lg {
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+  }
+  
+  .text-fluid-xl {
+    font-size: clamp(1.25rem, 3.5vw, 1.875rem);
+  }
+  
+  .text-fluid-2xl {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+  }
+  
+  .text-fluid-3xl {
+    font-size: clamp(1.875rem, 5vw, 3rem);
+  }
+  
+  .text-fluid-4xl {
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+  }
+  
+  /* Responsive spacing utilities */
+  .space-fluid-sm > * + * {
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+  
+  .space-fluid-md > * + * {
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .space-fluid-lg > * + * {
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  /* Responsive containers */
+  .container-fluid {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: min(90vw, 1280px);
+  }
+  
+  .container-tight {
+    @apply mx-auto px-6 sm:px-8 lg:px-12;
+    max-width: min(85vw, 1024px);
   }
   
   .card {
@@ -49,20 +104,25 @@
   .btn {
     @apply inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300;
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+    min-height: 44px; /* Minimum touch target size */
+    padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
   }
   
   .btn-primary {
     @apply btn bg-brand-orange-pantone text-white shadow-lg hover:shadow-xl hover:scale-105;
-    @apply focus:ring-warning-500 px-6 py-3 text-base hover:bg-warning-600;
+    @apply focus:ring-warning-500 hover:bg-warning-600;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
   
   .btn-secondary {
     @apply btn bg-white text-brand-brunswick-green border-2 border-primary-200 hover:bg-primary-50;
-    @apply focus:ring-primary-500 px-6 py-3 text-base;
+    @apply focus:ring-primary-500;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
   
   .btn-large {
-    @apply px-8 py-4 text-lg;
+    padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
   }
   
   .floating-element {
@@ -400,12 +460,45 @@
   contain: paint;
 }
 
-/* Reduced motion: disable animations for accessibility and to save resources */
+/* Enhanced responsive grid utilities */
+.grid-responsive-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.grid-responsive-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Improved reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
   .orbit-icon,
   .orbit-pulse,
-  .card-breathe {
+  .card-breathe,
+  .floating-element,
+  .floating-element-slow,
+  .floating-element-delayed,
+  .breathing-1,
+  .breathing-2,
+  .breathing-3,
+  .breathing-4 {
     animation: none !important;
+    transform: none !important;
+  }
+  
+  .btn:hover {
     transform: none !important;
   }
 }

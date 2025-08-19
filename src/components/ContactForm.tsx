@@ -52,8 +52,8 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
             Nombre completo *
@@ -67,7 +67,7 @@ const ContactForm = () => {
             required
             className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 backdrop-blur-sm 
                      focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none 
-                     transition-all duration-200 placeholder-slate-400"
+                     transition-all duration-200 placeholder-slate-400 text-sm sm:text-base min-h-[44px]"
             placeholder="Tu nombre completo"
           />
         </div>
@@ -85,7 +85,7 @@ const ContactForm = () => {
             required
             className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 backdrop-blur-sm 
                      focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none 
-                     transition-all duration-200 placeholder-slate-400"
+                     transition-all duration-200 placeholder-slate-400 text-sm sm:text-base min-h-[44px]"
             placeholder="tu@email.com"
           />
         </div>
@@ -103,7 +103,7 @@ const ContactForm = () => {
           onChange={handleChange}
           className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 backdrop-blur-sm 
                    focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none 
-                   transition-all duration-200 placeholder-slate-400"
+                   transition-all duration-200 placeholder-slate-400 text-sm sm:text-base min-h-[44px]"
           placeholder="Universidad, colegio, instituto..."
         />
       </div>
@@ -121,7 +121,7 @@ const ContactForm = () => {
           rows={4}
           className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 backdrop-blur-sm 
                    focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none 
-                   transition-all duration-200 placeholder-slate-400 resize-none"
+                   transition-all duration-200 placeholder-slate-400 resize-none text-sm sm:text-base min-h-[120px]"
           placeholder="Cuéntanos sobre tus necesidades educativas o agenda una demostración..."
         />
       </div>
@@ -129,27 +129,27 @@ const ContactForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full btn-primary btn-large justify-center group disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full btn-primary btn-large justify-center group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
       >
         {isSubmitting ? (
           <>
-            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+            <svg className="animate-spin -ml-1 mr-3 h-4 w-4 sm:h-5 sm:w-5 text-white" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Enviando...
+            <span className="text-sm sm:text-base">Enviando...</span>
           </>
         ) : (
           <>
-            Solicitar Demostración
-            <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="text-sm sm:text-base">Solicitar Demostración</span>
+            <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </>
         )}
       </button>
 
-      <p className="text-sm text-slate-300 text-center">
+      <p className="text-xs sm:text-sm text-slate-300 text-center leading-relaxed">
         Al enviar este formulario, aceptas que nos pongamos en contacto contigo para programar una demostración personalizada.
       </p>
     </form>

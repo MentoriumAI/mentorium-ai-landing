@@ -75,7 +75,7 @@ const Features = () => {
       </div>
 
       <div className="container relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="section-title">
             ¡Simplifica tu trabajo con tecnología inteligente!
           </h2>
@@ -84,7 +84,7 @@ const Features = () => {
           </p>
         </div>
 
-        <div className="feature-grid">
+        <div className="grid-responsive-cards">
           {features.map((feature, index) => (
             <div
               key={index}
@@ -92,16 +92,16 @@ const Features = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}
-              <div className={`card-icon ${feature.color} bg-gray-50 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 ${feature.color} bg-gray-50 group-hover:scale-110 transition-transform duration-300`}>
                 {feature.icon}
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-semibold text-brand-dark-green mb-3 group-hover:text-brand-brandeis-blue transition-colors duration-300">
+              <h3 className="text-fluid-lg font-semibold text-brand-dark-green mb-3 group-hover:text-brand-brandeis-blue transition-colors duration-300">
                 {feature.title}
               </h3>
               
-              <p className="text-brand-dark-green/70 leading-relaxed">
+              <p className="text-fluid-sm text-brand-dark-green/70 leading-relaxed">
                 {feature.description}
               </p>
 

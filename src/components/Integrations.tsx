@@ -76,7 +76,7 @@ const Integrations = () => {
       </div>
 
       <div className="container relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="section-title">
             Compatible con tus herramientas favoritas
           </h2>
@@ -87,7 +87,7 @@ const Integrations = () => {
         </div>
 
         {/* Integration Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-8 mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
           {integrations.map((integration, index) => (
             <div
               key={index}
@@ -96,18 +96,18 @@ const Integrations = () => {
             >
               <div className="card text-center h-full hover:scale-105 transition-all duration-500 group-hover:shadow-floating">
                 {/* Icon */}
-                <div className="mb-4 flex justify-center">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${integration.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div className="mb-3 sm:mb-4 flex justify-center">
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${integration.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                     {integration.icon}
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-semibold text-slate-800 mb-2 group-hover:text-primary-600 transition-colors duration-300">
+                <h3 className="text-fluid-base font-semibold text-slate-800 mb-2 group-hover:text-primary-600 transition-colors duration-300">
                   {integration.name}
                 </h3>
                 
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-fluid-sm text-slate-600 leading-relaxed">
                   {integration.description}
                 </p>
 
@@ -121,35 +121,35 @@ const Integrations = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="glass-card p-8 text-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          <div className="glass-card p-6 sm:p-8 text-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-primary flex items-center justify-center mx-auto mb-4">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-slate-800 mb-3">API Robusta</h3>
-            <p className="text-slate-600">Conecta cualquier sistema con nuestra API RESTful documentada y fácil de usar.</p>
+            <h3 className="text-fluid-lg font-semibold text-slate-800 mb-3">API Robusta</h3>
+            <p className="text-fluid-sm text-slate-600">Conecta cualquier sistema con nuestra API RESTful documentada y fácil de usar.</p>
           </div>
 
-          <div className="glass-card p-8 text-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <div className="glass-card p-6 sm:p-8 text-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center mx-auto mb-4">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 01-1 1H8a1 1 0 110-2h4a1 1 0 011 1zm-1 4a1 1 0 100-2H8a1 1 0 100 2h4z" clipRule="evenodd" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-slate-800 mb-3">Sincronización Automática</h3>
-            <p className="text-slate-600">Mantén tus datos actualizados en tiempo real entre todas las plataformas.</p>
+            <h3 className="text-fluid-lg font-semibold text-slate-800 mb-3">Sincronización Automática</h3>
+            <p className="text-fluid-sm text-slate-600">Mantén tus datos actualizados en tiempo real entre todas las plataformas.</p>
           </div>
 
-          <div className="glass-card p-8 text-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500 to-warning-500 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <div className="glass-card p-6 sm:p-8 text-center">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-accent-500 to-warning-500 flex items-center justify-center mx-auto mb-4">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-slate-800 mb-3">Soporte 24/7</h3>
-            <p className="text-slate-600">Nuestro equipo técnico te ayuda con la configuración e integración sin costo adicional.</p>
+            <h3 className="text-fluid-lg font-semibold text-slate-800 mb-3">Soporte 24/7</h3>
+            <p className="text-fluid-sm text-slate-600">Nuestro equipo técnico te ayuda con la configuración e integración sin costo adicional.</p>
           </div>
         </div>
 

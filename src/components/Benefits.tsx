@@ -56,7 +56,7 @@ const Benefits = () => {
     <section id="beneficios" className="section bg-brand-isabelline relative overflow-hidden">
 
       <div className="container relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="section-title">
             Más tiempo para enseñar, menos para gestionar
           </h2>
@@ -65,7 +65,7 @@ const Benefits = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {benefits.map((benefit, index) => (
             <div
               key={index}
@@ -73,30 +73,30 @@ const Benefits = () => {
               style={{ animationDelay: `${index * 150}ms` }}
             >
               {/* Card */}
-              <div className="bg-white rounded-xl border border-white/50 shadow-lg h-full p-8 text-center hover:scale-105 transition-all duration-500">
+              <div className="bg-white rounded-xl border border-white/50 shadow-lg h-full p-6 sm:p-8 text-center hover:scale-105 transition-all duration-500">
                 {/* Icon */}
-                <div className="mb-6 flex justify-center">
-                  <div className={`${benefit.color} p-3 rounded-2xl bg-gray-50 group-hover:scale-110 transition-transform duration-300`}>
+                <div className="mb-4 sm:mb-6 flex justify-center">
+                  <div className={`${benefit.color} p-2 sm:p-3 rounded-2xl bg-gray-50 group-hover:scale-110 transition-transform duration-300`}>
                     {benefit.icon}
                   </div>
                 </div>
 
                 {/* Stat */}
                 <div className="mb-4">
-                  <div className={`text-4xl font-bold ${benefit.color} mb-1`}>
+                  <div className={`text-fluid-3xl font-bold ${benefit.color} mb-1`}>
                     {benefit.stat}
                   </div>
-                  <div className="text-sm text-brand-dark-green/70 font-medium">
+                  <div className="text-fluid-sm text-brand-dark-green/70 font-medium">
                     {benefit.statLabel}
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-semibold text-brand-dark-green mb-3">
+                <h3 className="text-fluid-lg font-semibold text-brand-dark-green mb-3">
                   {benefit.title}
                 </h3>
                 
-                <p className="text-brand-dark-green/70 leading-relaxed">
+                <p className="text-fluid-sm text-brand-dark-green/70 leading-relaxed">
                   {benefit.description}
                 </p>
 

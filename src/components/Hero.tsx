@@ -5,14 +5,12 @@ import { cloneElement, type ReactElement, type SVGProps } from 'react'
 import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const Hero = () => {
-  // Precompute orbit icons positioned at equal arc-length intervals
-  const viewW = 820
-  const viewH = 520
-  const cx = 410
-  const cy = 260
-  // Radii chosen to comfortably surround the centered card inside a 3:2 box
-  const rx = 330
-  const ry = 186
+  // Responsive orbit calculations using percentage-based coordinates
+  const cx = 50  // Center X as percentage
+  const cy = 50  // Center Y as percentage
+  // Radii as percentages of the container size
+  const rx = 35  // Horizontal radius as percentage
+  const ry = 25  // Vertical radius as percentage
   // Configurable radial jitter range (fraction of radius): set between -0.10 and 0.10 e.g.
   const jitterMin = 0.05
   const jitterMax = 0.08
@@ -118,11 +116,11 @@ const Hero = () => {
     const chipFill = cfg.chipFill
     const chipStroke = cfg.chipStroke
     const sized = cloneElement(item.svg as ReactElement<SVGProps<SVGSVGElement>>, {
-      width: 28,
-      height: 28,
-      x: -14,
-      y: -14,
-      className: `w-7 h-7 ${iconClass}`
+      width: 3,
+      height: 3,
+      x: -1.5,
+      y: -1.5,
+      className: `${iconClass}`
     })
     // Deterministic animation timing per icon
     const dur = 4 + Math.floor(rand01(i + 303) * 4) // 4-7s
@@ -147,11 +145,11 @@ const Hero = () => {
         <g className="orbit-pulse" style={pulseStyle}>
           <g className="orbit-icon" style={{ animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
             {/* Base tinted chip */}
-            <circle r="28" fill={chipFill} stroke={chipStroke} />
+            <circle r="3" fill={chipFill} stroke={chipStroke} />
             {/* Frosted sheen overlay */}
-            <circle r="28" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
+            <circle r="3" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
             {/* Subtle inner highlight ring */}
-            <circle r="27" fill="none" stroke="rgba(255,255,255,0.6)" />
+            <circle r="2.8" fill="none" stroke="rgba(255,255,255,0.6)" />
             {sized}
           </g>
         </g>
@@ -160,29 +158,29 @@ const Hero = () => {
   })
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center hero-gradient overflow-visible">
+    <section id="inicio" className="relative min-h-screen flex items-center hero-gradient overflow-hidden">
       {/* Subtle Background Element */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl animate-float"></div>
       </div>
 
-      <div className="container relative z-20 pt-24 lg:pt-32 -mt-8 px-6 md:px-8 xl:px-0">
-        <div className="grid lg:grid-cols-2 xl:grid-cols-[1.3fr_0.9fr] gap-12 lg:gap-16 xl:gap-10 items-center">
+      <div className="container relative z-20 pt-20 sm:pt-24 lg:pt-32 -mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.3fr_0.9fr] gap-8 lg:gap-16 xl:gap-10 items-center">
           {/* Hero Content */}
-          <div className="space-y-8 text-center lg:text-left">
+          <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-1 lg:order-1">
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
               <span className="text-brand-dark-green">Reinventando</span>
               <br />
               <span className="text-brand-dark-green">la educación,</span>
               <br />
-              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent whitespace-nowrap">un documento</span>
+              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">un documento</span>
               <br />
               <span className="text-brand-dark-green">a la vez</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl lg:text-2xl text-brand-dark-green/80 max-w-3xl xl:max-w-4xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-lg sm:text-xl lg:text-2xl text-brand-dark-green/80 max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto lg:mx-0 leading-relaxed">
               Automatiza y optimiza la creación de materiales educativos con 
               <span className="font-semibold text-brand-brandeis-blue"> inteligencia artificial</span>
             </p>
@@ -191,48 +189,48 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link 
                 href="#demo" 
-                className="btn-primary btn-large group whitespace-nowrap"
+                className="btn-primary btn-large group"
               >
-                Solicitar Demo
-                <ArrowRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span className="text-sm sm:text-base">Solicitar Demo</span>
+                <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               
               <Link 
                 href="#caracteristicas" 
-                className="btn-secondary btn-large group whitespace-nowrap"
+                className="btn-secondary btn-large group"
               >
-                Ver Más
-                <ArrowRightIcon className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span className="text-sm sm:text-base">Ver Más</span>
+                <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-brand-isabelline">
+            <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-8 border-t border-brand-isabelline">
               <div className="text-center lg:text-left">
-                <div className="text-2xl lg:text-3xl font-bold text-brand-brandeis-blue">10x</div>
-                <div className="text-sm text-brand-dark-green/70">Más rápido</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-brandeis-blue">10x</div>
+                <div className="text-xs sm:text-sm text-brand-dark-green/70">Más rápido</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-2xl lg:text-3xl font-bold text-brand-orange-pantone">500+</div>
-                <div className="text-sm text-brand-dark-green/70">Universidades</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-orange-pantone">500+</div>
+                <div className="text-xs sm:text-sm text-brand-dark-green/70">Universidades</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-2xl lg:text-3xl font-bold text-brand-dark-moss-green">99%</div>
-                <div className="text-sm text-brand-dark-green/70">Satisfacción</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-dark-moss-green">99%</div>
+                <div className="text-xs sm:text-sm text-brand-dark-green/70">Satisfacción</div>
               </div>
             </div>
           </div>
 
-          {/* Second Column: Illustration + Card */}
-          <div className="relative justify-self-center mx-auto max-w-[900px]">
-            {/* Fixed-size orbit box to prevent squashing */}
-            <div className="relative overflow-visible w-[680px] h-[460px] sm:w-[760px] sm:h-[520px] lg:w-[780px] lg:h-[520px] xl:w-[860px] xl:h-[580px]">
+          {/* Second Column: Illustration + Card - Hidden on mobile, visible on large screens */}
+          <div className="hidden lg:block relative justify-self-center mx-auto w-full max-w-[900px] order-2 lg:order-2">
+            {/* Responsive orbit container with aspect ratio */}
+            <div className="relative overflow-visible w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] min-h-[400px] max-h-[580px]">
               {/* Hero Illustration with Orbital Icons */}
               <div className="absolute inset-0 z-20 overflow-visible">
                 {/* Simplified Orbital Icon System */}
                 <div className="absolute inset-0 pointer-events-none overflow-visible">
-                  {/* Debug Ellipse (visible stroke) */}
-                  <svg className="absolute inset-0 w-full h-full z-20 hero-orbit overflow-visible" viewBox={`0 0 ${viewW} ${viewH}`} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  {/* Responsive orbital SVG */}
+                  <svg className="absolute inset-0 w-full h-full z-20 hero-orbit overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                     <defs>
                       {/* Soft drop shadow to emulate glass depth */}
                       <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
@@ -253,47 +251,47 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
+              <div className="absolute inset-0 z-10 flex items-center justify-center p-4 sm:p-6 lg:p-8">
                 {/* Main Card with Frosted Glass + Breathing Animation */}
-                <div className="frost-main-card card-breathe p-8 lg:p-12 rounded-3xl w-[520px] lg:w-[560px]">
-                  <div className="space-y-6">
+                <div className="frost-main-card card-breathe p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl w-full max-w-[85%] sm:max-w-[520px] lg:max-w-[560px]">
+                  <div className="space-y-4 sm:space-y-6">
                     {/* Header */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow-green">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow-green">
                           <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
                           </svg>
                         </div>
-                        <span className="font-semibold text-brand-dark-green">Plataforma Educativa</span>
+                        <span className="text-sm sm:text-base font-semibold text-brand-dark-green">Plataforma Educativa</span>
                       </div>
                       <div className="w-2 h-2 bg-brand-orange-pantone rounded-full animate-pulse"></div>
                     </div>
 
                     {/* Content with Green/Orange Theme */}
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       <div className="h-3 bg-gradient-to-r from-brand-brunswick-green/30 to-brand-orange-pantone/30 rounded-full"></div>
                       <div className="h-3 bg-gradient-to-r from-brand-orange-pantone/30 to-brand-brunswick-green/30 rounded-full w-4/5"></div>
                       <div className="h-3 bg-gradient-to-r from-brand-dark-green/30 to-brand-orange-pantone/40 rounded-full w-3/5"></div>
                     </div>
 
                     {/* Features with 4 Brand Colors as Bullets: Blue, Yellow, Orange, Green */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-brandeis-blue rounded-full"></div>
-                        <span className="text-sm text-brand-dark-green">IA Integrada</span>
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">IA Integrada</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-sunglow rounded-full"></div>
-                        <span className="text-sm text-brand-dark-green">LMS Compatible</span>
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">LMS Compatible</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-orange-pantone rounded-full"></div>
-                        <span className="text-sm text-brand-dark-green">Colaborativo</span>
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Colaborativo</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-brunswick-green rounded-full"></div>
-                        <span className="text-sm text-brand-dark-green">Tiempo Real</span>
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Tiempo Real</span>
                       </div>
                     </div>
                   </div>

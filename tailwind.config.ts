@@ -8,9 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '475px',
+        '3xl': '1600px',
+      },
       fontFamily: {
         inter: ['Inter', 'ui-sans-serif', 'system-ui'],
         serif: ['ui-serif', 'Georgia', 'serif'],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '128': '32rem',
       },
       colors: {
         // Exact Brand Colors
@@ -237,6 +246,31 @@ const config: Config = {
         'glow-green': '0 0 20px rgba(15, 76, 56, 0.4), 0 0 40px rgba(15, 76, 56, 0.1)',
         'glow-orange': '0 0 20px rgba(251, 97, 19, 0.4), 0 0 40px rgba(251, 97, 19, 0.1)',
         'glow-strong': '0 0 30px rgba(251, 97, 19, 0.5), 0 0 60px rgba(15, 76, 56, 0.2)',
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+        '3/2': '3 / 2',
+        '5/3': '5 / 3',
+        '16/10': '16 / 10',
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem',
+      },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'base': ['1rem', { lineHeight: '1.5rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+        '5xl': ['3rem', { lineHeight: '1' }],
+        '6xl': ['3.75rem', { lineHeight: '1' }],
+        '7xl': ['4.5rem', { lineHeight: '1' }],
+        '8xl': ['6rem', { lineHeight: '1' }],
+        '9xl': ['8rem', { lineHeight: '1' }],
       },
     },
   },
