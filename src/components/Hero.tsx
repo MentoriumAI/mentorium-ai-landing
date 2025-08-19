@@ -5,18 +5,18 @@ import { cloneElement, type ReactElement, type SVGProps } from 'react'
 import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const Hero = () => {
-  // Responsive orbit calculations using percentage-based coordinates
-  const cx = 50  // Center X as percentage
-  const cy = 50  // Center Y as percentage
-  // Radii as percentages of the container size
-  const rx = 35  // Horizontal radius as percentage
-  const ry = 25  // Vertical radius as percentage
-  // Configurable radial jitter range (fraction of radius): set between -0.10 and 0.10 e.g.
-  const jitterMin = 0.05
-  const jitterMax = 0.08
-  // Configurable angular jitter range in degrees (relative to Y-axis placement)
-  const angleJitterMinDeg = -10
-  const angleJitterMaxDeg = 10
+  // Enhanced orbit calculations using percentage-based coordinates - spread out more from card center
+  const cx = 50  // Center X as percentage (card center)
+  const cy = 50  // Center Y as percentage (card center)
+  // Optimized radii: perfect horizontal spread, tighter vertical spread
+  const rx = 50  // Horizontal radius as percentage (perfect as is)
+  const ry = 30  // Vertical radius as percentage (reduced from 40 for tighter vertical spread)
+  // Maximum jitter range for optimal organic spread around the card center
+  const jitterMin = 0.15  // Further increased minimum jitter for more variation
+  const jitterMax = 0.25  // Further increased maximum jitter for wide organic positioning
+  // Maximum angular jitter range for natural distribution
+  const angleJitterMinDeg = -20  // Maximum angular range for best spread
+  const angleJitterMaxDeg = 20
 
   type OrbitItem = { key: string; chipClass: string; svg: ReactElement<SVGProps<SVGSVGElement>> }
 
@@ -116,18 +116,18 @@ const Hero = () => {
     const chipFill = cfg.chipFill
     const chipStroke = cfg.chipStroke
     const sized = cloneElement(item.svg as ReactElement<SVGProps<SVGSVGElement>>, {
-      width: 3,
-      height: 3,
-      x: -1.5,
-      y: -1.5,
+      width: 4.5,
+      height: 4.5,
+      x: -2.25,
+      y: -2.25,
       className: `${iconClass}`
     })
     // Deterministic animation timing per icon
     const dur = 4 + Math.floor(rand01(i + 303) * 4) // 4-7s
     const delay = Math.floor(rand01(i + 404) * 9) * 0.2 // 0,0.2,...,1.6s
     // Dynamic pulsing scale: approximately 3 icons big at a time via phase-staggered pulse
-    // Per-icon big scale amplitude (deterministic)
-    const bigScale = round(1.45 + 0.2 * rand01(i + 606), 3) // 1.45 - 1.65
+    // Enhanced per-icon big scale amplitude for more dramatic pulsing
+    const bigScale = round(1.6 + 0.3 * rand01(i + 606), 3) // 1.6 - 1.9 (increased from 1.45-1.65)
     // Pulse cycle duration and evenly distributed phase so big states are staggered
     const pulseDur = 16 // seconds
     const phaseBase = (i / n) * pulseDur
@@ -145,11 +145,11 @@ const Hero = () => {
         <g className="orbit-pulse" style={pulseStyle}>
           <g className="orbit-icon" style={{ animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
             {/* Base tinted chip */}
-            <circle r="3" fill={chipFill} stroke={chipStroke} />
+            <circle r="4.5" fill={chipFill} stroke={chipStroke} strokeWidth="0.2" />
             {/* Frosted sheen overlay */}
-            <circle r="3" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
+            <circle r="4.5" fill="url(#chipFrostGrad)" fillOpacity="0.9" />
             {/* Subtle inner highlight ring */}
-            <circle r="2.8" fill="none" stroke="rgba(255,255,255,0.6)" />
+            <circle r="4.2" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="0.15" />
             {sized}
           </g>
         </g>
@@ -221,10 +221,57 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Second Column: Illustration + Card - Hidden on mobile, visible on large screens */}
+          {/* Mobile Card - Only visible on mobile/tablet */}
+          <div className="lg:hidden flex items-center justify-center py-8 order-2">
+            <div className="frost-main-card card-breathe p-6 sm:p-8 rounded-2xl sm:rounded-3xl w-full max-w-[90%] sm:max-w-[480px] mx-4">
+              <div className="space-y-4 sm:space-y-6">
+                {/* Header */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow-green">
+                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                      </svg>
+                    </div>
+                    <span className="text-sm sm:text-base font-semibold text-brand-dark-green">Plataforma Educativa</span>
+                  </div>
+                  <div className="w-2 h-2 bg-brand-orange-pantone rounded-full animate-pulse"></div>
+                </div>
+
+                {/* Content with Green/Orange Theme */}
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="h-3 bg-gradient-to-r from-brand-brunswick-green/30 to-brand-orange-pantone/30 rounded-full"></div>
+                  <div className="h-3 bg-gradient-to-r from-brand-orange-pantone/30 to-brand-brunswick-green/30 rounded-full w-4/5"></div>
+                  <div className="h-3 bg-gradient-to-r from-brand-dark-green/30 to-brand-orange-pantone/40 rounded-full w-3/5"></div>
+                </div>
+
+                {/* Features with 4 Brand Colors as Bullets: Blue, Yellow, Orange, Green */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">IA Integrada</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">LMS Compatible</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Colaborativo</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Tiempo Real</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Column: Illustration + Card with Orbital System - Hidden on mobile, visible on large screens */}
           <div className="hidden lg:block relative justify-self-center mx-auto w-full max-w-[900px] order-2 lg:order-2">
-            {/* Responsive orbit container with aspect ratio */}
-            <div className="relative overflow-visible w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] min-h-[400px] max-h-[580px]">
+            {/* Maximum orbit container with optimal space for widely spread icons */}
+            <div className="relative overflow-visible w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] min-h-[550px] max-h-[700px]">
               {/* Hero Illustration with Orbital Icons */}
               <div className="absolute inset-0 z-20 overflow-visible">
                 {/* Simplified Orbital Icon System */}
@@ -232,9 +279,16 @@ const Hero = () => {
                   {/* Responsive orbital SVG */}
                   <svg className="absolute inset-0 w-full h-full z-20 hero-orbit overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                     <defs>
-                      {/* Soft drop shadow to emulate glass depth */}
-                      <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
-                        <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="rgba(31, 38, 135, 0.20)" floodOpacity="0.55" />
+                      {/* Circular drop shadow to match the round bubbles */}
+                      <filter id="chipShadow" x="-100%" y="-100%" width="300%" height="300%" colorInterpolationFilters="sRGB">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                        <feOffset dx="0" dy="2" result="offset" />
+                        <feFlood floodColor="rgba(31, 38, 135, 0.15)" />
+                        <feComposite in2="offset" operator="in" />
+                        <feMerge>
+                          <feMergeNode />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
                       </filter>
                       {/* Subtle white gradient for frosted sheen */}
                       <radialGradient id="chipFrostGrad" cx="30%" cy="30%" r="80%">
