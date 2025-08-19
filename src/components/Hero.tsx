@@ -1,10 +1,43 @@
 "use client"
 
 import Link from 'next/link'
-import { cloneElement, type ReactElement, type SVGProps } from 'react'
+import { cloneElement, type ReactElement, type SVGProps, useState, useEffect } from 'react'
 import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const Hero = () => {
+  // Brand color variants used randomly (but deterministically) per icon
+  const colorConfigs = [
+    {
+      name: 'blue',
+      iconClass: 'text-brand-brandeis-blue',
+      chipFill: 'rgba(0, 111, 234, 0.12)',
+      chipStroke: 'rgba(0, 111, 234, 0.25)'
+    },
+    {
+      name: 'yellow',
+      iconClass: 'text-brand-sunglow',
+      chipFill: 'rgba(255, 196, 0, 0.16)',
+      chipStroke: 'rgba(255, 196, 0, 0.25)'
+    },
+    {
+      name: 'orange',
+      iconClass: 'text-brand-orange-pantone',
+      chipFill: 'rgba(251, 97, 19, 0.14)',
+      chipStroke: 'rgba(251, 97, 19, 0.28)'
+    },
+    {
+      name: 'green',
+      iconClass: 'text-brand-brunswick-green',
+      chipFill: 'rgba(15, 76, 56, 0.12)',
+      chipStroke: 'rgba(15, 76, 56, 0.24)'
+    }
+  ] as const
+
+  // Client-side state for randomized colors to avoid hydration mismatch
+  const [topRowColors, setTopRowColors] = useState(colorConfigs)
+  const [bottomRowColors, setBottomRowColors] = useState(colorConfigs)
+  const [isClient, setIsClient] = useState(false)
+
   // Enhanced orbit calculations using percentage-based coordinates - spread out more from card center
   const cx = 50  // Center X as percentage (card center)
   const cy = 50  // Center Y as percentage (card center)
@@ -61,33 +94,26 @@ const Hero = () => {
 
   const n = items.length
 
-  // Brand color variants used randomly (but deterministically) per icon
-  const colorConfigs = [
-    {
-      name: 'blue',
-      iconClass: 'text-brand-brandeis-blue',
-      chipFill: 'rgba(0, 111, 234, 0.12)',
-      chipStroke: 'rgba(0, 111, 234, 0.25)'
-    },
-    {
-      name: 'yellow',
-      iconClass: 'text-brand-sunglow',
-      chipFill: 'rgba(255, 196, 0, 0.16)',
-      chipStroke: 'rgba(255, 196, 0, 0.25)'
-    },
-    {
-      name: 'orange',
-      iconClass: 'text-brand-orange-pantone',
-      chipFill: 'rgba(251, 97, 19, 0.14)',
-      chipStroke: 'rgba(251, 97, 19, 0.28)'
-    },
-    {
-      name: 'green',
-      iconClass: 'text-brand-brunswick-green',
-      chipFill: 'rgba(15, 76, 56, 0.12)',
-      chipStroke: 'rgba(15, 76, 56, 0.24)'
+  // Shuffle function using client-side randomization for color assignments
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
-  ] as const
+    return shuffled
+  }
+
+  // Client-side effect to randomize colors after hydration
+  useEffect(() => {
+    setIsClient(true)
+    setTopRowColors(shuffleArray([...colorConfigs]))
+    setBottomRowColors(shuffleArray([...colorConfigs]))
+  }, [])
+
+  // Fixed icon arrangements for mobile (same icons, different colors)
+  const topRowItems = items.slice(0, 4) // First 4 icons always
+  const bottomRowItems = items.slice(4, 8) // Last 4 icons always
 
   // Deterministic pseudo-random in [0,1) based on index to avoid hydration mismatch
   const rand01 = (k: number) => {
@@ -225,11 +251,12 @@ const Hero = () => {
           </div>
 
           {/* Mobile Card with Linear Bubbles - Only visible on mobile/tablet */}
-          <div className="lg:hidden flex flex-col items-center justify-center py-8 order-2 relative">
+          <div className="lg:hidden flex flex-col items-center justify-center py-16 sm:py-20 order-2 relative">
             {/* Top Row of Bubbles */}
             <div className="flex justify-center items-center gap-4 sm:gap-6 mb-6 relative z-10">
-              {items.slice(0, 4).map((item, i) => {
-                const cfg = colorConfigs[i % colorConfigs.length]
+              {topRowItems.map((item, i) => {
+                // Use randomized colors only on client, fallback to sequential during SSR
+                const cfg = isClient ? topRowColors[i % topRowColors.length] : colorConfigs[i % colorConfigs.length]
                 const iconClass = cfg.iconClass
                 const chipFill = cfg.chipFill
                 const chipStroke = cfg.chipStroke
@@ -250,15 +277,31 @@ const Hero = () => {
                     }}
                   >
                     <div 
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-lg mobile-bubble-pulse"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mobile-bubble-pulse relative overflow-hidden"
                       style={{ 
                         backgroundColor: chipFill,
                         border: `2px solid ${chipStroke}`,
                         animationDelay: `${delay + 1}s`,
-                        animationDuration: `${duration + 1}s`
+                        animationDuration: `${duration + 1}s`,
+                        boxShadow: '0 4px 20px 0 rgba(31, 38, 135, 0.15), 0 0 20px rgba(251, 97, 19, 0.1)'
                       }}
                     >
-                      {sized}
+                      {/* Subtle frosted sheen overlay - reduced opacity to preserve icon colors */}
+                      <div 
+                        className="absolute inset-0 rounded-full pointer-events-none"
+                        style={{
+                          background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.25) 60%, rgba(255,255,255,0.15) 100%)',
+                          opacity: 0.7
+                        }}
+                      />
+                      {/* Inner highlight ring like desktop */}
+                      <div 
+                        className="absolute inset-1 rounded-full border border-white/40 pointer-events-none"
+                      />
+                      {/* Icon with higher z-index to ensure vibrant colors */}
+                      <div className="relative z-10">
+                        {sized}
+                      </div>
                     </div>
                   </div>
                 )
@@ -312,8 +355,9 @@ const Hero = () => {
 
             {/* Bottom Row of Bubbles */}
             <div className="flex justify-center items-center gap-4 sm:gap-6 mt-6 relative z-10">
-              {items.slice(4, 8).map((item, i) => {
-                const cfg = colorConfigs[(i + 4) % colorConfigs.length]
+              {bottomRowItems.map((item, i) => {
+                // Use randomized colors only on client, fallback to sequential during SSR
+                const cfg = isClient ? bottomRowColors[i % bottomRowColors.length] : colorConfigs[i % colorConfigs.length]
                 const iconClass = cfg.iconClass
                 const chipFill = cfg.chipFill
                 const chipStroke = cfg.chipStroke
@@ -334,15 +378,31 @@ const Hero = () => {
                     }}
                   >
                     <div 
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-lg mobile-bubble-pulse"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mobile-bubble-pulse relative overflow-hidden"
                       style={{ 
                         backgroundColor: chipFill,
                         border: `2px solid ${chipStroke}`,
                         animationDelay: `${delay + 1.5}s`,
-                        animationDuration: `${duration + 1}s`
+                        animationDuration: `${duration + 1}s`,
+                        boxShadow: '0 4px 20px 0 rgba(31, 38, 135, 0.15), 0 0 20px rgba(251, 97, 19, 0.1)'
                       }}
                     >
-                      {sized}
+                      {/* Subtle frosted sheen overlay - reduced opacity to preserve icon colors */}
+                      <div 
+                        className="absolute inset-0 rounded-full pointer-events-none"
+                        style={{
+                          background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.25) 60%, rgba(255,255,255,0.15) 100%)',
+                          opacity: 0.7
+                        }}
+                      />
+                      {/* Inner highlight ring like desktop */}
+                      <div 
+                        className="absolute inset-1 rounded-full border border-white/40 pointer-events-none"
+                      />
+                      {/* Icon with higher z-index to ensure vibrant colors */}
+                      <div className="relative z-10">
+                        {sized}
+                      </div>
                     </div>
                   </div>
                 )
