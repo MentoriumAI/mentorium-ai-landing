@@ -194,7 +194,7 @@ const Hero = () => {
               <br />
               <span className="text-brand-dark-green">la educación,</span>
               <br />
-              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">un documento</span>
+              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent whitespace-nowrap">un documento</span>
               <br />
               <span className="text-brand-dark-green">a la vez</span>
             </h1>
