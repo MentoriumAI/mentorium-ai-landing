@@ -69,6 +69,58 @@
     @apply animate-float;
   }
   
+  .floating-element-slow {
+    @apply animate-float-slow;
+  }
+  
+  .floating-element-delayed {
+    @apply animate-float-delayed;
+  }
+  
+  .breathing-1 {
+    animation: breathe1 4s ease-in-out infinite;
+  }
+  
+  .breathing-2 {
+    animation: breathe2 5s ease-in-out infinite;
+  }
+  
+  .breathing-3 {
+    animation: breathe3 6s ease-in-out infinite;
+  }
+  
+  .breathing-4 {
+    animation: breathe4 4.5s ease-in-out infinite;
+  }
+  
+  .floating-element-orbit {
+    @apply animate-orbit;
+  }
+  
+  .floating-element-orbit-reverse {
+    @apply animate-orbit-reverse;
+  }
+  
+  .floating-element-slow {
+    @apply animate-float-slow;
+  }
+  
+  .floating-element-sparkle {
+    @apply animate-sparkle;
+  }
+  
+  .subtle-float {
+    @apply animate-subtle-float;
+  }
+  
+  .subtle-float-delayed {
+    @apply animate-subtle-float-delayed;
+  }
+  
+  .hero-glow-static {
+    box-shadow: 0 0 25px rgba(251, 97, 19, 0.2), 0 0 50px rgba(15, 76, 56, 0.1);
+  }
+  
   .gradient-text {
     @apply bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent;
   }
@@ -122,4 +174,146 @@
 .animate-on-scroll.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Enhanced floating animations with different speeds and patterns */
+.float-container {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.orbital-element {
+  position: absolute;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.orbital-element:hover {
+  z-index: 100;
+}
+
+/* Orbital animation containers */
+.orbit-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.orbit-path-1 {
+  animation: var(--orbit-animation-1, none);
+}
+
+.orbit-path-2 {
+  animation: var(--orbit-animation-2, none);
+}
+
+.orbit-path-3 {
+  animation: var(--orbit-animation-3, none);
+}
+
+/* Parallax effect on hero card hover */
+.hero-parallax-container:hover .orbit-path-1 {
+  animation-duration: 35s;
+}
+
+.hero-parallax-container:hover .orbit-path-2 {
+  animation-duration: 40s;
+}
+
+.hero-parallax-container:hover .orbit-path-3 {
+  animation-duration: 45s;
+}
+
+/* Semantic groups with subtle floating */
+.semantic-top {
+  --orbit-radius: 130px;
+  --orbit-y-offset: -20px;
+}
+
+.semantic-right {
+  --orbit-radius: 140px;
+  --orbit-y-offset: -10px;
+}
+
+.semantic-bottom {
+  --orbit-radius: 135px;
+  --orbit-y-offset: -15px;
+}
+
+.semantic-left {
+  --orbit-radius: 125px;
+  --orbit-y-offset: -25px;
+}
+
+/* Better glass morphism for floating elements */
+.floating-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
+}
+
+/* Solid frosted glass effect - fully opaque */
+.frost-glass {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 250, 252, 0.98) 50%, 
+    rgba(241, 245, 249, 0.95) 100%);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(148, 163, 184, 0.2);
+}
+
+.frost-glass:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.98) 0%, 
+    rgba(248, 250, 252, 1) 50%, 
+    rgba(241, 245, 249, 0.98) 100%);
+  border-color: rgba(203, 213, 225, 0.9);
+  transform: scale(1.05);
+  box-shadow: 
+    0 12px 40px 0 rgba(31, 38, 135, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(148, 163, 184, 0.3);
+}
+
+/* Enhanced main card - solid with frosted styling */
+.frost-main-card {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.96) 0%, 
+    rgba(248, 250, 252, 0.98) 30%, 
+    rgba(241, 245, 249, 0.96) 70%, 
+    rgba(226, 232, 240, 0.94) 100%);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  box-shadow: 
+    0 16px 40px 0 rgba(31, 38, 135, 0.2),
+    0 0 60px 0 rgba(251, 97, 19, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -2px 0 rgba(148, 163, 184, 0.25);
+}
+
+/* Entrance animations with stagger effect */
+.entrance-delay-1 { animation-delay: 0.1s; }
+.entrance-delay-2 { animation-delay: 0.2s; }
+.entrance-delay-3 { animation-delay: 0.3s; }
+.entrance-delay-4 { animation-delay: 0.4s; }
+.entrance-delay-5 { animation-delay: 0.5s; }
+.entrance-delay-6 { animation-delay: 0.6s; }
+.entrance-delay-7 { animation-delay: 0.7s; }
+.entrance-delay-8 { animation-delay: 0.8s; }
+
+/* Improved glass morphism with better blur and contrast */
+.glass-enhanced {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }

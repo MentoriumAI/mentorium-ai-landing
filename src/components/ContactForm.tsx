@@ -45,8 +45,8 @@ const ContactForm = () => {
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-slate-800 mb-2">¡Mensaje enviado!</h3>
-        <p className="text-slate-600">Nos pondremos en contacto contigo en las próximas 24 horas.</p>
+        <h3 className="text-xl font-semibold text-white mb-2">¡Mensaje enviado!</h3>
+        <p className="text-slate-200">Nos pondremos en contacto contigo en las próximas 24 horas.</p>
       </div>
     )
   }
@@ -55,7 +55,7 @@ const ContactForm = () => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
             Nombre completo *
           </label>
           <input
@@ -73,7 +73,7 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
             Correo electrónico *
           </label>
           <input
@@ -92,7 +92,7 @@ const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="institution" className="block text-sm font-medium text-slate-700 mb-2">
+        <label htmlFor="institution" className="block text-sm font-medium text-white mb-2">
           Institución educativa
         </label>
         <input
@@ -109,7 +109,7 @@ const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
+        <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
           Mensaje *
         </label>
         <textarea
@@ -149,7 +149,7 @@ const ContactForm = () => {
         )}
       </button>
 
-      <p className="text-sm text-slate-500 text-center">
+      <p className="text-sm text-slate-300 text-center">
         Al enviar este formulario, aceptas que nos pongamos en contacto contigo para programar una demostración personalizada.
       </p>
     </form>
