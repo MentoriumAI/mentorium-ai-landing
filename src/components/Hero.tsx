@@ -159,14 +159,17 @@ const Hero = () => {
     // Deterministic animation timing per icon
     const dur = 4 + Math.floor(rand01(i + 303) * 4) // 4-7s
     const delay = Math.floor(rand01(i + 404) * 9) * 0.2 // 0,0.2,...,1.6s
-    // Deterministic size variation: make about half of the icons clearly larger
-    const bigPick = rand01(i + 505)
-    const isBig = bigPick < 0.5
-    const scaleRaw = isBig ? 1.4 + 0.4 * rand01(i + 606) : 1.0 // 1.4 - 1.8 when big
-    const scale = round(scaleRaw, 3)
+    // Dynamic pulsing scale: approximately 3 icons big at a time via phase-staggered pulse
+    // Per-icon big scale amplitude (deterministic)
+    const bigScale = round(1.45 + 0.2 * rand01(i + 606), 3) // 1.45 - 1.65
+    // Pulse cycle duration and evenly distributed phase so big states are staggered
+    const pulseDur = 16 // seconds
+    const phaseBase = (i / n) * pulseDur
+    const phaseJitter = round(0.6 * (rand01(i + 707) - 0.5), 2) // +/-0.3s to avoid perfect sync
+    const pulseDelay = round(phaseBase + phaseJitter, 2)
     return (
       <g key={item.key} transform={`translate(${round(x)}, ${round(y)})`} filter="url(#chipShadow)">
-        <g transform={`scale(${scale})`}>
+        <g className="orbit-pulse" style={{ ['--big-scale' as any]: `${bigScale}`, animationDuration: `${pulseDur}s`, animationDelay: `${pulseDelay}s` }}>
           <g className="orbit-icon" style={{ animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
             {/* Base tinted chip */}
             <circle r="28" fill={chipFill} stroke={chipStroke} />
@@ -267,7 +270,7 @@ const Hero = () => {
                     <defs>
                       {/* Soft drop shadow to emulate glass depth */}
                       <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
-                        <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="rgba(31, 38, 135, 0.20)" floodOpacity="1" />
+                        <feDropShadow dx="0" dy="4" stdDeviation="4" floodColor="rgba(31, 38, 135, 0.20)" floodOpacity="0.85" />
                       </filter>
                       {/* Subtle white gradient for frosted sheen */}
                       <radialGradient id="chipFrostGrad" cx="30%" cy="30%" r="80%">
@@ -277,7 +280,6 @@ const Hero = () => {
                       </radialGradient>
                     </defs>
                     {/* Center near the right column where the card lives */}
-                    <ellipse cx="410" cy="260" rx="330" ry="205" fill="none" stroke="rgba(0, 111, 234, 0.5)" strokeWidth="3" strokeDasharray="6 8" />
                     
                     {/* Icons */}
                     {orbitElements}

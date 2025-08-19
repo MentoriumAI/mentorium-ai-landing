@@ -332,11 +332,11 @@
 
 /* Gentle icon drift (for orbiting chips) */
 @keyframes orbitIconDrift {
-  0%   { transform: translate(0px, 0px) rotate(0deg) scale(1); }
-  25%  { transform: translate(0px, -10px) rotate(2deg) scale(1.02); }
-  50%  { transform: translate(0px, 0px) rotate(0deg) scale(1.03); }
-  75%  { transform: translate(0px, 10px) rotate(-2deg) scale(1.02); }
-  100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+  0%   { transform: translate(0px, 0px) rotate(0deg); }
+  25%  { transform: translate(0px, -8px) rotate(1.5deg); }
+  50%  { transform: translate(0px, 0px) rotate(0deg); }
+  75%  { transform: translate(0px, 8px) rotate(-1.5deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
 }
 
 .orbit-icon {
@@ -358,5 +358,28 @@
 
 .card-breathe {
   animation: cardBreathe 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Pulsing scale to keep ~3 icons big at a time (assuming ~8 icons)
+   Duty cycle ~37.5%: icons are big for the first 37.5% of their cycle, then shrink.
+   Phase staggering (animation-delay per icon) distributes big states around the orbit. */
+@keyframes orbitPulse {
+  /* Smooth rise to big, then smooth fall back to 1 with no plateau */
+  0%   { transform: scale(1); }
+  15%  { transform: scale(calc(var(--big-scale, 1.6) * 0.98)); }
+  25%  { transform: scale(var(--big-scale, 1.6)); }
+  35%  { transform: scale(calc(var(--big-scale, 1.6) * 0.98)); }
+  50%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+.orbit-pulse {
+  animation-name: orbitPulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 16s; /* can be overridden inline */
+  transform-box: fill-box;
+  transform-origin: center;
   will-change: transform;
 }
