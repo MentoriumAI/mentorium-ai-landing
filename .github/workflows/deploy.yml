@@ -124,7 +124,7 @@ jobs:
           SERVICE_TYPE="${REPO_NAME#mentorium-ai-}"
           
           # Resolve image name (defaults to SERVICE_TYPE if IMAGE_NAME not provided)
-          if [[ -n "$IMAGE_NAME" ]]; then
+          if [[ -n "${IMAGE_NAME:-}" ]]; then
             RESOLVED_IMAGE_NAME="$IMAGE_NAME"
           else
             RESOLVED_IMAGE_NAME="$SERVICE_TYPE"
@@ -133,7 +133,7 @@ jobs:
           # Build full image repository path: <repo>[/<image_name>]
           IMAGE_REPO_BASE="${{ needs.determine-environment.outputs.artifact_registry }}"
           LAST_SEGMENT="${IMAGE_REPO_BASE##*/}"
-          if [[ -z "$IMAGE_NAME" && "$LAST_SEGMENT" == "$SERVICE_TYPE" ]]; then
+          if [[ -z "${IMAGE_NAME:-}" && "$LAST_SEGMENT" == "$SERVICE_TYPE" ]]; then
             # Repo already named like the image; don't append image name
             FULL_IMAGE_REPO="$IMAGE_REPO_BASE"
           else
