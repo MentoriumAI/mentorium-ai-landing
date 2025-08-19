@@ -3,14 +3,14 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files from next directory
-COPY next/package*.json ./
+# Copy package files
+COPY package*.json ./
 
 # Install all dependencies (including dev dependencies needed for build)
 RUN npm ci --no-audit --no-fund
 
-# Copy source code from next directory
-COPY next/ .
+# Copy source code
+COPY . .
 
 # Build the application
 RUN npm run build
@@ -22,12 +22,15 @@ WORKDIR /app
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=80
+ENV PORT=8080
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create nextjs user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+# Install runtime tools needed for healthcheck
+RUN apk add --no-cache curl
 
 # Copy built application from builder stage
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
@@ -41,11 +44,11 @@ RUN npm ci --only=production --no-audit --no-fund && npm cache clean --force
 USER nextjs
 
 # Expose port
-EXPOSE 80
+EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:80/ || exit 1
+  CMD curl -f http://localhost:${PORT:-8080}/ || exit 1
 
 # Start the application
 CMD ["npm", "start"]

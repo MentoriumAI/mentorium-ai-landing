@@ -5,8 +5,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # Next.js build output  
-next/.next/
-next/out/
+.next/
+out/
 
 # Environment variables
 .env
@@ -32,13 +32,9 @@ next/out/
 .DS_Store
 Thumbs.db
 
-# Static files (keep these for old implementation)
-static/
-
-# Python files (from old implementation)
-*.pyc
-__pycache__/
-*.py
+# Build artifacts
+.next/
+out/
 
 # Misc
 README.md

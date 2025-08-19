@@ -209,7 +209,7 @@ jobs:
               CPU=1
               ;;
             landing)
-              PORT=80
+              PORT=8080
               MEMORY=512Mi
               MAX_INSTANCES=${{ needs.determine-environment.outputs.environment == 'prod' && '5' || '3' }}
               CONCURRENCY=1000
