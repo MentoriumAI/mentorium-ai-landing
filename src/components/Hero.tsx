@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { cloneElement, isValidElement } from 'react'
+import { cloneElement, type ReactElement, type SVGProps } from 'react'
 import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const Hero = () => {
@@ -20,17 +20,19 @@ const Hero = () => {
   const angleJitterMinDeg = -10
   const angleJitterMaxDeg = 10
 
-  const items = [
+  type OrbitItem = { key: string; chipClass: string; svg: ReactElement<SVGProps<SVGSVGElement>> }
+
+  const items: OrbitItem[] = [
     { key: 'book', chipClass: 'shadow-glow-orange', svg: (
       <svg className="w-7 h-7 text-brand-orange-pantone" fill="currentColor" viewBox="0 0 20 20">
         <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
       </svg>
     )},
     { key: 'sparkles', chipClass: 'shadow-glow-green', svg: (
-      <SparklesIcon />
+      <SparklesIcon className="w-7 h-7" />
     )},
     { key: 'bulb', chipClass: 'shadow-glow-orange', svg: (
-      <LightBulbIcon />
+      <LightBulbIcon className="w-7 h-7" />
     )},
     { key: 'gear', chipClass: 'shadow-glow-green', svg: (
       <svg className="w-7 h-7 text-brand-brunswick-green" fill="currentColor" viewBox="0 0 20 20">
@@ -60,37 +62,6 @@ const Hero = () => {
   ]
 
   const n = items.length
-  const samples = 720
-  const startAngle = -Math.PI / 2
-  const pts = [] as { x: number; y: number; s: number }[]
-  let cum = 0
-  let prevX = cx + rx * Math.cos(startAngle)
-  let prevY = cy - ry * Math.sin(startAngle)
-  pts.push({ x: prevX, y: prevY, s: 0 })
-  for (let k = 1; k <= samples; k++) {
-    const t = startAngle + (2 * Math.PI * k) / samples
-    const x = cx + rx * Math.cos(t)
-    const y = cy - ry * Math.sin(t)
-    cum += Math.hypot(x - prevX, y - prevY)
-    pts.push({ x, y, s: cum })
-    prevX = x
-    prevY = y
-  }
-  const total = cum
-  const pointAt = (sTarget: number) => {
-    if (sTarget <= 0) return pts[0]
-    if (sTarget >= total) return pts[pts.length - 1]
-    for (let i = 1; i < pts.length; i++) {
-      if (pts[i].s >= sTarget) {
-        const p0 = pts[i - 1]
-        const p1 = pts[i]
-        const span = p1.s - p0.s || 1
-        const t = (sTarget - p0.s) / span
-        return { x: p0.x + t * (p1.x - p0.x), y: p0.y + t * (p1.y - p0.y), s: sTarget }
-      }
-    }
-    return pts[pts.length - 1]
-  }
 
   // Brand color variants used randomly (but deterministically) per icon
   const colorConfigs = [
@@ -146,9 +117,13 @@ const Hero = () => {
     const iconClass = cfg.iconClass
     const chipFill = cfg.chipFill
     const chipStroke = cfg.chipStroke
-    const sized = isValidElement(item.svg)
-      ? cloneElement(item.svg as any, { width: 28, height: 28, x: -14, y: -14, className: `w-7 h-7 ${iconClass}` })
-      : null
+    const sized = cloneElement(item.svg as ReactElement<SVGProps<SVGSVGElement>>, {
+      width: 28,
+      height: 28,
+      x: -14,
+      y: -14,
+      className: `w-7 h-7 ${iconClass}`
+    })
     // Deterministic animation timing per icon
     const dur = 4 + Math.floor(rand01(i + 303) * 4) // 4-7s
     const delay = Math.floor(rand01(i + 404) * 9) * 0.2 // 0,0.2,...,1.6s
@@ -160,9 +135,16 @@ const Hero = () => {
     const phaseBase = (i / n) * pulseDur
     const phaseJitter = round(0.6 * (rand01(i + 707) - 0.5), 2) // +/-0.3s to avoid perfect sync
     const pulseDelay = round(phaseBase + phaseJitter, 2)
+
+    type PulseStyle = React.CSSProperties & { ['--big-scale']?: string }
+    const pulseStyle: PulseStyle = {
+      ['--big-scale']: `${bigScale}`,
+      animationDuration: `${pulseDur}s`,
+      animationDelay: `${pulseDelay}s`
+    }
     return (
       <g key={item.key} transform={`translate(${round(x)}, ${round(y)})`} filter="url(#chipShadow)">
-        <g className="orbit-pulse" style={{ ['--big-scale' as any]: `${bigScale}`, animationDuration: `${pulseDur}s`, animationDelay: `${pulseDelay}s` }}>
+        <g className="orbit-pulse" style={pulseStyle}>
           <g className="orbit-icon" style={{ animationDuration: `${dur}s`, animationDelay: `${delay}s` }}>
             {/* Base tinted chip */}
             <circle r="28" fill={chipFill} stroke={chipStroke} />
@@ -250,7 +232,7 @@ const Hero = () => {
                 {/* Simplified Orbital Icon System */}
                 <div className="absolute inset-0 pointer-events-none overflow-visible">
                   {/* Debug Ellipse (visible stroke) */}
-                  <svg className="absolute inset-0 w-full h-full z-20 hero-orbit overflow-visible" viewBox="0 0 820 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                  <svg className="absolute inset-0 w-full h-full z-20 hero-orbit overflow-visible" viewBox={`0 0 ${viewW} ${viewH}`} preserveAspectRatio="xMidYMid meet" aria-hidden="true">
                     <defs>
                       {/* Soft drop shadow to emulate glass depth */}
                       <filter id="chipShadow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
