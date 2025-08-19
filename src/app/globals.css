@@ -390,17 +390,17 @@
   transform-box: fill-box;
 }
 
-/* Gentle icon drift (for orbiting chips) */
+/* Subtle icon drift (for orbiting chips) - reduced motion */
 @keyframes orbitIconDrift {
-  /* sine-like bob: A*sin(t) with A=6px; rotation follows y offset proportionally */
+  /* sine-like bob: A*sin(t) with A=3px; rotation follows y offset proportionally */
   0%     { transform: translate(0px,   0.0px) rotate(0deg); }
-  12.5%  { transform: translate(0px,  -4.2px) rotate(0.7deg); }
-  25%    { transform: translate(0px,  -6.0px) rotate(1deg); }
-  37.5%  { transform: translate(0px,  -4.2px) rotate(0.7deg); }
+  12.5%  { transform: translate(0px,  -2.1px) rotate(0.35deg); }
+  25%    { transform: translate(0px,  -3.0px) rotate(0.5deg); }
+  37.5%  { transform: translate(0px,  -2.1px) rotate(0.35deg); }
   50%    { transform: translate(0px,   0.0px) rotate(0deg); }
-  62.5%  { transform: translate(0px,   4.2px) rotate(-0.7deg); }
-  75%    { transform: translate(0px,   6.0px) rotate(-1deg); }
-  87.5%  { transform: translate(0px,   4.2px) rotate(-0.7deg); }
+  62.5%  { transform: translate(0px,   2.1px) rotate(-0.35deg); }
+  75%    { transform: translate(0px,   3.0px) rotate(-0.5deg); }
+  87.5%  { transform: translate(0px,   2.1px) rotate(-0.35deg); }
   100%   { transform: translate(0px,   0.0px) rotate(0deg); }
 }
 
@@ -425,7 +425,7 @@
 }
 
 .card-breathe {
-  animation: cardBreathe 8s ease-in-out infinite;
+  animation: cardBreathe 5s ease-in-out infinite;
   will-change: transform;
 }
 
@@ -511,6 +511,6 @@
 }
 
 .card-breathe {
-  animation: cardBreathe 8s ease-in-out infinite;
+  animation: cardBreathe 5s ease-in-out infinite;
   will-change: transform;
 }

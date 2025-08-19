@@ -8,15 +8,15 @@ const Hero = () => {
   // Enhanced orbit calculations using percentage-based coordinates - spread out more from card center
   const cx = 50  // Center X as percentage (card center)
   const cy = 50  // Center Y as percentage (card center)
-  // Optimized radii: perfect horizontal spread, tighter vertical spread
-  const rx = 50  // Horizontal radius as percentage (perfect as is)
-  const ry = 30  // Vertical radius as percentage (reduced from 40 for tighter vertical spread)
-  // Maximum jitter range for optimal organic spread around the card center
-  const jitterMin = 0.15  // Further increased minimum jitter for more variation
-  const jitterMax = 0.25  // Further increased maximum jitter for wide organic positioning
-  // Maximum angular jitter range for natural distribution
-  const angleJitterMinDeg = -20  // Maximum angular range for best spread
-  const angleJitterMaxDeg = 20
+  // Optimized radii: slightly increased horizontal spread, tighter vertical spread
+  const rx = 53  // Horizontal radius as percentage (slightly increased from 50)
+  const ry = 30  // Vertical radius as percentage (kept tight as requested)
+  // Balanced jitter range for organic spread around the card center
+  const jitterMin = 0.1   // Moderate radial jitter for natural variation
+  const jitterMax = 0.2   // Controlled radial jitter to maintain even spacing
+  // Reduced angular jitter for better even distribution
+  const angleJitterMinDeg = -8   // Smaller angular range for more even spacing
+  const angleJitterMaxDeg = 8    // Keeps organic feel while ensuring better distribution
 
   type OrbitItem = { key: string; chipClass: string; svg: ReactElement<SVGProps<SVGSVGElement>> }
 
@@ -102,10 +102,13 @@ const Hero = () => {
   }
 
   const orbitElements = items.map((item, i) => {
-    const theta = (-Math.PI / 2) + (2 * Math.PI * i) / n
-    // Angular jitter within configurable range [angleJitterMinDeg, angleJitterMaxDeg]
+    // Enhanced angular distribution: start from top, distribute evenly with small offset
+    const baseAngle = (-Math.PI / 2) + (2 * Math.PI * i) / n
+    // Add a small rotation offset to avoid symmetrical clustering
+    const offsetAngle = baseAngle + (Math.PI / (n * 2)) // Half-step offset for better distribution
+    // Angular jitter within reduced range for more even spacing
     const angleJitterDeg = angleJitterMinDeg + (angleJitterMaxDeg - angleJitterMinDeg) * rand01(i + 101)
-    const thetaJ = theta + (angleJitterDeg * Math.PI / 180)
+    const thetaJ = offsetAngle + (angleJitterDeg * Math.PI / 180)
     // Radial jitter within configurable range [jitterMin, jitterMax]
     const jitter = jitterMin + (jitterMax - jitterMin) * rand01(i)
     const rScale = 1 + jitter
