@@ -56,7 +56,7 @@ const Testimonials = () => {
     <section id="testimonios" className="section bg-brand-isabelline relative overflow-hidden">
 
       <div className="container relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="section-title">
             Lo que dicen nuestros usuarios
           </h2>
@@ -66,11 +66,11 @@ const Testimonials = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid-responsive-cards mb-12 sm:mb-16">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl border border-white/50 shadow-lg p-8 hover:scale-105 transition-all duration-500 group"
+              className="bg-white rounded-xl border border-white/50 shadow-lg p-6 sm:p-8 hover:scale-105 transition-all duration-500 group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Rating */}
@@ -78,7 +78,7 @@ const Testimonials = () => {
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <svg
                     key={i}
-                    className="w-5 h-5 text-brand-sunglow"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-brand-sunglow"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -88,23 +88,23 @@ const Testimonials = () => {
               </div>
 
               {/* Content */}
-              <blockquote className="text-brand-dark-green/80 mb-6 leading-relaxed">
+              <blockquote className="text-fluid-sm text-brand-dark-green/80 mb-4 sm:mb-6 leading-relaxed">
                 &ldquo;{testimonial.content}&rdquo;
               </blockquote>
 
               {/* Author */}
               <div className="flex items-center">
-                <div className="testimonial-avatar mr-4 text-sm">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand-brunswick-green flex items-center justify-center text-white font-bold text-sm sm:text-xl mr-3 sm:mr-4 ring-4 ring-accent-400/20 flex-shrink-0">
                   {testimonial.avatar}
                 </div>
-                <div>
-                  <div className="font-semibold text-brand-dark-green group-hover:text-brand-brandeis-blue transition-colors duration-300">
+                <div className="min-w-0">
+                  <div className="text-fluid-sm font-semibold text-brand-dark-green group-hover:text-brand-brandeis-blue transition-colors duration-300 truncate">
                     {testimonial.name}
                   </div>
-                  <div className="text-sm text-brand-dark-green/70">
+                  <div className="text-xs sm:text-sm text-brand-dark-green/70 leading-tight">
                     {testimonial.role}
                   </div>
-                  <div className="text-sm text-brand-dark-green/60">
+                  <div className="text-xs sm:text-sm text-brand-dark-green/60 leading-tight">
                     {testimonial.institution}
                   </div>
                 </div>
@@ -117,22 +117,22 @@ const Testimonials = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold text-brand-brandeis-blue mb-2">500+</div>
-            <div className="text-brand-dark-green font-medium">Instituciones</div>
+            <div className="text-fluid-3xl font-bold text-brand-brandeis-blue mb-2">500+</div>
+            <div className="text-fluid-sm text-brand-dark-green font-medium">Instituciones</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold text-brand-orange-pantone mb-2">50K+</div>
-            <div className="text-brand-dark-green font-medium">Usuarios Activos</div>
+            <div className="text-fluid-3xl font-bold text-brand-orange-pantone mb-2">50K+</div>
+            <div className="text-fluid-sm text-brand-dark-green font-medium">Usuarios Activos</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold text-brand-dark-moss-green mb-2">99.8%</div>
-            <div className="text-brand-dark-green font-medium">Uptime</div>
+            <div className="text-fluid-3xl font-bold text-brand-dark-moss-green mb-2">99.8%</div>
+            <div className="text-fluid-sm text-brand-dark-green font-medium">Uptime</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl lg:text-5xl font-bold text-brand-sunglow mb-2">4.9/5</div>
-            <div className="text-brand-dark-green font-medium">Satisfacción</div>
+            <div className="text-fluid-3xl font-bold text-brand-sunglow mb-2">4.9/5</div>
+            <div className="text-fluid-sm text-brand-dark-green font-medium">Satisfacción</div>
           </div>
         </div>
 
