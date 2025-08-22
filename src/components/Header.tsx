@@ -19,7 +19,7 @@ const Header = () => {
     { href: '#inicio', label: 'Inicio' },
     { href: '#caracteristicas', label: 'Características' },
     { href: '#beneficios', label: 'Beneficios' },
-    { href: '#integraciones', label: 'Integraciones' },
+    { href: '/trusted', label: 'Confianza & Integración' },
     { href: '#contacto', label: 'Contacto' },
   ]
 
