@@ -199,19 +199,19 @@ const Hero = () => {
           <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-1 lg:order-1">
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
-              <span className="text-brand-dark-green">Reinventando</span>
+              <span className="text-brand-dark-green">Mentorium:</span>
               <br />
-              <span className="text-brand-dark-green">la educación,</span>
+              <span className="text-brand-dark-green">La plataforma educativa</span>
               <br />
-              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">un documento</span>
+              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">con IA</span>
               <br />
-              <span className="text-brand-dark-green">a la vez</span>
+              <span className="text-brand-dark-green">que multiplica la eficiencia</span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl lg:text-2xl text-brand-dark-green/80 max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto lg:mx-0 leading-relaxed">
-              Automatiza y optimiza la creación de materiales educativos con 
-              <span className="font-semibold text-brand-brandeis-blue"> inteligencia artificial</span>
+              Transforma la forma en que gestionas materiales, aulas y evaluaciones con la primera plataforma hecha para el Perú, diseñada para 
+              <span className="font-semibold text-brand-brandeis-blue"> ahorrar tiempo y reducir costos mediante automatización inteligente</span>
             </p>
 
             {/* CTA Buttons */}
@@ -220,7 +220,7 @@ const Hero = () => {
                 href="#demo" 
                 className="btn-primary btn-large group"
               >
-                <span className="text-sm sm:text-base">Solicitar Demo</span>
+                <span className="text-sm sm:text-base">Comenzar con Mentorium</span>
                 <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               
@@ -236,16 +236,16 @@ const Hero = () => {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-8 border-t border-brand-isabelline">
               <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-brandeis-blue">10x</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Más rápido</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-brandeis-blue">60%</div>
+                <div className="text-xs sm:text-sm text-brand-dark-green/70">Menos tiempo</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-orange-pantone">500+</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Universidades</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-orange-pantone">100%</div>
+                <div className="text-xs sm:text-sm text-brand-dark-green/70">MINEDU</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-dark-moss-green">99%</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Satisfacción</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-dark-moss-green">20min</div>
+                <div className="text-xs sm:text-sm text-brand-dark-green/70">Ver impacto</div>
               </div>
             </div>
           </div>
@@ -335,19 +335,19 @@ const Hero = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">IA Integrada</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Automatización IA</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">LMS Compatible</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Cumple MINEDU</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Colaborativo</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Alertas Tempranas</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Tiempo Real</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Asistente Virtual</span>
                   </div>
                 </div>
               </div>
@@ -475,19 +475,19 @@ const Hero = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">IA Integrada</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Automatización IA</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">LMS Compatible</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Cumple MINEDU</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">Colaborativo</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Alertas Tempranas</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">Tiempo Real</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Asistente Virtual</span>
                       </div>
                     </div>
                   </div>
