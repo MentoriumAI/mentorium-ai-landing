@@ -87,7 +87,22 @@ const RoadmapInnovacion = () => {
                 {/* Card */}
                 <div className={`relative w-full max-w-sm ${index % 2 === 0 ? 'mr-2' : 'ml-2'}`}>
                   <div className="bg-white rounded-xl border border-white/50 shadow-lg p-4 hover:scale-105 transition-all duration-500 group">
-                    <div className="flex items-start space-x-4">
+                    <div className="flex items-center space-x-4">
+                      {/* Content */}
+                      <div className="flex-1">
+                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-2">
+                          Próximamente
+                        </span>
+                        
+                        <h3 className="text-base sm:text-lg font-semibold text-brand-dark-green mb-2 group-hover:text-brand-brandeis-blue transition-colors duration-300">
+                          {item.title}
+                        </h3>
+                        
+                        <p className="text-sm text-brand-dark-green/70 leading-relaxed">
+                          {item.description}
+                        </p>
+                      </div>
+
                       {/* Icon */}
                       <div className="flex-shrink-0">
                         <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border-2 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}
@@ -103,17 +118,6 @@ const RoadmapInnovacion = () => {
                              }}>
                           {item.icon}
                         </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1">
-                        <h3 className="text-base sm:text-lg font-semibold text-brand-dark-green mb-2 group-hover:text-brand-brandeis-blue transition-colors duration-300">
-                          {item.title}
-                        </h3>
-                        
-                        <p className="text-sm text-brand-dark-green/70 leading-relaxed">
-                          {item.description}
-                        </p>
                       </div>
                     </div>
 
