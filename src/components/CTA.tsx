@@ -14,19 +14,19 @@ const CTA = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-sunglow/20 text-sm font-medium text-brand-dark-green mb-8">
-            🚀 ¡Únete a la revolución educativa!
+            🏫 ¡Transforma tu institución educativa!
           </div>
 
           {/* Main Heading */}
           <h2 className="text-fluid-3xl sm:text-fluid-4xl font-bold text-brand-dark-green mb-6 leading-tight">
-            Transforma tu proceso educativo
-            <span className="text-brand-brandeis-blue"> hoy mismo</span>
+            Menos gestión, más educación.
+            <br />
+            <span className="text-brand-brandeis-blue">Transforma tu institución hoy</span>
           </h2>
 
           {/* Subtitle */}
           <p className="text-fluid-lg text-brand-dark-green/70 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed">
-            Descubre cómo Mentorium puede revolucionar la forma en que creas, 
-            gestionas y compartes contenido educativo
+            Únete a las instituciones que ya están ahorrando tiempo, reduciendo costos y mejorando la calidad educativa con inteligencia artificial
           </p>
 
           {/* CTA Buttons */}
@@ -35,17 +35,17 @@ const CTA = () => {
               href="#contacto" 
               className="btn-primary btn-large group hover:shadow-glow"
             >
-              <span className="text-sm sm:text-base">Solicitar Demostración Gratuita</span>
+              <span className="text-sm sm:text-base">Comenzar con Mentorium</span>
               <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </Link>
             
             <Link 
-              href="#caracteristicas" 
+              href="#beneficios" 
               className="btn-secondary btn-large group"
             >
-              <span className="text-sm sm:text-base">Ver Más Características</span>
+              <span className="text-sm sm:text-base">Ver Beneficios</span>
               <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
@@ -60,8 +60,8 @@ const CTA = () => {
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h3 className="text-fluid-base font-semibold text-brand-dark-green mb-2">Demo en 15 minutos</h3>
-              <p className="text-fluid-sm text-brand-dark-green/70">Ve Mentorium en acción con una demostración personalizada</p>
+              <h3 className="text-fluid-base font-semibold text-brand-dark-green mb-2">Ver impacto en 20 minutos</h3>
+              <p className="text-fluid-sm text-brand-dark-green/70">Sin compromiso, en menos de 20 minutos verás el impacto</p>
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-xl p-6 group hover:scale-105 transition-all duration-300 shadow-lg">
@@ -70,8 +70,8 @@ const CTA = () => {
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               </div>
-              <h3 className="text-fluid-base font-semibold text-brand-dark-green mb-2">Prueba gratuita</h3>
-              <p className="text-fluid-sm text-brand-dark-green/70">30 días gratis para explorar todas las funcionalidades</p>
+              <h3 className="text-fluid-base font-semibold text-brand-dark-green mb-2">100% online</h3>
+              <p className="text-fluid-sm text-brand-dark-green/70">Sin instalación y sin costo inicial</p>
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-xl p-6 group hover:scale-105 transition-all duration-300 shadow-lg">
