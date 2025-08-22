@@ -65,7 +65,7 @@ const Features = () => {
   ]
 
   return (
-    <section id="caracteristicas" className="section bg-white relative overflow-hidden">
+    <section id="caracteristicas" className="section bg-brand-dark-green relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -76,10 +76,10 @@ const Features = () => {
 
       <div className="container relative z-10">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="section-title">
+          <h2 className="section-title text-white">
             Eficiencia en cada clic
           </h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle text-white/80">
             Mentorium no es solo un LMS, es un asistente inteligente que trabaja contigo
           </p>
         </div>
@@ -92,7 +92,7 @@ const Features = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Icon */}
-              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 ${feature.color} bg-gray-50 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 ${feature.color} bg-white border-2 border-current group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                 {feature.icon}
               </div>
 
@@ -113,8 +113,8 @@ const Features = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center px-6 py-3 rounded-full bg-brand-sunglow/20 text-brand-dark-green font-medium">
-            <span className="w-2 h-2 bg-brand-orange-pantone rounded-full mr-3 animate-pulse"></span>
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 text-white font-medium backdrop-blur-sm">
+            <span className="w-2 h-2 bg-brand-sunglow rounded-full mr-3 animate-pulse"></span>
             ¿Listo para automatizar tu gestión educativa con IA?
           </div>
         </div>
