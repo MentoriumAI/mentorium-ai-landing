@@ -190,64 +190,43 @@ const Hero = () => {
     <section id="inicio" className="relative min-h-screen flex items-center hero-gradient overflow-hidden">
       {/* Subtle Background Element */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl animate-float"></div>
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl"></div>
       </div>
 
-      <div className="container relative z-20 pt-20 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.3fr_0.9fr] gap-8 lg:gap-16 xl:gap-10 items-center">
+      <div className="container relative z-20 pt-24 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
+        <div className="grid grid-cols-1 lg:grid lg:grid-cols-12 gap-8 lg:gap-x-8 lg:items-center">
           {/* Hero Content */}
-          <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-1 lg:order-1">
+          <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-1 lg:order-1 lg:col-span-5">
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
-              <span className="text-brand-dark-green">Reinventando</span>
+              <span className="text-brand-dark-green">La plataforma educativa</span>
               <br />
-              <span className="text-brand-dark-green">la educación,</span>
+              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">inteligente</span>
               <br />
-              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">un documento</span>
-              <br />
-              <span className="text-brand-dark-green">a la vez</span>
+              <span className="text-brand-dark-green">que multiplica resultados</span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl lg:text-2xl text-brand-dark-green/80 max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto lg:mx-0 leading-relaxed">
-              Automatiza y optimiza la creación de materiales educativos con 
-              <span className="font-semibold text-brand-brandeis-blue"> inteligencia artificial</span>
+              Optimiza la gestión académica con IA: materiales, aulas y evaluaciones en menos tiempo y a menor costo.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            {/* CTA Button */}
+            <div className="flex flex-col items-center lg:items-start gap-4">
               <Link 
                 href="#demo" 
                 className="btn-primary btn-large group"
               >
-                <span className="text-sm sm:text-base">Solicitar Demo</span>
+                <span className="text-sm sm:text-base">Comenzar con Mentorium</span>
                 <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               
-              <Link 
-                href="#caracteristicas" 
-                className="btn-secondary btn-large group"
-              >
-                <span className="text-sm sm:text-base">Ver Más</span>
-                <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/* Microcopy */}
+              <p className="text-sm text-brand-dark-green/60 text-center lg:text-left">
+                100% online, sin instalación y sin costo inicial.
+              </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-8 border-t border-brand-isabelline">
-              <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-brandeis-blue">10x</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Más rápido</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-orange-pantone">500+</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Universidades</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-dark-moss-green">99%</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Satisfacción</div>
-              </div>
-            </div>
           </div>
 
           {/* Mobile Card with Linear Bubbles - Only visible on mobile/tablet */}
@@ -335,19 +314,19 @@ const Hero = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">IA Integrada</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Automatización IA</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">LMS Compatible</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Cumple MINEDU</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Colaborativo</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Alertas Tempranas</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Tiempo Real</span>
+                    <span className="text-xs sm:text-sm text-brand-dark-green">Asistente Virtual</span>
                   </div>
                 </div>
               </div>
@@ -411,9 +390,9 @@ const Hero = () => {
           </div>
 
           {/* Desktop Column: Illustration + Card with Orbital System - Hidden on mobile, visible on large screens */}
-          <div className="hidden lg:block relative justify-self-center mx-auto w-full max-w-[900px] order-2 lg:order-2">
+          <div className="hidden lg:block relative order-2 lg:order-2 lg:col-span-7">
             {/* Maximum orbit container with optimal space for widely spread icons */}
-            <div className="relative overflow-visible w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] min-h-[550px] max-h-[700px]">
+            <div className="relative overflow-visible w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] min-h-[450px] max-h-[550px]">
               {/* Hero Illustration with Orbital Icons */}
               <div className="absolute inset-0 z-20 overflow-visible">
                 {/* Simplified Orbital Icon System */}
@@ -449,7 +428,7 @@ const Hero = () => {
 
               <div className="absolute inset-0 z-10 flex items-center justify-center p-4 sm:p-6 lg:p-8">
                 {/* Main Card with Frosted Glass + Breathing Animation */}
-                <div className="frost-main-card card-breathe p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl w-full max-w-[85%] sm:max-w-[520px] lg:max-w-[560px]">
+                <div className="frost-main-card card-breathe p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl w-full max-w-[85%] sm:max-w-[520px] lg:max-w-[480px]">
                   <div className="space-y-4 sm:space-y-6">
                     {/* Header */}
                     <div className="flex items-center justify-between">
@@ -475,19 +454,19 @@ const Hero = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">IA Integrada</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Automatización IA</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">LMS Compatible</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Cumple MINEDU</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">Colaborativo</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Alertas Tempranas</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
-                        <span className="text-xs sm:text-sm text-brand-dark-green">Tiempo Real</span>
+                        <span className="text-xs sm:text-sm text-brand-dark-green">Asistente Virtual</span>
                       </div>
                     </div>
                   </div>
