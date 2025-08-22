@@ -194,28 +194,25 @@ const Hero = () => {
       </div>
 
       <div className="container relative z-20 pt-24 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.3fr_0.9fr] gap-8 lg:gap-16 xl:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[2fr_0.6fr] gap-8 lg:gap-10 xl:gap-6 items-center">
           {/* Hero Content */}
           <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-1 lg:order-1">
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
-              <span className="text-brand-dark-green">Mentorium:</span>
-              <br />
               <span className="text-brand-dark-green">La plataforma educativa</span>
               <br />
-              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">con IA</span>
+              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">inteligente</span>
               <br />
-              <span className="text-brand-dark-green">que multiplica la eficiencia</span>
+              <span className="text-brand-dark-green">que multiplica resultados</span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl lg:text-2xl text-brand-dark-green/80 max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto lg:mx-0 leading-relaxed">
-              Transforma la forma en que gestionas materiales, aulas y evaluaciones con la primera plataforma hecha para el Perú, diseñada para 
-              <span className="font-semibold text-brand-brandeis-blue"> ahorrar tiempo y reducir costos mediante automatización inteligente</span>
+              Optimiza la gestión académica con IA: materiales, aulas y evaluaciones en menos tiempo y a menor costo.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            {/* CTA Button */}
+            <div className="flex flex-col items-center lg:items-start gap-4">
               <Link 
                 href="#demo" 
                 className="btn-primary btn-large group"
@@ -224,30 +221,12 @@ const Hero = () => {
                 <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               
-              <Link 
-                href="#caracteristicas" 
-                className="btn-secondary btn-large group"
-              >
-                <span className="text-sm sm:text-base">Ver Más</span>
-                <ArrowRightIcon className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/* Microcopy */}
+              <p className="text-sm text-brand-dark-green/60 text-center lg:text-left">
+                100% online, sin instalación y sin costo inicial.
+              </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-8 border-t border-brand-isabelline">
-              <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-brandeis-blue">60%</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Menos tiempo</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-orange-pantone">100%</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">MINEDU</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-brand-dark-moss-green">20min</div>
-                <div className="text-xs sm:text-sm text-brand-dark-green/70">Ver impacto</div>
-              </div>
-            </div>
           </div>
 
           {/* Mobile Card with Linear Bubbles - Only visible on mobile/tablet */}
