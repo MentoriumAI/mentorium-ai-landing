@@ -73,7 +73,7 @@ const RoadmapInnovacion = () => {
         </div>
 
         {/* Timeline */}
-        <div className="relative mb-8 sm:mb-12">
+        <div className="relative mb-8 sm:mb-12 max-w-3xl mx-auto">
           {/* Timeline Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-brand-brandeis-blue via-brand-brunswick-green to-brand-orange-pantone rounded-full"></div>
           
@@ -85,7 +85,7 @@ const RoadmapInnovacion = () => {
                 style={{ animationDelay: `${index * 200}ms` }}
               >
                 {/* Card */}
-                <div className={`relative w-full max-w-sm ${index % 2 === 0 ? 'mr-2' : 'ml-2'}`}>
+                <div className={`relative w-full max-w-[22rem] ${index % 2 === 0 ? 'mr-2' : 'ml-2'}`}>
                   <div className="bg-white rounded-xl border border-white/50 shadow-lg p-4 hover:scale-105 transition-all duration-500 group">
                     <div className="flex items-center space-x-4">
                       {/* Content */}
@@ -125,8 +125,6 @@ const RoadmapInnovacion = () => {
                     <div className="absolute inset-0 bg-brand-brandeis-blue/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                   </div>
 
-                  {/* Timeline Dot */}
-                  <div className={`absolute top-1/2 transform -translate-y-1/2 ${index % 2 === 0 ? '-right-3' : '-left-3'} w-3 h-3 rounded-full bg-white border-2 border-brand-brandeis-blue shadow-lg z-10`}></div>
                 </div>
               </div>
             ))}
