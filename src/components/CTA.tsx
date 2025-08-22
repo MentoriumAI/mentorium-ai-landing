@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const CTA = () => {
   return (
-    <section id="demo" className="section bg-brand-isabelline relative overflow-hidden mt-0 pt-0">
+    <section id="demo" className="section bg-brand-isabelline relative overflow-hidden mt-0 pt-6 sm:pt-10">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl animate-float"></div>
@@ -14,7 +14,7 @@ const CTA = () => {
         <div className="max-w-4xl mx-auto text-center">
 
           {/* Main Heading */}
-          <h2 className="text-fluid-3xl sm:text-fluid-4xl font-bold text-brand-dark-green mb-6 leading-tight mt-4 sm:mt-6">
+          <h2 className="text-fluid-3xl sm:text-fluid-4xl font-bold text-brand-dark-green mb-6 leading-tight mt-6 sm:mt-8">
             <span className="bg-gradient-to-r from-brand-brandeis-blue to-brand-brunswick-green bg-clip-text text-transparent">Transforma tu institución hoy</span>
           </h2>
 

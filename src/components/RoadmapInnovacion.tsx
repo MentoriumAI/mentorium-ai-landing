@@ -74,7 +74,7 @@ const RoadmapInnovacion = () => {
         {/* Timeline */}
         <div className="relative max-w-3xl mx-auto">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-brand-brandeis-blue via-brand-brunswick-green to-brand-orange-pantone rounded-full"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-brand-orange-pantone via-brand-brunswick-green to-brand-brandeis-blue rounded-full"></div>
           
           <div className="space-y-6 sm:space-y-8">
             {roadmapItems.map((item, index) => (
@@ -135,8 +135,8 @@ const RoadmapInnovacion = () => {
             >
               <div className="relative w-full max-w-lg">
                 <div className="relative bg-white rounded-xl shadow-lg p-8 text-center hover:scale-105 transition-all duration-500 group overflow-hidden">
-                  {/* Orange border using pseudo-element */}
-                  <div className="absolute inset-0 bg-brand-orange-pantone rounded-xl p-[2px]">
+                  {/* Blue border using pseudo-element */}
+                  <div className="absolute inset-0 bg-brand-brandeis-blue rounded-xl p-[2px]">
                     <div className="bg-white rounded-xl h-full w-full"></div>
                   </div>
                   
@@ -145,7 +145,7 @@ const RoadmapInnovacion = () => {
                     <h3 className="text-2xl font-bold text-brand-brunswick-green mb-4">
                       Menos gestión, más educación
                     </h3>
-                    <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-brand-orange-pantone text-white">
+                    <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-brand-brandeis-blue/20 text-brand-brandeis-blue">
                       🚀 Empieza hoy
                     </span>
                   </div>
