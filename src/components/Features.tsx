@@ -5,41 +5,41 @@ const Features = () => {
     {
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+          <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
         </svg>
       ),
-      title: 'Automatización inteligente',
-      description: 'Genera sílabos, referencias y estructuras automáticamente con nuestra tecnología de IA avanzada.',
+      title: '📚 Carga Automática de Materiales',
+      description: 'IA que categoriza, etiqueta y organiza tus contenidos al subirlos.',
       color: 'text-brand-brunswick-green'
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+          <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
         </svg>
       ),
-      title: 'Personalización con IA',
-      description: 'Contenido adaptado a necesidades específicas de cada institución y programa educativo.',
+      title: '📝 Evaluaciones Inteligentes',
+      description: 'Generación automática de preguntas, rúbricas y retroalimentación en segundos.',
       color: 'text-brand-brandeis-blue'
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM4 8a2 2 0 100-4 2 2 0 000 4zM4 10a2 2 0 100 4 2 2 0 000-4z"/>
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
         </svg>
       ),
-      title: 'Colaboración en tiempo real',
-      description: 'Edición compartida y control de versiones para trabajo en equipo eficiente.',
+      title: '📊 Calificaciones sin esfuerzo',
+      description: 'Notas registradas en escala 0–20 y conversión automática a AD/A/B/C.',
       color: 'text-brand-sunglow'
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
         </svg>
       ),
-      title: 'Compatibilidad con LMS',
-      description: 'Exportación optimizada para Moodle, Blackboard y otras plataformas educativas.',
+      title: '🚨 Alertas Tempranas',
+      description: 'Predicción de riesgo académico: identifica alumnos en riesgo antes de que sea tarde.',
       color: 'text-brand-orange-pantone'
     },
     {
@@ -48,18 +48,18 @@ const Features = () => {
           <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
         </svg>
       ),
-      title: 'Diseño moderno y accesible',
-      description: 'Interfaces claras y optimizadas para educadores de todos los niveles tecnológicos.',
+      title: '📈 Reportes Automáticos',
+      description: 'Boletas oficiales y dashboards para directivos listos en un clic.',
       color: 'text-brand-dark-moss-green'
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+          <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
         </svg>
       ),
-      title: 'Exportación flexible',
-      description: 'Múltiples formatos de salida para adaptarse a cualquier flujo de trabajo educativo.',
+      title: '🤝 Asistente Virtual Multirol',
+      description: 'Chatbot integrado que responde dudas de estudiantes, padres y docentes.',
       color: 'text-brand-brandeis-blue'
     }
   ]
@@ -77,10 +77,10 @@ const Features = () => {
       <div className="container relative z-10">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="section-title">
-            ¡Simplifica tu trabajo con tecnología inteligente!
+            Eficiencia en cada clic
           </h2>
           <p className="section-subtitle">
-            Descubre las características que hacen de Mentorium la plataforma educativa más avanzada y fácil de usar
+            Mentorium no es solo un LMS, es un asistente inteligente que trabaja contigo
           </p>
         </div>
 
@@ -115,7 +115,7 @@ const Features = () => {
         <div className="text-center mt-16">
           <div className="inline-flex items-center px-6 py-3 rounded-full bg-brand-sunglow/20 text-brand-dark-green font-medium">
             <span className="w-2 h-2 bg-brand-orange-pantone rounded-full mr-3 animate-pulse"></span>
-            ¿Listo para revolucionar tu proceso educativo?
+            ¿Listo para automatizar tu gestión educativa con IA?
           </div>
         </div>
       </div>
