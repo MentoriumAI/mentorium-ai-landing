@@ -390,7 +390,7 @@ const Hero = () => {
           </div>
 
           {/* Desktop Column: Illustration + Card with Orbital System - Hidden on mobile, visible on large screens */}
-          <div className="hidden lg:block relative order-2 lg:order-2 lg:col-span-7 lg:max-w-[clamp(420px,34vw,560px)] lg:mx-auto">
+          <div className="hidden lg:block relative order-2 lg:order-2 lg:col-span-7">
             {/* Maximum orbit container with optimal space for widely spread icons */}
             <div className="relative overflow-visible w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] min-h-[450px] max-h-[550px]">
               {/* Hero Illustration with Orbital Icons */}
@@ -428,7 +428,7 @@ const Hero = () => {
 
               <div className="absolute inset-0 z-10 flex items-center justify-center p-4 sm:p-6 lg:p-8">
                 {/* Main Card with Frosted Glass + Breathing Animation */}
-                <div className="frost-main-card card-breathe p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl w-full max-w-[85%] sm:max-w-[520px] lg:max-w-[560px]">
+                <div className="frost-main-card card-breathe p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl w-full max-w-[85%] sm:max-w-[520px] lg:max-w-[480px]">
                   <div className="space-y-4 sm:space-y-6">
                     {/* Header */}
                     <div className="flex items-center justify-between">
