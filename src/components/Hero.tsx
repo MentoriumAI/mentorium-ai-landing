@@ -196,7 +196,7 @@ const Hero = () => {
       <div className="container relative z-20 pt-24 sm:pt-24 md:pt-28 lg:pt-32 xl:pt-36">
         <div className="grid grid-cols-1 lg:grid lg:grid-cols-12 gap-8 lg:gap-x-8 lg:items-center">
           {/* Hero Content */}
-          <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-1 lg:order-1 lg:col-span-7">
+          <div className="space-y-6 sm:space-y-8 text-center lg:text-left order-1 lg:order-1 lg:col-span-5">
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
               <span className="text-brand-dark-green">La plataforma educativa</span>
@@ -390,7 +390,7 @@ const Hero = () => {
           </div>
 
           {/* Desktop Column: Illustration + Card with Orbital System - Hidden on mobile, visible on large screens */}
-          <div className="hidden lg:block relative order-2 lg:order-2 lg:col-span-5 lg:max-w-[clamp(420px,34vw,560px)] lg:mx-auto">
+          <div className="hidden lg:block relative order-2 lg:order-2 lg:col-span-7 lg:max-w-[clamp(420px,34vw,560px)] lg:mx-auto">
             {/* Maximum orbit container with optimal space for widely spread icons */}
             <div className="relative overflow-visible w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[5/3] min-h-[450px] max-h-[550px]">
               {/* Hero Illustration with Orbital Icons */}
