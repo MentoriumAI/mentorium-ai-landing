@@ -16,7 +16,7 @@ const Header = () => {
   }, [])
 
   const navItems = [
-    { href: '#inicio', label: 'Inicio' },
+    { href: '/', label: 'Inicio' },
     { href: '#caracteristicas', label: 'Características' },
     { href: '#beneficios', label: 'Beneficios' },
     { href: '/trusted', label: 'Confianza & Integración' },
@@ -58,10 +58,10 @@ const Header = () => {
           <div className="hidden lg:block">
             <Link 
               href="#demo" 
-              className="btn-primary btn-large hover:shadow-glow"
+              className="btn-primary btn-large group hover:shadow-glow"
             >
-              Solicitar Demo
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="text-sm sm:text-base">Solicitar Demo</span>
+              <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </Link>
@@ -119,7 +119,7 @@ const Header = () => {
             <div className="px-4 pt-3">
               <Link 
                 href="#demo" 
-                className={`btn-primary w-full justify-center transform transition-all duration-300 ${
+                className={`btn-primary btn-large group w-full justify-center transform transition-all duration-300 ${
                   isMobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                 }`}
                 style={{ 
@@ -127,7 +127,10 @@ const Header = () => {
                 }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Solicitar Demo
+                <span className="text-sm sm:text-base">Solicitar Demo</span>
+                <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </Link>
             </div>
           </div>

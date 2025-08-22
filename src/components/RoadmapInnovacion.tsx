@@ -134,7 +134,7 @@ const RoadmapInnovacion = () => {
               style={{ animationDelay: `${roadmapItems.length * 200}ms` }}
             >
               <div className="relative w-full max-w-lg">
-                <div className="relative bg-white rounded-xl shadow-lg p-8 text-center hover:scale-105 transition-all duration-500 group overflow-visible">
+                <div className="relative bg-white rounded-xl border border-brand-brandeis-blue/20 shadow-lg p-8 text-center hover:scale-105 transition-all duration-500 group overflow-visible">
                   {/* Content */}
                   <div className="relative z-10">
                     <h3 className="text-2xl font-bold text-brand-brandeis-blue mb-4">
