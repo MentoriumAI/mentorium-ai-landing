@@ -65,7 +65,7 @@ const Features = () => {
   ]
 
   return (
-    <section id="caracteristicas" className="section bg-brand-dark-green relative overflow-hidden">
+    <section id="caracteristicas" className="section bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -76,10 +76,10 @@ const Features = () => {
 
       <div className="container relative z-10">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="section-title text-white">
+          <h2 className="section-title">
             Eficiencia en cada clic
           </h2>
-          <p className="section-subtitle text-white/80">
+          <p className="section-subtitle">
             Mentorium no es solo un LMS, es un asistente inteligente que trabaja contigo
           </p>
         </div>
@@ -113,8 +113,8 @@ const Features = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 text-white font-medium backdrop-blur-sm">
-            <span className="w-2 h-2 bg-brand-sunglow rounded-full mr-3 animate-pulse"></span>
+          <div className="inline-flex items-center px-6 py-3 rounded-full bg-brand-sunglow/20 text-brand-dark-green font-medium">
+            <span className="w-2 h-2 bg-brand-orange-pantone rounded-full mr-3 animate-pulse"></span>
             ¿Listo para automatizar tu gestión educativa con IA?
           </div>
         </div>
