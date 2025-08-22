@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { AcademicCapIcon, UserIcon, ClockIcon, HeartIcon } from '@heroicons/react/24/solid'
 
 const RoadmapInnovacion = () => {
@@ -51,7 +50,7 @@ const RoadmapInnovacion = () => {
   }
 
   return (
-    <section id="roadmap" className="section bg-brand-isabelline relative overflow-hidden">
+    <section id="roadmap" className="section bg-brand-isabelline relative overflow-hidden !mb-0">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl animate-float"></div>
@@ -73,7 +72,7 @@ const RoadmapInnovacion = () => {
         </div>
 
         {/* Timeline */}
-        <div className="relative mb-8 sm:mb-12 max-w-3xl mx-auto">
+        <div className="relative max-w-3xl mx-auto">
           {/* Timeline Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-brand-brandeis-blue via-brand-brunswick-green to-brand-orange-pantone rounded-full"></div>
           
@@ -128,46 +127,34 @@ const RoadmapInnovacion = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center">
-          <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-xl shadow-lg inline-block p-8 max-w-2xl">
-            <h3 className="text-2xl font-bold text-brand-dark-green mb-4">
-              Sé parte del futuro educativo
-            </h3>
-            <p className="text-brand-dark-green/80 mb-6">
-              Únete a Mentorium hoy y accede a las innovaciones más avanzadas en educación con IA
-            </p>
             
-            <Link 
-              href="#demo" 
-              className="btn-primary btn-large group inline-flex items-center"
+            {/* Final Card */}
+            <div
+              className="flex items-center justify-center pt-16"
+              style={{ animationDelay: `${roadmapItems.length * 200}ms` }}
             >
-              <span>Comenzar con Mentorium</span>
-              <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-
-            {/* Features List */}
-            <div className="flex flex-wrap justify-center gap-4 mt-6 text-sm">
-              <div className="flex items-center space-x-2 text-brand-dark-green/70">
-                <div className="w-2 h-2 bg-brand-brandeis-blue rounded-full"></div>
-                <span>Actualizaciones automáticas</span>
-              </div>
-              <div className="flex items-center space-x-2 text-brand-dark-green/70">
-                <div className="w-2 h-2 bg-brand-brunswick-green rounded-full"></div>
-                <span>Acceso anticipado a nuevas funciones</span>
-              </div>
-              <div className="flex items-center space-x-2 text-brand-dark-green/70">
-                <div className="w-2 h-2 bg-brand-orange-pantone rounded-full"></div>
-                <span>Feedback directo con nuestro equipo</span>
+              <div className="relative w-full max-w-lg">
+                <div className="relative bg-white rounded-xl shadow-lg p-8 text-center hover:scale-105 transition-all duration-500 group overflow-hidden">
+                  {/* Gradient border using pseudo-element */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-brunswick-green to-brand-brandeis-blue rounded-xl p-[2px]">
+                    <div className="bg-white rounded-xl h-full w-full"></div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-bold bg-gradient-to-br from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent mb-2">
+                      Menos gestión, más educación
+                    </h3>
+                    <p className="text-brand-dark-green/80 text-base">
+                      El futuro de la educación está aquí
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   )

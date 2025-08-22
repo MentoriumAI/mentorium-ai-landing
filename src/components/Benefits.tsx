@@ -39,7 +39,7 @@ const Benefits = () => {
   ]
 
   return (
-    <section id="beneficios" className="section bg-brand-isabelline relative overflow-hidden">
+    <section id="beneficios" className="section bg-white relative overflow-hidden">
 
       <div className="container relative z-10">
         <div className="text-center mb-12 sm:mb-16">

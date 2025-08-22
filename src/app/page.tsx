@@ -17,7 +17,7 @@ export default function Page() {
         <ProblemSolution />
         <Features />
         <Benefits />
-        <Diferenciadores />
+        {/* <Diferenciadores /> */}
         <RoadmapInnovacion />
         <CTA />
       </main>

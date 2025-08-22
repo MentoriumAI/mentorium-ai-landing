@@ -12,15 +12,9 @@ const CTA = () => {
 
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-sunglow/20 text-sm font-medium text-brand-dark-green mb-8">
-            🏫 ¡Transforma tu institución educativa!
-          </div>
 
           {/* Main Heading */}
           <h2 className="text-fluid-3xl sm:text-fluid-4xl font-bold text-brand-dark-green mb-6 leading-tight">
-            Menos gestión, más educación.
-            <br />
             <span className="text-brand-brandeis-blue">Transforma tu institución hoy</span>
           </h2>
 
