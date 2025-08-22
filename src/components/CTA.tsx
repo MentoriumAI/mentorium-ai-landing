@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const CTA = () => {
   return (
-    <section id="demo" className="section bg-brand-isabelline relative overflow-hidden">
+    <section id="demo" className="section bg-brand-isabelline relative overflow-hidden mt-0 pt-0">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl animate-float"></div>
@@ -14,7 +14,7 @@ const CTA = () => {
         <div className="max-w-4xl mx-auto text-center">
 
           {/* Main Heading */}
-          <h2 className="text-fluid-3xl sm:text-fluid-4xl font-bold text-brand-dark-green mb-6 leading-tight">
+          <h2 className="text-fluid-3xl sm:text-fluid-4xl font-bold text-brand-dark-green mb-6 leading-tight mt-4 sm:mt-6">
             <span className="text-brand-brandeis-blue">Transforma tu institución hoy</span>
           </h2>
 
@@ -24,7 +24,7 @@ const CTA = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16">
+          <div className="flex justify-center mb-12 sm:mb-16">
             <Link 
               href="#contacto" 
               className="btn-primary btn-large group hover:shadow-glow"
@@ -32,16 +32,6 @@ const CTA = () => {
               <span className="text-sm sm:text-base">Comenzar con Mentorium</span>
               <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-            
-            <Link 
-              href="#beneficios" 
-              className="btn-secondary btn-large group"
-            >
-              <span className="text-sm sm:text-base">Ver Beneficios</span>
-              <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </Link>
           </div>

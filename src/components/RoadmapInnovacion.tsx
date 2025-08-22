@@ -50,7 +50,7 @@ const RoadmapInnovacion = () => {
   }
 
   return (
-    <section id="roadmap" className="section bg-brand-isabelline relative overflow-hidden !mb-0">
+    <section id="roadmap" className="section bg-brand-isabelline relative overflow-hidden mb-0 pb-0">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl animate-float"></div>
