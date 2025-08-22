@@ -50,7 +50,7 @@ const RoadmapInnovacion = () => {
   }
 
   return (
-    <section id="roadmap" className="section bg-brand-isabelline relative overflow-hidden mb-0 pb-0">
+    <section id="roadmap" className="section bg-brand-isabelline relative overflow-visible mb-0 pb-16">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl"></div>
@@ -134,15 +134,10 @@ const RoadmapInnovacion = () => {
               style={{ animationDelay: `${roadmapItems.length * 200}ms` }}
             >
               <div className="relative w-full max-w-lg">
-                <div className="relative bg-white rounded-xl shadow-lg p-8 text-center hover:scale-105 transition-all duration-500 group overflow-hidden">
-                  {/* Blue border using pseudo-element */}
-                  <div className="absolute inset-0 bg-brand-brandeis-blue rounded-xl p-[2px]">
-                    <div className="bg-white rounded-xl h-full w-full"></div>
-                  </div>
-                  
+                <div className="relative bg-white rounded-xl shadow-lg p-8 text-center hover:scale-105 transition-all duration-500 group overflow-visible">
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-bold text-brand-brunswick-green mb-4">
+                    <h3 className="text-2xl font-bold text-brand-brandeis-blue mb-4">
                       Menos gestión, más educación
                     </h3>
                     <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-brand-brandeis-blue/20 text-brand-brandeis-blue">
