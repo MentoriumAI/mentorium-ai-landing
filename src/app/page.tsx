@@ -1,9 +1,10 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
+import ProblemSolution from '@/components/ProblemSolution'
 import Features from '@/components/Features'
 import Benefits from '@/components/Benefits'
-import Integrations from '@/components/Integrations'
-import Testimonials from '@/components/Testimonials'
+import Diferenciadores from '@/components/Diferenciadores'
+import RoadmapInnovacion from '@/components/RoadmapInnovacion'
 import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
 
@@ -13,10 +14,11 @@ export default function Page() {
       <Header />
       <main>
         <Hero />
+        <ProblemSolution />
         <Features />
         <Benefits />
-        <Integrations />
-        <Testimonials />
+        <Diferenciadores />
+        <RoadmapInnovacion />
         <CTA />
       </main>
       <Footer />
