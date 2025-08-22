@@ -14,6 +14,15 @@ const ProblemSolution = () => {
       </div>
 
       <div className="container relative z-10">
+        {/* Section Title */}
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-brand-brunswick-green/10 text-sm font-medium text-brand-brunswick-green mb-4">
+            🌱 Nuestro enfoque
+          </div>
+          <h2 className="section-title">Problema y solución</h2>
+          <p className="section-subtitle">Entendemos los retos actuales y proponemos una vía clara para superarlos.</p>
+        </div>
+        
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Problem Side */}
           <div className="bg-white rounded-xl border border-red-100 shadow-lg p-6 sm:p-8 h-full flex flex-col">
@@ -65,21 +74,23 @@ const ProblemSolution = () => {
           </div>
 
           {/* Solution Side */}
-          <div className="bg-gradient-to-br from-brand-brunswick-green/5 to-brand-brandeis-blue/5 rounded-xl border border-brand-brunswick-green/20 shadow-lg p-6 sm:p-8 h-full flex flex-col">
+          <div tabIndex={0} className="group relative overflow-hidden bg-gradient-to-br from-brand-brunswick-green/5 to-brand-brandeis-blue/5 rounded-xl border border-brand-brunswick-green/20 shadow-lg p-6 sm:p-8 h-full flex flex-col transform-gpu transition-all duration-500 hover:shadow-2xl hover:border-brand-brunswick-green/40 hover:scale-105 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-brand-brunswick-green/7 hover:to-brand-brandeis-blue/7 ring-0 ring-transparent hover:ring-2 hover:ring-brand-brunswick-green/40 hover:ring-offset-2 hover:ring-offset-white focus:outline-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-brunswick-green/50 focus-visible:ring-offset-0">
+            {/* Glow overlay for hover highlight */}
+            <div className="pointer-events-none absolute -inset-px rounded-[0.75rem] bg-gradient-to-r from-brand-brunswick-green/10 to-brand-brandeis-blue/10 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-80 z-0"></div>
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-brunswick-green/10 text-sm font-medium text-brand-brunswick-green mb-4">
               ✨ La solución
             </div>
             
-            <h2 className="text-3xl lg:text-4xl font-bold text-brand-dark-green mb-6">
+            <h2 className="relative z-10 text-3xl lg:text-4xl font-bold text-brand-dark-green mb-6">
               Mentorium integra 
               <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent"> automatización + IA</span>
             </h2>
             
-            <p className="text-lg text-brand-dark-green/80 mb-6">
-              Simplificamos lo complejo: desde la carga de materiales hasta la generación de evaluaciones y reportes oficiales MINEDU.
+            <p className="relative z-10 text-lg text-brand-dark-green/80 mb-6">
+              Simplificamos lo complejo: desde la creación y carga de materiales hasta la generación de evaluaciones y reportes oficiales MINEDU.
             </p>
             
-            <div className="space-y-4 flex-1">
+            <div className="relative z-10 space-y-4 flex-1">
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 rounded-full bg-brand-brunswick-green flex items-center justify-center flex-shrink-0 mt-1">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -117,7 +128,7 @@ const ProblemSolution = () => {
               </div>
             </div>
 
-            <div className="pt-6 mt-auto">
+            <div className="relative z-10 pt-6 mt-auto">
               <Link 
                 href="#demo" 
                 className="btn-primary btn-large group"

@@ -53,8 +53,8 @@ const RoadmapInnovacion = () => {
     <section id="roadmap" className="section bg-brand-isabelline relative overflow-hidden mb-0 pb-0">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl animate-float"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-brand-brunswick-green/5 rounded-full filter blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-20 left-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-brand-brunswick-green/5 rounded-full filter blur-xl"></div>
       </div>
 
       <div className="container relative z-10">

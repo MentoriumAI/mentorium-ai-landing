@@ -7,7 +7,7 @@ const CTA = () => {
     <section id="demo" className="section bg-brand-isabelline relative overflow-hidden mt-0 pt-6 sm:pt-10">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl animate-float"></div>
+        <div className="absolute top-20 right-20 w-72 h-72 bg-brand-brandeis-blue/5 rounded-full filter blur-xl"></div>
       </div>
 
       <div className="container relative z-10">

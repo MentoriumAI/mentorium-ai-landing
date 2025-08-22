@@ -12,7 +12,7 @@ export default function TrustedPage() {
         {/* Hero Section for Trust & Integrations */}
         <section className="relative min-h-[60vh] flex items-center hero-gradient overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl animate-float"></div>
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl"></div>
           </div>
 
           <div className="container relative z-20 pt-24 sm:pt-24 md:pt-28 lg:pt-32">
