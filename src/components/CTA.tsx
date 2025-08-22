@@ -15,7 +15,7 @@ const CTA = () => {
 
           {/* Main Heading */}
           <h2 className="text-fluid-3xl sm:text-fluid-4xl font-bold text-brand-dark-green mb-6 leading-tight mt-4 sm:mt-6">
-            <span className="text-brand-brandeis-blue">Transforma tu institución hoy</span>
+            <span className="bg-gradient-to-r from-brand-brandeis-blue to-brand-brunswick-green bg-clip-text text-transparent">Transforma tu institución hoy</span>
           </h2>
 
           {/* Subtitle */}

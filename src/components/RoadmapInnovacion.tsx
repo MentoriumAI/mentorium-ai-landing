@@ -135,19 +135,19 @@ const RoadmapInnovacion = () => {
             >
               <div className="relative w-full max-w-lg">
                 <div className="relative bg-white rounded-xl shadow-lg p-8 text-center hover:scale-105 transition-all duration-500 group overflow-hidden">
-                  {/* Gradient border using pseudo-element */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-brunswick-green to-brand-brandeis-blue rounded-xl p-[2px]">
+                  {/* Orange border using pseudo-element */}
+                  <div className="absolute inset-0 bg-brand-orange-pantone rounded-xl p-[2px]">
                     <div className="bg-white rounded-xl h-full w-full"></div>
                   </div>
                   
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-bold bg-gradient-to-br from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent mb-2">
+                    <h3 className="text-2xl font-bold text-brand-brunswick-green mb-4">
                       Menos gestión, más educación
                     </h3>
-                    <p className="text-brand-dark-green/80 text-base">
-                      El futuro de la educación está aquí
-                    </p>
+                    <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-brand-orange-pantone text-white">
+                      🚀 Empieza hoy
+                    </span>
                   </div>
                 </div>
               </div>
