@@ -1,48 +1,33 @@
 'use client'
 
 import Link from 'next/link'
+import { AcademicCapIcon, UserIcon, ClockIcon, HeartIcon } from '@heroicons/react/24/solid'
 
 const RoadmapInnovacion = () => {
   const roadmapItems = [
     {
-      icon: (
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3z"/>
-        </svg>
-      ),
+      icon: <AcademicCapIcon className="w-8 h-8" />,
       title: 'Copilot Pedagógico',
       description: 'Genera planes de clase completos en minutos.',
       status: 'coming-soon',
       color: 'from-brand-brandeis-blue to-blue-600'
     },
     {
-      icon: (
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-        </svg>
-      ),
+      icon: <UserIcon className="w-8 h-8" />,
       title: 'Detección de necesidades educativas especiales',
       description: 'Mediante análisis de interacciones.',
       status: 'research',
       color: 'from-brand-brunswick-green to-green-600'
     },
     {
-      icon: (
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-        </svg>
-      ),
+      icon: <ClockIcon className="w-8 h-8" />,
       title: 'Optimización de horarios y recursos',
       description: 'Con algoritmos inteligentes.',
       status: 'development',
       color: 'from-brand-sunglow to-yellow-500'
     },
     {
-      icon: (
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-      ),
+      icon: <HeartIcon className="w-8 h-8" />,
       title: 'Análisis de bienestar y clima escolar',
       description: 'En tiempo real.',
       status: 'beta',
@@ -88,11 +73,11 @@ const RoadmapInnovacion = () => {
         </div>
 
         {/* Timeline */}
-        <div className="relative mb-12 sm:mb-16">
+        <div className="relative mb-8 sm:mb-12">
           {/* Timeline Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-brand-brandeis-blue via-brand-brunswick-green to-brand-orange-pantone rounded-full"></div>
           
-          <div className="space-y-12">
+          <div className="space-y-6 sm:space-y-8">
             {roadmapItems.map((item, index) => (
               <div
                 key={index}
@@ -100,37 +85,44 @@ const RoadmapInnovacion = () => {
                 style={{ animationDelay: `${index * 200}ms` }}
               >
                 {/* Card */}
-                <div className={`relative w-full max-w-md ${index % 2 === 0 ? 'mr-8' : 'ml-8'}`}>
-                  <div className="bg-white rounded-xl border border-white/50 shadow-lg p-6 sm:p-8 hover:scale-105 transition-all duration-500 group">
-                    {/* Status Badge */}
-                    <div className="mb-4">
-                      <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${getStatusBadge(item.status).color}`}>
-                        {getStatusBadge(item.status).text}
-                      </span>
-                    </div>
+                <div className={`relative w-full max-w-sm ${index % 2 === 0 ? 'mr-2' : 'ml-2'}`}>
+                  <div className="bg-white rounded-xl border border-white/50 shadow-lg p-4 hover:scale-105 transition-all duration-500 group">
+                    <div className="flex items-start space-x-4">
+                      {/* Icon */}
+                      <div className="flex-shrink-0">
+                        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border-2 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                             style={{ 
+                               borderColor: item.color.includes('brandeis-blue') ? '#006FEA' : 
+                                          item.color.includes('brunswick-green') ? '#0f4c38' :
+                                          item.color.includes('sunglow') ? '#FFC400' : 
+                                          '#FB6113',
+                               color: item.color.includes('brandeis-blue') ? '#006FEA' : 
+                                     item.color.includes('brunswick-green') ? '#0f4c38' :
+                                     item.color.includes('sunglow') ? '#FFC400' : 
+                                     '#FB6113'
+                             }}>
+                          {item.icon}
+                        </div>
+                      </div>
 
-                    {/* Icon */}
-                    <div className="mb-4">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                        {item.icon}
+                      {/* Content */}
+                      <div className="flex-1">
+                        <h3 className="text-base sm:text-lg font-semibold text-brand-dark-green mb-2 group-hover:text-brand-brandeis-blue transition-colors duration-300">
+                          {item.title}
+                        </h3>
+                        
+                        <p className="text-sm text-brand-dark-green/70 leading-relaxed">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
-
-                    {/* Content */}
-                    <h3 className="text-lg sm:text-xl font-semibold text-brand-dark-green mb-3 group-hover:text-brand-brandeis-blue transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    
-                    <p className="text-sm sm:text-base text-brand-dark-green/70 leading-relaxed">
-                      {item.description}
-                    </p>
 
                     {/* Hover Effect */}
                     <div className="absolute inset-0 bg-brand-brandeis-blue/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                   </div>
 
                   {/* Timeline Dot */}
-                  <div className={`absolute top-1/2 transform -translate-y-1/2 ${index % 2 === 0 ? '-right-10' : '-left-10'} w-4 h-4 rounded-full bg-white border-4 border-brand-brandeis-blue shadow-lg z-10`}></div>
+                  <div className={`absolute top-1/2 transform -translate-y-1/2 ${index % 2 === 0 ? '-right-3' : '-left-3'} w-3 h-3 rounded-full bg-white border-2 border-brand-brandeis-blue shadow-lg z-10`}></div>
                 </div>
               </div>
             ))}
