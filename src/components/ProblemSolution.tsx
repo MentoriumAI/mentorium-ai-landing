@@ -14,9 +14,9 @@ const ProblemSolution = () => {
       </div>
 
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Problem Side */}
-          <div className="space-y-6">
+          <div className="bg-white rounded-xl border border-red-100 shadow-lg p-6 sm:p-8 h-full flex flex-col">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-50 text-sm font-medium text-red-600 mb-4">
               ⚠️ El problema actual
             </div>
@@ -25,7 +25,7 @@ const ProblemSolution = () => {
               Las plataformas educativas tradicionales son rígidas
             </h2>
             
-            <div className="space-y-4 text-brand-dark-green/80">
+            <div className="space-y-4 text-brand-dark-green/80 flex-1">
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-1">
                   <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
@@ -65,7 +65,7 @@ const ProblemSolution = () => {
           </div>
 
           {/* Solution Side */}
-          <div className="space-y-6">
+          <div className="bg-white rounded-xl border border-brand-brunswick-green/20 shadow-lg p-6 sm:p-8 h-full flex flex-col">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-brunswick-green/10 text-sm font-medium text-brand-brunswick-green mb-4">
               ✨ La solución
             </div>
@@ -79,7 +79,7 @@ const ProblemSolution = () => {
               Simplificamos lo complejo: desde la carga de materiales hasta la generación de evaluaciones y reportes oficiales MINEDU.
             </p>
             
-            <div className="space-y-4">
+            <div className="space-y-4 flex-1">
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 rounded-full bg-brand-brunswick-green flex items-center justify-center flex-shrink-0 mt-1">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -117,7 +117,7 @@ const ProblemSolution = () => {
               </div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-6 mt-auto">
               <Link 
                 href="#demo" 
                 className="btn-primary btn-large group"
