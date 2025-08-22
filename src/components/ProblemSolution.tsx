@@ -65,7 +65,7 @@ const ProblemSolution = () => {
           </div>
 
           {/* Solution Side */}
-          <div className="bg-white rounded-xl border border-brand-brunswick-green/20 shadow-lg p-6 sm:p-8 h-full flex flex-col">
+          <div className="bg-gradient-to-br from-brand-brunswick-green/5 to-brand-brandeis-blue/5 rounded-xl border border-brand-brunswick-green/20 shadow-lg p-6 sm:p-8 h-full flex flex-col">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-brunswick-green/10 text-sm font-medium text-brand-brunswick-green mb-4">
               ✨ La solución
             </div>
