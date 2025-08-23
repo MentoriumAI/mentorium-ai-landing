@@ -9,11 +9,15 @@
     "build": "next build",
     "start": "next start -p ${PORT:-80}",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
-    "build:production": "npm run lint && npm run type-check && npm run build"
+    "build:production": "npm run lint && npm run type-check && npm run build",
+    "analyze": "cross-env ANALYZE=true npm run build",
+    "dev:debug": "NODE_OPTIONS='--inspect' next dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
     "next": "15.4.7",
     "react": "19.1.0",
     "react-dom": "19.1.0"
@@ -25,10 +29,14 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
     "critters": "^0.0.23",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.4.7",
     "postcss": "^8.5.6",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.0",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "webpack-bundle-analyzer": "^4.10.1"
   }
 }

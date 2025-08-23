@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import '../styles/theme-variables.css';
 
 @tailwind base;
 @tailwind components;
@@ -10,11 +10,25 @@
   }
   
   body {
-    @apply bg-brand-isabelline text-brand-dark-green font-inter antialiased;
+    @apply bg-brand-isabelline text-brand-dark-green antialiased;
+    font-family: var(--font-family-primary, var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif);
   }
   
   * {
     @apply selection:bg-accent-200 selection:text-accent-900;
+  }
+  
+  /* Theme-aware typography */
+  .font-primary {
+    font-family: var(--font-family-primary, var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif);
+  }
+  
+  .font-heading {
+    font-family: var(--font-family-heading, var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif);
+  }
+  
+  .font-mono {
+    font-family: var(--font-family-mono, ui-monospace, 'SFMono-Regular', 'SF Mono', monospace);
   }
 }
 
@@ -28,43 +42,45 @@
   }
   
   .section-title {
-    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-size: var(--font-size-section-title);
     @apply font-bold text-center mb-4 leading-tight;
     @apply text-brand-brunswick-green;
+    font-family: var(--font-family-heading);
   }
   
   .section-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-size: var(--font-size-section-subtitle);
     @apply text-brand-dark-green/70 text-center max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed;
+    font-family: var(--font-family-primary);
   }
   
   /* Fluid typography classes */
   .text-fluid-sm {
-    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-size: var(--font-size-fluid-sm);
   }
   
   .text-fluid-base {
-    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    font-size: var(--font-size-fluid-base);
   }
   
   .text-fluid-lg {
-    font-size: clamp(1.125rem, 3vw, 1.5rem);
+    font-size: var(--font-size-fluid-lg);
   }
   
   .text-fluid-xl {
-    font-size: clamp(1.25rem, 3.5vw, 1.875rem);
+    font-size: var(--font-size-fluid-xl);
   }
   
   .text-fluid-2xl {
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-size: var(--font-size-fluid-2xl);
   }
   
   .text-fluid-3xl {
-    font-size: clamp(1.875rem, 5vw, 3rem);
+    font-size: var(--font-size-fluid-3xl);
   }
   
   .text-fluid-4xl {
-    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-size: var(--font-size-fluid-4xl);
   }
   
   /* Responsive spacing utilities */
@@ -92,8 +108,15 @@
   }
   
   .card {
-    @apply rounded-2xl border border-slate-200/50 p-6 sm:p-8 shadow-elegant bg-white/80 backdrop-blur-sm;
-    @apply hover:shadow-floating hover:border-slate-300/50 transition-all duration-300;
+    @apply rounded-2xl border border-slate-200/50 p-6 sm:p-8 bg-white/80 backdrop-blur-sm;
+    box-shadow: var(--shadow-elegant);
+    transition: all var(--animation-duration-default) var(--animation-easing-default);
+    border-radius: var(--border-radius-2xl);
+  }
+  
+  .card:hover {
+    box-shadow: var(--shadow-floating);
+    @apply border-slate-300/50;
   }
   
   .card-icon {
@@ -102,27 +125,30 @@
   }
   
   .btn {
-    @apply inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300;
+    @apply inline-flex items-center justify-center font-semibold;
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
     min-height: 44px; /* Minimum touch target size */
     padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+    border-radius: var(--border-radius-xl);
+    transition: all var(--animation-duration-default) var(--animation-easing-default);
+    font-family: var(--font-family-primary);
   }
   
   .btn-primary {
     @apply btn bg-brand-orange-pantone text-white shadow-lg hover:shadow-xl hover:scale-105;
     @apply focus:ring-warning-500 hover:bg-warning-600;
-    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    font-size: var(--font-size-fluid-sm);
   }
   
   .btn-secondary {
     @apply btn bg-white text-brand-brunswick-green border-2 border-primary-200 hover:bg-primary-50;
     @apply focus:ring-primary-500;
-    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    font-size: var(--font-size-fluid-sm);
   }
   
   .btn-large {
     padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
-    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    font-size: var(--font-size-fluid-base);
   }
   
   .floating-element {
@@ -137,33 +163,6 @@
     @apply animate-float-delayed;
   }
   
-  .breathing-1 {
-    animation: breathe1 4s ease-in-out infinite;
-  }
-  
-  .breathing-2 {
-    animation: breathe2 5s ease-in-out infinite;
-  }
-  
-  .breathing-3 {
-    animation: breathe3 6s ease-in-out infinite;
-  }
-  
-  .breathing-4 {
-    animation: breathe4 4.5s ease-in-out infinite;
-  }
-  
-  .floating-element-orbit {
-    @apply animate-orbit;
-  }
-  
-  .floating-element-orbit-reverse {
-    @apply animate-orbit-reverse;
-  }
-  
-  .floating-element-slow {
-    @apply animate-float-slow;
-  }
   
   .floating-element-sparkle {
     @apply animate-sparkle;
@@ -505,17 +504,6 @@
   }
 }
 
-/* Breathing animation for main card */
-@keyframes cardBreathe {
-  0%   { transform: translateY(0px) scale(1); }
-  50%  { transform: translateY(-10px) scale(1.005); }
-  100% { transform: translateY(0px) scale(1); }
-}
-
-.card-breathe {
-  animation: cardBreathe 5s ease-in-out infinite;
-  will-change: transform;
-}
 
 /* Mobile bubble animations */
 @keyframes mobileBubbleFloat {

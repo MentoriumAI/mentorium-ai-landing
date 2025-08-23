@@ -1,16 +1,22 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ThemeProvider } from '@/context/ThemeContext'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter'
+})
 
 export const viewport = 'width=device-width, initial-scale=1'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mentorium.ai'),
-  title: 'Mentorium - Reinventando la educación, un documento a la vez',
-  description: 'Mentorium - Plataforma SaaS para la creación y gestión de documentos educativos. Automatiza y optimiza la creación de materiales educativos con inteligencia artificial.',
-  keywords: 'educación, inteligencia artificial, documentos educativos, sílabos, materiales educativos, LMS, Moodle, Blackboard',
+  title: 'Mentorium - IA para Educación | Crea Documentos Educativos Automáticamente',
+  description: 'Plataforma educativa con IA que automatiza la creación de sílabos, evaluaciones y materiales. Compatible con Moodle y Blackboard. Cumple normas MINEDU. Prueba gratis.',
+  keywords: 'plataforma educativa, inteligencia artificial educación, crear sílabos automáticamente, evaluaciones IA, materiales educativos, LMS, Moodle, Blackboard, MINEDU, gestión académica',
   authors: [{ name: 'Mentorium' }],
   creator: 'Mentorium',
   publisher: 'Mentorium',
@@ -20,8 +26,8 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     url: 'https://mentorium.ai',
     siteName: 'Mentorium',
-    title: 'Mentorium - Reinventando la educación, un documento a la vez',
-    description: 'Plataforma SaaS para la creación y gestión de documentos educativos con inteligencia artificial.',
+    title: 'Mentorium - IA para Educación | Automatiza Creación de Documentos Educativos',
+    description: 'Crea sílabos, evaluaciones y materiales educativos automáticamente con IA. Compatible con LMS. Cumple MINEDU. Ahorra 80% del tiempo.',
     images: [
       {
         url: '/og-image.png',
@@ -33,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mentorium - Reinventando la educación',
-    description: 'Automatiza y optimiza la creación de materiales educativos con IA',
+    title: 'Mentorium - IA para Educación',
+    description: 'Crea documentos educativos automáticamente con IA. Compatible con LMS. Ahorra 80% del tiempo.',
     images: ['/og-image.png'],
   },
   icons: {
@@ -51,8 +57,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body className={inter.className}>
-        {children}
+      <body className={`${inter.className} ${inter.variable}`}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

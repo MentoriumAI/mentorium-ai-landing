@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { cloneElement, type ReactElement, type SVGProps, useState, useEffect, useCallback, useMemo } from 'react'
-import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
+import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@/components/icons'
 
 const Hero = () => {
   // Brand color variants used randomly (but deterministically) per icon

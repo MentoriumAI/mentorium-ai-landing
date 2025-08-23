@@ -1,3 +1,3 @@
 [submodule "mentorium-docs"]
 	path = mentorium-docs
-	url = /Users/mosheojeda/Repositories/mentorium-docs
+	url = git@github.com:MentoriumAI/mentorium-docs.git
