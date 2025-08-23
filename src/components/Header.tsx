@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -36,9 +37,19 @@ const Header = () => {
           {/* Logo */}
           <Link 
             href="/" 
-            className="text-2xl lg:text-3xl font-bold gradient-text hover:scale-105 transition-transform duration-200"
+            className="flex items-center space-x-2 hover:scale-105 transition-transform duration-200"
           >
-            Mentorium
+            <Image
+              src="/logo.svg"
+              alt="Mentorium Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 lg:w-10 lg:h-10"
+              priority
+            />
+            <span className="text-2xl lg:text-3xl font-bold gradient-text">
+              Mentorium
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
