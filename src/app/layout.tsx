@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Faculty_Glyphic } from 'next/font/google'
 import { ThemeProvider } from '@/context/ThemeContext'
 
 const inter = Inter({ 
@@ -8,6 +9,14 @@ const inter = Inter({
   display: 'swap',
   preload: true,
   variable: '--font-inter'
+})
+
+const facultyGlyphic = Faculty_Glyphic({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-faculty-glyphic',
+  weight: '400'
 })
 
 export const viewport = 'width=device-width, initial-scale=1'
@@ -60,7 +69,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body className={`${inter.className} ${inter.variable}`}>
+      <body className={`${inter.className} ${inter.variable} ${facultyGlyphic.variable}`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

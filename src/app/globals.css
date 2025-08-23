@@ -182,6 +182,8 @@
   
   .gradient-text {
     @apply bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent;
+    font-family: var(--font-faculty-glyphic), ui-serif, Georgia, Times, serif;
+    font-weight: bold;
   }
   
   .glass-card {

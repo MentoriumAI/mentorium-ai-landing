@@ -64,6 +64,15 @@ export const googleFonts = {
     subsets: ['latin'],
     fallback: ['ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
     url: 'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap'
+  },
+  facultyGlyphic: {
+    family: 'Faculty Glyphic',
+    weights: [400],
+    display: 'swap' as const,
+    preload: false,
+    subsets: ['latin'],
+    fallback: ['ui-serif', 'Georgia', 'Times', 'serif'],
+    url: 'https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap'
   }
 } as const
 
