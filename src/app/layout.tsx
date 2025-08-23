@@ -14,9 +14,9 @@ export const viewport = 'width=device-width, initial-scale=1'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mentorium.ai'),
-  title: 'Mentorium - IA para Educación | Crea Documentos Educativos Automáticamente',
-  description: 'Plataforma educativa con IA que automatiza la creación de sílabos, evaluaciones y materiales. Compatible con Moodle y Blackboard. Cumple normas MINEDU. Prueba gratis.',
-  keywords: 'plataforma educativa, inteligencia artificial educación, crear sílabos automáticamente, evaluaciones IA, materiales educativos, LMS, Moodle, Blackboard, MINEDU, gestión académica',
+  title: 'Mentorium: Plataforma educativa con IA en Perú | Automatización y eficiencia para instituciones',
+  description: 'Mentorium es la primera plataforma educativa con IA diseñada para instituciones en Perú. Automatiza materiales, evaluaciones, notas y reportes oficiales MINEDU. Ahorra tiempo, reduce costos y mejora la gestión escolar con inteligencia artificial y soporte local.',
+  keywords: 'plataforma educativa Perú, LMS con inteligencia artificial, software educativo automatización, gestión escolar digital, automatización evaluaciones MINEDU, sistema académico con IA, reducción de costos educativos, innovación educativa Perú, Mentorium plataforma educativa, eficiencia en instituciones educativas',
   authors: [{ name: 'Mentorium' }],
   creator: 'Mentorium',
   publisher: 'Mentorium',
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     url: 'https://mentorium.ai',
     siteName: 'Mentorium',
-    title: 'Mentorium - IA para Educación | Automatiza Creación de Documentos Educativos',
-    description: 'Crea sílabos, evaluaciones y materiales educativos automáticamente con IA. Compatible con LMS. Cumple MINEDU. Ahorra 80% del tiempo.',
+    title: 'Mentorium: Plataforma educativa con IA en Perú | Automatización y eficiencia para instituciones',
+    description: 'Mentorium es la primera plataforma educativa con IA diseñada para instituciones en Perú. Automatiza materiales, evaluaciones, notas y reportes oficiales MINEDU. Ahorra tiempo, reduce costos y mejora la gestión escolar con inteligencia artificial y soporte local.',
     images: [
       {
         url: '/og-image.png',
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mentorium - IA para Educación',
-    description: 'Crea documentos educativos automáticamente con IA. Compatible con LMS. Ahorra 80% del tiempo.',
+    title: 'Mentorium: Plataforma educativa con IA en Perú',
+    description: 'Automatiza materiales, evaluaciones, notas y reportes oficiales MINEDU con IA. Ahorra tiempo y costos con soporte local en Perú.',
     images: ['/og-image.png'],
   },
   icons: {

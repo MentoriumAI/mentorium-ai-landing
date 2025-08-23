@@ -40,7 +40,7 @@ const Header = () => {
             className="flex items-center space-x-2 hover:scale-105 transition-transform duration-200"
           >
             <Image
-              src="/logo.svg"
+              src="/logo.svg?v=3"
               alt="Mentorium Logo"
               width={32}
               height={32}
