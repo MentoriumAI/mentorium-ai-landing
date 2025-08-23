@@ -3,10 +3,11 @@ import Hero from '@/components/Hero'
 import ProblemSolution from '@/components/ProblemSolution'
 import Features from '@/components/Features'
 import Benefits from '@/components/Benefits'
-import Diferenciadores from '@/components/Diferenciadores'
+// import Diferenciadores from '@/components/Diferenciadores'
 import RoadmapInnovacion from '@/components/RoadmapInnovacion'
 import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
+import ThemeButton from '@/components/ThemeButton'
 
 export default function Page() {
   return (
@@ -22,6 +23,7 @@ export default function Page() {
         <CTA />
       </main>
       <Footer />
+      <ThemeButton />
     </>
   )
 }

@@ -1,0 +1,130 @@
+/* Default CSS custom properties for theme system */
+:root {
+  /* Brand Colors */
+  --color-brand-dark-green: #093b2c;
+  --color-brand-brunswick-green: #0f4c38;
+  --color-brand-isabelline: #f7f4ef;
+  --color-brand-brandeis-blue: #006fea;
+  --color-brand-sunglow: #fac827;
+  --color-brand-dark-moss-green: #536c03;
+  --color-brand-orange-pantone: #fb6113;
+  
+  /* Primary Palette (Greens) */
+  --color-primary-50: #f0fdf6;
+  --color-primary-100: #dcfce9;
+  --color-primary-200: #bbf7d2;
+  --color-primary-300: #86efac;
+  --color-primary-400: #4ade80;
+  --color-primary-500: #0f4c38;
+  --color-primary-600: #093b2c;
+  --color-primary-700: #065f3c;
+  --color-primary-800: #064e2f;
+  --color-primary-900: #053d26;
+  --color-primary-950: #022a1a;
+  
+  /* Secondary Palette (Blues) */
+  --color-secondary-50: #eff7ff;
+  --color-secondary-100: #deeeff;
+  --color-secondary-200: #b4ddff;
+  --color-secondary-300: #72c3ff;
+  --color-secondary-400: #26a5ff;
+  --color-secondary-500: #006fea;
+  --color-secondary-600: #0058c7;
+  --color-secondary-700: #0047a1;
+  --color-secondary-800: #003d85;
+  --color-secondary-900: #06366e;
+  --color-secondary-950: #04244a;
+  
+  /* Accent Palette (Yellows) */
+  --color-accent-50: #fffaeb;
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fee68a;
+  --color-accent-300: #fdd347;
+  --color-accent-400: #fac827;
+  --color-accent-500: #f4b817;
+  --color-accent-600: #d8950a;
+  --color-accent-700: #b3720c;
+  --color-accent-800: #915912;
+  --color-accent-900: #784713;
+  --color-accent-950: #452505;
+  
+  /* Success Palette */
+  --color-success-50: #f7fee7;
+  --color-success-100: #ecfccb;
+  --color-success-200: #d9f99d;
+  --color-success-300: #bef264;
+  --color-success-400: #a3e635;
+  --color-success-500: #84cc16;
+  --color-success-600: #536c03;
+  --color-success-700: #4d7c0f;
+  --color-success-800: #3f6212;
+  --color-success-900: #365314;
+  --color-success-950: #1a2e05;
+  
+  /* Warning Palette */
+  --color-warning-50: #fff7ed;
+  --color-warning-100: #ffedd5;
+  --color-warning-200: #fed7aa;
+  --color-warning-300: #fdba74;
+  --color-warning-400: #fb923c;
+  --color-warning-500: #fb6113;
+  --color-warning-600: #ea580c;
+  --color-warning-700: #c2410c;
+  --color-warning-800: #9a3412;
+  --color-warning-900: #7c2d12;
+  --color-warning-950: #431407;
+  
+  /* Neutral Palette */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+  
+  /* Font Families */
+  --font-family-primary: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-heading: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace;
+  
+  /* Fluid Typography */
+  --font-size-fluid-sm: clamp(0.875rem, 2vw, 1rem);
+  --font-size-fluid-base: clamp(1rem, 2.5vw, 1.125rem);
+  --font-size-fluid-lg: clamp(1.125rem, 3vw, 1.5rem);
+  --font-size-fluid-xl: clamp(1.25rem, 3.5vw, 1.875rem);
+  --font-size-fluid-2xl: clamp(1.5rem, 4vw, 2.25rem);
+  --font-size-fluid-3xl: clamp(1.875rem, 5vw, 3rem);
+  --font-size-fluid-4xl: clamp(2.25rem, 6vw, 3.75rem);
+  --font-size-section-title: clamp(1.75rem, 4vw, 3rem);
+  --font-size-section-subtitle: clamp(1rem, 2.5vw, 1.25rem);
+  
+  /* Animation Properties */
+  --animation-duration-default: 300ms;
+  --animation-easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration-slow: 500ms;
+  --animation-duration-fast: 150ms;
+  
+  /* Spacing Scale */
+  --spacing-scale: 1;
+  --spacing-base: 4px;
+  
+  /* Border Radius Scale */
+  --border-radius-scale: 1;
+  --border-radius-sm: calc(0.375rem * var(--border-radius-scale));
+  --border-radius-md: calc(0.5rem * var(--border-radius-scale));
+  --border-radius-lg: calc(0.75rem * var(--border-radius-scale));
+  --border-radius-xl: calc(1rem * var(--border-radius-scale));
+  --border-radius-2xl: calc(1.5rem * var(--border-radius-scale));
+  
+  /* Shadow Values */
+  --shadow-elegant: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-floating: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow-green: 0 0 20px rgba(15, 76, 56, 0.4), 0 0 40px rgba(15, 76, 56, 0.1);
+  --shadow-glow-orange: 0 0 20px rgba(251, 97, 19, 0.4), 0 0 40px rgba(251, 97, 19, 0.1);
+  --shadow-glow-strong: 0 0 30px rgba(251, 97, 19, 0.5), 0 0 60px rgba(15, 76, 56, 0.2);
+}
