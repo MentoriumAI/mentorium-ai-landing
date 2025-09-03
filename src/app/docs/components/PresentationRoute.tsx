@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import './presentation.css';
 
 interface Slide {
@@ -30,19 +31,33 @@ interface ProcessingContext {
   targetLinesPerSlide: number;
 }
 
-interface PresentationModeProps {
-  htmlContent: string;
-  title?: string;
+interface PresentationRouteProps {
+  initialSlide?: number;
+  sourceDocsUrl?: string; // URL to fetch the docs page
+  documentPath?: string;  // Legacy: path to HTML file 
+  htmlContent?: string;   // Direct HTML content passed from server
+  documentTitle: string;
+  backUrl: string;
+  presentationBasePath?: string;
 }
 
-export default function PresentationMode({ htmlContent, title = 'Presentación' }: PresentationModeProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function PresentationRoute({ 
+  initialSlide = 0, 
+  sourceDocsUrl,
+  documentPath,
+  htmlContent,
+  documentTitle,
+  backUrl,
+  presentationBasePath 
+}: PresentationRouteProps) {
   const [slides, setSlides] = useState<Slide[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showKeyboardHints, setShowKeyboardHints] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const slideContentRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Content Measurer for accurate line counting and content analysis
   class ContentMeasurer {
@@ -389,58 +404,98 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       }
     }
   }
-  
-  // Parse HTML content using the three-stage splitter
-  const parseSlides = useCallback((html: string): Slide[] => {
-    const splitter = new SlideSplitter(
-      title,
-      window.innerHeight,
-      window.innerWidth
-    );
-    
-    return splitter.processContent(html);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title]);
 
-
-  // Initialize slides when component mounts or htmlContent changes
+  // Load content and generate slides
   useEffect(() => {
-    if (htmlContent && isOpen) {
-      const parsedSlides = parseSlides(htmlContent);
-      setSlides(parsedSlides);
-      setCurrentSlide(0);
-    }
-  }, [htmlContent, isOpen, parseSlides]);
-
-  // Handle toolbar button interaction - now redirects to generalized presentation route
-  useEffect(() => {
-    const toolbarBtn = document.getElementById('presentation-btn');
-    const handleToolbarClick = () => {
-      // Get current path and convert /docs/... to /presentacion/...
-      const currentPath = window.location.pathname;
-      
-      if (currentPath.startsWith('/docs/')) {
-        // Remove '/docs/' prefix and create presentation URL
-        const docsPath = currentPath.substring(6); // Remove '/docs/'
-        const presentationUrl = `/presentacion/${docsPath}?slide=1`;
-        window.location.href = presentationUrl;
-      } else {
-        // Fallback for non-docs pages
-        window.location.href = '/presentacion/pacasmayo?slide=1';
+    const loadContent = async () => {
+      try {
+        let mainContent: Element | null = null;
+        
+        if (htmlContent) {
+          // Use HTML content passed as prop (server-side)
+          mainContent = document.createElement('main');
+          mainContent.innerHTML = htmlContent;
+        } else if (sourceDocsUrl) {
+          // Use API endpoint to fetch HTML content (fallback)
+          const apiPath = sourceDocsUrl.replace('/docs/', '/api/docs/');
+          const response = await fetch(apiPath);
+          if (!response.ok) {
+            throw new Error(`Failed to load docs content: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          if (!data.success || !data.content) {
+            throw new Error('Invalid response from docs API');
+          }
+          
+          // Create a temporary element to hold the content
+          mainContent = document.createElement('main');
+          mainContent.innerHTML = data.content;
+        } else if (documentPath) {
+          // Legacy approach: Fetch HTML file directly
+          const response = await fetch(documentPath);
+          if (!response.ok) {
+            throw new Error(`Failed to load document file: ${response.status}`);
+          }
+          const html = await response.text();
+          
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          mainContent = doc.querySelector('main') || doc.querySelector('.page') || doc.body;
+        } else {
+          throw new Error('No document source provided');
+        }
+        
+        if (mainContent) {
+          const splitter = new SlideSplitter(
+            documentTitle,
+            window.innerHeight,
+            window.innerWidth
+          );
+          
+          const generatedSlides = splitter.processContent(mainContent.innerHTML);
+          setSlides(generatedSlides);
+          
+          // Validate initial slide
+          const validatedSlide = Math.max(0, Math.min(initialSlide, generatedSlides.length - 1));
+          setCurrentSlide(validatedSlide);
+        } else {
+          throw new Error('No main content found in document');
+        }
+      } catch (error) {
+        console.error('Error loading document:', error);
+        const sourcePath = sourceDocsUrl || documentPath || 'unknown';
+        setSlides([{
+          id: 'error-slide',
+          content: `<h1>Error</h1><p>No se pudo cargar el contenido del documento: ${sourcePath}</p><p>Error: ${error instanceof Error ? error.message : 'Unknown error'}</p>`,
+          title: 'Error',
+          type: 'title'
+        }]);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    if (toolbarBtn) {
-      toolbarBtn.addEventListener('click', handleToolbarClick);
-    }
+    loadContent();
+  }, [htmlContent || '', sourceDocsUrl || '', documentPath || '', documentTitle, initialSlide]);
 
-    return () => {
-      if (toolbarBtn) {
-        toolbarBtn.removeEventListener('click', handleToolbarClick);
+  // Update URL without page refresh
+  const updateURL = useCallback((slideIndex: number) => {
+    if (presentationBasePath) {
+      // Use search params for the new generalized route
+      const newUrl = `${presentationBasePath}?slide=${slideIndex + 1}`;
+      router.replace(newUrl, { scroll: false });
+    } else {
+      // Fallback to the old path-based approach for backward compatibility
+      const basePath = pathname.split('/').slice(0, -1).join('/');
+      const newUrl = `${basePath}/${slideIndex + 1}`;
+      if (pathname !== newUrl) {
+        router.replace(newUrl, { scroll: false });
       }
-    };
-  }, []);
+    }
+  }, [router, pathname, presentationBasePath]);
 
+  // Navigation functions
   const nextSlide = useCallback(() => {
     if (currentSlide < slides.length - 1 && !isTransitioning) {
       setIsTransitioning(true);
@@ -450,7 +505,9 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       }
       
       setTimeout(() => {
-        setCurrentSlide(prev => prev + 1);
+        const newSlide = currentSlide + 1;
+        setCurrentSlide(newSlide);
+        updateURL(newSlide);
         
         if (slideContentRef.current) {
           slideContentRef.current.classList.remove('sliding-out-up');
@@ -466,7 +523,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         }
       }, 200);
     }
-  }, [currentSlide, slides.length, isTransitioning]);
+  }, [currentSlide, slides.length, isTransitioning, updateURL]);
 
   const previousSlide = useCallback(() => {
     if (currentSlide > 0 && !isTransitioning) {
@@ -477,7 +534,9 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       }
       
       setTimeout(() => {
-        setCurrentSlide(prev => prev - 1);
+        const newSlide = currentSlide - 1;
+        setCurrentSlide(newSlide);
+        updateURL(newSlide);
         
         if (slideContentRef.current) {
           slideContentRef.current.classList.remove('sliding-out-down');
@@ -493,7 +552,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         }
       }, 200);
     }
-  }, [currentSlide, isTransitioning]);
+  }, [currentSlide, isTransitioning, updateURL]);
 
   const goToSlide = useCallback((index: number) => {
     if (index >= 0 && index < slides.length && index !== currentSlide && !isTransitioning) {
@@ -507,6 +566,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       
       setTimeout(() => {
         setCurrentSlide(index);
+        updateURL(index);
         
         if (slideContentRef.current) {
           slideContentRef.current.classList.remove(`sliding-out-${direction}`);
@@ -522,12 +582,12 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         }
       }, 200);
     }
-  }, [currentSlide, slides.length, isTransitioning]);
+  }, [currentSlide, slides.length, isTransitioning, updateURL]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (!isOpen || isTransitioning) return;
+      if (isTransitioning) return;
 
       switch (e.key) {
         case 'ArrowDown':
@@ -543,14 +603,13 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
           break;
         case 'ArrowRight':
         case 'ArrowLeft':
-          // Still allow horizontal arrows for backwards compatibility
           e.preventDefault();
           if (e.key === 'ArrowRight') nextSlide();
           else previousSlide();
           break;
         case 'Escape':
           e.preventDefault();
-          closePresentation();
+          router.push(backUrl);
           break;
         case 'Home':
           e.preventDefault();
@@ -568,56 +627,41 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyPress);
-      // Hide body scroll when presentation is open
-      document.body.style.overflow = 'hidden';
-    }
+    document.addEventListener('keydown', handleKeyPress);
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, isTransitioning, slides.length, showKeyboardHints, nextSlide, previousSlide, goToSlide]);
+  }, [isTransitioning, slides.length, showKeyboardHints, nextSlide, previousSlide, goToSlide, router, backUrl]);
 
   // Hide keyboard hints after 5 seconds
   useEffect(() => {
-    if (isOpen && showKeyboardHints) {
+    if (showKeyboardHints) {
       const timer = setTimeout(() => {
         setShowKeyboardHints(false);
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, showKeyboardHints]);
+  }, [showKeyboardHints]);
 
-  const openPresentation = () => {
-    setIsOpen(true);
-    setIsExiting(false);
-    setShowKeyboardHints(true);
-    // Hide toolbar in presentation mode
-    document.body.classList.add('presentation-active');
-  };
-
-  const closePresentation = () => {
-    setIsExiting(true);
-    // Show toolbar again
-    document.body.classList.remove('presentation-active');
-    setTimeout(() => {
-      setIsOpen(false);
-      setIsExiting(false);
-      setCurrentSlide(0);
-    }, 300);
-  };
-
-
-  if (!isOpen) {
-    return null; // Only show the toolbar button, no duplicate React button
+  if (isLoading) {
+    return (
+      <div className="presentation-mode">
+        <div className="presentation-slide">
+          <div className="slide-content slide-loading">
+            <div className="loading-spinner">Cargando presentación...</div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const currentSlideData = slides[currentSlide];
 
   return (
-    <div className={`presentation-mode ${isExiting ? 'exiting' : ''}`}>
+    <div className="presentation-mode">
       {/* Main slide area - full screen */}
       <div className="presentation-slide">
         {currentSlideData ? (
@@ -635,12 +679,12 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
 
       {/* Vertical sidebar navigation */}
       <div className="presentation-sidebar">
-        {/* Close button */}
+        {/* Close button - goes back to document page */}
         <button 
           className="sidebar-close"
-          onClick={closePresentation}
+          onClick={() => router.push(backUrl)}
           type="button"
-          aria-label="Cerrar presentación"
+          aria-label="Volver al documento"
         >
           ✕
         </button>
