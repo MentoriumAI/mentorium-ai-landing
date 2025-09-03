@@ -1,3 +1,9 @@
+/* Hide slideshow button in presentation mode */
+.presentation-mode #presentation-btn,
+#presentation-btn {
+  display: none !important;
+}
+
 /* Minimalist Presentation Mode Styles */
 .presentation-mode {
   position: fixed;
