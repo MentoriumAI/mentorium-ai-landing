@@ -49,6 +49,49 @@
     .section.theme-brunswick .card{ border-left:6px solid var(--brunswick-green); background: rgba(15,76,56,.06); border-color: rgba(15,76,56,.25); }
     .section.theme-brunswick .card h3{ color: var(--brunswick-green); }
 
+    /* ===== Team member cards styling ===== */
+    .team-member .card{ display: flex; flex-direction: column; gap: 1rem; }
+    .team-member .member-header{ display: flex; align-items: center; gap: 1rem; }
+    .team-member .member-photo{ width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--brunswick-green); flex-shrink: 0; }
+    .team-member .member-info{ flex: 1; }
+    .team-member .member-info h3{ margin-bottom: .2rem; }
+    .team-member .member-title{ font-size: .9rem; color: var(--brunswick-green); font-weight: 600; font-style: italic; margin: 0; }
+    .team-member .member-content{ margin-top: 0; }
+
+    /* ===== Roadmap section styling ===== */
+    .roadmap-header{ 
+      display: flex; 
+      align-items: center; 
+      gap: 1rem; 
+      margin-bottom: 1.2rem; 
+    }
+    .roadmap-header h2{ 
+      margin: 0; 
+      flex: 1; 
+    }
+    .roadmap-link{ 
+      display: inline-flex; 
+      align-items: center; 
+      gap: .4rem; 
+      padding: .6rem 1rem; 
+      background: var(--dark-moss-green); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 8px; 
+      font-size: .9rem; 
+      font-weight: 600; 
+      transition: all 0.2s ease; 
+    }
+    .roadmap-link:hover{ 
+      background: var(--brunswick-green); 
+      transform: translateY(-1px); 
+      box-shadow: 0 4px 8px rgba(0,0,0,.15); 
+    }
+    .roadmap-link::after{ 
+      content: "→"; 
+      font-size: 1.1em; 
+    }
+
     .session{ border-left: 6px solid var(--dark-moss-green); padding-left: 1.05rem; margin:1rem 0; }
     .session .badge{ display:inline-block; background: var(--dark-moss-green); color:white; padding:.08rem .5rem; border-radius: .35rem; font-size:.78rem; margin-right:.4rem; }
     .session .logro{ font-size:.95rem; color:#26423b; background:#f3f8f6; border:1px solid #e0eee9; border-radius:8px; padding:.85rem 1rem; margin-top:.5rem; }
@@ -57,8 +100,20 @@
     ul li{ list-style-type: disc; }
     
     /* Checklist items use checkmarks instead */
-    .checklist li{ list-style: none; }
-    .checklist li::before{ content: "✔"; color: var(--dark-moss-green); margin-right: .6rem; }
+    .checklist li{ 
+      list-style: none; 
+      display: flex; 
+      align-items: flex-start; 
+      margin-bottom: .8rem; 
+      line-height: 1.6; 
+    }
+    .checklist li::before{ 
+      content: "✔"; 
+      color: var(--dark-moss-green); 
+      margin-right: .8rem; 
+      flex-shrink: 0; 
+      margin-top: .1rem; 
+    }
   </style>
 </head>
 <body>
@@ -97,7 +152,8 @@
     <section class="section">
       <span class="tag">Propuesta de valor</span>
       <h2>De la Teoría a Resultados Medibles</h2>
-      <p><strong>Metodología Mentorium para Cementos Pacasmayo</strong><br/>La metodología combina el aprendizaje experiencial, el trabajo sobre desafíos reales y un diseño pedagógico estructurado, bajo un modelo progresivo de seis etapas.</p>
+      <h3>Metodología Mentorium para Cementos Pacasmayo</h3>
+      <p>La metodología combina el aprendizaje experiencial, el trabajo sobre desafíos reales y un diseño pedagógico estructurado, bajo un modelo progresivo de seis etapas.</p>
       <h3>Enfoques clave de la metodología</h3>
       <ul>
         <li><strong>Challenge-Based Learning:</strong> el aprendizaje se centra en resolver desafíos del negocio.</li>
@@ -155,35 +211,52 @@
       </div>
     </section>
 
-    <section class="section theme-brunswick">
+    <section class="section theme-brunswick team-member">
       <span class="tag">Equipo facilitador</span>
       <h2>Liderazgo Técnico Especializado</h2>
       <div class="cards">
         <div class="card">
-          <h3>Moshe Ojeda – Facilitador Técnico</h3>
-          <p>Ingeniero Informático, especialista en IA generativa, ex Lead de IA en Yape y cofundador de Agentman. Su principal rol dentro del programa es traducir conceptos complejos en aplicaciones prácticas, guiando a los colaboradores en el uso estratégico de estas tecnologías y mostrando casos reales de cómo la IA puede transformar procesos empresariales.</p>
-          <p>Además de su experiencia profesional en el desarrollo e implementación de soluciones de IA, Moshe cuenta con una sólida trayectoria como docente y facilitador en cursos y espacios formativos vinculados a la tecnología, entre ellos:</p>
-          <ul>
-            <li>AI Engineering</li>
-            <li>Prompt Engineering</li>
-            <li>Análisis de Datos</li>
-            <li>Desarrollo de Software</li>
-          </ul>
-          <p>Esta experiencia le permite ofrecer una metodología de aprendizaje interactiva y aplicada, adaptada a distintos niveles de dominio tecnológico.</p>
+          <div class="member-header">
+            <img src="../assets/people/moshe.jpg" alt="Moshe Ojeda" class="member-photo">
+            <div class="member-info">
+              <h3>Moshe Ojeda</h3>
+              <p class="member-title">Facilitador Técnico</p>
+            </div>
+          </div>
+          <div class="member-content">
+            <p>Ingeniero Informático, especialista en IA generativa, ex Lead de IA en Yape y cofundador de Agentman. Su principal rol dentro del programa es traducir conceptos complejos en aplicaciones prácticas, guiando a los colaboradores en el uso estratégico de estas tecnologías y mostrando casos reales de cómo la IA puede transformar procesos empresariales.</p>
+            <p>Además de su experiencia profesional en el desarrollo e implementación de soluciones de IA, Moshe cuenta con una sólida trayectoria como docente y facilitador en cursos y espacios formativos vinculados a la tecnología, entre ellos:</p>
+            <ul>
+              <li>AI Engineering</li>
+              <li>Prompt Engineering</li>
+              <li>Análisis de Datos</li>
+              <li>Desarrollo de Software</li>
+            </ul>
+            <p>Esta experiencia le permite ofrecer una metodología de aprendizaje interactiva y aplicada, adaptada a distintos niveles de dominio tecnológico.</p>
+          </div>
         </div>
         <div class="card">
-          <h3>Silvia Fernández – Diseño Pedagógico y Facilitación Educativa</h3>
-          <p>Educadora y gestora educativa, especialista en diseño instruccional y curricular. Su rol en el programa es estructurar las experiencias de aprendizaje, dinamizar las sesiones y guiar la reflexión de los participantes, asegurando que el conocimiento se interiorice, se conecte con la práctica laboral y se transforme en competencias aplicables.</p>
-          <p>Con experiencia en la implementación de metodologías activas y en la integración de tecnologías educativas, Silvia aporta la mirada pedagógica necesaria para que la innovación tecnológica se traduzca en aprendizajes significativos y sostenibles dentro de Cementos Pacasmayo.</p>
+          <div class="member-header">
+            <img src="../assets/people/silvia.jpg" alt="Silvia Fernández" class="member-photo">
+            <div class="member-info">
+              <h3>Silvia Fernández</h3>
+              <p class="member-title">Diseño Pedagógico y Facilitación Educativa</p>
+            </div>
+          </div>
+          <div class="member-content">
+            <p>Educadora y gestora educativa, especialista en diseño instruccional y curricular. Su rol en el programa es estructurar las experiencias de aprendizaje, dinamizar las sesiones y guiar la reflexión de los participantes, asegurando que el conocimiento se interiorice, se conecte con la práctica laboral y se transforme en competencias aplicables.</p>
+            <p>Con experiencia en la implementación de metodologías activas y en la integración de tecnologías educativas, Silvia aporta la mirada pedagógica necesaria para que la innovación tecnológica se traduzca en aprendizajes significativos y sostenibles dentro de Cementos Pacasmayo.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section">
       <span class="tag">Implementación Acelerada</span>
-      <h2>Roadmap de 8 Sesiones</h2>
-
-      <h3>Duración y formato del programa</h3>
+      <div class="roadmap-header">
+        <h2>Roadmap de 8 Sesiones</h2>
+        <a href="../roadmap/roadmap.html" class="roadmap-link">Ver roadmap detallado</a>
+      </div>
       <ul>
         <li><strong>Periodo de desarrollo:</strong> Septiembre a noviembre (3 meses).</li>
         <li><strong>Espaciado:</strong> Semanal o quincenal, según la disponibilidad de los equipos de Pacasmayo.</li>
