@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Programa de Aplicación Práctica de IA en Cementos Pacasmayo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../components/styles.css" />
+  <style>
+    /* ===== Tipografía y espaciados específicos de la propuesta ===== */
+    h1{ font-size: 2.5rem; line-height: 1.25; }
+    h2{ font-size: 1.8rem; line-height: 1.35; margin-top: .4rem; margin-bottom: .35rem; }
+    h3{ font-size: 1.3rem; color: var(--dark-green); line-height: 1.45; margin-top: .6rem; margin-bottom: .25rem; }
+
+    .title{ display:flex; align-items:flex-end; gap:.6rem; }
+    .meta{ display:grid; grid-template-columns: 1fr; gap:.45rem; color:#335a50; font-size:1rem; margin-top: .7rem; margin-bottom: .2rem; }
+    @media (min-width: 820px){ .meta{ grid-template-columns: 1fr 1fr; } }
+
+    .section > * + *{ margin-top: 1.1rem; }
+    .section h2 + *{ margin-top: 1rem; }
+    .section .chip{ display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.02em; color:#285a52; background:#eef6f3; border:1px solid #d7ece4; border-radius:999px; padding:.12rem .5rem; margin-right:.3rem; }
+
+    .callout{ border-left: 4px solid var(--celtic-blue); background: #f5f9ff; padding: 1rem 1.05rem; border-radius: 10px; }
+
+    /* Divider line */
+    .rule{ height:1px; background: var(--border); border:0; margin:1.6rem 0 1.6rem; }
+
+    /* ===== Cards ===== */
+    .cards{ display:grid; grid-template-columns: 1fr; gap:1rem; margin-top:.6rem; }
+    .card{ background: var(--paper); border:1px solid var(--border); border-radius:12px; padding:1rem; box-shadow: 0 1px 0 rgba(0,0,0,.03); }
+    .card h3{ margin-top:0; margin-bottom:.4rem; font-size:1.05rem; color: var(--dark-green); }
+    .card ul{ margin:.4rem 0 0 .95rem; }
+
+    /* ===== Themed cards by section ===== */
+    .section.theme-blue .card{ border-left:6px solid var(--celtic-blue); background: rgba(0,105,224,.05); border-color:#e0e9ff; }
+    .section.theme-blue .card h3{ color: var(--celtic-blue); }
+
+    .section.theme-sunglow .card{ border-left:6px solid var(--sunglow); background: rgba(250,200,39,.08); border-color: rgba(250,200,39,.35); }
+    .section.theme-sunglow .card h3{ color: #b38700; }
+
+    .section.theme-moss .card{ border-left:6px solid var(--dark-moss-green); background: rgba(83,108,3,.08); border-color: rgba(83,108,3,.25); }
+    .section.theme-moss .card h3{ color: var(--dark-moss-green); }
+
+    .section.theme-orange .card{ border-left:6px solid var(--orange-pantone); background: rgba(251,97,19,.08); border-color: rgba(251,97,19,.25); }
+    .section.theme-orange .card h3{ color: var(--orange-pantone); }
+
+    .section.theme-brunswick .card{ border-left:6px solid var(--brunswick-green); background: rgba(15,76,56,.06); border-color: rgba(15,76,56,.25); }
+    .section.theme-brunswick .card h3{ color: var(--brunswick-green); }
+
+    .session{ border-left: 6px solid var(--dark-moss-green); padding-left: 1.05rem; margin:1rem 0; }
+    .session .badge{ display:inline-block; background: var(--dark-moss-green); color:white; padding:.08rem .5rem; border-radius: .35rem; font-size:.78rem; margin-right:.4rem; }
+    .session .logro{ font-size:.95rem; color:#26423b; background:#f3f8f6; border:1px solid #e0eee9; border-radius:8px; padding:.85rem 1rem; margin-top:.5rem; }
+
+    .checklist li{ list-style: none; }
+    .checklist li::before{ content: "✔"; color: var(--dark-moss-green); margin-right: .6rem; }
+  </style>
+</head>
+<body>
+  <div class="toolbar" aria-hidden="true">
+    <button onclick="window.print()">🖨️ Exportar a PDF</button>
+  </div>
+
+  <main class="page">
+    <section class="hero">
+      <div class="accent" aria-hidden="true"></div>
+      <div class="kicker">Propuesta</div>
+      <div class="title">
+        <h1>Programa de Aplicación Práctica de IA en Cementos Pacasmayo</h1>
+      </div>
+      <div class="meta">
+        <div><strong>Facilitador:</strong><br/>Mentorium AI (Mentorium S.A.C.)</div>
+      </div>
+      <p><strong>Propósito</strong><br/>Crear un espacio de práctica, colaboración y aprendizaje continuo, donde colaboradores de distintas áreas de Cementos Pacasmayo trabajen junto a expertos en IA para identificar y resolver problemáticas reales de su día a día. Este proceso permitirá no solo diseñar soluciones con IA, sino también aplicarlas directamente en sus equipos de trabajo, consolidando aprendizajes compartidos, generando resultados tangibles en el corto plazo y fortaleciendo una cultura de innovación colaborativa en la organización.</p>
+    </section>
+  <hr class="rule"/>
+
+    <section class="section">
+      <h2>Objetivos del programa</h2>
+      <ul class="checklist">
+        <li>Comprender la IA: qué es, qué no es y cómo aplicarla con realismo en el sector industrial.</li>
+        <li>Detectar y priorizar retos de las distintas áreas, generando pensamiento crítico y compromiso.</li>
+        <li>Explorar herramientas de IA generativa y analítica aplicadas a un desafío inicial.</li>
+        <li>Prototipar soluciones rápidas, llevando la experimentación a propuestas concretas.</li>
+        <li>Iterar y validar prototipos con retroalimentación y pruebas en el entorno laboral.</li>
+        <li>Colaborar y socializar aprendizajes, identificando patrones de éxito y obstáculos comunes.</li>
+        <li>Presentar públicamente soluciones, mostrando impacto y recibiendo feedback constructivo.</li>
+        <li>Consolidar y proyectar aprendizajes, formando una comunidad interna de innovación en IA.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <span class="tag">Propuesta de valor</span>
+      <h2>De la Teoría a Resultados Medibles</h2>
+      <p><strong>Metodología Mentorium para Cementos Pacasmayo</strong><br/>La metodología combina el aprendizaje experiencial, el trabajo sobre desafíos reales y un diseño pedagógico estructurado, bajo un modelo progresivo de seis etapas.</p>
+      <h3>Enfoques clave de la metodología</h3>
+      <ul>
+        <li><strong>Challenge-Based Learning:</strong> el aprendizaje se centra en resolver desafíos del negocio.</li>
+        <li><strong>Learning by Doing:</strong> cada explicación se traduce en ejercicios prácticos e inmediatos.</li>
+        <li><strong>Progresión pedagógica estructurada:</strong> de la comprensión a la aplicación real, asegurando transferencia al puesto de trabajo.</li>
+      </ul>
+    </section>
+
+    <section class="section theme-blue">
+      <span class="tag">MAA-IA</span>
+      <h2>Etapas del aprendizaje aplicado con IA</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>1. Explorar</h3>
+          <ul>
+            <li>Introducción a la IA generativa en el contexto de Pacasmayo.</li>
+            <li>Casos de inspiración vinculados a operaciones, RRHH, comunicaciones y gestión de proyectos.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2. Definir</h3>
+          <ul>
+            <li>Identificación y priorización de desafíos reales de cada área (BaU).</li>
+            <li>Selección de retos que orientarán la práctica en sesiones posteriores.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>3. Experimentar</h3>
+          <ul>
+            <li>Aplicación directa de herramientas de IA en micro-retos y ejercicios inmediatos.</li>
+            <li>“Learning by Doing”: los colaboradores prueban, ajustan y reflexionan en tiempo real.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>4. Construir</h3>
+          <ul>
+            <li>Desarrollo de prototipos y soluciones aplicadas a los retos seleccionados.</li>
+            <li>Uso de plantillas y guías de trabajo diseñadas pedagógicamente.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>5. Validar</h3>
+          <ul>
+            <li>Presentación de las soluciones a sus equipos y validación de resultados.</li>
+            <li>Retroalimentación formativa y ajustes en función del impacto.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>6. Consolidar</h3>
+          <ul>
+            <li>Documentación de aprendizajes y buenas prácticas.</li>
+            <li>Creación de una base para una comunidad de práctica interna en Pacasmayo.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section theme-brunswick">
+      <span class="tag">Equipo facilitador</span>
+      <h2>Liderazgo Técnico Especializado</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Moshe Ojeda – Facilitador Técnico</h3>
+          <p>Ingeniero Informático, especialista en IA generativa, ex Lead de IA en Yape y cofundador de Agentman. Su principal rol dentro del programa es traducir conceptos complejos en aplicaciones prácticas, guiando a los colaboradores en el uso estratégico de estas tecnologías y mostrando casos reales de cómo la IA puede transformar procesos empresariales.</p>
+          <p>Además de su experiencia profesional en el desarrollo e implementación de soluciones de IA, Moshe cuenta con una sólida trayectoria como docente y facilitador en cursos y espacios formativos vinculados a la tecnología, entre ellos:</p>
+          <ul>
+            <li>AI Engineering</li>
+            <li>Prompt Engineering</li>
+            <li>Análisis de Datos</li>
+            <li>Desarrollo de Software</li>
+          </ul>
+          <p>Esta experiencia le permite ofrecer una metodología de aprendizaje interactiva y aplicada, adaptada a distintos niveles de dominio tecnológico.</p>
+        </div>
+        <div class="card">
+          <h3>Silvia Fernández – Diseño Pedagógico y Facilitación Educativa</h3>
+          <p>Educadora y gestora educativa, especialista en diseño instruccional y curricular. Su rol en el programa es estructurar las experiencias de aprendizaje, dinamizar las sesiones y guiar la reflexión de los participantes, asegurando que el conocimiento se interiorice, se conecte con la práctica laboral y se transforme en competencias aplicables.</p>
+          <p>Con experiencia en la implementación de metodologías activas y en la integración de tecnologías educativas, Silvia aporta la mirada pedagógica necesaria para que la innovación tecnológica se traduzca en aprendizajes significativos y sostenibles dentro de Cementos Pacasmayo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="tag">Implementación Acelerada</span>
+      <h2>Roadmap de 8 Sesiones</h2>
+
+      <h3>Duración y formato del programa</h3>
+      <ul>
+        <li><strong>Periodo de desarrollo:</strong> Septiembre a noviembre (3 meses).</li>
+        <li><strong>Espaciado:</strong> Semanal o quincenal, según la disponibilidad de los equipos de Pacasmayo.</li>
+        <li><strong>Duración de cada sesión:</strong> 2 a 3 horas por sesión (ideal para lograr profundidad sin saturar).</li>
+        <li><strong>Número de sesiones:</strong> 8 sesiones (con progresión de menor a mayor complejidad).</li>
+        <li><strong>Modalidad:</strong> Presencial o virtual sincrónica, según la necesidad y la disponibilidad logística.</li>
+      </ul>
+      <div class="note">
+        <p><strong>Se recomienda un formato mixto flexible:</strong> sesiones clave presenciales (para dinámica experiencial y co-creación) y sesiones virtuales sincrónicas (para transferencia de conceptos y retos aplicados).</p>
+      </div>
+    </section>
+
+    <section class="section theme-orange">
+      <span class="tag">Enfoque técnico</span>
+      <h2>Herramientas y tecnologías</h2>
+      <p>Desde Mentorium proponemos un conjunto de herramientas y tecnologías de Inteligencia Artificial como base para el programa. Sin embargo, consideramos esencial partir del diagnóstico del perfil de los colaboradores: identificar qué tecnologías utilizan actualmente y cuáles necesitan incorporar en su labor. Este análisis permitirá incluir en el roadmap sesiones técnicas y prácticas más efectivas, ajustadas a las características de los participantes y alineadas con los objetivos estratégicos y competencias que busca desarrollar Cementos Pacasmayo.</p>
+      <p>Durante el programa, los colaboradores tendrán la oportunidad de explorar y aplicar herramientas de IA cuidadosamente seleccionadas, presentadas de manera práctica y contextualizada bajo la guía experta de Moshe Ojeda, especialista en transformación digital e implementación de soluciones de IA.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>IA generativa y asistencial</h3>
+          <ul>
+            <li><strong>Microsoft Copilot:</strong> Automatización de tareas de productividad, análisis de documentos y soporte en la toma de decisiones.</li>
+            <li><strong>ChatGPT / Gemini:</strong> Creación de contenidos, análisis de datos no estructurados, prototipado de soluciones y apoyo en procesos de comunicación.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>IA analítica y de datos</h3>
+          <ul>
+            <li><strong>Power BI con integración de IA:</strong> Dashboards inteligentes y generación de insights accionables.</li>
+            <li><strong>Machine Learning en la nube</strong> (Azure ML, Google Vertex AI, según necesidad): Modelado predictivo y exploración de datos.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>IA aplicada al flujo de trabajo empresarial</h3>
+          <ul>
+            <li><strong>Automatización con Power Automate + IA Builder:</strong> Optimización de procesos repetitivos en áreas como RRHH, logística y operaciones.</li>
+            <li><strong>Visión computacional y NLP</strong> (análisis de texto, sentimiento, reconocimiento visual): Aplicaciones en monitoreo, retroalimentación de clientes y seguridad operativa.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Laboratorio de experimentación</h3>
+          <ul>
+            <li>Espacios <em>hands-on</em> para probar nuevas aplicaciones de IA en desafíos seleccionados.</li>
+            <li>Experimentación con APIs abiertas para personalizar soluciones según área o necesidad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>Este bloque busca que los colaboradores no solo aprendan a usar herramientas, sino que también desarrollen la capacidad de elegir estratégicamente cuándo y cómo aplicarlas, logrando un impacto real en la organización.</p>
+    </section>
+
+    <section class="section theme-moss">
+      <h2>Factores de éxito del programa</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Selección estratégica de desafíos</h3>
+          <ul>
+            <li>Definición de criterios claros (impacto, viabilidad, aprendizaje).</li>
+            <li>Elección de retos vinculados directamente con las áreas críticas de la empresa.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Aplicación práctica e inmediata</h3>
+          <ul>
+            <li>Ejercicios y prototipos transferidos directamente al día a día de los equipos.</li>
+            <li>Resultados visibles en procesos de RRHH, comunicaciones, operaciones y gestión.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Documentación y replicabilidad</h3>
+          <ul>
+            <li>Sistematización de aprendizajes y soluciones generadas.</li>
+            <li>Creación de guías y buenas prácticas para escalar a otros equipos y áreas.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mentoría experta y complementaria</h3>
+          <ul>
+            <li>Acompañamiento técnico en IA (Moshe) y pedagógico en diseño de aprendizaje (Silvia).</li>
+            <li>Equilibrio entre profundidad tecnológica y enfoque didáctico, asegurando comprensión y aplicabilidad.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cultura de innovación y comunidad de práctica</h3>
+          <ul>
+            <li>Integración de los colaboradores en una red interna que comparte casos y soluciones.</li>
+            <li>Reconocimiento de logros y motivación para sostener el aprendizaje más allá del programa.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section theme-sunglow">
+      <h2>Resultados esperados del programa</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Soluciones concretas y de impacto</h3>
+          <ul>
+            <li>Desafíos resueltos con propuestas aplicadas en áreas clave (RRHH, Comunicaciones, Operaciones, etc.).</li>
+            <li>Mejoras tangibles en eficiencia, procesos y gestión.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Colaboradores con competencias prácticas en IA</h3>
+          <ul>
+            <li>Habilidades desarrolladas para integrar IA en su trabajo cotidiano.</li>
+            <li>Capacidad para identificar nuevas oportunidades de aplicación.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Casos documentados y replicables</h3>
+          <ul>
+            <li>Registro sistemático de los retos, metodologías y resultados obtenidos.</li>
+            <li>Generación de modelos que sirvan de referencia para otras áreas de la empresa.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cultura de innovación fortalecida</h3>
+          <ul>
+            <li>Fomento de la colaboración interáreas mediante proyectos conjuntos.</li>
+            <li>Instalación de prácticas que promuevan la creatividad, la experimentación y la mejora continua.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Mentorium AI · Programa de Aplicación Práctica de IA · Cementos Pacasmayo</p>
+    </footer>
+  </main>
+</body>
+</html>
