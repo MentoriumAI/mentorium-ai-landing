@@ -92,6 +92,38 @@
       font-size: 1.1em; 
     }
 
+    /* ===== Minimal table styling ===== */
+    .minimal-table{ 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 1rem 0; 
+      background: var(--paper); 
+    }
+    .minimal-table td{ 
+      padding: .8rem 1rem; 
+      border-bottom: 1px solid var(--border); 
+      vertical-align: top; 
+    }
+    .minimal-table tr:last-child td{ 
+      border-bottom: none; 
+    }
+    .minimal-table td:first-child{ 
+      font-weight: 600; 
+      color: var(--dark-green); 
+      width: 30%; 
+      padding-right: 1.5rem; 
+    }
+    .minimal-table tr:hover{ 
+      background: rgba(83,108,3,.03); 
+    }
+    .minimal-table .microcopy{ 
+      display: block; 
+      color: var(--muted); 
+      font-size: .85rem; 
+      font-weight: normal; 
+      margin-top: .3rem; 
+    }
+
     .session{ border-left: 6px solid var(--dark-moss-green); padding-left: 1.05rem; margin:1rem 0; }
     .session .badge{ display:inline-block; background: var(--dark-moss-green); color:white; padding:.08rem .5rem; border-radius: .35rem; font-size:.78rem; margin-right:.4rem; }
     .session .logro{ font-size:.95rem; color:#26423b; background:#f3f8f6; border:1px solid #e0eee9; border-radius:8px; padding:.85rem 1rem; margin-top:.5rem; }
@@ -257,15 +289,34 @@
         <h2>Roadmap de 8 Sesiones</h2>
         <a href="../roadmap/roadmap.html" class="roadmap-link">Ver roadmap detallado</a>
       </div>
-      <ul>
-        <li><strong>Periodo de desarrollo:</strong> Septiembre a noviembre (3 meses).</li>
-        <li><strong>Espaciado:</strong> Semanal o quincenal, según la disponibilidad de los equipos de Pacasmayo.</li>
-        <li><strong>Duración de cada sesión:</strong> 2 a 3 horas por sesión (ideal para lograr profundidad sin saturar).</li>
-        <li><strong>Número de sesiones:</strong> 8 sesiones (con progresión de menor a mayor complejidad).</li>
-        <li><strong>Modalidad:</strong> Presencial o virtual sincrónica, según la necesidad y la disponibilidad logística.</li>
-      </ul>
+      <table class="minimal-table">
+        <tr>
+          <td>Periodo de desarrollo</td>
+          <td>Tres meses de duración<span class="microcopy">De septiembre a noviembre</span></td>
+        </tr>
+        <tr>
+          <td>Espaciado</td>
+          <td>Semanal o quincenal<span class="microcopy">Según la disponibilidad de los equipos de Pacasmayo</span></td>
+        </tr>
+        <tr>
+          <td>Duración por sesión</td>
+          <td>2 a 3 horas por sesión<span class="microcopy">Ideal para lograr profundidad sin saturar</span></td>
+        </tr>
+        <tr>
+          <td>Número de sesiones</td>
+          <td>8 sesiones<span class="microcopy">Con progresión de menor a mayor complejidad</span></td>
+        </tr>
+        <tr>
+          <td>Modalidad</td>
+          <td>Presencial o virtual sincrónica<span class="microcopy">Según la necesidad y la disponibilidad logística</span></td>
+        </tr>
+      </table>
       <div class="note">
-        <p><strong>Se recomienda un formato mixto flexible:</strong> sesiones clave presenciales (para dinámica experiencial y co-creación) y sesiones virtuales sincrónicas (para transferencia de conceptos y retos aplicados).</p>
+        <h4><strong>Se recomienda un formato mixto flexible</strong></h4>
+        <ul>
+          <li>Sesiones clave presenciales (para dinámica experiencial y co-creación)</li>
+          <li>Sesiones virtuales sincrónicas (para transferencia de conceptos y retos aplicados)</li>
+        </ul>
       </div>
     </section>
 
