@@ -79,3 +79,14 @@ footer{ color:var(--muted); font-size:.9rem; margin-top:1.2rem; text-align:cente
   h1, h2, h3{ page-break-after: avoid; break-after: avoid; }
   p, ul, ol{ orphans: 3; widows: 3; }
 }
+
+/* ===== Sessions: two-column card layout (desktop) ===== */
+@media (min-width: 880px){
+  /* Activate two columns only after JS wraps blocks and marks the session */
+  .session.cols-ready{ display:grid; grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+  .session.cols-ready h2, .session.cols-ready .meta{ grid-column: 1 / -1; }
+  .session.cols-ready > .col-left{ grid-column: 1; display:flex; flex-direction: column; gap: 1rem; }
+  .session.cols-ready > .col-right{ grid-column: 2; display:flex; flex-direction: column; gap: 1rem; }
+  /* Neutralize extra margins between blocks inside columns */
+  .session.cols-ready .block{ margin: 0; }
+}

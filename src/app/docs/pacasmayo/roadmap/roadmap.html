@@ -22,6 +22,8 @@
       --muted: #54645f;
       --border: #e6e1d7;
       --paper: #ffffff;
+      /* layout */
+      --session-gap: 1rem; /* single source of truth for gaps */
     }
 
     /* ===== Base ===== */
@@ -69,6 +71,15 @@
     .session h2{ margin-top:0; display:flex; flex-direction:column; align-items:flex-start; gap:.35rem; }
     .session .meta{ font-size:.95rem; color:#2b4a42; margin:.35rem 0 .6rem; }
     .session .block{ background:#fff; border:1px solid var(--border); border-radius:10px; padding:.85rem 1rem; margin:.5rem 0; border-left-width:6px; border-left-style:solid; }
+
+    /* Two-column layout with symmetrical gaps on desktop */
+    @media (min-width: 880px){
+      .session{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--session-gap); }
+      .session > .col-left,
+      .session > .col-right{ display:grid; gap: var(--session-gap); }
+      /* remove per-card margins so gap rules everything */
+      .session .block{ margin:0; }
+    }
     /* Color-coded blocks */
     .session .block.objetivo{ border-left-color: var(--celtic-blue); border-color: rgba(0,105,224,.25); background: rgba(0,105,224,.06); }
     .session .block.objetivo strong{ color: var(--celtic-blue); }
@@ -124,14 +135,14 @@
       <span class="tag">Propuesta</span>
       <h2>Índice de sesiones</h2>
       <ul class="toc">
-        <li><span class="badge">Sesión 1</span> <a href="#s1">Kick off – Presentación del programa</a></li>
-        <li><span class="badge">Sesión 2</span> <a href="#s2">Identificación de Desafíos</a></li>
-        <li><span class="badge">Sesión 3</span> <a href="#s3">Exploración de herramientas de IA</a></li>
-        <li><span class="badge">Sesión 4</span> <a href="#s4">Laboratorio de experimentación I</a></li>
-        <li><span class="badge">Sesión 5</span> <a href="#s5">Laboratorio de experimentación II</a></li>
-        <li><span class="badge">Sesión 6</span> <a href="#s6">Espacio de intercambio</a></li>
-        <li><span class="badge">Sesión 7</span> <a href="#s7">Open Demo</a></li>
-        <li><span class="badge">Sesión 8</span> <a href="#s8">Cierre y reconocimiento</a></li>
+        <li><span class="badge">S1</span> <a href="#s1">Kick off – Presentación del programa</a></li>
+        <li><span class="badge">S2</span> <a href="#s2">Identificación de Desafíos</a></li>
+        <li><span class="badge">S3</span> <a href="#s3">Exploración de herramientas de IA</a></li>
+        <li><span class="badge">S4</span> <a href="#s4">Laboratorio de experimentación I</a></li>
+        <li><span class="badge">S5</span> <a href="#s5">Laboratorio de experimentación II</a></li>
+        <li><span class="badge">S6</span> <a href="#s6">Espacio de intercambio</a></li>
+        <li><span class="badge">S7</span> <a href="#s7">Open Demo</a></li>
+        <li><span class="badge">S8</span> <a href="#s8">Cierre y reconocimiento</a></li>
       </ul>
     </section>
 
