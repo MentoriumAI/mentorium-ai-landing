@@ -58,15 +58,17 @@ export default async function PresentationPage({ params, searchParams }: PagePro
         body = bodyMatch[1] ?? raw;
       }
       
-      // Remove outer html tags and doctype if any remain
+      // Remove outer html tags, doctype, and toolbar
       htmlContent = body
         .replace(/<!doctype[^>]*>/gi, '')
         .replace(/<\/?html[^>]*>/gi, '')
+        .replace(/<div class="toolbar"[^>]*>[\s\S]*?<\/div>/gi, '') // Remove toolbar
         .trim();
     }
   } catch (error) {
     console.error('Error reading HTML file:', error);
   }
+  
   
   // Determine document title and URLs based on the path
   let documentTitle: string;

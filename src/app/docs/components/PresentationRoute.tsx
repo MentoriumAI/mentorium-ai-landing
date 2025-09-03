@@ -407,14 +407,29 @@ export default function PresentationRoute({
 
   // Load content and generate slides
   useEffect(() => {
+    // Don't run if we don't have any content source
+    if (!htmlContent && !sourceDocsUrl && !documentPath) {
+      return;
+    }
+    
     const loadContent = async () => {
       try {
         let mainContent: Element | null = null;
         
         if (htmlContent) {
           // Use HTML content passed as prop (server-side)
-          mainContent = document.createElement('main');
-          mainContent.innerHTML = htmlContent;
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = htmlContent;
+          
+          // Look for the main.page element within the content
+          const innerMain = tempDiv.querySelector('main.page') || tempDiv.querySelector('main');
+          if (innerMain) {
+            mainContent = innerMain;
+          } else {
+            // Fallback: create a main element with all content
+            mainContent = document.createElement('main');
+            mainContent.innerHTML = htmlContent;
+          }
         } else if (sourceDocsUrl) {
           // Use API endpoint to fetch HTML content (fallback)
           const apiPath = sourceDocsUrl.replace('/docs/', '/api/docs/');
@@ -454,6 +469,8 @@ export default function PresentationRoute({
           );
           
           const generatedSlides = splitter.processContent(mainContent.innerHTML);
+          console.log('First slide content preview:', generatedSlides[0]?.content?.substring(0, 200));
+          console.log('First slide type:', generatedSlides[0]?.type);
           setSlides(generatedSlides);
           
           // Validate initial slide
@@ -477,7 +494,7 @@ export default function PresentationRoute({
     };
 
     loadContent();
-  }, [htmlContent || '', sourceDocsUrl || '', documentPath || '', documentTitle, initialSlide]);
+  }, [htmlContent, sourceDocsUrl, documentPath, documentTitle, initialSlide]);
 
   // Update URL without page refresh
   const updateURL = useCallback((slideIndex: number) => {
