@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import DocsContainer from '@/app/docs/components/DocsContainer';
-import HtmlEmbed from '@/app/docs/components/HtmlEmbed';
+import HtmlEmbedWithPresentation from '@/app/docs/components/HtmlEmbedWithPresentation';
 import EqualizeRoadmap from '@/app/docs/components/EqualizeRoadmap';
 
 export const metadata: Metadata = {
@@ -12,9 +12,10 @@ export const metadata: Metadata = {
 export default function RoadmapPage() {
   return (
     <DocsContainer>
-      <HtmlEmbed relativePath={
-        'src/app/docs/pacasmayo/roadmap/roadmap.html'
-      } />
+      <HtmlEmbedWithPresentation 
+        relativePath="src/app/docs/pacasmayo/roadmap/roadmap.html"
+        title="Roadmap Tentativo (8 Sesiones) – Mentorium × Pacasmayo"
+      />
       <EqualizeRoadmap />
     </DocsContainer>
   );

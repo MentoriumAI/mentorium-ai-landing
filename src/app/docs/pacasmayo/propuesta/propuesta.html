@@ -165,6 +165,7 @@
       font-size: .9rem; 
       font-weight: 600; 
       transition: all 0.2s ease; 
+      margin: 1rem 0; 
     }
     .roadmap-link:hover{ 
       background: var(--brunswick-green); 
@@ -262,11 +263,19 @@
       flex-shrink: 0; 
       margin-top: .1rem; 
     }
+    
+    /* Hide toolbar on mobile devices */
+    @media (max-width: 768px) {
+      .toolbar {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="toolbar" aria-hidden="true">
-    <button onclick="window.print()">🖨️ Exportar a PDF</button>
+    <button onclick="window.print()">Exportar a PDF</button>
+    <button id="presentation-btn" style="background: linear-gradient(135deg, #0069e0, #004bb8); color: white; border: none;">Ver como Presentación</button>
   </div>
 
   <main class="page">
@@ -366,7 +375,7 @@
       <h2>Liderazgo Técnico Especializado</h2>
       <div class="cards">
         <div class="card moshe-card">
-          <img src="../assets/people/moshe.jpg" alt="Moshe Ojeda" class="member-photo">
+          <img src="/docs/assets/people/moshe.jpg" alt="Moshe Ojeda" class="member-photo">
           <h3 class="member-name">Moshe Ojeda</h3>
           <p class="member-title">Facilitador Técnico</p>
           <p class="member-bio">
@@ -380,7 +389,7 @@
           </div>
         </div>
         <div class="card">
-          <img src="../assets/people/silvia.jpg" alt="Silvia Fernández" class="member-photo">
+          <img src="/docs/assets/people/silvia.jpg" alt="Silvia Fernández" class="member-photo">
           <h3 class="member-name">Silvia Fernández</h3>
           <p class="member-title">Diseño Pedagógico y Facilitación Educativa</p>
           <p class="member-bio">
@@ -397,10 +406,7 @@
 
     <section class="section">
       <span class="tag">Implementación Acelerada</span>
-      <div class="roadmap-header">
-        <h2>Roadmap de 8 Sesiones</h2>
-        <a href="/docs/pacasmayo/roadmap" class="roadmap-link">Ver roadmap detallado</a>
-      </div>
+      <h2>Roadmap de 8 Sesiones</h2>
       <table class="minimal-table">
         <tr>
           <td>Periodo de desarrollo</td>
@@ -423,6 +429,7 @@
           <td>Presencial o virtual sincrónica<span class="microcopy">Según la necesidad y la disponibilidad logística</span></td>
         </tr>
       </table>
+      <a href="/docs/pacasmayo/roadmap" class="roadmap-link">Ver roadmap detallado</a>
       <div class="note">
         <h4><strong>Se recomienda un formato mixto flexible</strong></h4>
         <ul>

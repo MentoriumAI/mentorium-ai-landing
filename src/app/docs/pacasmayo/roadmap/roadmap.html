@@ -113,6 +113,31 @@
 
     .note{ font-size:.9rem; color:#3a4b46; background:#fff8ea; border:1px solid #f4e3b6; border-radius:8px; padding:.8rem .9rem; }
 
+    /* ===== Back link button ===== */
+    .back-link{ 
+      display: inline-flex; 
+      align-items: center; 
+      gap: .4rem; 
+      padding: .6rem 1rem; 
+      background: var(--celtic-blue); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 8px; 
+      font-size: .9rem; 
+      font-weight: 600; 
+      transition: all 0.2s ease; 
+      margin: 1rem 0; 
+    }
+    .back-link:hover{ 
+      background: var(--brunswick-green); 
+      transform: translateY(-1px); 
+      box-shadow: 0 4px 8px rgba(0,0,0,.15); 
+    }
+    .back-link::before{ 
+      content: "←"; 
+      font-size: 1.1em; 
+    }
+
     footer{ color:var(--muted); font-size:.9rem; margin-top:1.2rem; text-align:center; border-top:1px solid var(--border); padding-top:1.2rem; }
 
     /* ===== Highlight styles using section colors ===== */
@@ -176,11 +201,19 @@
       h1, h2, h3{ page-break-after: avoid; break-after: avoid; }
       p, ul, ol{ orphans: 3; widows: 3; }
     }
+    
+    /* Hide toolbar on mobile devices */
+    @media (max-width: 768px) {
+      .toolbar {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="toolbar" aria-hidden="true">
-    <button onclick="window.print()">🖨️ Exportar a PDF</button>
+    <button onclick="window.print()">Exportar a PDF</button>
+    <button id="presentation-btn" style="background: linear-gradient(135deg, #0069e0, #004bb8); color: white; border: none;">Ver como Presentación</button>
   </div>
 
   <main class="page">
@@ -205,6 +238,7 @@
         <li><span class="badge">S7</span> <a href="#s7">Open Demo</a></li>
         <li><span class="badge">S8</span> <a href="#s8">Cierre y reconocimiento</a></li>
       </ul>
+      <a href="/docs/pacasmayo/propuesta" class="back-link">Volver a la Propuesta</a>
     </section>
 
     <!-- Sesión 1 -->

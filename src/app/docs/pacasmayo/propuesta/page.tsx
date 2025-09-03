@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import DocsContainer from '@/app/docs/components/DocsContainer';
-import HtmlEmbed from '@/app/docs/components/HtmlEmbed';
+import HtmlEmbedWithPresentation from '@/app/docs/components/HtmlEmbedWithPresentation';
 
 export const metadata: Metadata = {
   title: 'Propuesta',
@@ -11,9 +11,10 @@ export const metadata: Metadata = {
 export default function PropuestaPage() {
   return (
     <DocsContainer>
-      <HtmlEmbed relativePath={
-        'src/app/docs/pacasmayo/propuesta/propuesta.html'
-      } />
+      <HtmlEmbedWithPresentation 
+        relativePath="src/app/docs/pacasmayo/propuesta/propuesta.html"
+        title="Programa de Aplicación Práctica de IA en Cementos Pacasmayo"
+      />
     </DocsContainer>
   );
 }
