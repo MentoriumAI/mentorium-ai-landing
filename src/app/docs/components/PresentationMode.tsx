@@ -58,9 +58,14 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
 
   // Content Analyzer for measuring lines and element types
   class ContentAnalyzer {
-    static analyzeElement(element: Element): ElementInfo {
+    static analyzeElement(element: Element, viewportHeight?: number): ElementInfo {
       const tagName = element.tagName.toLowerCase();
       const textContent = element.textContent || '';
+      const vh = viewportHeight || window.innerHeight;
+      
+      // Calculate maximum allowed lines based on viewport height
+      // Assuming ~50-60px per line for readability in presentations
+      const maxLinesPerSlide = Math.floor(vh / 80); // Conservative estimate
       
       let type: ElementInfo['type'] = 'text';
       let estimatedLines = 1;
@@ -68,7 +73,15 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       
       switch (tagName) {
         case 'h1':
+          type = 'heading';
+          estimatedLines = 2; // H1 takes more visual space
+          isAtomic = true;
+          break;
         case 'h2':
+          type = 'heading';
+          estimatedLines = 1.5; // H2 takes moderate space
+          isAtomic = true;
+          break;
         case 'h3':
           type = 'heading';
           estimatedLines = 1;
@@ -77,35 +90,43 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         case 'pre':
         case 'code':
           type = 'code';
-          estimatedLines = Math.max(1, textContent.split('\n').length);
-          isAtomic = true;
+          const codeLines = Math.max(1, textContent.split('\n').length);
+          estimatedLines = Math.min(codeLines, maxLinesPerSlide); // Cap code blocks
+          isAtomic = codeLines <= maxLinesPerSlide; // Only atomic if it fits
           break;
         case 'table':
           type = 'table';
-          estimatedLines = Math.max(3, element.querySelectorAll('tr').length);
-          isAtomic = true;
+          const tableRows = element.querySelectorAll('tr').length;
+          estimatedLines = Math.min(tableRows + 1, maxLinesPerSlide); // +1 for header spacing
+          isAtomic = tableRows <= maxLinesPerSlide - 2; // Leave room for title
           break;
         case 'ul':
         case 'ol':
           type = 'list';
-          estimatedLines = element.querySelectorAll('li').length;
+          const listItems = element.querySelectorAll('li').length;
+          estimatedLines = Math.min(listItems, 3); // Max 3 list items per slide
+          isAtomic = listItems <= 3;
           break;
         case 'img':
           type = 'image';
-          estimatedLines = 3; // Image takes visual space
+          estimatedLines = Math.floor(maxLinesPerSlide * 0.6); // Images take significant space
           isAtomic = true;
           break;
         default:
           if (element.classList.contains('card')) {
             type = 'card';
-            estimatedLines = Math.max(2, Math.ceil(textContent.length / 100));
-            isAtomic = textContent.length > 300; // Large cards are atomic
+            const cardLines = Math.ceil(textContent.length / 50); // Shorter line estimate for cards
+            estimatedLines = Math.min(cardLines, maxLinesPerSlide - 1);
+            isAtomic = cardLines <= maxLinesPerSlide - 1; // Leave room for title
           } else if (element.classList.contains('callout')) {
             type = 'text';
-            estimatedLines = Math.max(1, Math.ceil(textContent.length / 80));
+            const calloutLines = Math.ceil(textContent.length / 60);
+            estimatedLines = Math.min(calloutLines, maxLinesPerSlide - 1);
             isAtomic = true;
           } else {
-            estimatedLines = Math.max(1, Math.ceil(textContent.length / 80));
+            // Regular paragraphs - be very conservative
+            const paraLines = Math.ceil(textContent.length / 100); // Longer line estimate
+            estimatedLines = Math.min(paraLines, 2); // Max 2 lines of regular text
           }
       }
       
@@ -174,13 +195,16 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       
       parts.forEach((part, partIndex) => {
         if (part.trim()) {
+          const viewportHeight = window.innerHeight;
+          const maxAllowedLines = Math.floor(viewportHeight / 80) - 2; // Conservative: leave room for title and spacing
+          
           const context: SlideContext = {
             isFirst: partIndex === 0 && slides.length === 0,
             baseTitle,
             slideIndex: slides.length,
             previousSlides: [...slides],
-            maxLines: 3,
-            viewportHeight: window.innerHeight,
+            maxLines: Math.max(2, Math.min(maxAllowedLines, 4)), // Between 2-4 lines max
+            viewportHeight,
             viewportWidth: window.innerWidth
           };
           
@@ -231,6 +255,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
     
     // Add rules in priority order
     engine.addRule(new TitleSlideRule());
+    engine.addRule(new HeadingBasedRule());
     engine.addRule(new VisualSlideRule());
     engine.addRule(new LineCountRule());
     engine.addRule(new StandardRule());
@@ -248,7 +273,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = content;
       const elements = Array.from(tempDiv.children);
-      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el));
+      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
       
       // Check if this should be a title slide (only headings, minimal content)
       const slideType = ContentAnalyzer.determineSlideType(analyzedElements, content);
@@ -286,15 +311,190 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
     }
   }
   
-  class VisualSlideRule implements SlideRule {
-    name = 'VisualSlideRule';
+  class HeadingBasedRule implements SlideRule {
+    name = 'HeadingBasedRule';
     priority = 2;
     
     apply(content: string, context: SlideContext): SlideResult {
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = content;
       const elements = Array.from(tempDiv.children);
-      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el));
+      
+      // Find all headings and their positions
+      const headings = elements
+        .map((element, index) => ({
+          element,
+          index,
+          level: this.getHeadingLevel(element),
+          isHeading: this.isHeading(element)
+        }))
+        .filter(item => item.isHeading);
+      
+      // If no headings found, let other rules handle it
+      if (headings.length === 0) {
+        return { slides: [], shouldContinue: true };
+      }
+      
+      const slides: Slide[] = [];
+      
+      // Handle content before first heading (if any)
+      if (headings.length > 0 && headings[0].index > 0) {
+        const preHeadingElements = elements.slice(0, headings[0].index);
+        if (preHeadingElements.length > 0) {
+          const slideContent = preHeadingElements.map(el => el.outerHTML).join('\\n');
+          const analyzedElements = preHeadingElements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
+          const slideType = ContentAnalyzer.determineSlideType(analyzedElements, slideContent);
+          
+          slides.push({
+            id: `slide-heading-${context.slideIndex}-${slides.length}`,
+            content: slideContent,
+            title: this.generateTitle(context, slides.length + 1),
+            type: slideType,
+            lineCount: ContentAnalyzer.getTotalLines(analyzedElements),
+            elements: analyzedElements.map(el => el.type)
+          });
+        }
+      }
+      
+      // Create slides for each heading and its content (non-overlapping)
+      for (let i = 0; i < headings.length; i++) {
+        const currentHeading = headings[i];
+        const nextHeading = headings[i + 1];
+        
+        const startIndex = currentHeading.index;
+        const endIndex = nextHeading ? nextHeading.index : elements.length;
+        
+        // Get content from current heading up to (but NOT including) next heading
+        const slideElements = elements.slice(startIndex, endIndex);
+        
+        if (slideElements.length > 0) {
+          const slideContent = slideElements.map(el => el.outerHTML).join('\\n');
+          const analyzedElements = slideElements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
+          const slideType = ContentAnalyzer.determineSlideType(analyzedElements, slideContent);
+          
+          // Extract title from the heading element (first element should be the heading)
+          const headingTitle = this.extractTitle(slideElements[0]) || this.generateTitle(context, slides.length + 1);
+          
+          slides.push({
+            id: `slide-heading-${context.slideIndex}-${slides.length}`,
+            content: slideContent,
+            title: headingTitle,
+            type: slideType,
+            lineCount: ContentAnalyzer.getTotalLines(analyzedElements),
+            elements: analyzedElements.map(el => el.type)
+          });
+        }
+      }
+      
+      return { slides, shouldContinue: false };
+    }
+    
+    private isHeading(element: Element): boolean {
+      const tagName = element.tagName.toLowerCase();
+      return ['h1', 'h2', 'h3'].includes(tagName);
+    }
+    
+    private getHeadingLevel(element: Element): number {
+      const tagName = element.tagName.toLowerCase();
+      switch (tagName) {
+        case 'h1': return 1;
+        case 'h2': return 2;
+        case 'h3': return 3;
+        default: return 0;
+      }
+    }
+    
+    private extractTitle(element: Element): string | undefined {
+      if (this.isHeading(element)) {
+        return element.textContent || undefined;
+      }
+      return undefined;
+    }
+    
+    private generateTitle(context: SlideContext, slideNumber: number): string {
+      return context.baseTitle ? `${context.baseTitle} (${slideNumber})` : `Slide ${slideNumber}`;
+    }
+    
+    private createSubSlides(sectionElements: Element[], sectionHeadings: any[], context: SlideContext, slides: Slide[]) {
+      // Find the lowest level (highest number) headings in this section
+      const lowestLevel = Math.max(...sectionHeadings.map(h => h.level));
+      const lowestLevelHeadings = sectionHeadings.filter(h => h.level === lowestLevel);
+      
+      if (lowestLevelHeadings.length === 1) {
+        // Only one lowest level heading - use the original section
+        const slideContent = sectionElements.map(el => el.outerHTML).join('\\n');
+        const analyzedElements = sectionElements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
+        const slideType = ContentAnalyzer.determineSlideType(analyzedElements, slideContent);
+        
+        slides.push({
+          id: `slide-heading-${context.slideIndex}-${slides.length}`,
+          content: slideContent,
+          title: this.extractTitle(sectionElements[0]) || this.generateTitle(context, slides.length + 1),
+          type: slideType,
+          lineCount: ContentAnalyzer.getTotalLines(analyzedElements),
+          elements: analyzedElements.map(el => el.type)
+        });
+      } else {
+        // Multiple lowest level headings - split by them
+        
+        // Handle content before first lowest-level heading
+        const firstLowestHeading = lowestLevelHeadings[0];
+        const firstLowestRelativeIndex = firstLowestHeading.index - sectionHeadings[0].index;
+        
+        if (firstLowestRelativeIndex > 0) {
+          // There's content before the first lowest-level heading
+          const preElements = sectionElements.slice(0, firstLowestRelativeIndex);
+          const slideContent = preElements.map(el => el.outerHTML).join('\\n');
+          const analyzedElements = preElements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
+          const slideType = ContentAnalyzer.determineSlideType(analyzedElements, slideContent);
+          
+          slides.push({
+            id: `slide-heading-${context.slideIndex}-${slides.length}`,
+            content: slideContent,
+            title: this.extractTitle(preElements[0]) || this.generateTitle(context, slides.length + 1),
+            type: slideType,
+            lineCount: ContentAnalyzer.getTotalLines(analyzedElements),
+            elements: analyzedElements.map(el => el.type)
+          });
+        }
+        
+        // Create slides for each lowest-level heading
+        lowestLevelHeadings.forEach((heading, headingIndex) => {
+          const nextLowestHeading = lowestLevelHeadings[headingIndex + 1];
+          const relativeStart = heading.index - sectionHeadings[0].index;
+          const relativeEnd = nextLowestHeading 
+            ? nextLowestHeading.index - sectionHeadings[0].index 
+            : sectionElements.length;
+          
+          const slideElements = sectionElements.slice(relativeStart, relativeEnd);
+          if (slideElements.length > 0) {
+            const slideContent = slideElements.map(el => el.outerHTML).join('\\n');
+            const analyzedElements = slideElements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
+            const slideType = ContentAnalyzer.determineSlideType(analyzedElements, slideContent);
+            
+            slides.push({
+              id: `slide-heading-${context.slideIndex}-${slides.length}`,
+              content: slideContent,
+              title: this.extractTitle(slideElements[0]) || this.generateTitle(context, slides.length + 1),
+              type: slideType,
+              lineCount: ContentAnalyzer.getTotalLines(analyzedElements),
+              elements: analyzedElements.map(el => el.type)
+            });
+          }
+        });
+      }
+    }
+  }
+
+  class VisualSlideRule implements SlideRule {
+    name = 'VisualSlideRule';
+    priority = 3;
+    
+    apply(content: string, context: SlideContext): SlideResult {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = content;
+      const elements = Array.from(tempDiv.children);
+      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
       
       const slideType = ContentAnalyzer.determineSlideType(analyzedElements, content);
       
@@ -330,7 +530,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
   
   class LineCountRule implements SlideRule {
     name = 'LineCountRule';
-    priority = 3;
+    priority = 4;
     
     apply(content: string, context: SlideContext): SlideResult {
       if (context.isFirst) {
@@ -345,7 +545,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         return { slides: [], shouldContinue: true };
       }
       
-      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el));
+      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el, context.viewportHeight));
       const totalLines = ContentAnalyzer.getTotalLines(analyzedElements);
       
       if (totalLines <= context.maxLines) {
@@ -466,7 +666,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
   
   class StandardRule implements SlideRule {
     name = 'StandardRule';
-    priority = 4;
+    priority = 5;
     
     apply(content: string, context: SlideContext): SlideResult {
       // Fallback rule - always applies
@@ -684,10 +884,14 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
     setIsOpen(true);
     setIsExiting(false);
     setShowKeyboardHints(true);
+    // Hide toolbar in presentation mode
+    document.body.classList.add('presentation-active');
   };
 
   const closePresentation = () => {
     setIsExiting(true);
+    // Show toolbar again
+    document.body.classList.remove('presentation-active');
     setTimeout(() => {
       setIsOpen(false);
       setIsExiting(false);
