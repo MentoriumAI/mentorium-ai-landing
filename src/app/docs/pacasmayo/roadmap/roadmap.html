@@ -54,7 +54,7 @@
 
     .hero{ background: transparent; border:0; border-radius:0; padding:0 0 1rem; box-shadow:none; position:relative; overflow:visible; }
     .hero .accent{ display:none; }
-    .kicker{ font-size:.85rem; color:#335a50; text-transform:uppercase; letter-spacing:.12em; font-weight:600; }
+    .kicker{ font-size:.85rem; color:#335a50; text-transform:uppercase; letter-spacing:.12em; font-weight:600; margin-bottom: 1rem; }
     .title h1{ border-bottom:3px solid var(--sunglow); padding-bottom:.22rem; }
 
     .section{ background: transparent; border:0; border-radius:0; padding:0; margin-top: 1.6rem; box-shadow:none; }
@@ -105,6 +105,56 @@
     .note{ font-size:.9rem; color:#3a4b46; background:#fff8ea; border:1px solid #f4e3b6; border-radius:8px; padding:.8rem .9rem; }
 
     footer{ color:var(--muted); font-size:.9rem; margin-top:1.2rem; text-align:center; border-top:1px solid var(--border); padding-top:1.2rem; }
+
+    /* ===== Highlight styles using section colors ===== */
+    .highlight{ 
+      background: linear-gradient(120deg, rgba(83,108,3,.25) 0%, rgba(83,108,3,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-blue{ 
+      background: linear-gradient(120deg, rgba(0,105,224,.25) 0%, rgba(0,105,224,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-sunglow{ 
+      background: linear-gradient(120deg, rgba(250,200,39,.35) 0%, rgba(250,200,39,.2) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-orange{ 
+      background: linear-gradient(120deg, rgba(251,97,19,.25) 0%, rgba(251,97,19,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-brunswick{ 
+      background: linear-gradient(120deg, rgba(15,76,56,.25) 0%, rgba(15,76,56,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+
+    /* ===== List styles ===== */
+    ul li{ list-style-type: disc; }
+    
+    .checklist li{ 
+      list-style: none; 
+      display: flex; 
+      align-items: flex-start; 
+      margin-bottom: .8rem; 
+      line-height: 1.6; 
+    }
+    .checklist li::before{ 
+      content: "✔"; 
+      color: var(--dark-moss-green); 
+      margin-right: .8rem; 
+      flex-shrink: 0; 
+      margin-top: .1rem; 
+    }
 
     /* ===== Print ===== */
     @page{ size: A4; margin: 16mm; }

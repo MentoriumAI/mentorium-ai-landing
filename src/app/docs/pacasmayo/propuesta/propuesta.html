@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../components/styles.css" />
   <style>
     /* ===== Tipografía y espaciados específicos de la propuesta ===== */
+    .kicker{ margin-bottom: 1rem; }
     h1{ font-size: 2.5rem; line-height: 1.25; }
     h2{ font-size: 1.8rem; line-height: 1.35; margin-top: .4rem; margin-bottom: .35rem; }
     h3{ font-size: 1.3rem; color: var(--dark-green); line-height: 1.45; margin-top: .6rem; margin-bottom: .25rem; }
@@ -116,6 +117,21 @@
       font-size: .8rem; 
       font-weight: 500; 
     }
+    
+    /* ===== Moshe's blue card variant ===== */
+    .team-member .card.moshe-card{ 
+      background: rgba(0,105,224,.05); 
+      border-left: 6px solid var(--celtic-blue); 
+    }
+    .team-member .card.moshe-card .member-photo{ 
+      border-color: var(--celtic-blue); 
+    }
+    .team-member .card.moshe-card .member-title{ 
+      color: var(--celtic-blue); 
+    }
+    .team-member .card.moshe-card .skill-tag{ 
+      background: var(--celtic-blue); 
+    }
 
     /* ===== Roadmap section styling ===== */
     .roadmap-header{ 
@@ -190,6 +206,38 @@
     /* Regular lists should show bullets */
     ul li{ list-style-type: disc; }
     
+    /* ===== Highlight styles using section colors ===== */
+    .highlight{ 
+      background: linear-gradient(120deg, rgba(83,108,3,.25) 0%, rgba(83,108,3,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-blue{ 
+      background: linear-gradient(120deg, rgba(0,105,224,.25) 0%, rgba(0,105,224,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-sunglow{ 
+      background: linear-gradient(120deg, rgba(250,200,39,.35) 0%, rgba(250,200,39,.2) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-orange{ 
+      background: linear-gradient(120deg, rgba(251,97,19,.25) 0%, rgba(251,97,19,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    .highlight-brunswick{ 
+      background: linear-gradient(120deg, rgba(15,76,56,.25) 0%, rgba(15,76,56,.15) 100%); 
+      padding: .1rem .2rem; 
+      border-radius: 3px; 
+      font-weight: 600; 
+    }
+    
     /* Checklist items use checkmarks instead */
     .checklist li{ 
       list-style: none; 
@@ -222,7 +270,7 @@
       <div class="meta">
         <div><strong>Facilitador:</strong><br/>Mentorium AI (Mentorium S.A.C.)</div>
       </div>
-      <p><strong>Propósito</strong><br/>Crear un espacio de práctica, colaboración y aprendizaje continuo, donde colaboradores de distintas áreas de Cementos Pacasmayo trabajen junto a expertos en IA para identificar y resolver problemáticas reales de su día a día. Este proceso permitirá no solo diseñar soluciones con IA, sino también aplicarlas directamente en sus equipos de trabajo, consolidando aprendizajes compartidos, generando resultados tangibles en el corto plazo y fortaleciendo una cultura de innovación colaborativa en la organización.</p>
+      <p><strong>Propósito</strong><br/>Crear un <span class="highlight">espacio de práctica, colaboración y aprendizaje continuo</span>, donde colaboradores de distintas áreas de Cementos Pacasmayo trabajen junto a expertos en IA para identificar y resolver problemáticas reales de su día a día. Este proceso permitirá no solo diseñar soluciones con IA, sino también aplicarlas directamente en sus equipos de trabajo, consolidando aprendizajes compartidos, generando <span class="highlight">resultados tangibles en el corto plazo</span> y fortaleciendo una cultura de innovación colaborativa en la organización.</p>
     </section>
   <hr class="rule"/>
 
@@ -244,7 +292,7 @@
       <span class="tag">Propuesta de valor</span>
       <h2>De la Teoría a Resultados Medibles</h2>
       <h3>Metodología Mentorium para Cementos Pacasmayo</h3>
-      <p>La metodología combina el aprendizaje experiencial, el trabajo sobre desafíos reales y un diseño pedagógico estructurado, bajo un modelo progresivo de seis etapas.</p>
+      <p>La metodología combina el <span class="highlight">aprendizaje experiencial</span>, el trabajo sobre <span class="highlight">desafíos reales</span> y un <span class="highlight">diseño pedagógico estructurado</span>, bajo un modelo progresivo de seis etapas.</p>
       <h3>Enfoques clave de la metodología</h3>
       <ul>
         <li><strong>Challenge-Based Learning:</strong> el aprendizaje se centra en resolver desafíos del negocio.</li>
@@ -306,12 +354,12 @@
       <span class="tag">Equipo facilitador</span>
       <h2>Liderazgo Técnico Especializado</h2>
       <div class="cards">
-        <div class="card">
+        <div class="card moshe-card">
           <img src="../assets/people/moshe.jpg" alt="Moshe Ojeda" class="member-photo">
           <h3 class="member-name">Moshe Ojeda</h3>
           <p class="member-title">Facilitador Técnico</p>
           <p class="member-bio">
-            Ingeniero en Informática, especialista en IA generativa. Ex Lead de IA en Yape y cofundador de Agentman. Traduce conceptos complejos en aplicaciones prácticas, guiando a los colaboradores en el uso estratégico de tecnologías de IA.
+            Ingeniero en Informática, <strong>especialista en IA generativa</strong>. Ex Lead de IA en Yape y cofundador de Agentman. <strong>Traduce conceptos complejos en aplicaciones prácticas</strong>, guiando a los colaboradores en el uso estratégico de tecnologías de IA.
           </p>
           <div class="member-skills">
             <span class="skill-tag">AI Engineering</span>
@@ -325,7 +373,7 @@
           <h3 class="member-name">Silvia Fernández</h3>
           <p class="member-title">Diseño Pedagógico y Facilitación Educativa</p>
           <p class="member-bio">
-            Educadora y gestora educativa, especialista en diseño instruccional y curricular. Estructura las experiencias de aprendizaje y guía la reflexión de los participantes, asegurando que el conocimiento se transforme en competencias aplicables.
+            Educadora y gestora educativa, <strong>especialista en diseño instruccional y curricular</strong>. Estructura las experiencias de aprendizaje y guía la reflexión de los participantes, asegurando que el conocimiento se transforme en <strong>competencias aplicables</strong>.
           </p>
           <div class="member-skills">
             <span class="skill-tag">Metodologías Activas</span>
@@ -376,8 +424,8 @@
     <section class="section theme-orange">
       <span class="tag">Enfoque técnico</span>
       <h2>Herramientas y tecnologías</h2>
-      <p>Desde Mentorium proponemos un conjunto de herramientas y tecnologías de Inteligencia Artificial como base para el programa. Sin embargo, consideramos esencial partir del diagnóstico del perfil de los colaboradores: identificar qué tecnologías utilizan actualmente y cuáles necesitan incorporar en su labor. Este análisis permitirá incluir en el roadmap sesiones técnicas y prácticas más efectivas, ajustadas a las características de los participantes y alineadas con los objetivos estratégicos y competencias que busca desarrollar Cementos Pacasmayo.</p>
-      <p>Durante el programa, los colaboradores tendrán la oportunidad de explorar y aplicar herramientas de IA cuidadosamente seleccionadas, presentadas de manera práctica y contextualizada bajo la guía experta de Moshe Ojeda, especialista en transformación digital e implementación de soluciones de IA.</p>
+      <p>Desde Mentorium proponemos un conjunto de <span class="highlight-orange">herramientas y tecnologías de Inteligencia Artificial</span> como base para el programa. Sin embargo, consideramos esencial partir del <span class="highlight-orange">diagnóstico del perfil de los colaboradores</span>: identificar qué tecnologías utilizan actualmente y cuáles necesitan incorporar en su labor. Este análisis permitirá incluir en el roadmap sesiones técnicas y prácticas más efectivas, ajustadas a las características de los participantes y alineadas con los objetivos estratégicos y competencias que busca desarrollar Cementos Pacasmayo.</p>
+      <p>Durante el programa, los colaboradores tendrán la oportunidad de explorar y aplicar <span class="highlight-orange">herramientas de IA cuidadosamente seleccionadas</span>, presentadas de manera práctica y contextualizada bajo la <span class="highlight-orange">guía experta de Moshe Ojeda</span>, especialista en transformación digital e implementación de soluciones de IA.</p>
 
       <div class="cards">
         <div class="card">
@@ -410,7 +458,7 @@
         </div>
       </div>
 
-      <p>Este bloque busca que los colaboradores no solo aprendan a usar herramientas, sino que también desarrollen la capacidad de elegir estratégicamente cuándo y cómo aplicarlas, logrando un impacto real en la organización.</p>
+      <p>Este bloque busca que los colaboradores no solo aprendan a usar herramientas, sino que también desarrollen la <span class="highlight-orange">capacidad de elegir estratégicamente</span> cuándo y cómo aplicarlas, logrando un <span class="highlight-orange">impacto real en la organización</span>.</p>
     </section>
 
     <section class="section theme-moss">
