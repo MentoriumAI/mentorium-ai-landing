@@ -12,7 +12,7 @@ export default function HtmlEmbed({ relativePath }: { relativePath: string }) {
   let raw = '';
   try {
     raw = fs.readFileSync(filePath, 'utf-8');
-  } catch (e) {
+  } catch {
     raw = `<p>Could not load ${relativePath}. Ensure the file exists.</p>`;
   }
 

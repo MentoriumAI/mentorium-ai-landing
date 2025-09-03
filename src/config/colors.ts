@@ -129,7 +129,8 @@ export function generateThemeFromBrandColors(brandColors: Partial<BrandColors>):
 }
 
 // Color accessibility utilities
-export function getContrastRatio(_color1: string, _color2: string): number {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function getContrastRatio(_: string, __: string): number {
   // Simplified contrast calculation - in production, use a proper library
   // This is a placeholder for now
   return 4.5 // WCAG AA minimum
@@ -139,7 +140,8 @@ export function isColorAccessible(foreground: string, background: string): boole
   return getContrastRatio(foreground, background) >= 4.5
 }
 
-export function suggestAccessibleColor(baseColor: string, _background: string): string {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function suggestAccessibleColor(baseColor: string, _: string): string {
   // Logic to suggest an accessible color variant
   return baseColor // Placeholder
 }

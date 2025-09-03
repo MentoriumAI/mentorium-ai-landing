@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function EqualizeRoadmap() {
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function EqualizeRoadmap() {
             // Insert columns after the heading/meta
             const anchor = session.querySelector(':scope h2') || session.firstChild;
             if (anchor && anchor.parentNode === session) {
-              session.insertBefore(leftCol, (anchor as any).nextSibling);
+              session.insertBefore(leftCol, (anchor as Element).nextSibling);
               session.insertBefore(rightCol, leftCol.nextSibling);
             } else {
               session.appendChild(leftCol);

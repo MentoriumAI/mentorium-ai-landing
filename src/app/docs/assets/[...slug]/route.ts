@@ -20,8 +20,9 @@ function contentTypeFor(ext: string): string {
   }
 }
 
-export async function GET(_req: NextRequest, ctx: { params: { slug: string[] } }) {
-  const relPath = (ctx.params?.slug || []).join('/');
+export async function GET(_req: NextRequest, context: { params: Promise<{ slug: string[] }> }) {
+  const params = await context.params;
+  const relPath = (params?.slug || []).join('/');
 
   // Prevent path traversal
   if (relPath.includes('..')) {
@@ -35,13 +36,13 @@ export async function GET(_req: NextRequest, ctx: { params: { slug: string[] } }
     const data = await fs.readFile(filePath);
     const ext = path.extname(filePath).toLowerCase();
     const ct = contentTypeFor(ext);
-    return new Response(data, {
+    return new Response(new Uint8Array(data), {
       headers: {
         'Content-Type': ct,
         'Cache-Control': 'public, max-age=31536000, immutable',
       },
     });
-  } catch (_e) {
+  } catch {
     return new Response('Not Found', { status: 404 });
   }
 }
