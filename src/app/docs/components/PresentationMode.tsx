@@ -7,7 +7,7 @@ interface Slide {
   id: string;
   content: string;
   title?: string;
-  type?: 'first' | 'standard' | 'card-focused' | 'section-break' | 'continuation';
+  type?: 'title' | 'bullet' | 'visual' | 'quote' | 'summary' | 'standard' | 'continuation';
   lineCount?: number;
   elements?: string[];
   continuationOf?: string;
@@ -25,6 +25,8 @@ interface SlideContext {
   slideIndex: number;
   previousSlides: Slide[];
   maxLines: number;
+  viewportHeight?: number;
+  viewportWidth?: number;
 }
 
 interface SlideResult {
@@ -119,6 +121,42 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
     static getTotalLines(elements: ElementInfo[]): number {
       return elements.reduce((total, el) => total + el.estimatedLines, 0);
     }
+
+    static determineSlideType(elements: ElementInfo[], content: string): Slide['type'] {
+      const elementTypes = elements.map(el => el.type);
+      const hasOnlyHeadings = elementTypes.every(type => type === 'heading');
+      const hasLists = elementTypes.includes('list');
+      const hasImages = elementTypes.includes('image');
+      const hasCards = elementTypes.includes('card');
+      const textLength = content.replace(/<[^>]*>/g, '').length;
+      
+      // Title slide: Only headings with minimal text
+      if (hasOnlyHeadings && textLength < 100) {
+        return 'title';
+      }
+      
+      // Visual slide: Contains images or cards
+      if (hasImages || hasCards) {
+        return 'visual';
+      }
+      
+      // Bullet slide: Contains lists
+      if (hasLists) {
+        return 'bullet';
+      }
+      
+      // Quote slide: Contains callouts or blockquotes
+      if (content.includes('callout') || content.includes('blockquote')) {
+        return 'quote';
+      }
+      
+      // Summary slide: Short content with key points
+      if (textLength < 200 && elements.length <= 2) {
+        return 'summary';
+      }
+      
+      return 'standard';
+    }
   }
   
   // Slide Rule Engine
@@ -141,7 +179,9 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
             baseTitle,
             slideIndex: slides.length,
             previousSlides: [...slides],
-            maxLines: 5
+            maxLines: 3,
+            viewportHeight: window.innerHeight,
+            viewportWidth: window.innerWidth
           };
           
           const result = this.applyRules(part.trim(), context);
@@ -153,7 +193,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         id: 'slide-0',
         content: html,
         title: baseTitle,
-        type: 'first'
+        type: 'title'
       }];
     }
     
@@ -171,7 +211,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
           id: `slide-${context.slideIndex}`,
           content,
           title: this.extractTitle(content),
-          type: context.isFirst ? 'first' : 'standard'
+          type: context.isFirst ? 'title' : 'standard'
         }],
         shouldContinue: false
       };
@@ -190,8 +230,8 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
     const engine = new SlideRuleEngine();
     
     // Add rules in priority order
-    engine.addRule(new FirstSlideRule());
-    engine.addRule(new CardFocusedRule());
+    engine.addRule(new TitleSlideRule());
+    engine.addRule(new VisualSlideRule());
     engine.addRule(new LineCountRule());
     engine.addRule(new StandardRule());
     
@@ -200,62 +240,84 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
   }, [title]);
 
   // Concrete Rule Implementations
-  class FirstSlideRule implements SlideRule {
-    name = 'FirstSlideRule';
+  class TitleSlideRule implements SlideRule {
+    name = 'TitleSlideRule';
     priority = 1;
     
     apply(content: string, context: SlideContext): SlideResult {
-      if (!context.isFirst) {
-        return { slides: [], shouldContinue: true };
-      }
-      
-      return {
-        slides: [{
-          id: 'slide-first',
-          content,
-          title: context.baseTitle,
-          type: 'first',
-          lineCount: 0, // No line limit for first slide
-          elements: ['logo', 'title', 'styling-line']
-        }],
-        shouldContinue: false
-      };
-    }
-  }
-  
-  class CardFocusedRule implements SlideRule {
-    name = 'CardFocusedRule';
-    priority = 2;
-    
-    apply(content: string, context: SlideContext): SlideResult {
-      if (context.isFirst) {
-        return { slides: [], shouldContinue: true };
-      }
-      
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = content;
-      const cards = Array.from(tempDiv.querySelectorAll('.card'));
+      const elements = Array.from(tempDiv.children);
+      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el));
       
-      if (cards.length === 1) {
-        const cardInfo = ContentAnalyzer.analyzeElement(cards[0]);
-        
-        // If card is large enough to warrant its own slide
-        if (cardInfo.isAtomic && cardInfo.estimatedLines > 3) {
-          return {
-            slides: [{
-              id: `slide-card-${context.slideIndex}`,
-              content,
-              title: this.extractOrCreateTitle(content, context),
-              type: 'card-focused',
-              lineCount: cardInfo.estimatedLines,
-              elements: ['card']
-            }],
-            shouldContinue: false
-          };
-        }
+      // Check if this should be a title slide (only headings, minimal content)
+      const slideType = ContentAnalyzer.determineSlideType(analyzedElements, content);
+      
+      if (slideType === 'title' || (context.isFirst && analyzedElements.length <= 2)) {
+        return {
+          slides: [{
+            id: `slide-title-${context.slideIndex}`,
+            content: this.formatTitleSlide(content, context),
+            title: this.extractTitle(content),
+            type: 'title',
+            lineCount: 1,
+            elements: ['title']
+          }],
+          shouldContinue: false
+        };
       }
       
       return { slides: [], shouldContinue: true };
+    }
+    
+    private formatTitleSlide(content: string, context: SlideContext): string {
+      // For title slides, center the content and add logo if it's the first slide
+      if (context.isFirst) {
+        return `<div class="title-slide-content">${content}</div>`;
+      }
+      return content;
+    }
+    
+    private extractTitle(content: string): string {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = content;
+      const titleElement = tempDiv.querySelector('h1, h2, h3');
+      return titleElement?.textContent || 'Título';
+    }
+  }
+  
+  class VisualSlideRule implements SlideRule {
+    name = 'VisualSlideRule';
+    priority = 2;
+    
+    apply(content: string, context: SlideContext): SlideResult {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = content;
+      const elements = Array.from(tempDiv.children);
+      const analyzedElements = elements.map(el => ContentAnalyzer.analyzeElement(el));
+      
+      const slideType = ContentAnalyzer.determineSlideType(analyzedElements, content);
+      
+      if (slideType === 'visual') {
+        return {
+          slides: [{
+            id: `slide-visual-${context.slideIndex}`,
+            content: this.formatVisualSlide(content),
+            title: this.extractOrCreateTitle(content, context),
+            type: 'visual',
+            lineCount: ContentAnalyzer.getTotalLines(analyzedElements),
+            elements: analyzedElements.map(el => el.type)
+          }],
+          shouldContinue: false
+        };
+      }
+      
+      return { slides: [], shouldContinue: true };
+    }
+    
+    private formatVisualSlide(content: string): string {
+      // Ensure visual slides have proper formatting
+      return `<div class="visual-slide-content">${content}</div>`;
     }
     
     private extractOrCreateTitle(content: string, context: SlideContext): string {
@@ -319,11 +381,12 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         if (currentLines + element.estimatedLines > context.maxLines && currentElements.length > 0) {
           // Create slide with current elements
           const slideContent = this.buildSlideContent(currentElements, context, slideIndex, needsTitle);
+          const slideType = slideIndex > 1 ? 'continuation' : ContentAnalyzer.determineSlideType(currentElements, slideContent);
           slides.push({
             id: `slide-${context.slideIndex}-${slideIndex++}`,
             content: slideContent,
             title: this.generateTitle(context, slideIndex),
-            type: slideIndex > 1 ? 'continuation' : 'standard',
+            type: slideType,
             lineCount: currentLines,
             elements: currentElements.map(el => el.type),
             continuationOf: slideIndex > 1 ? slides[slides.length - 1]?.id : undefined
@@ -343,11 +406,12 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       // Add remaining elements
       if (currentElements.length > 0) {
         const slideContent = this.buildSlideContent(currentElements, context, slideIndex, needsTitle);
+        const slideType = slideIndex > 0 ? 'continuation' : ContentAnalyzer.determineSlideType(currentElements, slideContent);
         slides.push({
           id: `slide-${context.slideIndex}-${slideIndex}`,
           content: slideContent,
           title: this.generateTitle(context, slideIndex + 1),
-          type: slideIndex > 0 ? 'continuation' : 'standard',
+          type: slideType,
           lineCount: currentLines,
           elements: currentElements.map(el => el.type),
           continuationOf: slideIndex > 0 ? slides[slides.length - 1]?.id : undefined
@@ -413,7 +477,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
           id: `slide-${context.slideIndex}`,
           content: context.isFirst ? content : this.ensureTitle(content, context),
           title,
-          type: context.isFirst ? 'first' : 'standard'
+          type: context.isFirst ? 'title' : 'standard'
         }],
         shouldContinue: false
       };
@@ -472,19 +536,19 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       setIsTransitioning(true);
       
       if (slideContentRef.current) {
-        slideContentRef.current.classList.add('sliding-out-left');
+        slideContentRef.current.classList.add('sliding-out-up');
       }
       
       setTimeout(() => {
         setCurrentSlide(prev => prev + 1);
         
         if (slideContentRef.current) {
-          slideContentRef.current.classList.remove('sliding-out-left');
-          slideContentRef.current.classList.add('sliding-in-right');
+          slideContentRef.current.classList.remove('sliding-out-up');
+          slideContentRef.current.classList.add('sliding-in-down');
           
           setTimeout(() => {
             if (slideContentRef.current) {
-              slideContentRef.current.classList.remove('sliding-in-right');
+              slideContentRef.current.classList.remove('sliding-in-down');
               slideContentRef.current.classList.add('active');
             }
             setIsTransitioning(false);
@@ -499,19 +563,19 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       setIsTransitioning(true);
       
       if (slideContentRef.current) {
-        slideContentRef.current.classList.add('sliding-out-right');
+        slideContentRef.current.classList.add('sliding-out-down');
       }
       
       setTimeout(() => {
         setCurrentSlide(prev => prev - 1);
         
         if (slideContentRef.current) {
-          slideContentRef.current.classList.remove('sliding-out-right');
-          slideContentRef.current.classList.add('sliding-in-left');
+          slideContentRef.current.classList.remove('sliding-out-down');
+          slideContentRef.current.classList.add('sliding-in-up');
           
           setTimeout(() => {
             if (slideContentRef.current) {
-              slideContentRef.current.classList.remove('sliding-in-left');
+              slideContentRef.current.classList.remove('sliding-in-up');
               slideContentRef.current.classList.add('active');
             }
             setIsTransitioning(false);
@@ -525,7 +589,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
     if (index >= 0 && index < slides.length && index !== currentSlide && !isTransitioning) {
       setIsTransitioning(true);
       
-      const direction = index > currentSlide ? 'left' : 'right';
+      const direction = index > currentSlide ? 'up' : 'down';
       
       if (slideContentRef.current) {
         slideContentRef.current.classList.add(`sliding-out-${direction}`);
@@ -536,11 +600,11 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
         
         if (slideContentRef.current) {
           slideContentRef.current.classList.remove(`sliding-out-${direction}`);
-          slideContentRef.current.classList.add(`sliding-in-${direction === 'left' ? 'right' : 'left'}`);
+          slideContentRef.current.classList.add(`sliding-in-${direction === 'up' ? 'down' : 'up'}`);
           
           setTimeout(() => {
             if (slideContentRef.current) {
-              slideContentRef.current.classList.remove(`sliding-in-${direction === 'left' ? 'right' : 'left'}`);
+              slideContentRef.current.classList.remove(`sliding-in-${direction === 'up' ? 'down' : 'up'}`);
               slideContentRef.current.classList.add('active');
             }
             setIsTransitioning(false);
@@ -556,14 +620,23 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       if (!isOpen || isTransitioning) return;
 
       switch (e.key) {
-        case 'ArrowRight':
+        case 'ArrowDown':
         case 'Space':
+        case 'PageDown':
           e.preventDefault();
           nextSlide();
           break;
-        case 'ArrowLeft':
+        case 'ArrowUp':
+        case 'PageUp':
           e.preventDefault();
           previousSlide();
+          break;
+        case 'ArrowRight':
+        case 'ArrowLeft':
+          // Still allow horizontal arrows for backwards compatibility
+          e.preventDefault();
+          if (e.key === 'ArrowRight') nextSlide();
+          else previousSlide();
           break;
         case 'Escape':
           e.preventDefault();
@@ -630,70 +703,59 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
   const currentSlideData = slides[currentSlide];
 
   return (
-    <div className={`presentation-overlay ${isExiting ? 'exiting' : ''}`}>
-      {currentSlideData?.type !== 'first' && (
-        <div className="presentation-header">
-          <h2 className="presentation-title">{title}</h2>
-          <div className="presentation-controls">
-            <div className="presentation-progress">
-              {currentSlide + 1} de {slides.length}
-            </div>
-            <button 
-              className="presentation-close"
-              onClick={closePresentation}
-              type="button"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      )}
-
-      <div className="slide-container">
-        {currentSlideData?.type === 'first' && (
-          <button 
-            className="first-slide-close"
-            onClick={closePresentation}
-            type="button"
-            aria-label="Cerrar presentación"
-          >
-            ✕
-          </button>
-        )}
-        
+    <div className={`presentation-mode ${isExiting ? 'exiting' : ''}`}>
+      {/* Main slide area - full screen */}
+      <div className="presentation-slide">
         {currentSlideData ? (
           <div 
             ref={slideContentRef}
-            className={`slide-content active ${currentSlideData.type ? `slide-${currentSlideData.type}` : ''}`}
+            className={`slide-content ${currentSlideData.type ? `slide-${currentSlideData.type}` : 'slide-standard'}`}
             dangerouslySetInnerHTML={{ __html: currentSlideData.content }}
           />
         ) : (
-          <div className="slide-content loading">
-            Cargando presentación...
+          <div className="slide-content slide-loading">
+            <div className="loading-spinner">Preparando presentación...</div>
           </div>
         )}
-
-        <div className={`keyboard-hints ${showKeyboardHints ? '' : 'hidden'}`}>
-          Usa las flechas del teclado, barra espaciadora o los botones para navegar • ESC para salir
-        </div>
       </div>
 
-      <div className="presentation-nav">
+      {/* Vertical sidebar navigation */}
+      <div className="presentation-sidebar">
+        {/* Close button */}
         <button 
-          className="nav-button"
-          onClick={previousSlide}
-          disabled={currentSlide === 0 || isTransitioning}
+          className="sidebar-close"
+          onClick={closePresentation}
           type="button"
+          aria-label="Cerrar presentación"
         >
-          ← Anterior
+          ✕
         </button>
 
-        <div className="slide-indicator">
-          <div className="slide-dots">
+        {/* Slide progress */}
+        <div className="sidebar-progress">
+          <span className="current-slide">{currentSlide + 1}</span>
+          <div className="progress-divider"></div>
+          <span className="total-slides">{slides.length}</span>
+        </div>
+
+        {/* Vertical navigation */}
+        <div className="sidebar-nav">
+          <button 
+            className="nav-up"
+            onClick={previousSlide}
+            disabled={currentSlide === 0 || isTransitioning}
+            type="button"
+            aria-label="Diapositiva anterior"
+          >
+            ↑
+          </button>
+
+          {/* Vertical slide dots */}
+          <div className="sidebar-dots">
             {slides.map((_, index) => (
               <div
                 key={index}
-                className={`slide-dot ${index === currentSlide ? 'active' : ''}`}
+                className={`sidebar-dot ${index === currentSlide ? 'active' : ''}`}
                 onClick={() => goToSlide(index)}
                 role="button"
                 tabIndex={0}
@@ -707,16 +769,23 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
               />
             ))}
           </div>
+
+          <button 
+            className="nav-down"
+            onClick={nextSlide}
+            disabled={currentSlide === slides.length - 1 || isTransitioning}
+            type="button"
+            aria-label="Siguiente diapositiva"
+          >
+            ↓
+          </button>
         </div>
 
-        <button 
-          className="nav-button"
-          onClick={nextSlide}
-          disabled={currentSlide === slides.length - 1 || isTransitioning}
-          type="button"
-        >
-          Siguiente →
-        </button>
+        {/* Keyboard hints */}
+        <div className={`sidebar-hints ${showKeyboardHints ? '' : 'hidden'}`}>
+          <div className="hint">↑↓</div>
+          <div className="hint-text">ESC</div>
+        </div>
       </div>
     </div>
   );

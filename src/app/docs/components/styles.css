@@ -47,8 +47,52 @@ strong{ color: var(--dark-green); }
 a{ color: var(--celtic-blue); text-decoration: none; }
 
 /* ===== Layout ===== */
-.toolbar{ position: sticky; top: 0; z-index: 10; display:flex; gap:.5rem; padding:.55rem .85rem; background: linear-gradient(90deg, var(--isabelline), #fffffff0); border-bottom:1px solid var(--border); backdrop-filter: blur(4px); }
-.toolbar button{ border:1px solid #d9d4c9; background:white; padding:.45rem .7rem; border-radius:.5rem; cursor:pointer; font-size:.9rem; }
+.toolbar{ position: sticky; top: 0; z-index: 10; display:flex; gap:.4rem; padding:.35rem .7rem; background: linear-gradient(90deg, var(--isabelline), #fffffff0); border-bottom:1px solid var(--border); backdrop-filter: blur(4px); }
+/* ===== Toolbar Buttons - Centralized Styling ===== */
+.toolbar button {
+  /* Base dimensions and layout - IDENTICAL for all buttons */
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  min-height: 36px !important;
+  
+  /* Default styling (PDF export button) */
+  background: white !important;
+  border: 1px solid #d9d4c9 !important;
+  color: var(--ink) !important;
+}
+
+.toolbar button:hover {
+  transform: translateY(-1px) !important;
+}
+
+/* PDF Export Button - Default white styling */
+.toolbar button:not(#presentation-btn):hover {
+  background: #f8f9fa !important;
+  border-color: #c7c2b8 !important;
+}
+
+/* Presentation Button - Blue styling */
+.toolbar #presentation-btn {
+  background: linear-gradient(135deg, #0069e0, #004bb8) !important;
+  border: 1px solid transparent !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(0, 105, 224, 0.3) !important;
+}
+
+.toolbar #presentation-btn:hover {
+  background: linear-gradient(135deg, #0056c7, #003d9e) !important;
+  box-shadow: 0 4px 16px rgba(0, 105, 224, 0.4) !important;
+}
 
 .page{ max-width: 820px; margin: 1.2rem auto 2.2rem; padding: .45rem 1.5rem 2.4rem; }
 
