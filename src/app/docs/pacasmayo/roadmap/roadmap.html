@@ -72,13 +72,14 @@
     .session .meta{ font-size:.95rem; color:#2b4a42; margin:.35rem 0 .6rem; }
     .session .block{ background:#fff; border:1px solid var(--border); border-radius:10px; padding:.85rem 1rem; margin:.5rem 0; border-left-width:6px; border-left-style:solid; }
 
-    /* Two-column layout with symmetrical gaps on desktop */
+    /* Two-column layout with symmetrical gaps on desktop
+       Scope to .cols-ready to avoid flash before JS restructures DOM */
     @media (min-width: 880px){
-      .session{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--session-gap); }
-      .session > .col-left,
-      .session > .col-right{ display:grid; gap: var(--session-gap); }
+      .session.cols-ready{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--session-gap); }
+      .session.cols-ready > .col-left,
+      .session.cols-ready > .col-right{ display:grid; gap: var(--session-gap); }
       /* remove per-card margins so gap rules everything */
-      .session .block{ margin:0; }
+      .session.cols-ready .block{ margin:0; }
     }
     /* Color-coded blocks */
     .session .block.objetivo{ border-left-color: var(--celtic-blue); border-color: rgba(0,105,224,.25); background: rgba(0,105,224,.06); }
