@@ -222,6 +222,11 @@
   margin: 1rem 0;
 }
 
+/* Hide presentation button temporarily */
+#presentation-btn {
+  display: none !important;
+}
+
 .presentation-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 105, 224, 0.4);
@@ -345,4 +350,164 @@
   justify-content: center;
   min-height: 200px;
   color: #666;
+}
+
+/* Slide Type Specific Styles */
+/* First slide - logo and title with styling line, no header */
+.slide-content.slide-first {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.slide-content.slide-first h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #0f4c38;
+  font-weight: 700;
+}
+
+.slide-content.slide-first .styling-line {
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(135deg, #0069e0, #004bb8);
+  border-radius: 2px;
+  margin: 2rem auto;
+}
+
+/* Card-focused slides - single large card centered */
+.slide-content.slide-card-focused {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.slide-content.slide-card-focused .card {
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  padding: 3rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(0, 105, 224, 0.1);
+}
+
+.slide-content.slide-card-focused h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #0f4c38;
+  font-size: 2rem;
+}
+
+.slide-content.slide-card-focused h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #093b2c;
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+/* Section break slides - title only */
+.slide-content.slide-section-break {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 50vh;
+}
+
+.slide-content.slide-section-break h2 {
+  font-size: 2.5rem;
+  color: #0f4c38;
+  margin-bottom: 1rem;
+}
+
+.slide-content.slide-section-break h3 {
+  font-size: 1.8rem;
+  color: #093b2c;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+/* Continuation slides - indicate they continue from previous */
+.slide-content.slide-continuation {
+  position: relative;
+}
+
+.slide-content.slide-continuation::before {
+  content: '... continuación';
+  position: absolute;
+  top: -1rem;
+  right: 1rem;
+  font-size: 0.8rem;
+  color: #666;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* Standard slides - ensure proper title formatting */
+.slide-content.slide-standard h2 {
+  border-bottom: 2px solid #0069e0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* First slide close button */
+.first-slide-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.first-slide-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments for slide types */
+@media (max-width: 768px) {
+  .slide-content.slide-first h1 {
+    font-size: 2rem;
+  }
+  
+  .slide-content.slide-card-focused {
+    padding: 1rem;
+  }
+  
+  .slide-content.slide-card-focused .card {
+    padding: 2rem;
+  }
+  
+  .slide-content.slide-card-focused h2 {
+    font-size: 1.5rem;
+  }
+  
+  .slide-content.slide-section-break h2 {
+    font-size: 2rem;
+  }
+  
+  .slide-content.slide-section-break h3 {
+    font-size: 1.4rem;
+  }
 }
