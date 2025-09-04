@@ -574,6 +574,14 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   font-size: 1.1em; 
 }
 
+/* Orange variant for CTA buttons */
+.roadmap-link.cta-orange{ 
+  background: var(--orange-pantone); 
+}
+.roadmap-link.cta-orange:hover{ 
+  background: #e05512; /* slightly darker hover */ 
+}
+
 /* ===== Table Components ===== */
 .minimal-table{ 
   width: 100%; 
