@@ -1,17 +1,360 @@
-/* Hide slideshow button in presentation mode */
-.presentation-mode #presentation-btn,
-#presentation-btn {
+/* Hide slideshow button only when presentation is active */
+.presentation-mode #presentation-btn {
   display: none !important;
 }
 
-/* Minimalist Presentation Mode Styles */
+/* Presentation Mode Container with proper CSS variables */
 .presentation-mode {
+  /* Import CSS variables from main page */
+  --dark-green: #093b2c;
+  --brunswick-green: #0f4c38;
+  --isabelline: #fffaf5;
+  --celtic-blue: #0069e0;
+  --sunglow: #fac827;
+  --dark-moss-green: #536c03;
+  --orange-pantone: #fb6113;
+  --ink: #18322a;
+  --muted: #54645f;
+  --border: #e6e1d7;
+  --paper: #ffffff;
+  --session-gap: 1rem;
+
   position: fixed;
   inset: 0;
-  background: #ffffff;
+  background: var(--isabelline);
   z-index: 9999;
   opacity: 0;
   animation: fadeIn 0.4s ease-out forwards;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  color: var(--ink);
+  font-size: 13pt;
+  line-height: 1.75;
+}
+
+/* Import all component styles from main page */
+.presentation-mode p { margin: .5rem 0 1.4rem; line-height: 1.8; }
+.presentation-mode ul, .presentation-mode ol { padding-left: 1rem; margin: .6rem 0 1.4rem; }
+.presentation-mode li { margin: 0.5rem 0; line-height: 1.85; }
+.presentation-mode strong { color: var(--dark-green); }
+.presentation-mode a { color: var(--celtic-blue); text-decoration: none; }
+
+/* Section styling */
+.presentation-mode .section { 
+  background: transparent; 
+  border-top: 1px solid var(--border); 
+  border-radius: 0; 
+  padding: 0; 
+  margin-top: 1.6rem; 
+  padding-top: 1.6rem; 
+  box-shadow: none; 
+}
+
+.presentation-mode .section .tag { 
+  display: inline-block; 
+  font-size: .7rem; 
+  font-weight: 700; 
+  letter-spacing: .04em; 
+  text-transform: uppercase; 
+  color: #173d39; 
+  background: #e8f5f0; 
+  border: 1px solid #cfeae1; 
+  border-radius: 999px; 
+  padding: .2rem .6rem; 
+  margin-bottom: 0.5rem; 
+}
+
+/* Card components */
+.presentation-mode .cards { 
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 1rem; 
+  margin-top: .6rem; 
+}
+
+.presentation-mode .card { 
+  background: var(--paper); 
+  border: 1px solid var(--border); 
+  border-radius: 12px; 
+  padding: 1rem; 
+  box-shadow: 0 1px 0 rgba(0,0,0,.03); 
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+.presentation-mode .card h3 { 
+  margin-top: 0; 
+  margin-bottom: .4rem; 
+  margin-left: .7rem;
+  font-size: 1.05rem; 
+  font-weight: bold; 
+  color: var(--dark-green); 
+}
+
+.presentation-mode .card ul { margin: .2rem 0 0 .95rem; }
+.presentation-mode .card li { margin-left: .5rem; margin-bottom: .5rem; line-height: 1.25; }
+.presentation-mode .card p { margin-left: .8rem; margin-top: .7rem; margin-bottom: .7rem; line-height: 1.25; }
+
+/* Themed sections */
+.presentation-mode .section.theme-orange .card { 
+  border-left: 6px solid var(--orange-pantone); 
+  background: rgba(251,97,19,.08); 
+  border-color: rgba(251,97,19,.25); 
+}
+.presentation-mode .section.theme-orange .card h3 { color: var(--orange-pantone); }
+
+.presentation-mode .section.theme-sunglow .card { 
+  border-left: 6px solid var(--sunglow); 
+  background: rgba(250,200,39,.08); 
+  border-color: rgba(250,200,39,.35); 
+}
+.presentation-mode .section.theme-sunglow .card h3 { color: #b38700; }
+
+.presentation-mode .section.theme-moss .card { 
+  border-left: 6px solid var(--dark-moss-green); 
+  background: rgba(83,108,3,.08); 
+  border-color: rgba(83,108,3,.25); 
+}
+.presentation-mode .section.theme-moss .card h3 { color: var(--dark-moss-green); }
+
+.presentation-mode .section.theme-brunswick .card { 
+  border-left: 6px solid var(--brunswick-green); 
+  background: rgba(15,76,56,.06); 
+  border-color: rgba(15,76,56,.25); 
+}
+.presentation-mode .section.theme-brunswick .card h3 { color: var(--brunswick-green); }
+
+/* Team member cards */
+.presentation-mode .team-member .cards { 
+  grid-template-columns: 1fr 1fr; 
+  gap: 2rem; 
+}
+
+.presentation-mode .team-member .card { 
+  padding: 2rem; 
+  text-align: left; 
+  border: none; 
+  background: var(--paper); 
+  box-shadow: 0 2px 12px rgba(0,0,0,.08); 
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.presentation-mode .team-member .member-photo { 
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 3px solid var(--brunswick-green); 
+  margin: 0 0 1.5rem 0; 
+  display: block; 
+}
+
+.presentation-mode .team-member .member-name { 
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  color: var(--dark-green); 
+  margin: 0 0 .4rem 0; 
+}
+
+.presentation-mode .team-member .member-title { 
+  font-size: .9rem; 
+  color: var(--brunswick-green); 
+  font-weight: 600; 
+  margin: 0 0 1.2rem 0; 
+  text-transform: uppercase; 
+  letter-spacing: .02em; 
+}
+
+.presentation-mode .team-member .member-bio { 
+  font-size: .95rem; 
+  color: var(--muted); 
+  line-height: 1.6; 
+  margin-bottom: 1.5rem; 
+  text-align: left; 
+}
+
+.presentation-mode .team-member .member-skills { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: .5rem; 
+  justify-content: flex-start; 
+}
+
+.presentation-mode .team-member .skill-tag { 
+  background: var(--brunswick-green); 
+  color: white; 
+  padding: .3rem .8rem; 
+  border-radius: 20px; 
+  font-size: .8rem; 
+  font-weight: 500; 
+}
+
+/* Moshe's special card */
+.presentation-mode .team-member .card.moshe-card { 
+  background: rgba(0,105,224,.05); 
+  border-left: 6px solid var(--celtic-blue); 
+}
+.presentation-mode .team-member .card.moshe-card .member-photo { 
+  border-color: var(--celtic-blue); 
+}
+.presentation-mode .team-member .card.moshe-card .member-name { 
+  color: var(--celtic-blue); 
+}
+.presentation-mode .team-member .card.moshe-card .member-title { 
+  color: var(--celtic-blue); 
+}
+.presentation-mode .team-member .card.moshe-card .skill-tag { 
+  background: var(--celtic-blue); 
+}
+
+/* Highlight styles */
+.presentation-mode .highlight { 
+  background: linear-gradient(120deg, rgba(83,108,3,.25) 0%, rgba(83,108,3,.15) 100%); 
+  padding: .1rem .2rem; 
+  border-radius: 3px; 
+  font-weight: 600; 
+}
+.presentation-mode .highlight-orange { 
+  background: linear-gradient(120deg, rgba(251,97,19,.25) 0%, rgba(251,97,19,.15) 100%); 
+  padding: .1rem .2rem; 
+  border-radius: 3px; 
+  font-weight: 600; 
+}
+
+/* Tables */
+.presentation-mode .minimal-table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin: 1rem 0; 
+  background: var(--paper); 
+}
+
+.presentation-mode .minimal-table td { 
+  padding: 1.5rem 1rem; 
+  border-bottom: 1px solid var(--border); 
+  vertical-align: middle; 
+}
+
+.presentation-mode .minimal-table tr:last-child td { 
+  border-bottom: none; 
+}
+
+.presentation-mode .minimal-table td:first-child { 
+  font-weight: 600; 
+  color: var(--dark-green); 
+  width: 30%; 
+  padding-right: 1.5rem; 
+}
+
+.presentation-mode .minimal-table tr:hover { 
+  background: rgba(83,108,3,.03); 
+}
+
+.presentation-mode .minimal-table .microcopy { 
+  display: block; 
+  color: var(--muted); 
+  font-size: .85rem; 
+  font-weight: normal; 
+  margin-top: .3rem; 
+}
+
+/* Lists */
+.presentation-mode .checklist li { 
+  list-style: none; 
+  position: relative; 
+  padding-left: 1.6rem;
+  margin: .85rem 0; 
+  line-height: 1.65; 
+  max-width: 70ch; 
+}
+.presentation-mode .checklist li::before { 
+  content: "✔"; 
+  color: var(--dark-moss-green); 
+  position: absolute; 
+  left: 0; 
+  top: .1rem; 
+}
+
+.presentation-mode .checklist { 
+  padding-left: 0; 
+  max-width: 70ch; 
+}
+
+/* Hero section */
+.presentation-mode .kicker { 
+  font-size: .85rem; 
+  color: #335a50; 
+  text-transform: uppercase; 
+  letter-spacing: .12em; 
+  font-weight: 600; 
+  margin-bottom: 1rem; 
+}
+
+.presentation-mode .title { display: flex; align-items: flex-end; gap: .6rem; }
+.presentation-mode .title h1 { border-bottom: 4px solid var(--sunglow); padding-bottom: 1rem; }
+
+.presentation-mode .byline {
+  font-size: 0.9rem; 
+  color: #666; 
+  margin: 1rem 0 1.5rem 0; 
+  font-style: italic;
+}
+
+/* Typography exactly matching main page */
+.presentation-mode h1 { 
+  font-family: "Faculty Glyphic", serif; 
+  color: var(--brunswick-green); 
+  margin: 0 0 .5rem; 
+  letter-spacing: .3px; 
+  font-size: 2.4rem; 
+  line-height: 1.25; 
+}
+
+.presentation-mode h2 { 
+  font-family: "Faculty Glyphic", serif; 
+  color: var(--brunswick-green); 
+  margin: 0 0 .5rem; 
+  letter-spacing: .3px; 
+  font-size: 1.75rem; 
+  line-height: 1.35; 
+  margin-top: .5rem; 
+  margin-bottom: .6rem; 
+}
+
+.presentation-mode h3 { 
+  font-family: "Faculty Glyphic", serif; 
+  color: var(--dark-moss-green); 
+  margin: 0 0 .5rem; 
+  letter-spacing: .3px; 
+  font-size: 1.28rem; 
+  line-height: 1.5; 
+  margin-top: 1rem; 
+  margin-bottom: 0rem; 
+}
+
+.presentation-mode p { 
+  margin: .5rem 0 1.4rem; 
+  line-height: 1.8; 
+}
+
+.presentation-mode ul, 
+.presentation-mode ol { 
+  padding-left: 1rem; 
+  margin: .6rem 0 1.4rem; 
+}
+
+.presentation-mode li { 
+  margin: 0.5rem 0; 
+  line-height: 1.85; 
+}
+
+.presentation-mode strong { 
+  color: var(--dark-green); 
+}
+
+.presentation-mode a { 
+  color: var(--celtic-blue); 
+  text-decoration: none; 
 }
 
 .presentation-mode.exiting {
@@ -42,7 +385,7 @@
   position: relative;
 }
 
-/* Slide content - Always fits in viewport */
+/* Slide content - Styled like page content */
 .slide-content {
   width: 100%;
   max-width: 1200px;
@@ -56,7 +399,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   box-sizing: border-box;
+  padding: 2rem;
+  background: var(--paper);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin: 2rem;
 }
 
 /* Vertical slide transitions */
@@ -93,9 +442,9 @@
   top: 0;
   bottom: 0;
   width: 80px;
-  background: rgba(248, 250, 252, 0.95);
+  background: rgba(255, 250, 245, 0.95);
   backdrop-filter: blur(10px);
-  border-left: 1px solid rgba(226, 232, 240, 0.5);
+  border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -249,33 +598,43 @@
   letter-spacing: 0.05em;
 }
 
-/* Slide type specific styles */
+/* Presentation slides inherit all page styles automatically */
 
-/* Title slides */
-.slide-content.slide-title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 60vh;
+/* Essential layout fixes for presentation mode */
+.presentation-mode .hero-logo {
+  max-width: 120px;
+  max-height: 120px;
+  margin: 0 auto 1rem auto;
+  display: block;
 }
 
-.slide-content.slide-title h1,
-.slide-content.slide-title h2 {
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 700;
-  color: #0f172a;
-  line-height: 1.2;
+.presentation-mode .hero {
+  text-align: center;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.presentation-mode .accent {
+  display: none; /* Hide decorative elements that might interfere */
+}
+
+.presentation-mode .kicker {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
   margin-bottom: 1rem;
 }
 
-.slide-content.slide-title h3 {
-  font-size: clamp(1.2rem, 3vw, 2rem);
-  font-weight: 400;
-  color: #64748b;
-  line-height: 1.4;
-  margin-top: 0;
+.presentation-mode .byline {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 1rem 0;
 }
 
 /* Title slide content wrapper */
