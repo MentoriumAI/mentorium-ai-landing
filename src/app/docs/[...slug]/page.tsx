@@ -1,12 +1,13 @@
 import { redirect } from 'next/navigation'
 
 interface DocsPageProps {
-  params: {
+  params: Promise<{
     slug: string[]
-  }
+  }>
 }
 
-export default function DocsSlugPage({ params }: DocsPageProps) {
-  const path = params.slug.join('/')
+export default async function DocsSlugPage({ params }: DocsPageProps) {
+  const { slug } = await params
+  const path = slug.join('/')
   redirect(`/pages/${path}`)
 }
