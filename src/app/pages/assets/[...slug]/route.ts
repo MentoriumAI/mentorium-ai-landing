@@ -29,7 +29,7 @@ export async function GET(_req: NextRequest, context: { params: Promise<{ slug: 
     return new Response('Bad Request', { status: 400 });
   }
 
-  const baseDir = path.join(process.cwd(), 'src/app/docs/assets');
+  const baseDir = path.join(process.cwd(), 'src/app/pages/assets');
   const filePath = path.join(baseDir, relPath);
 
   try {

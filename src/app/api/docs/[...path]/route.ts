@@ -13,13 +13,13 @@ export async function GET(
     let htmlFilePath = '';
     
     if (docPath.includes('pacasmayo') && docPath.includes('propuesta')) {
-      htmlFilePath = path.join(process.cwd(), 'src/app/docs/pacasmayo/propuesta/propuesta.html');
+      htmlFilePath = path.join(process.cwd(), 'src/app/pages/pacasmayo/propuesta/propuesta.html');
     } else if (docPath.includes('pacasmayo') && docPath.includes('roadmap')) {
-      htmlFilePath = path.join(process.cwd(), 'src/app/docs/pacasmayo/roadmap/roadmap.html');
+      htmlFilePath = path.join(process.cwd(), 'src/app/pages/pacasmayo/roadmap/roadmap.html');
     } else {
       // Fallback: try to construct the path
       const pathStr = docPath.join('/');
-      htmlFilePath = path.join(process.cwd(), `src/app/docs/${pathStr}/${docPath[docPath.length - 1]}.html`);
+      htmlFilePath = path.join(process.cwd(), `src/app/pages/${pathStr}/${docPath[docPath.length - 1]}.html`);
     }
     
     // Read the HTML file

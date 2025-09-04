@@ -416,13 +416,13 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
   useEffect(() => {
     const toolbarBtn = document.getElementById('presentation-btn');
     const handleToolbarClick = () => {
-      // Get current path and convert /docs/... to /presentacion/...
+      // Get current path and convert /pages/... to /presentacion/...
       const currentPath = window.location.pathname;
       
-      if (currentPath.startsWith('/docs/')) {
-        // Remove '/docs/' prefix and create presentation URL
-        const docsPath = currentPath.substring(6); // Remove '/docs/'
-        const presentationUrl = `/presentacion/${docsPath}?slide=1`;
+      if (currentPath.startsWith('/pages/')) {
+        // Remove '/pages/' prefix and create presentation URL
+        const pagesPath = currentPath.substring(7); // Remove '/pages/'
+        const presentationUrl = `/presentacion/${pagesPath}?slide=1`;
         window.location.href = presentationUrl;
       } else {
         // Fallback for non-docs pages

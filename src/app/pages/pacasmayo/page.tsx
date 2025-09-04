@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import React from 'react';
-import DocsContainer from '@/app/docs/components/DocsContainer';
+import DocsContainer from '@/app/pages/components/DocsContainer';
 
 export const metadata: Metadata = {
   title: 'Pacasmayo - Documentos',
@@ -33,7 +33,7 @@ export default function PacasmayoIndexPage() {
             <div className="grid gap-6 sm:gap-8 md:grid-cols-2 max-w-4xl mx-auto px-4 sm:px-0">
               {/* Propuesta Card */}
               <a 
-                href="/docs/pacasmayo/propuesta"
+                href="/pages/pacasmayo/propuesta"
                 className="group block p-5 sm:p-6 lg:p-8 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
@@ -63,7 +63,7 @@ export default function PacasmayoIndexPage() {
 
               {/* Roadmap Card */}
               <a 
-                href="/docs/pacasmayo/roadmap"
+                href="/pages/pacasmayo/roadmap"
                 className="group block p-5 sm:p-6 lg:p-8 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">

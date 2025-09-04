@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import fs from 'fs';
 import path from 'path';
-import PresentationRoute from '../../docs/components/PresentationRoute';
+import PresentationRoute from '../../pages/components/PresentationRoute';
 
 export const metadata: Metadata = {
   title: 'Modo Presentación - Mentorium AI',
@@ -37,13 +37,13 @@ export default async function PresentationPage({ params, searchParams }: PagePro
   let htmlFilePath = '';
   
   if (docsPath.includes('pacasmayo') && docsPath.includes('propuesta')) {
-    htmlFilePath = path.join(process.cwd(), 'src/app/docs/pacasmayo/propuesta/propuesta.html');
+    htmlFilePath = path.join(process.cwd(), 'src/app/pages/pacasmayo/propuesta/propuesta.html');
   } else if (docsPath.includes('pacasmayo') && docsPath.includes('roadmap')) {
-    htmlFilePath = path.join(process.cwd(), 'src/app/docs/pacasmayo/roadmap/roadmap.html');
+    htmlFilePath = path.join(process.cwd(), 'src/app/pages/pacasmayo/roadmap/roadmap.html');
   } else {
     // Fallback: try to construct the path
     const pathStr = docsPath;
-    htmlFilePath = path.join(process.cwd(), `src/app/docs/${pathStr}/${docPath[docPath.length - 1]}.html`);
+    htmlFilePath = path.join(process.cwd(), `src/app/pages/${pathStr}/${docPath[docPath.length - 1]}.html`);
   }
   
   try {
@@ -76,10 +76,10 @@ export default async function PresentationPage({ params, searchParams }: PagePro
   
   if (docsPath.includes('pacasmayo/roadmap')) {
     documentTitle = 'Roadmap de 8 Sesiones - Proyecto Pacasmayo';
-    backUrl = '/docs/pacasmayo/roadmap';
+    backUrl = '/pages/pacasmayo/roadmap';
   } else if (docsPath.includes('pacasmayo/propuesta')) {
     documentTitle = 'Propuesta del Programa - Proyecto Pacasmayo';
-    backUrl = '/docs/pacasmayo/propuesta';
+    backUrl = '/pages/pacasmayo/propuesta';
   } else if (docsPath.includes('pacasmayo')) {
     documentTitle = 'Proyecto Pacasmayo';
     backUrl = fullDocsPath;

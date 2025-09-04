@@ -432,7 +432,7 @@ export default function PresentationRoute({
           }
         } else if (sourceDocsUrl) {
           // Use API endpoint to fetch HTML content (fallback)
-          const apiPath = sourceDocsUrl.replace('/docs/', '/api/docs/');
+          const apiPath = sourceDocsUrl.replace('/pages/', '/api/pages/');
           const response = await fetch(apiPath);
           if (!response.ok) {
             throw new Error(`Failed to load docs content: ${response.status}`);
