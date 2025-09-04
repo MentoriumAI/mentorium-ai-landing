@@ -582,6 +582,17 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   background: var(--paper); 
 }
 
+.minimal-table th{ 
+  text-align: left; 
+  padding: 1.5rem 1rem; 
+  border-bottom: 1px solid var(--border); 
+}
+
+.minimal-table thead th{
+  color: var(--dark-green);
+  background: rgba(83,108,3,.06); /* slightly darker than hover */
+}
+
 .minimal-table td{ 
   padding: 1.5rem 1rem; 
   border-bottom: 1px solid var(--border); 
@@ -609,6 +620,17 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   font-size: .85rem; 
   font-weight: normal; 
   margin-top: .3rem; 
+}
+
+/* Notes and lists */
+.note ol{
+  list-style: decimal; /* ensure numbers show even if globally reset */
+  margin: .5rem 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.note li{
+  margin: .4rem 0;
 }
 
 /* ===== Utility Components ===== */
