@@ -14,8 +14,6 @@
   --muted: #54645f;
   --border: #e6e1d7;
   --paper: #ffffff;
-  /* layout */
-  --session-gap: 1rem; /* single source of truth for gaps */
 }
 
 /* ===== Base Styles ===== */
@@ -713,19 +711,14 @@ a{ color: var(--celtic-blue); text-decoration: none; }
 }
 
 .session .block{ 
-  background:#fff; 
-  border:1px solid var(--border); 
-  border-radius:10px; 
-  padding:.85rem 1rem; 
-  margin:.5rem 0; 
-  border-left-width:6px; 
-  border-left-style:solid; 
-}
-
-/* Simple linear layout for sessions */
-.session .block{ 
-  display: block; 
+  display: block;
+  background: #fff; 
+  border: 1px solid var(--border); 
+  border-radius: 10px; 
+  padding: 1rem; 
   margin: 1rem 0; 
+  border-left-width: 6px; 
+  border-left-style: solid; 
 }
 
 /* Color-coded blocks for sessions */
@@ -756,6 +749,19 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   background: rgba(83,108,3,.08); 
 }
 .session .block.resultado strong{ color: var(--dark-moss-green); }
+
+/* Task styling within blocks */
+.session .block em {
+  font-style: normal;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.session .block.objetivo em { color: var(--celtic-blue); }
+.session .block.contenido em { color: #b38700; }
+.session .block.actividades em { color: var(--orange-pantone); }
+.session .block.resultado em { color: var(--dark-moss-green); }
 
 /* Propuesta-specific session styling */
 .propuesta-doc .session{ 
