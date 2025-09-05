@@ -159,7 +159,7 @@ export default function ResumeIndexPage() {
                       ML Product Owner @BCP - Docente & Keynote Speaker
                     </p>
                     <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
-                      Especialista en Data Science, DevOps y Machine Learning con experiencia en soluciones de nube.
+                      Especialista en Machine Learning, DevOps, MLOps e IA Generativa.
                     </p>
                     <div className="flex items-center text-xs sm:text-sm" style={{ color: '#b8900b' }}>
                       <span>Ver CV</span>
