@@ -50,6 +50,13 @@ export default function ResumeHeader({
           {/* Title */}
           <p className="resume-hero-title">{title}</p>
           
+          {/* Mobile Photo - shows only on mobile */}
+          <div className="resume-hero-photo-mobile">
+            <div className="resume-hero-photo">
+              <FounderImage photoName={photoName} name={name} />
+            </div>
+          </div>
+          
           {/* Tags */}
           {subtitle && (
             <div className="resume-hero-tags">

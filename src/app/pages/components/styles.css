@@ -242,6 +242,7 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   gap: 0.5rem;
   margin: 0.5rem 0;
   font-style: normal;
+  justify-content: flex-start;
 }
 
 .resume-hero-tags .tag-chip {
@@ -321,6 +322,10 @@ a{ color: var(--celtic-blue); text-decoration: none; }
 }
 
 /* Responsive adjustments */
+.resume-hero-photo-mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .resume-hero-columns {
     grid-template-columns: 1fr;
@@ -328,8 +333,43 @@ a{ color: var(--celtic-blue); text-decoration: none; }
     text-align: center;
   }
   
+  .resume-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+  
+  .resume-hero-content .resume-hero-kicker {
+    margin-bottom: 1rem;
+  }
+  
+  .resume-hero-content .resume-hero-name {
+    margin-bottom: 1rem;
+  }
+  
+  .resume-hero-content .resume-hero-title {
+    margin: 0 0 0.75rem 0;
+  }
+  
+  .resume-hero-content .resume-hero-tags {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+  
+  .resume-hero-content .resume-hero-info-card {
+    margin-top: 1rem;
+  }
+  
   .resume-hero-photo-section {
-    order: -1;
+    display: none;
+  }
+  
+  .resume-hero-photo-mobile {
+    display: block;
+    margin: 1.5rem 0;
   }
   
   .resume-hero-photo {
