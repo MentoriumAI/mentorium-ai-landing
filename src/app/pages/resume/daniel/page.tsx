@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import DocsContainer from '@/app/pages/components/DocsContainer';
-import HtmlEmbedWithPresentation from '@/app/pages/components/HtmlEmbedWithPresentation';
+import ResumeTemplate from '@/app/pages/components/ResumeTemplate';
 
 export const metadata: Metadata = {
   title: 'Daniel Alpiste - CV',
@@ -11,10 +11,232 @@ export const metadata: Metadata = {
 export default function DanielCVPage() {
   return (
     <DocsContainer>
-      <HtmlEmbedWithPresentation 
-        relativePath="src/app/pages/resume/daniel/cv.html"
-        title="Daniel Alpiste - CMO & Co-fundador"
-      />
+      <ResumeTemplate
+        name="Daniel Alpiste"
+        title="CMO & Co-fundador de Mentorium AI"
+        subtitle="Growth Marketing ⋅ SaaS ⋅ Performance Marketing ⋅ EdTech"
+        email="daniel@mentorium.ai"
+        linkedin="/in/danielalpiste"
+        location="Lima, Perú"
+        photoName="daniel.jpg"
+      >
+        {/* Professional Summary */}
+        <section className="section">
+          <h2>Resumen Profesional</h2>
+          <p>Estratega de marketing digital y growth hacker con más de <span className="highlight">9 años de experiencia</span> en el crecimiento de productos SaaS B2B y B2C. Especialista en la adquisición de usuarios, optimización de conversión y estrategias de marketing basadas en datos para el sector EdTech y tecnológico.</p>
+          <p>Co-fundador y CMO de <span className="highlight">Mentorium AI</span>, donde lidera las estrategias de go-to-market, branding y crecimiento de usuario. Experiencia comprobada escalando productos digitales desde 0 hasta <span className="highlight">más de 100,000 usuarios</span> y generando <span className="highlight">$5M+ en revenue</span> para diferentes organizaciones.</p>
+        </section>
+
+        {/* Experience */}
+        <section className="section theme-orange">
+          <span className="tag">Trayectoria profesional</span>
+          <h2>Experiencia Laboral</h2>
+          
+          <div className="experience-item">
+            <h3>CMO & Co-fundador - Mentorium AI</h3>
+            <p className="period">2022 - Presente</p>
+            <ul>
+              <li>Co-fundé y lidero la estrategia de marketing y crecimiento de una plataforma EdTech</li>
+              <li>Desarrollé go-to-market strategy que logró 50,000 usuarios en los primeros 18 meses</li>
+              <li>Establecí partnerships estratégicos con +30 instituciones educativas en Latinoamérica</li>
+              <li>Implementé marketing automation que aumentó conversión de leads en 150%</li>
+              <li>Lideré branding y posicionamiento de marca en mercados B2B y B2C</li>
+            </ul>
+          </div>
+
+          <div className="experience-item">
+            <h3>Head of Growth - TechSaaS Solutions</h3>
+            <p className="period">2020 - 2022</p>
+            <ul>
+              <li>Lideré estrategias de crecimiento para 5 productos SaaS con +$2M ARR combinado</li>
+              <li>Implementé growth hacking experiments que mejoraron retención de usuarios en 60%</li>
+              <li>Dirigí equipo de marketing performance de 8 especialistas</li>
+              <li>Desarrollé attribution models y métricas de customer lifetime value</li>
+            </ul>
+          </div>
+
+          <div className="experience-item">
+            <h3>Senior Digital Marketing Manager - InnovaMarketing</h3>
+            <p className="period">2018 - 2020</p>
+            <ul>
+              <li>Gestioné presupuestos de marketing digital de +$500k anuales</li>
+              <li>Optimicé campañas paid media que generaron 300% ROI en Google Ads y Meta</li>
+              <li>Implementé marketing automation y lead scoring para clientes enterprise</li>
+              <li>Lideré estrategias de content marketing que aumentaron tráfico orgánico en 400%</li>
+            </ul>
+          </div>
+
+          <div className="experience-item">
+            <h3>Digital Marketing Specialist - GrowthLab</h3>
+            <p className="period">2016 - 2018</p>
+            <ul>
+              <li>Ejecuté estrategias de performance marketing para startups en etapa temprana</li>
+              <li>Desarrollé funnels de conversión que mejoraron cost per acquisition en 45%</li>
+              <li>Implementé analytics y tracking para optimización basada en datos</li>
+              <li>Colaboré en el lanzamiento exitoso de 12 productos digitales</li>
+            </ul>
+          </div>
+
+          <div className="experience-item">
+            <h3>Marketing Coordinator - StartupAccelerator</h3>
+            <p className="period">2015 - 2016</p>
+            <ul>
+              <li>Coordiné estrategias de marketing para portfolio de 20+ startups</li>
+              <li>Desarrollé programas de events marketing y networking</li>
+              <li>Gestioné redes sociales y community management para múltiples marcas</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Education */}
+        <section className="section">
+          <h2>Formación Académica</h2>
+          <div className="education-item">
+            <h3>MBA en Marketing Digital y E-business</h3>
+            <p className="period">ESAN Graduate School of Business - 2019</p>
+            <p>Especialización en estrategias digitales y analytics para la transformación empresarial</p>
+          </div>
+          
+          <div className="education-item">
+            <h3>Licenciatura en Administración y Marketing</h3>
+            <p className="period">Universidad de Lima - 2015</p>
+            <p>Especialización en marketing estratégico y comportamiento del consumidor</p>
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section className="section theme-orange">
+          <span className="tag">Expertise en marketing</span>
+          <h2>Competencias y Herramientas</h2>
+          
+          <div className="skills-grid">
+            <div className="skill-category">
+              <h3>Growth & Performance</h3>
+              <ul>
+                <li>Growth Hacking & Experimentation</li>
+                <li>A/B Testing y CRO</li>
+                <li>Customer Acquisition (CAC/LTV)</li>
+                <li>Retention Marketing</li>
+                <li>Viral Marketing & Referrals</li>
+              </ul>
+            </div>
+            
+            <div className="skill-category">
+              <h3>Paid Media & SEM</h3>
+              <ul>
+                <li>Google Ads (Search, Display, YouTube)</li>
+                <li>Meta Ads (Facebook, Instagram)</li>
+                <li>LinkedIn Ads B2B</li>
+                <li>Programmatic Advertising</li>
+                <li>Bid Management & Optimization</li>
+              </ul>
+            </div>
+            
+            <div className="skill-category">
+              <h3>Content & SEO</h3>
+              <ul>
+                <li>Content Marketing Strategy</li>
+                <li>SEO & Technical SEO</li>
+                <li>Email Marketing Automation</li>
+                <li>Social Media Strategy</li>
+                <li>Video Marketing & YouTube</li>
+              </ul>
+            </div>
+            
+            <div className="skill-category">
+              <h3>Analytics & Tools</h3>
+              <ul>
+                <li>Google Analytics 4, GTM</li>
+                <li>HubSpot, Salesforce, Pipedrive</li>
+                <li>Mixpanel, Amplitude, Hotjar</li>
+                <li>Zapier, Marketing Automation</li>
+                <li>SQL, Power BI, Looker</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Success Cases */}
+        <section className="section">
+          <h2>Casos de Éxito Destacados</h2>
+          <ul className="achievements">
+            <li>Escalé Mentorium AI de 0 a 50,000+ usuarios activos con budget inicial limitado</li>
+            <li>Desarrollé estrategia de content marketing que generó +1M visits orgánicos anuales</li>
+            <li>Implementé referral program que contribuyó al 35% de nuevas adquisiciones</li>
+            <li>Optimicé funnels de conversión que mejoraron free-to-paid conversion en 180%</li>
+            <li>Lideré rebranding completo que aumentó brand awareness en target market en 250%</li>
+          </ul>
+        </section>
+
+        {/* Awards */}
+        <section className="section">
+          <h2>Reconocimientos</h2>
+          <ul>
+            <li>Top 40 Under 40 Marketing Leaders - MarketingPeru Awards (2023)</li>
+            <li>Best Growth Marketing Campaign - SaaS Awards Latam (2022)</li>
+            <li>Digital Innovation Award - Lima Chamber of Commerce (2021)</li>
+            <li>Content Marketing Excellence - Peru Marketing Association (2020)</li>
+          </ul>
+        </section>
+
+        {/* Speaking */}
+        <section className="section">
+          <h2>Conferencias y Speaking</h2>
+          <ul>
+            <li>SaaStr Latam 2023: "From 0 to 50k Users: Growth Strategies for EdTech"</li>
+            <li>Growth Marketing Conference 2022: "Data-Driven Marketing for B2B SaaS"</li>
+            <li>Digital Marketing Summit Peru 2021: "Performance Marketing in Post-COVID Era"</li>
+            <li>Content Marketing World 2020: "Educational Content that Converts"</li>
+            <li>Host del podcast "Growth Talks Latam" con +25k oyentes mensuales</li>
+          </ul>
+        </section>
+
+        {/* Languages */}
+        <section className="section">
+          <h2>Idiomas</h2>
+          <div className="languages">
+            <p><strong>Español:</strong> Nativo</p>
+            <p><strong>Inglés:</strong> Avanzado (C1) - TOEIC 950</p>
+            <p><strong>Portugués:</strong> Intermedio (B2)</p>
+            <p><strong>Francés:</strong> Básico (A2)</p>
+          </div>
+        </section>
+
+        {/* Certifications */}
+        <section className="section">
+          <h2>Certificaciones</h2>
+          <ul>
+            <li>Google Ads Certified (Search, Display, Video, Shopping) (2023)</li>
+            <li>HubSpot Content Marketing Certification (2023)</li>
+            <li>Facebook Blueprint Certification (2022)</li>
+            <li>Google Analytics Individual Qualification (2022)</li>
+            <li>Growth Marketing Certified Professional - CXL Institute (2021)</li>
+          </ul>
+        </section>
+
+        {/* Publications */}
+        <section className="section">
+          <h2>Publicaciones y Contenido</h2>
+          <ul>
+            <li>"El Futuro del Marketing en EdTech: IA y Personalización" - Harvard Business Review Latam (2023)</li>
+            <li>"Growth Hacking for B2B SaaS: A Complete Guide" - Marketing Land (2022)</li>
+            <li>Columna mensual en revista "Entrepreneur Peru" sobre marketing digital</li>
+            <li>Autor del e-book "Performance Marketing para Startups" (5,000+ descargas)</li>
+            <li>Contributor regular en blogs especializados de marketing y growth</li>
+          </ul>
+        </section>
+
+        {/* Volunteer Work */}
+        <section className="section">
+          <h2>Voluntariado y Mentoría</h2>
+          <ul>
+            <li>Mentor de marketing para 15+ startups en Wayra y otros aceleradores</li>
+            <li>Instructor voluntario en "Marketing Digital para Emprendedores" - UTEC</li>
+            <li>Advisor de marketing para 3 NGOs educativas en Perú</li>
+            <li>Jurado en competencias de marketing digital universitarias</li>
+          </ul>
+        </section>
+      </ResumeTemplate>
     </DocsContainer>
   );
 }
