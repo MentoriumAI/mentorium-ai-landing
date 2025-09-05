@@ -75,7 +75,7 @@ export default function ResumeHeader({
               {phone && <p><strong>Teléfono:</strong> {phone}</p>}
             </div>
             <div className="info-card-row">
-              <p><strong>LinkedIn:</strong> {linkedin}</p>
+              <p><strong>LinkedIn:</strong> <span dangerouslySetInnerHTML={{ __html: linkedin }} /></p>
               {github && <p><strong>GitHub:</strong> {github}</p>}
             </div>
             <div className="info-card-row">
