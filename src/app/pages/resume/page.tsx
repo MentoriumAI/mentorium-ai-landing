@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ResumeIndexPage() {
   return (
     <DocsContainer>
-      <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ background: 'var(--isabelline)' }}>
+      <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ background: 'var(--paper)' }}>
         <div className="w-full max-w-5xl mx-auto py-8 sm:py-12">
           <div className="space-y-8 sm:space-y-12">
             {/* Header */}
@@ -35,7 +35,7 @@ export default function ResumeIndexPage() {
               <a 
                 href="/pages/resume/moshe"
                 className="group block p-5 sm:p-6 lg:p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                style={{ background: 'var(--paper)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(75, 144, 226, 0.05)', border: '1px solid rgba(75, 144, 226, 0.2)' }}
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
@@ -67,7 +67,7 @@ export default function ResumeIndexPage() {
               <a 
                 href="/pages/resume/silvia"
                 className="group block p-5 sm:p-6 lg:p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                style={{ background: 'var(--paper)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(125, 180, 108, 0.05)', border: '1px solid rgba(125, 180, 108, 0.2)' }}
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
@@ -99,7 +99,7 @@ export default function ResumeIndexPage() {
               <a 
                 href="/pages/resume/arian"
                 className="group block p-5 sm:p-6 lg:p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                style={{ background: 'var(--paper)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(255, 204, 102, 0.05)', border: '1px solid rgba(255, 204, 102, 0.2)' }}
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
@@ -131,7 +131,7 @@ export default function ResumeIndexPage() {
               <a 
                 href="/pages/resume/daniel"
                 className="group block p-5 sm:p-6 lg:p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                style={{ background: 'var(--paper)', border: '1px solid var(--border)' }}
+                style={{ background: 'rgba(255, 150, 79, 0.05)', border: '1px solid rgba(255, 150, 79, 0.2)' }}
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">

@@ -82,6 +82,13 @@ export default function ResumeHeader({
               <p><strong>Ubicación:</strong> {location}</p>
             </div>
           </div>
+          
+          {/* Profiles Button */}
+          <div className="resume-hero-profiles-button">
+            <a href="/pages/resume" className="resume-profiles-button">
+              Ver todos los perfiles
+            </a>
+          </div>
         </div>
         
         {/* Right column - Photo */}

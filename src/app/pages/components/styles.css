@@ -321,6 +321,29 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   font-weight: 600;
 }
 
+.resume-profiles-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--brunswick-green);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.resume-profiles-button:hover {
+  background: var(--dark-moss-green);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resume-hero-profiles-button {
+  margin-top: 1.5rem;
+}
+
 /* Responsive adjustments */
 .resume-hero-photo-mobile {
   display: none;
@@ -699,23 +722,10 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   border-left-style:solid; 
 }
 
-/* Two-column layout for sessions on desktop (masonry-like) */
-@media (min-width: 880px){
-  .session{ 
-    column-count: 2;
-    column-gap: var(--session-gap);
-  }
-  .session > h2{ 
-    column-span: all; 
-    display: block; 
-    margin-bottom: var(--session-gap);
-  }
-  .session .block{ 
-    /* render as independent blocks within columns */
-    display: block; 
-    break-inside: avoid; 
-    margin: 0 0 var(--session-gap) 0; 
-  }
+/* Simple linear layout for sessions */
+.session .block{ 
+  display: block; 
+  margin: 1rem 0; 
 }
 
 /* Color-coded blocks for sessions */
