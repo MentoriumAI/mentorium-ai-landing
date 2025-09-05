@@ -25,48 +25,61 @@ export default function ResumeHeader({
   photoName
 }: ResumeHeaderProps) {
   return (
-    <section className="hero colorful-header">
+    <section className="resume-hero">
       <div className="colorful-accent" aria-hidden="true"></div>
       
       {/* Two column layout */}
-      <div className="header-columns">
+      <div className="resume-hero-columns">
         {/* Left column - Content */}
-        <div className="header-content">
+        <div className="resume-hero-content">
+          {/* Logo */}
           <img 
             src="/logo.svg?v=3" 
             alt="Mentorium AI" 
-            className="hero-logo"
+            className="resume-hero-logo"
           />
           
-          <div className="kicker">Currículum</div>
-          <div className="title">
+          {/* Kicker */}
+          <div className="resume-hero-kicker">Currículum</div>
+          
+          {/* Name */}
+          <div className="resume-hero-name">
             <h1>{name}</h1>
           </div>
-          <p className="byline">{title}</p>
+          
+          {/* Title */}
+          <p className="resume-hero-title">{title}</p>
+          
+          {/* Tags */}
           {subtitle && (
-            <p className="highlight subtitle-highlight">
-              {subtitle}
-            </p>
+            <div className="resume-hero-tags">
+              {subtitle.split(' ⋅ ').map((tag, index) => (
+                <span key={index} className="tag-chip">
+                  {tag.trim()}
+                </span>
+              ))}
+            </div>
           )}
           
-          <div className="contact-info">
-            <div className="contact-row">
+          {/* Info Card */}
+          <div className="resume-hero-info-card">
+            <div className="info-card-row">
               <p><strong>Email:</strong> {email}</p>
               {phone && <p><strong>Teléfono:</strong> {phone}</p>}
             </div>
-            <div className="contact-row">
+            <div className="info-card-row">
               <p><strong>LinkedIn:</strong> {linkedin}</p>
               {github && <p><strong>GitHub:</strong> {github}</p>}
             </div>
-            <div className="contact-row">
+            <div className="info-card-row">
               <p><strong>Ubicación:</strong> {location}</p>
             </div>
           </div>
         </div>
         
         {/* Right column - Photo */}
-        <div className="header-photo-section">
-          <div className="founder-photo-large">
+        <div className="resume-hero-photo-section">
+          <div className="resume-hero-photo">
             <FounderImage photoName={photoName} name={name} />
           </div>
         </div>
