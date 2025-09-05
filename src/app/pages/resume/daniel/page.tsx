@@ -12,7 +12,7 @@ export default function DanielCVPage() {
   return (
     <DocsContainer>
       <ResumeWithHtmlContent
-        name="Daniel Mijail Alpiste Sarmiento"
+        name="Daniel Alpiste"
         title="MLOps Engineer"
         subtitle="Data Science ⋅ DevOps ⋅ Machine Learning ⋅ Cloud Solutions"
         email="daniel@mentorium.ai"

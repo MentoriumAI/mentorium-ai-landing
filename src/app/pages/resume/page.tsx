@@ -48,10 +48,10 @@ export default function ResumeIndexPage() {
                       Moshe Ojeda
                     </h3>
                     <p className="text-xs sm:text-sm font-medium mb-2" style={{ color: 'var(--celtic-blue)' }}>
-                      CEO & Co-fundador
+                      Ingeniero Líder en IA Generativa
                     </p>
                     <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
-                      Especialista en transformación digital e implementación de soluciones de IA en empresas.
+                      Especialista en IA Generativa, MLOps, LLMOps y enseñanza de tecnologías emergentes.
                     </p>
                     <div className="flex items-center text-xs sm:text-sm" style={{ color: 'var(--celtic-blue)' }}>
                       <span>Ver CV</span>
@@ -80,10 +80,10 @@ export default function ResumeIndexPage() {
                       Silvia Fernandez
                     </h3>
                     <p className="text-xs sm:text-sm font-medium mb-2" style={{ color: 'var(--dark-moss-green)' }}>
-                      CPO & Co-fundadora
+                      Diseñadora Curricular e Instruccional
                     </p>
                     <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
-                      Experta en diseño de productos educativos y experiencia de usuario en tecnología educativa.
+                      Especialista en Diseño Curricular, EdTech, LMS y Evaluación Educativa.
                     </p>
                     <div className="flex items-center text-xs sm:text-sm" style={{ color: 'var(--dark-moss-green)' }}>
                       <span>Ver CV</span>
@@ -112,10 +112,10 @@ export default function ResumeIndexPage() {
                       Arian Gallardo
                     </h3>
                     <p className="text-xs sm:text-sm font-medium mb-2" style={{ color: 'var(--brunswick-green)' }}>
-                      CTO & Co-fundador
+                      Ingeniero de Software II - Microsoft Teams
                     </p>
                     <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
-                      Arquitecto de software especializado en sistemas de IA y machine learning a gran escala.
+                      Especialista en IA Generativa, React, TypeScript y Microsoft Teams.
                     </p>
                     <div className="flex items-center text-xs sm:text-sm" style={{ color: 'var(--brunswick-green)' }}>
                       <span>Ver CV</span>

@@ -12,7 +12,7 @@ export default function MosheCVPage() {
   return (
     <DocsContainer>
       <ResumeWithHtmlContent
-        name="Moshe Ojeda Dejo"
+        name="Moshe Ojeda"
         title="Ingeniero Líder en IA Generativa"
         subtitle="IA Generativa ⋅ MLOps ⋅ LLMOps ⋅ Enseñanza"
         email="moshe@mentorium.ai"

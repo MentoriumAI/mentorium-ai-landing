@@ -12,7 +12,7 @@ export default function SilviaCVPage() {
   return (
     <DocsContainer>
       <ResumeWithHtmlContent
-        name="Silvia Fernandez Zapata"
+        name="Silvia Fernandez"
         title="Diseñadora Curricular e Instruccional"
         subtitle="Diseño Curricular ⋅ EdTech ⋅ LMS ⋅ Evaluación Educativa"
         email="silvia@mentorium.ai"
