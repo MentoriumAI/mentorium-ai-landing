@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import DocsContainer from '@/app/pages/components/DocsContainer';
+import FounderImage from '@/app/pages/components/FounderImage';
 
 export const metadata: Metadata = {
   title: 'Equipo Fundador - CVs',
@@ -16,7 +17,7 @@ export default function ResumeIndexPage() {
             {/* Header */}
             <div className="text-center px-4 sm:px-0">
               <img 
-                src="/logo.svg?v=3" 
+                src="/logo-no-bg.svg?v=3" 
                 alt="Mentorium AI" 
                 className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 opacity-90"
               />
@@ -38,10 +39,8 @@ export default function ResumeIndexPage() {
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-all" style={{ backgroundColor: 'var(--celtic-blue)', opacity: '0.1' }}>
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--celtic-blue)' }}>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden group-hover:opacity-90 transition-all">
+                      <FounderImage photoName="moshe.jpg" name="Moshe Ojeda" />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -72,10 +71,8 @@ export default function ResumeIndexPage() {
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-all" style={{ backgroundColor: 'var(--sunglow)', opacity: '0.2' }}>
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--dark-moss-green)' }}>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden group-hover:opacity-90 transition-all">
+                      <FounderImage photoName="silvia.jpg" name="Silvia Fernandez" />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -106,10 +103,8 @@ export default function ResumeIndexPage() {
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-all" style={{ backgroundColor: 'var(--brunswick-green)', opacity: '0.1' }}>
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--brunswick-green)' }}>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden group-hover:opacity-90 transition-all">
+                      <FounderImage photoName="arian.jpg" name="Arian Gallardo" />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">

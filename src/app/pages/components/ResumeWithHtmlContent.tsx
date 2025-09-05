@@ -30,7 +30,7 @@ export default function ResumeWithHtmlContent({ contentPath, ...headerProps }: R
       <div className="toolbar" aria-hidden="true">
         <PrintButton />
       </div>
-      <main className="page cv-doc">
+      <main className="page">
         <ResumeHeader {...headerProps} />
         <div dangerouslySetInnerHTML={{ __html: styles + contentWithoutStyles }} />
       </main>
