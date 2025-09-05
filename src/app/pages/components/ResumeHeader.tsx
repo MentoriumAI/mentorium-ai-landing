@@ -4,6 +4,7 @@ import FounderImage from './FounderImage';
 export type ResumeHeaderProps = {
   name: string;
   title: string;
+  title2?: string;
   subtitle?: string;
   email: string;
   phone?: string;
@@ -16,6 +17,7 @@ export type ResumeHeaderProps = {
 export default function ResumeHeader({
   name,
   title,
+  title2,
   subtitle,
   email,
   phone,
@@ -49,6 +51,9 @@ export default function ResumeHeader({
           
           {/* Title */}
           <p className="resume-hero-title">{title}</p>
+          {title2 && (
+            <p className="resume-hero-title-2" dangerouslySetInnerHTML={{ __html: title2.replace(/ - /g, '<br />') }} />
+          )}
           
           {/* Mobile Photo - shows only on mobile */}
           <div className="resume-hero-photo-mobile">

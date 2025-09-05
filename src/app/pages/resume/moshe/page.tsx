@@ -13,8 +13,9 @@ export default function MosheCVPage() {
     <DocsContainer>
       <ResumeWithHtmlContent
         name="Moshe Ojeda"
-        title="Ingeniero Líder en IA Generativa"
-        subtitle="IA Generativa ⋅ MLOps ⋅ LLMOps ⋅ Enseñanza"
+        title="CEO @Mentorium AI"
+        title2="Head of Agent Engineering & Co-Founder @Agentman - Docente & Keynote Speaker"
+        subtitle="AI Engineering ⋅ MLOps ⋅ LLMOps ⋅ Cloud Infrastucture ⋅ Product Management"
         email="moshe@mentorium.ai"
         phone="(+51) 953-719-060"
         linkedin="<a href='https://www.linkedin.com/in/moshe-ojeda/' target='_blank' rel='noopener noreferrer'>moshe-ojeda</a>"

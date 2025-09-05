@@ -13,7 +13,8 @@ export default function SilviaCVPage() {
     <DocsContainer>
       <ResumeWithHtmlContent
         name="Silvia Fernandez"
-        title="Diseñadora Curricular e Instruccional"
+        title="Learning Experience Leader @Mentorium AI"
+        title2="Líder de Programa Educativo (+24k estudiantes) @Cibertec"
         subtitle="Diseño Curricular ⋅ EdTech ⋅ LMS ⋅ Evaluación Educativa"
         email="silvia@mentorium.ai"
         phone="(+51) 963-841-294"

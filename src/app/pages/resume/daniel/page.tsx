@@ -13,8 +13,9 @@ export default function DanielCVPage() {
     <DocsContainer>
       <ResumeWithHtmlContent
         name="Daniel Alpiste"
-        title="MLOps Engineer"
-        subtitle="Data Science ⋅ DevOps ⋅ Machine Learning ⋅ Cloud Solutions"
+        title="Head of Operations @Mentorium AI"
+        title2="ML Product Owner @BCP - Docente & Keynote Speaker"
+        subtitle="Machine Learning ⋅ DevOps ⋅ MLOps ⋅ IA Generativa"
         email="daniel@mentorium.ai"
         phone="(+51) 941-952-278"
         linkedin="<a href='https://www.linkedin.com/in/daniel-alpiste/' target='_blank' rel='noopener noreferrer'>daniel-alpiste</a>"

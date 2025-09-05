@@ -13,7 +13,8 @@ export default function ArianCVPage() {
     <DocsContainer>
       <ResumeWithHtmlContent
         name="Arian Gallardo"
-        title="Ingeniero de Software II - Microsoft Teams"
+        title="Head of Platform & AI @Mentorium AI"
+        title2="Ingeniero de Software II @Microsoft - Docente & Keynote Speaker"
         subtitle="IA Generativa ⋅ React ⋅ TypeScript ⋅ Microsoft Teams"
         email="arian@mentorium.ai"
         phone="(+1 778) 917-6074"
