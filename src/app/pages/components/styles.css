@@ -955,6 +955,97 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   margin-top: .3rem; 
 }
 
+/* ===== Accordion / Expander ===== */
+.accordion{ 
+  display: grid; 
+  gap: .6rem; 
+  margin: .6rem 0 1.8rem; /* larger bottom margin after a sequence */ 
+}
+/* Extra breathing room after the last expander */
+.accordion details:last-child{ 
+  margin-bottom: .6rem; 
+}
+  
+.accordion details{ 
+  background: var(--paper); 
+  border: 1px solid var(--border); 
+  border-left: 6px solid var(--dark-moss-green); 
+  border-radius: 10px; 
+  overflow: hidden; 
+  box-shadow: 0 1px 0 rgba(0,0,0,.03); 
+  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease; 
+}
+.accordion details:hover{ 
+  background: rgba(83,108,3,.06); 
+}
+.accordion details[open]{ 
+  background: rgba(83,108,3,.10); 
+  border-color: rgba(83,108,3,.25); 
+}
+  
+.accordion summary{ 
+  list-style: none; 
+  cursor: pointer; 
+  padding: .9rem 1rem; 
+  display: flex; 
+  align-items: center; 
+  gap: .6rem; 
+  font-weight: 700; 
+  color: var(--dark-moss-green); 
+  outline: none; 
+  user-select: none; 
+}
+.accordion summary::-webkit-details-marker{ display:none; }
+  
+/* Chevron indicator */
+.accordion summary::after{ 
+  content: "▸"; 
+  margin-left: auto; 
+  color: var(--dark-moss-green); 
+  transform: translateY(-1px); 
+  transition: transform .18s ease; 
+  font-size: 1.1rem; 
+  line-height: 1; 
+}
+.accordion details[open] > summary::after{ 
+  content: "▾"; 
+  transform: none; 
+}
+  
+/* Body content inside the expander */
+.accordion details > *:not(summary){ 
+  padding: 0 1rem 1rem; 
+}
+.accordion details > p{ 
+  margin: .85rem 0; 
+  line-height: 1.7; 
+  color: var(--ink); 
+}
+.accordion details > ul,
+.accordion details > ol{ 
+  margin: .6rem 0 1rem; 
+  padding-left: 1.2rem; 
+}
+  
+/* Focus-visible for keyboard users */
+.accordion summary:focus-visible{ 
+  box-shadow: 0 0 0 3px rgba(83,108,3,.30); 
+  border-radius: 8px; 
+}
+  
+/* Print: keep expanders open for PDF export usability (optional) */
+@media print{ 
+  .accordion details{ 
+    background: white; 
+    box-shadow: none; 
+  }
+  /* Many browsers force details open in print; these hints keep a clean look */
+  .accordion summary{ 
+    padding-bottom: .6rem; 
+    border-bottom: 1px solid var(--border); 
+  }
+}
+
 /* Notes and lists */
 .note ol{
   list-style: decimal; /* ensure numbers show even if globally reset */
