@@ -12,11 +12,12 @@ export default function DanielCVPage() {
   return (
     <DocsContainer>
       <ResumeWithHtmlContent
-        name="Daniel Alpiste"
-        title="CMO & Co-fundador de Mentorium AI"
-        subtitle="Growth Marketing ⋅ SaaS ⋅ Performance Marketing ⋅ EdTech"
-        email="daniel@mentorium.ai"
-        linkedin="/in/danielalpiste"
+        name="Daniel Mijail Alpiste Sarmiento"
+        title="MLOps Engineer"
+        subtitle="Data Science ⋅ DevOps ⋅ Machine Learning ⋅ Cloud Solutions"
+        email="danielalpiste@gmail.com"
+        phone="+51 941-952-278"
+        linkedin="Linkedin"
         location="Lima, Perú"
         photoName="daniel.jpg"
         contentPath="src/app/pages/resume/daniel/cv-content.html"
