@@ -208,9 +208,20 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  border-bottom: 4px solid var(--sunglow);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
+  border-bottom: none;
+  position: relative;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.resume-hero-content .resume-hero-name h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.5rem;
+  width: 100%;
+  height: 4px;
+  background: #7DB46C;
 }
 
 .resume-hero-content .resume-hero-title {
@@ -254,24 +265,17 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  overflow: hidden;
-  border: 6px solid transparent;
-  background: linear-gradient(45deg, var(--sunglow), var(--orange-pantone), var(--celtic-blue));
-  padding: 6px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   position: relative;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .resume-hero-photo::before {
   content: '';
   position: absolute;
-  inset: -6px;
-  padding: 6px;
-  background: linear-gradient(45deg, var(--sunglow), var(--orange-pantone), var(--celtic-blue));
+  inset: -4px;
+  background: linear-gradient(45deg, #7DB46C, var(--brunswick-green));
   border-radius: 50%;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: xor;
-  -webkit-mask-composite: xor;
+  z-index: -1;
 }
 
 .resume-hero-photo .founder-image {
