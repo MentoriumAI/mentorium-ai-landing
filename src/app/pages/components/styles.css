@@ -489,6 +489,12 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   padding-top: 1.6rem; 
   box-shadow:none; 
 }
+/* helper to remove top border/line for the first section after hero */
+.section.no-border-top{
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0.8rem;
+}
 /* .section + .section{ 
   border-top: 1px solid var(--border); 
   padding-top: 1.6rem; 
@@ -990,12 +996,17 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   display: flex; 
   align-items: center; 
   gap: .6rem; 
-  font-weight: 700; 
+  font-weight: 400; 
   color: var(--dark-moss-green); 
   outline: none; 
   user-select: none; 
 }
 .accordion summary::-webkit-details-marker{ display:none; }
+/* Ensure no bold inside summary text (names wrapped in <strong>) */
+.accordion summary strong{ 
+  font-weight: 400; 
+  color: inherit; 
+}
   
 /* Chevron indicator */
 .accordion summary::after{ 
