@@ -183,7 +183,7 @@ a{ color: var(--celtic-blue); text-decoration: none; }
 .resume-hero-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .resume-hero-content .resume-hero-logo {

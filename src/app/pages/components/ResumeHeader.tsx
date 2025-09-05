@@ -34,13 +34,13 @@ export default function ResumeHeader({
         <div className="resume-hero-content">
           {/* Logo */}
           <img 
-            src="/logo.svg?v=3" 
+            src="/logo-no-bg.svg?v=3" 
             alt="Mentorium AI" 
             className="resume-hero-logo"
           />
           
           {/* Kicker */}
-          <div className="resume-hero-kicker">Currículum</div>
+          <div className="resume-hero-kicker">Resume</div>
           
           {/* Name */}
           <div className="resume-hero-name">
