@@ -230,7 +230,7 @@ jobs:
             --port="$PORT" \
             --memory="$MEMORY" \
             --cpu="$CPU" \
-            --min-instances=0 \
+            --min-instances=1 \
             --max-instances="$MAX_INSTANCES" \
             --concurrency="$CONCURRENCY" \
             --execution-environment=gen2 \
