@@ -482,13 +482,29 @@ a{ color: var(--celtic-blue); text-decoration: none; }
 .section{ 
   background: transparent; 
   /* border:0;  */
-  border-top: 1px solid var(--border); 
+  /* border-top: 1px solid var(--border);  */
   border-radius:0; 
   padding:0; 
   margin-top: 1.6rem; 
   padding-top: 1.6rem; 
   box-shadow:none; 
 }
+
+/* Divider line and spacing for H2s inside sections */
+.section h2{
+  border-bottom: 1px solid var(--border);
+  padding-bottom: .6rem;
+  /* Default: generous top margin when no chip/tag directly above */
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* If a chip/tag is directly above the h2, tighten the top spacing */
+.section .tag + h2,
+.section .chip + h2{
+  margin-top: .5rem;
+}
+
 /* helper to remove top border/line for the first section after hero */
 .section.no-border-top{
   border-top: 0;
