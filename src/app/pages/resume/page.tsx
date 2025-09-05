@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ResumeIndexPage() {
   return (
     <DocsContainer>
-      <div className="min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ background: 'var(--isabelline)' }}>
+      <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ background: 'var(--isabelline)' }}>
         <div className="w-full max-w-5xl mx-auto py-8 sm:py-12">
           <div className="space-y-8 sm:space-y-12">
             {/* Header */}
@@ -44,16 +44,16 @@ export default function ResumeIndexPage() {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight" style={{ color: 'var(--ink)' }}>
+                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight mt-0 mb-1" style={{ color: 'var(--ink)' }}>
                       Moshe Ojeda
                     </h3>
-                    <p className="text-xs sm:text-sm font-medium mb-1" style={{ color: 'var(--celtic-blue)' }}>
+                    <p className="text-xs sm:text-sm font-medium mb-2" style={{ color: 'var(--celtic-blue)' }}>
                       CEO & Co-fundador
                     </p>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                    <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
                       Especialista en transformación digital e implementación de soluciones de IA en empresas.
                     </p>
-                    <div className="mt-3 sm:mt-4 flex items-center text-xs sm:text-sm" style={{ color: 'var(--celtic-blue)' }}>
+                    <div className="flex items-center text-xs sm:text-sm" style={{ color: 'var(--celtic-blue)' }}>
                       <span>Ver CV</span>
                       <svg className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -76,16 +76,16 @@ export default function ResumeIndexPage() {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight" style={{ color: 'var(--ink)' }}>
+                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight mt-0 mb-1" style={{ color: 'var(--ink)' }}>
                       Silvia Fernandez
                     </h3>
-                    <p className="text-xs sm:text-sm font-medium mb-1" style={{ color: 'var(--dark-moss-green)' }}>
+                    <p className="text-xs sm:text-sm font-medium mb-2" style={{ color: 'var(--dark-moss-green)' }}>
                       CPO & Co-fundadora
                     </p>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                    <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
                       Experta en diseño de productos educativos y experiencia de usuario en tecnología educativa.
                     </p>
-                    <div className="mt-3 sm:mt-4 flex items-center text-xs sm:text-sm" style={{ color: 'var(--dark-moss-green)' }}>
+                    <div className="flex items-center text-xs sm:text-sm" style={{ color: 'var(--dark-moss-green)' }}>
                       <span>Ver CV</span>
                       <svg className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -108,16 +108,16 @@ export default function ResumeIndexPage() {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight" style={{ color: 'var(--ink)' }}>
+                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight mt-0 mb-1" style={{ color: 'var(--ink)' }}>
                       Arian Gallardo
                     </h3>
-                    <p className="text-xs sm:text-sm font-medium mb-1" style={{ color: 'var(--brunswick-green)' }}>
+                    <p className="text-xs sm:text-sm font-medium mb-2" style={{ color: 'var(--brunswick-green)' }}>
                       CTO & Co-fundador
                     </p>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                    <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
                       Arquitecto de software especializado en sistemas de IA y machine learning a gran escala.
                     </p>
-                    <div className="mt-3 sm:mt-4 flex items-center text-xs sm:text-sm" style={{ color: 'var(--brunswick-green)' }}>
+                    <div className="flex items-center text-xs sm:text-sm" style={{ color: 'var(--brunswick-green)' }}>
                       <span>Ver CV</span>
                       <svg className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -135,23 +135,21 @@ export default function ResumeIndexPage() {
               >
                 <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-all" style={{ backgroundColor: 'var(--orange-pantone)', opacity: '0.1' }}>
-                      <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--orange-pantone)' }}>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden group-hover:opacity-90 transition-all">
+                      <FounderImage photoName="daniel.jpg" name="Daniel Alpiste" />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight" style={{ color: 'var(--ink)' }}>
+                    <h3 className="text-base sm:text-lg font-semibold transition-colors leading-tight mt-0 mb-1" style={{ color: 'var(--ink)' }}>
                       Daniel Alpiste
                     </h3>
-                    <p className="text-xs sm:text-sm font-medium mb-1" style={{ color: 'var(--orange-pantone)' }}>
-                      CMO & Co-fundador
+                    <p className="text-xs sm:text-sm font-medium mb-2" style={{ color: 'var(--orange-pantone)' }}>
+                      MLOps Engineer
                     </p>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
-                      Estratega de marketing digital con experiencia en crecimiento de productos SaaS B2B.
+                    <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--muted)' }}>
+                      Especialista en Data Science, DevOps y Machine Learning con experiencia en soluciones de nube.
                     </p>
-                    <div className="mt-3 sm:mt-4 flex items-center text-xs sm:text-sm" style={{ color: 'var(--orange-pantone)' }}>
+                    <div className="flex items-center text-xs sm:text-sm" style={{ color: 'var(--orange-pantone)' }}>
                       <span>Ver CV</span>
                       <svg className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
