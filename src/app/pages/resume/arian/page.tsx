@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import ResumeWithHtmlContent from '@/app/pages/components/ResumeWithHtmlContent';
 
 export const metadata: Metadata = {
-  title: 'Arian Gallardo - CV',
-  description: 'Currículum de Arian Gallardo, Ingeniero de Software II',
+  title: 'Arian Gallardo - Head of Platform Mentorium AI',
+  description: 'CV de Arian Gallardo, Head of Platform & AI & Co-fundador de Mentorium AI',
 };
 
 export default function ArianCVPage() {

@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import ResumeWithHtmlContent from '@/app/pages/components/ResumeWithHtmlContent';
 
 export const metadata: Metadata = {
-  title: 'Silvia Fernandez - CV',
-  description: 'Currículum de Silvia Fernandez, Diseñadora Curricular e Instruccional',
+  title: 'Silvia Fernandez - Learning Leader Mentorium AI',
+  description: 'CV de Silvia Fernandez, Learning Experience Leader & Co-fundadora de Mentorium AI',
 };
 
 export default function SilviaCVPage() {

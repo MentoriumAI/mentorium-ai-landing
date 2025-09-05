@@ -3,8 +3,8 @@ import React from 'react';
 import DocsContainer from '@/app/pages/components/DocsContainer';
 
 export const metadata: Metadata = {
-  title: 'Pacasmayo - Documentos',
-  description: 'Documentos del proyecto Pacasmayo - Mentorium AI',
+  title: 'Proyecto Pacasmayo - Mentorium AI',
+  description: 'Documentos del proyecto de IA aplicada - Mentorium × Cementos Pacasmayo',
 };
 
 export default function PacasmayoIndexPage() {

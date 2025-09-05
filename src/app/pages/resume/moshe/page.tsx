@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import ResumeWithHtmlContent from '@/app/pages/components/ResumeWithHtmlContent';
 
 export const metadata: Metadata = {
-  title: 'Moshe Ojeda - CV',
-  description: 'Currículum de Moshe Ojeda, Ingeniero Líder en IA Generativa',
+  title: 'Moshe Ojeda - CEO Mentorium AI',
+  description: 'CV de Moshe Ojeda, CEO & Co-fundador de Mentorium AI, especialista en IA Generativa',
 };
 
 export default function MosheCVPage() {

@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import ResumeWithHtmlContent from '@/app/pages/components/ResumeWithHtmlContent';
 
 export const metadata: Metadata = {
-  title: 'Daniel Alpiste - CV',
-  description: 'Currículum de Daniel Alpiste, CMO & Co-fundador de Mentorium AI',
+  title: 'Daniel Alpiste - Head of Operations Mentorium AI',
+  description: 'CV de Daniel Alpiste, Head of Operations & Co-fundador de Mentorium AI',
 };
 
 export default function DanielCVPage() {

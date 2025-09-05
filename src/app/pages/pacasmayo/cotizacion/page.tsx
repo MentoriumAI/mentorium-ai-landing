@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import HtmlEmbedWithPresentation from '@/app/pages/components/HtmlEmbedWithPresentation';
 
 export const metadata: Metadata = {
-  title: 'Propuesta',
-  description: 'Pacasmayo - Propuesta',
+  title: 'Cotización - Programa de IA',
+  description: 'Cotización del Programa de IA - Mentorium × Pacasmayo',
 };
 
 export default function PropuestaPage() {

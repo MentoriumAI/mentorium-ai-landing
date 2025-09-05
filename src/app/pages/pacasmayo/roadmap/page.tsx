@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import HtmlEmbedWithPresentation from '@/app/pages/components/HtmlEmbedWithPresentation';
 
 export const metadata: Metadata = {
-  title: 'Roadmap',
-  description: 'Pacasmayo - Roadmap',
+  title: 'Roadmap - Programa de IA',
+  description: 'Roadmap del Programa de IA (8 Sesiones) - Mentorium × Pacasmayo',
 };
 
 export default function RoadmapPage() {

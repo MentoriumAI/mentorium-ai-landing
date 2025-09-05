@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import FounderImage from '@/app/pages/components/FounderImage';
 
 export const metadata: Metadata = {
-  title: 'Equipo Fundador - CVs',
-  description: 'Currículums del equipo fundador de Mentorium AI',
+  title: 'Equipo Fundador - Mentorium AI',
+  description: 'Currículums y experiencia profesional del equipo fundador de Mentorium AI',
 };
 
 export default function ResumeIndexPage() {
