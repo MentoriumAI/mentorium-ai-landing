@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import DocsContainer from '@/app/pages/components/DocsContainer';
-import ResumeTemplate from '@/app/pages/components/ResumeTemplate';
+import ResumeWithHtmlContent from '@/app/pages/components/ResumeWithHtmlContent';
 
 export const metadata: Metadata = {
   title: 'Arian Gallardo - CV',
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ArianCVPage() {
   return (
     <DocsContainer>
-      <ResumeTemplate
+      <ResumeWithHtmlContent
         name="Arian Gallardo"
         title="Ingeniero de Software II - Microsoft Teams"
         subtitle="IA Generativa ⋅ React ⋅ TypeScript ⋅ Microsoft Teams"
@@ -21,146 +21,8 @@ export default function ArianCVPage() {
         github="github.com/ariangcc"
         location="Vancouver, Columbia Británica, Canadá"
         photoName="arian.jpg"
-      >
-        {/* Professional Summary */}
-        <section className="section">
-          <h2>Resumen Profesional</h2>
-          <p>Ingeniero de Software especializado en el <span className="highlight">diseño y desarrollo de funcionalidades impulsadas por IA Generativa</span> en Microsoft Teams. Experto en la integración de LLMs, optimización de modelos y desarrollo de características de núcleo de composición de mensajes.</p>
-          <p>Con experiencia sólida en <span className="highlight">plataformas de gran escala como Microsoft Teams y Dynamics 365</span>, lidero implementaciones end-to-end de flujos de trabajo de IA para habilitar comunicación inteligente y automatizada. Especialista en tecnologías de vanguardia incluyendo OpenAI GPT, React, TypeScript, .NET y Azure.</p>
-        </section>
-
-        {/* Experience */}
-        <section className="section theme-orange">
-          <span className="tag">Trayectoria profesional</span>
-          <h2>Experiencia Laboral</h2>
-          
-          <div className="experience-item">
-            <h3>Ingeniero de Software II - Microsoft</h3>
-            <p className="period">Enero 2022 - Presente</p>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Vancouver, Columbia Británica, Canadá</p>
-            
-            <h4 style={{color: 'var(--dark-moss-green)', marginTop: '1rem'}}>Microsoft Teams - Core Compose</h4>
-            <ul>
-              <li>Diseño y desarrollo de funcionalidades de mensajería impulsadas por IA Generativa dentro de Microsoft Teams, liderando la implementación end-to-end a través de experiencias del lado del cliente y flujos de trabajo de IA para habilitar comunicación inteligente y automatizada</li>
-              <li>Gestión y optimización de esfuerzos de integración de LLM, incluyendo migración de modelos, ajuste de prompts, pruebas de calidad, y monitoreo basado en telemetría para asegurar funcionalidad de IA de alto rendimiento, escalable y alineada al usuario</li>
-              <li>Desarrollo y refinamiento de características centrales del compose box en la aplicación de escritorio para mejorar la experiencia del usuario durante la composición de mensajes, enfocándose en usabilidad, accesibilidad, rendimiento, e integración fluida con el ecosistema de mensajería más amplio</li>
-            </ul>
-
-            <h4 style={{color: 'var(--dark-moss-green)', marginTop: '1rem'}}>Dynamics 365 for Marketing and Sales</h4>
-            <ul>
-              <li>Diseñé e implementé características de Customer Journey Orchestration impulsadas por IA dentro de Microsoft Dynamics 365, integrando creación de journeys asistida por LLM, segmentación de audiencias en lenguaje natural, y seguimiento de engagement en tiempo real para habilitar campañas personalizadas y basadas en datos</li>
-              <li>Apoyé el módulo Dynamics 365 Sales, una plataforma crítica que sirve a miles de clientes, abordando prontamente incidentes de sitios en vivo, colaborando con compañeros de equipo para resolver problemas de alta prioridad, implementando mejoras de procesos, y entregando correcciones de bugs y mejoras para asegurar confiabilidad y satisfacción del usuario</li>
-            </ul>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Tecnologías utilizadas: OpenAI GPT 4o/4.1, Jest, React, JavaScript, TypeScript, .NET, C#, Azure</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Ingeniero de Software - Fromsolvers</h3>
-            <p className="period">Abril 2021 - Diciembre 2021</p>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Lima, Perú</p>
-            <ul>
-              <li>Diseñé y desarrollé una aplicación web para automatizar procesos de importación y exportación para una empresa de servicios aeroportuarios, mejorando significativamente la eficiencia operativa, reduciendo el esfuerzo manual, y mejorando la precisión de procesos</li>
-              <li>Participé en reuniones con clientes junto al equipo técnico para recopilar, refinar, y alinear requisitos del sistema, asegurando que la solución entregada cumpliera con las necesidades del negocio y superara las expectativas del cliente</li>
-            </ul>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Tecnologías utilizadas: React, JavaScript, AWS (EC2, RDS, S3)</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Desarrollador e Investigador - Agencia Espacial del Perú</h3>
-            <p className="period">Febrero 2020 - Julio 2021</p>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Lima, Perú</p>
-            <ul>
-              <li>Desarrollé una herramienta dinámica de detección de inundaciones, permitiendo a los investigadores analizar imágenes satelitales en tiempo real con una interfaz de mapa fácil de usar, mejorando significativamente la velocidad y precisión del diagnóstico de inundaciones</li>
-              <li>Diseñé una red neuronal profunda de alta precisión para segmentación semántica de imágenes satelitales, aprovechando el aprendizaje semi-supervisado para identificar áreas propensas a inundaciones en el Norte de Perú, contribuyendo a la gestión efectiva de desastres naturales</li>
-              <li>Presenté el proyecto como Tesis de Licenciatura, ganando reconocimiento por avanzar metodologías de evaluación de desastres naturales. El trabajo conectó la investigación académica con aplicaciones prácticas, proporcionando herramientas impactantes para detección de inundaciones y mejorando estrategias de respuesta a desastres en Perú</li>
-            </ul>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Tecnologías utilizadas: VueJS, Flask, JavaScript, Python, ArcGIS, OpenStreetMap</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Practicante de Ingeniero de Software - VTEX</h3>
-            <p className="period">Diciembre 2020 - Abril 2021</p>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Río de Janeiro, Brasil</p>
-            <ul>
-              <li>Desarrollé funcionalidades para habilitar Progressive Web Apps (PWAs) y notificaciones push, mejorando el engagement del cliente y la experiencia de compra en la plataforma de comercio de VTEX</li>
-              <li>Contribuí al equipo de Store Framework creando soluciones backend y APIs, apoyando el despliegue fluido y personalización de tiendas en línea para clientes empresariales</li>
-            </ul>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Tecnologías utilizadas: TypeScript, Node.js, GraphQL</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Practicante de Desarrollo de Software - Siemens Healthineers</h3>
-            <p className="period">Julio 2018 - Febrero 2019</p>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Malvern, PA, Estados Unidos</p>
-            <ul>
-              <li>Diseñé un framework integrando librerías de deep learning para optimizar procesos de inferencia e imagen en tiempo real en escáneres CT y MRI, mientras optimizaba sistemas distribuidos para entrenamiento escalable de redes de deep learning, habilitando procesamiento eficiente de grandes conjuntos de datos médicos</li>
-            </ul>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Tecnologías utilizadas: C++, Apache Spark, Caffe, TensorFlow</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Practicante de Ingeniero de Software - IBM</h3>
-            <p className="period">Enero 2018 - Marzo 2018</p>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Lima, Perú</p>
-            <ul>
-              <li>Automaticé procesos de recuperación de datos, reduciendo el tiempo de reportes de base de datos en 75%, mientras aseguraba operaciones de base de datos seguras y confiables para más de 100 clientes principales a través de resolución rápida de problemas y gestión de integridad de datos</li>
-            </ul>
-            <p style={{fontStyle: 'italic', color: 'var(--muted)'}}>Tecnologías utilizadas: Bash, Perl, Linux, SQL</p>
-          </div>
-        </section>
-
-        {/* Education */}
-        <section className="section">
-          <h2>Formación Académica</h2>
-          <div className="education-item">
-            <h3>Licenciatura en Ingeniería de Computación</h3>
-            <p className="period">Pontificia Universidad Católica del Perú - Marzo 2015 - Julio 2021</p>
-            <p><strong>GPA:</strong> 3.69/4.00</p>
-            <p>Lima, Perú</p>
-          </div>
-        </section>
-
-        {/* Activities and Achievements */}
-        <section className="section theme-orange">
-          <span className="tag">Actividades extracurriculares</span>
-          <h2>Actividades Extracurriculares y Reconocimientos</h2>
-          
-          <div className="experience-item">
-            <h3>Mentor del Hackathon APEC 2024</h3>
-            <p className="period">2024</p>
-            <p>Mentoré equipos en el Hackathon AYNI, parte del Foro de Cooperación Económica Asia-Pacífico, proporcionando guía técnica y refinando soluciones en áreas como turismo inteligente e inclusión digital.</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Concurso de Aplicación Móvil TuApp</h3>
-            <p className="period">2019</p>
-            <p>Creé una plataforma conectando voluntarios, ONGs y empresas, ganando reconocimiento de Facebook como la "aplicación de cuidado social más completa" en las Finales Mundiales 2019 en México.</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Finales Latinoamericanas ICPC 2020</h3>
-            <p className="period">2020</p>
-            <p>2do lugar de 100 equipos en Perú</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>IEEEXtreme</h3>
-            <p className="period">Últimas 4 competencias</p>
-            <p>Top-100 en las últimas 4 competencias</p>
-          </div>
-        </section>
-
-        {/* Languages */}
-        <section className="section">
-          <h2>Idiomas</h2>
-          <div className="languages">
-            <p><strong>Español:</strong> Nativo</p>
-            <p><strong>Inglés:</strong> Fluido</p>
-            <p><strong>Portugués:</strong> Avanzado</p>
-            <p><strong>Japonés:</strong> Básico</p>
-          </div>
-        </section>
-      </ResumeTemplate>
+        contentPath="src/app/pages/resume/arian/cv-content.html"
+      />
     </DocsContainer>
   );
 }

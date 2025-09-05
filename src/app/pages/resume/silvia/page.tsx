@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import DocsContainer from '@/app/pages/components/DocsContainer';
-import ResumeTemplate from '@/app/pages/components/ResumeTemplate';
+import ResumeWithHtmlContent from '@/app/pages/components/ResumeWithHtmlContent';
 
 export const metadata: Metadata = {
   title: 'Silvia Fernandez - CV',
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function SilviaCVPage() {
   return (
     <DocsContainer>
-      <ResumeTemplate
+      <ResumeWithHtmlContent
         name="Silvia Fernandez Zapata"
         title="Diseñadora Curricular e Instruccional"
         subtitle="Diseño Curricular ⋅ EdTech ⋅ LMS ⋅ Evaluación Educativa"
@@ -20,160 +20,8 @@ export default function SilviaCVPage() {
         linkedin="/in/silvia-fernandez-zapata"
         location="Lima, Perú"
         photoName="silvia.jpg"
-      >
-        {/* Professional Summary */}
-        <section className="section">
-          <h2>Resumen Profesional</h2>
-          <p>Me apasiona <span className="highlight">liderar iniciativas de transformación en los modelos educativos</span>, así como participar en proyectos que promuevan el desarrollo del conocimiento mediante la integración de nuevas tecnologías.</p>
-          <p>Con un firme compromiso hacia la <span className="highlight">diversidad e inclusión, así como la promoción de la agilidad en la gestión educativa y organizacional</span>, mi propósito es generar y diseñar experiencias de aprendizaje innovadoras que respondan de manera efectiva a las necesidades y perspectivas de desarrollo académico.</p>
-        </section>
-
-        {/* Experience */}
-        <section className="section theme-orange">
-          <span className="tag">Trayectoria profesional</span>
-          <h2>Experiencia Laboral</h2>
-          
-          <div className="experience-item">
-            <h3>Coordinadora de Producto Diplomado y Alianza Educativa - LAUREATE EDUCATION INC</h3>
-            <p className="period">Octubre 2024 - Presente</p>
-            <ul>
-              <li>Gestión y supervisión del diseño y desarrollo de programas educativos, asegurando la alineación con los estándares pedagógicos, la pertinencia de los contenidos y la integración de competencias clave</li>
-              <li>Establecimiento y mantenimiento de alianzas educativas estratégicas con instituciones externas, facilitando la implementación de programas académicos y colaborando en la creación de sinergias para nuevas ofertas</li>
-              <li>Implementación de metodologías innovadoras de evaluación y revisión de materiales pedagógicos, utilizando herramientas de seguimiento y retroalimentación continua para asegurar la calidad de los recursos educativos</li>
-            </ul>
-            <p className="achievement"><strong>Logro esencial:</strong> Rediseño y mejora continua de los materiales pedagógicos a través de la integración de enfoques transversales y la alineación con los estándares nacionales, mejorando la calidad educativa y fortaleciendo la relación con las instituciones aliadas.</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Supervisor Curricular - CIBERTEC</h3>
-            <p className="period">Mayo 2024 - Octubre 2024</p>
-            <ul>
-              <li>Diseñé y establecí un proceso integral de diseño instruccional, adaptándolo a las necesidades de los cursos de alianza educativa</li>
-              <li>Supervisé y coordiné un equipo de diseñadores instruccionales, asegurando que los materiales educativos se desarrollen en línea con las competencias, habilidades y enfoques del MINEDU</li>
-              <li>Colaboré con docentes y especialistas para crear y revisar módulos educativos innovadores y efectivos, alineados con los estándares educativos y objetivos de aprendizaje</li>
-            </ul>
-            <p className="achievement"><strong>Logro esencial:</strong> Lideré la implementación exitosa de un sistema de supervisión que ha mejorado significativamente la calidad de los cursos, garantizando su alineación con los lineamientos pedagógicos, promoviendo la excelencia académica.</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Asesora Curricular - Universidad Tecnológica del Perú (UTP)</h3>
-            <p className="period">Agosto 2023 - Presente</p>
-            <ul>
-              <li>Mejora y desarrollo de carpetas instruccionales, enfocado en la optimización de planes de estudio y materiales educativos</li>
-              <li>Revisión y análisis crítico de recursos educativos para proponer mejoras sustanciales y adaptaciones que se alineen con los objetivos educativos</li>
-              <li>Diseño de experiencias de aprendizaje significativas mediante la implementación de estrategias innovadoras que estimulan el interés y el compromiso de los estudiantes</li>
-            </ul>
-            <p className="achievement"><strong>Logro esencial:</strong> Implementar con éxito la revisión integral de un programa educativo, liderando el rediseño completo de las carpetas instruccionales, favoreciendo los estándares de excelencia de diseño curricular y la mejora continua.</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Asesora Académica - GERENS - Escuela de Posgrado</h3>
-            <p className="period">Diciembre 2022 - Agosto 2023</p>
-            <ul>
-              <li>Analizar y monitorear las herramientas de LMS integradas al programa para realizar propuestas de mejora en el proceso de enseñanza-aprendizaje</li>
-              <li>Supervisar el desarrollo del diseño instruccional elaborado por los docentes a fin de contribuir en la mejora de la matriz de los cursos</li>
-              <li>Evaluar los recursos y materiales del programa conforme a los estándares a fin de asegurar los objetivos académicos</li>
-            </ul>
-            <p className="achievement"><strong>Logro esencial:</strong> Despliegue del programa de capacitación dirigido al personal de la plataforma MAC a nivel nacional - PROMSACE.</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Analista de Aprendizaje - Innova Qx</h3>
-            <p className="period">Julio 2022 - Diciembre 2022</p>
-            <ul>
-              <li>Recopilación y análisis de datos relacionados con el rendimiento académico de los estudiantes, evaluaciones de cursos y retroalimentación del cuerpo docente</li>
-              <li>Integración efectiva de tecnologías educativas para mejorar la entrega de contenido, la participación del estudiante y la eficacia del aprendizaje en el entorno médico</li>
-              <li>Colaboración activa con docentes y personal educativo para identificar áreas de mejora, proporcionar apoyo en la implementación de estrategias pedagógicas efectivas</li>
-            </ul>
-            <p className="achievement"><strong>Logro esencial:</strong> Desarrollo y evaluación de programas de formación médica, asegurando que estén alineados con los estándares académicos y las necesidades del campo de medicina.</p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Asistente de Aprendizaje - Innova Qx</h3>
-            <p className="period">Enero 2022 - Junio 2022</p>
-            <ul>
-              <li>Dirección de plataformas y softwares LMS con el Departamento de Recursos Humanos y equipos de TI para el lanzamiento de proyectos educativos e-learning</li>
-              <li>Administración de base de datos de los programas y contenidos educativos</li>
-              <li>Asesorar los equipos de diseñadores y diseñadores curriculares sobre las capacidades y limitaciones de las plataformas, como consultora de aprendizaje en base a las tecnologías dentro de la organización</li>
-              <li>Liderar proyectos educativos de aprendizaje especializado, supervisión de metodologías y pruebas de implementación</li>
-            </ul>
-            <p className="achievement"><strong>Logro esencial:</strong> Diseño de programas de aprendizaje enfocados en el uso de herramientas y medios digitales.</p>
-          </div>
-        </section>
-
-        {/* Education */}
-        <section className="section">
-          <h2>Formación Académica</h2>
-          <div className="education-item">
-            <h3>Diplomado en Gestión del Currículo en Educación Superior Universitaria</h3>
-            <p className="period">Universidad Peruana Cayetano Heredia (UPCH) - Posgrado Cayetano - 2025</p>
-          </div>
-          
-          <div className="education-item">
-            <h3>Diseño Instruccional</h3>
-            <p className="period">Universidad Peruana de Ciencias Aplicadas (UPC) - EPG - 2023</p>
-          </div>
-
-          <div className="education-item">
-            <h3>Educación y Gestión del Aprendizaje</h3>
-            <p className="period">Universidad Peruana de Ciencias Aplicadas (UPC) - 2022</p>
-          </div>
-
-          <div className="education-item">
-            <h3>Herramientas para la Educación</h3>
-            <p className="period">Google for Education - 2022</p>
-          </div>
-        </section>
-
-        {/* Skills */}
-        <section className="section theme-orange">
-          <span className="tag">Competencias profesionales</span>
-          <h2>Habilidades</h2>
-          
-          <div className="skills-grid">
-            <div className="skill-category">
-              <h3>Sistemas y Tecnologías Educativas</h3>
-              <ul>
-                <li><strong>Implementación de sistemas LMS:</strong> Experiencia en la implementación eficiente de sistemas de Plataformas de Gestión del Aprendizaje (LMS)</li>
-                <li><strong>Integración de Tecnologías Educativas:</strong> Conocimiento en la integración efectiva de herramientas tecnológicas en entornos educativos para mejorar la experiencia de aprendizaje</li>
-              </ul>
-            </div>
-            
-            <div className="skill-category">
-              <h3>Diseño Curricular e Instruccional</h3>
-              <ul>
-                <li><strong>Diseño curricular e instruccional:</strong> Experta en el desarrollo de currículos y materiales instruccionales que maximizan el impacto pedagógico y se alinean a los objetivos educativos</li>
-                <li><strong>Desarrollo de Programas Educativos:</strong> Creación y mejora continua de programas educativos que se adaptan a las últimas tendencias y mejores prácticas en el campo de la educación</li>
-              </ul>
-            </div>
-            
-            <div className="skill-category">
-              <h3>Capacitación e Investigación</h3>
-              <ul>
-                <li><strong>Technical Training:</strong> Amplia experiencia en la facilitación de capacitaciones técnicas, asegurando una comprensión profunda de conceptos complejos de manera accesible</li>
-                <li><strong>Investigación Educativa:</strong> Competencia en la investigación de tendencias educativas, mejores prácticas y avances pedagógicos para informar el diseño de programas más efectivos</li>
-              </ul>
-            </div>
-            
-            <div className="skill-category">
-              <h3>Evaluación y Mejora Continua</h3>
-              <ul>
-                <li><strong>Evaluación y Mejora Continua:</strong> Implementación de estrategias de evaluación constante para identificar áreas de mejora en los programas educativos</li>
-                <li><strong>Análisis de Datos Educativos:</strong> Recopilación y análisis de datos relacionados con el rendimiento académico y evaluaciones de cursos</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Languages */}
-        <section className="section">
-          <h2>Idiomas</h2>
-          <div className="languages">
-            <p><strong>Español:</strong> Lengua materna</p>
-            <p><strong>Inglés:</strong> Fluido con amplia experiencia en comunicación oral y escrita. <strong>Certificado en nivel avanzado</strong> - Instituto Cultural Británico</p>
-          </div>
-        </section>
-      </ResumeTemplate>
+        contentPath="src/app/pages/resume/silvia/cv-content.html"
+      />
     </DocsContainer>
   );
 }
