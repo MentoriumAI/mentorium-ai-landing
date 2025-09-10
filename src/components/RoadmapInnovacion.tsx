@@ -13,7 +13,7 @@ const RoadmapInnovacion = () => {
     },
     {
       icon: <UserIcon className="w-8 h-8" />,
-      title: 'Detección de necesidades educativas especiales',
+      title: 'Detección de necesidades educativas diferenciadas',
       description: 'Mediante análisis de interacciones.',
       status: 'research',
       color: 'from-brand-brunswick-green to-green-600'

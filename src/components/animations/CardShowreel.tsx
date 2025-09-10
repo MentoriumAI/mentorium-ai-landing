@@ -251,11 +251,11 @@ export const CardShowreel = ({
         </div>
       </div>
 
-      {/* Navigation buttons - Hidden on mobile */}
+      {/* Navigation buttons */}
       <button
         onClick={goToPrevious}
         className={`
-          hidden sm:flex absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30
+          flex absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30
           w-12 h-12 sm:w-14 sm:h-14 rounded-full
           bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl
           border-2 border-brand-dark-green/10 hover:border-brand-dark-green/20
@@ -280,7 +280,7 @@ export const CardShowreel = ({
       <button
         onClick={goToNext}
         className={`
-          hidden sm:flex absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30
+          flex absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30
           w-12 h-12 sm:w-14 sm:h-14 rounded-full
           bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl
           border-2 border-brand-dark-green/10 hover:border-brand-dark-green/20
