@@ -31,7 +31,7 @@ const Hero = () => {
             {/* CTA Button */}
             <div className="flex flex-col items-center gap-6">
               <Link 
-                href="#demo" 
+                href="/start" 
                 className="btn-primary btn-large group"
               >
                 <span className="text-base sm:text-lg">Comienza hoy con Mentorium</span>

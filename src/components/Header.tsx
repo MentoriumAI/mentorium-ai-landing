@@ -68,7 +68,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <Link 
-              href="#demo" 
+              href="/start" 
               className="btn-primary btn-large group hover:shadow-glow"
             >
               <span className="text-sm sm:text-base">Solicitar Demo</span>
@@ -129,7 +129,7 @@ const Header = () => {
             ))}
             <div className="px-4 pt-3">
               <Link 
-                href="#demo" 
+                href="/start" 
                 className={`btn-primary btn-large group w-full justify-center transform transition-all duration-300 ${
                   isMobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                 }`}

@@ -159,7 +159,7 @@ const ProblemSolution = () => {
 
             <div className="relative z-10 pt-6 mt-auto">
               <Link 
-                href="#demo" 
+                href="/start" 
                 className="btn-primary btn-large group"
               >
                 <span>Comienza hoy con Mentorium</span>

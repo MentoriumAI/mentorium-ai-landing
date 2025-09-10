@@ -85,7 +85,7 @@ const Footer = () => {
 
               {/* CTA inside card */}
               <div className="mt-6 text-center">
-                <Link href="#demo" className="btn-primary btn-large inline-flex items-center">
+                <Link href="/start" className="btn-primary btn-large inline-flex items-center">
                   <span>Comienza hoy con Mentorium</span>
                   <svg className="ml-2 w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />

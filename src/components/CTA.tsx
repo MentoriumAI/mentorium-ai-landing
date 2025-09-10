@@ -26,7 +26,7 @@ const CTA = () => {
           {/* CTA Buttons */}
           <div className="flex justify-center mb-12 sm:mb-16">
             <Link 
-              href="#contacto" 
+              href="/start" 
               className="btn-primary btn-large group hover:shadow-glow"
             >
               <span className="text-sm sm:text-base">Comienza hoy con Mentorium</span>
