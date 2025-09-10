@@ -5,17 +5,18 @@ import { CARD_HEIGHT_CSS } from '@/constants/cardDimensions'
 
 interface FeatureCardProps {
   card: FeatureCardType
+  isFocused?: boolean
   onClick?: () => void
 }
 
-export const FeatureCard = ({ card, onClick }: FeatureCardProps) => {
+export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardProps) => {
   return (
     <div
-      className="
-        flex-none w-72 sm:w-80 lg:w-96 p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl lg:rounded-3xl
+      className={`
+        flex-none w-72 sm:w-80 lg:w-96 p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl
         frost-main-card cursor-pointer select-none flex flex-col relative overflow-hidden
         feature-card-enhanced
-      "
+      `}
       style={{
         height: CARD_HEIGHT_CSS,
         background: `linear-gradient(135deg, ${card.backgroundColor}cc, ${card.accentColor}15, ${card.accentColor}25)`,
@@ -34,11 +35,15 @@ export const FeatureCard = ({ card, onClick }: FeatureCardProps) => {
         }}
       />
       {/* Header - Fixed at top */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
           {/* Icon with enhanced styling */}
           <div 
-            className="card-icon w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-lg sm:rounded-xl flex items-center justify-center text-xl sm:text-2xl lg:text-3xl flex-shrink-0"
+            className={`
+              card-icon w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0
+              transition-all duration-200 
+              ${isFocused ? 'scale-110 rotate-3' : 'hover:scale-105'}
+            `}
             style={{
               backgroundColor: card.accentColor,
               color: 'white',
@@ -81,10 +86,12 @@ export const FeatureCard = ({ card, onClick }: FeatureCardProps) => {
       {/* Content - Flexible middle section */}
       <div className="flex-1 flex flex-col justify-between">
         {/* Title with color accent */}
-        <div className="mb-4">
+        <div className="mb-3">
           <h3 
-            className="text-lg sm:text-xl lg:text-2xl font-bold leading-tight"
-            style={{ color: '#093b2c' }}
+            className="text-base sm:text-lg lg:text-xl font-bold leading-tight transition-colors duration-200"
+            style={{ 
+              color: isFocused ? card.accentColor : '#093b2c'
+            }}
           >
             {card.title}
           </h3>
@@ -92,13 +99,13 @@ export const FeatureCard = ({ card, onClick }: FeatureCardProps) => {
 
         {/* Description with improved contrast */}
         {card.description && (
-          <p className="text-sm sm:text-base text-brand-dark-green/85 leading-relaxed mb-5 flex-1">
+          <p className="text-xs sm:text-sm text-brand-dark-green/85 leading-relaxed mb-4 flex-1">
             {card.description}
           </p>
         )}
 
-        {/* Elegant progress indicator */}
-        <div className="mb-5">
+        {/* Elegant progress indicator with shimmer effect */}
+        <div className="mb-3">
           <div 
             className="progress-bar h-1 rounded-full"
             style={{

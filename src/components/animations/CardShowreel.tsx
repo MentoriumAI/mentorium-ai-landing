@@ -4,56 +4,97 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { FeatureCard } from './FeatureCard'
 import { featureCards } from '@/data/featureCards'
 import { CARD_DIMENSIONS } from '@/constants/cardDimensions'
+import { useViewport } from '@/hooks/useViewport'
 
 interface CardShowreelProps {
-  autoScrollSpeed?: number // pixels per second
   pauseOnHover?: boolean
+  autoScrollSpeed?: number
   className?: string
 }
 
 export const CardShowreel = ({ 
-  autoScrollSpeed = 30,
   pauseOnHover = true, 
+  autoScrollSpeed = 60,
   className = "" 
 }: CardShowreelProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number | null>(null)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPaused, setIsPaused] = useState(false)
+  const [focusedCardIndex, setFocusedCardIndex] = useState<number | null>(null)
   const [translateX, setTranslateX] = useState(0)
+  const translateXRef = useRef<number>(0)
+  const viewport = useViewport()
+  
+  // Physics state
+  const [isDragging, setIsDragging] = useState(false)
+  const [hasMomentum, setHasMomentum] = useState(false)
+  const velocityRef = useRef<number>(0)
+  const lastPositionRef = useRef<number>(0)
   const lastTimeRef = useRef<number>(0)
-  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
-  const isDraggingRef = useRef(false)
+  const touchStartRef = useRef<{ x: number; time: number } | null>(null)
+  const mouseStartRef = useRef<{ x: number; time: number } | null>(null)
   
   const originalCardsCount = featureCards.length
-  const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
-  const totalWidth = originalCardsCount * cardWidth
+  const momentumAnimationRef = useRef<number | null>(null)
+  
+  // Get responsive card width based on viewport
+  const getCardWidth = useCallback(() => {
+    if (viewport.isMobile) return CARD_DIMENSIONS.WIDTH.MOBILE
+    if (viewport.isSmall) return CARD_DIMENSIONS.WIDTH.SMALL
+    return CARD_DIMENSIONS.WIDTH.DESKTOP
+  }, [viewport.isMobile, viewport.isSmall])
 
-  // Simple infinite auto-scroll animation
-  useEffect(() => {
-    if (!isPlaying) return
-
-    const animate = (currentTime: number) => {
-      if (lastTimeRef.current === 0) {
-        lastTimeRef.current = currentTime
+  // Physics calculations with responsive dimensions
+  const applyPhysicsMovement = useCallback((deltaX: number) => {
+    translateXRef.current += deltaX
+    
+    // Handle infinite loop boundaries - seamless wrapping with responsive width
+    const cardWidth = getCardWidth() + CARD_DIMENSIONS.GAP
+    const totalOriginalWidth = originalCardsCount * cardWidth
+    
+    // When we've scrolled past one full set of cards, wrap back seamlessly
+    if (translateXRef.current <= -totalOriginalWidth) {
+      translateXRef.current += totalOriginalWidth
+    } else if (translateXRef.current >= 0) {
+      translateXRef.current -= totalOriginalWidth
+    }
+    
+    setTranslateX(translateXRef.current)
+  }, [originalCardsCount, getCardWidth])
+  
+  const startMomentumAnimation = useCallback((initialVelocity: number) => {
+    setHasMomentum(true)
+    velocityRef.current = initialVelocity
+    
+    const animateMomentum = () => {
+      if (Math.abs(velocityRef.current) > 0.1) {
+        applyPhysicsMovement(velocityRef.current)
+        // Stronger deceleration on mobile for better control
+        const deceleration = viewport.isMobile ? 0.92 : 0.95
+        velocityRef.current *= deceleration
+        momentumAnimationRef.current = requestAnimationFrame(animateMomentum)
+      } else {
+        setHasMomentum(false)
+        velocityRef.current = 0
       }
+    }
+    
+    momentumAnimationRef.current = requestAnimationFrame(animateMomentum)
+  }, [applyPhysicsMovement, viewport.isMobile])
+  
+
+  // Auto-scroll that respects physics interactions
+  useEffect(() => {
+    if (isPaused || isDragging || hasMomentum) return
+    
+    const animate = () => {
+      // Movement derived from desired pixels/second at ~60fps
+      const perFrame = -autoScrollSpeed / 60
+      applyPhysicsMovement(perFrame)
       
-      const deltaTime = currentTime - lastTimeRef.current
-      const moveDistance = (autoScrollSpeed * deltaTime) / 1000
-      
-      setTranslateX(prev => {
-        let newX = prev - moveDistance
-        
-        // Reset position for infinite scroll
-        if (newX <= -totalWidth) {
-          newX = 0
-        }
-        
-        return newX
-      })
-      
-      lastTimeRef.current = currentTime
-      animationRef.current = requestAnimationFrame(animate)
+      if (!isPaused && !isDragging && !hasMomentum) {
+        animationRef.current = requestAnimationFrame(animate)
+      }
     }
     
     animationRef.current = requestAnimationFrame(animate)
@@ -63,175 +104,230 @@ export const CardShowreel = ({
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [isPlaying, autoScrollSpeed, totalWidth])
+  }, [isPaused, isDragging, hasMomentum, applyPhysicsMovement, autoScrollSpeed])
 
-  // Pause animation on interaction
-  const pauseAnimation = useCallback(() => {
-    if (!pauseOnHover) return
-    
-    setIsPlaying(false)
-    lastTimeRef.current = 0
-    
-    // Clear any existing timeout
-    if (pauseTimeoutRef.current) {
-      clearTimeout(pauseTimeoutRef.current)
-    }
-  }, [pauseOnHover])
-
-  // Resume animation after delay
-  const resumeAnimation = useCallback(() => {
-    if (!pauseOnHover) return
-    
-    // Clear any existing timeout
-    if (pauseTimeoutRef.current) {
-      clearTimeout(pauseTimeoutRef.current)
-    }
-    
-    // Resume after 2 seconds
-    pauseTimeoutRef.current = setTimeout(() => {
-      setIsPlaying(true)
-      lastTimeRef.current = 0
-    }, 2000)
-  }, [pauseOnHover])
-
-  // Mouse interactions
+  // Simple mouse interactions
   const handleMouseEnter = useCallback(() => {
-    pauseAnimation()
-  }, [pauseAnimation])
+    if (pauseOnHover) {
+      setIsPaused(true)
+    }
+  }, [pauseOnHover])
 
   const handleMouseLeave = useCallback(() => {
-    resumeAnimation()
-  }, [resumeAnimation])
-
-  // Touch interactions
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    pauseAnimation()
-    const touch = e.touches[0]
-    touchStartRef.current = { x: touch.clientX, y: touch.clientY }
-    isDraggingRef.current = false
-  }, [pauseAnimation])
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!touchStartRef.current) return
-
-    const touch = e.touches[0]
-    const deltaX = touch.clientX - touchStartRef.current.x
-    const deltaY = touch.clientY - touchStartRef.current.y
-
-    // If horizontal movement is greater than vertical, handle as swipe
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
-      e.preventDefault() // Prevent vertical scroll
-      isDraggingRef.current = true
-      
-      setTranslateX(prev => {
-        let newX = prev + deltaX * 0.5 // Damping factor for smooth movement
-        
-        // Keep within bounds for infinite scroll
-        if (newX <= -totalWidth) {
-          newX = 0
-        } else if (newX > 0) {
-          newX = -totalWidth + cardWidth
-        }
-        
-        return newX
-      })
-      
-      // Update touch start for next delta calculation
-      touchStartRef.current = { x: touch.clientX, y: touch.clientY }
+    if (pauseOnHover) {
+      // Immediate restart - no delay
+      setIsPaused(false)
+      setFocusedCardIndex(null)
     }
-  }, [totalWidth, cardWidth])
+  }, [pauseOnHover])
 
-  const handleTouchEnd = useCallback(() => {
-    touchStartRef.current = null
-    isDraggingRef.current = false
-    resumeAnimation()
-  }, [resumeAnimation])
+  // Handle card focus (visual only, no movement)
+  const handleCardClick = useCallback((index: number) => {
+    setFocusedCardIndex(index % originalCardsCount)
+    // Clear focus after 2 seconds
+    setTimeout(() => {
+      setFocusedCardIndex(null)
+    }, 2000)
+  }, [originalCardsCount])
 
-  // Wheel/scroll interactions
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    // Prevent vertical scroll when scrolling horizontally
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault()
+
+
+  // Physics-based touch interactions
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    setIsPaused(true)
+    setIsDragging(true)
+    
+    // Stop any existing momentum
+    if (momentumAnimationRef.current) {
+      cancelAnimationFrame(momentumAnimationRef.current)
+      setHasMomentum(false)
     }
     
-    // Handle horizontal scrolling
-    if (e.deltaX !== 0) {
-      pauseAnimation()
-      setTranslateX(prev => {
-        let newX = prev - e.deltaX * 2 // Multiply for smoother scrolling
-        
-        // Keep within bounds for infinite scroll
-        if (newX <= -totalWidth) {
-          newX = 0
-        } else if (newX > 0) {
-          newX = -totalWidth + cardWidth
-        }
-        
-        return newX
-      })
-      resumeAnimation()
-    }
-  }, [pauseAnimation, resumeAnimation, totalWidth, cardWidth])
-
-  // Navigation buttons
-  const goToPrevious = useCallback(() => {
-    pauseAnimation()
-    setTranslateX(prev => {
-      let newX = prev + cardWidth
-      if (newX > 0) {
-        newX = -totalWidth + cardWidth
-      }
-      return newX
-    })
-    resumeAnimation()
-  }, [pauseAnimation, resumeAnimation, cardWidth, totalWidth])
-
-  const goToNext = useCallback(() => {
-    pauseAnimation()
-    setTranslateX(prev => {
-      let newX = prev - cardWidth
-      if (newX <= -totalWidth) {
-        newX = 0
-      }
-      return newX
-    })
-    resumeAnimation()
-  }, [pauseAnimation, resumeAnimation, cardWidth, totalWidth])
-
-  // Cleanup timeouts on unmount
-  useEffect(() => {
-    return () => {
-      if (pauseTimeoutRef.current) {
-        clearTimeout(pauseTimeoutRef.current)
-      }
-    }
+    const touch = e.touches[0]
+    touchStartRef.current = { x: touch.clientX, time: Date.now() }
+    lastPositionRef.current = touch.clientX
+    lastTimeRef.current = Date.now()
   }, [])
+  
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!isDragging || !touchStartRef.current) return
+    
+    e.preventDefault() // Prevent page scroll
+    const touch = e.touches[0]
+    const currentTime = Date.now()
+    const deltaX = touch.clientX - lastPositionRef.current
+    const deltaTime = currentTime - lastTimeRef.current
+    
+    // Apply movement
+    applyPhysicsMovement(deltaX)
+    
+    // Calculate velocity for momentum - reduced sensitivity on mobile
+    if (deltaTime > 0) {
+      const velocityScale = viewport.isMobile ? 12 : 16 // Reduced for mobile
+      velocityRef.current = deltaX / deltaTime * velocityScale
+    }
+    
+    lastPositionRef.current = touch.clientX
+    lastTimeRef.current = currentTime
+  }, [isDragging, applyPhysicsMovement, viewport.isMobile])
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging) return
+    
+    setIsDragging(false)
+    
+    // Start momentum animation if velocity is significant
+    if (Math.abs(velocityRef.current) > 1) {
+      startMomentumAnimation(velocityRef.current)
+    } else {
+      setIsPaused(false)
+    }
+    
+    touchStartRef.current = null
+  }, [isDragging, startMomentumAnimation])
+  
+  // Mouse drag support for desktop
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    // Only handle middle mouse button or left button with Shift
+    if (!(e.button === 1 || (e.button === 0 && e.shiftKey))) return
+    
+    e.preventDefault()
+    setIsPaused(true)
+    setIsDragging(true)
+    
+    // Stop any existing momentum
+    if (momentumAnimationRef.current) {
+      cancelAnimationFrame(momentumAnimationRef.current)
+      setHasMomentum(false)
+    }
+    
+    mouseStartRef.current = { x: e.clientX, time: Date.now() }
+    lastPositionRef.current = e.clientX
+    lastTimeRef.current = Date.now()
+  }, [])
+  
+
+  // Scroll wheel support (both regular and with Shift modifier)
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    // Handle horizontal scroll directly or vertical with Shift
+    const shouldHandle = e.deltaX !== 0 || e.shiftKey
+    if (!shouldHandle) return
+    
+    e.preventDefault() // Prevent page scroll
+    
+    // Stop any existing momentum or auto-scroll
+    if (momentumAnimationRef.current) {
+      cancelAnimationFrame(momentumAnimationRef.current)
+      setHasMomentum(false)
+    }
+    
+    // Use horizontal delta if available, otherwise use vertical with Shift
+    const scrollDelta = e.deltaX !== 0 ? e.deltaX : e.deltaY
+    const scrollVelocity = -scrollDelta * 0.5 // Adjust sensitivity
+    
+    startMomentumAnimation(scrollVelocity)
+  }, [startMomentumAnimation])
+  
+  // Global mouse event listeners for dragging
+  useEffect(() => {
+    if (!isDragging) return
+
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (!mouseStartRef.current) return
+      
+      const currentTime = Date.now()
+      const deltaX = e.clientX - lastPositionRef.current
+      const deltaTime = currentTime - lastTimeRef.current
+      
+      // Apply movement
+      applyPhysicsMovement(deltaX)
+      
+      // Calculate velocity for momentum
+      if (deltaTime > 0) {
+        velocityRef.current = deltaX / deltaTime * 16
+      }
+      
+      lastPositionRef.current = e.clientX
+      lastTimeRef.current = currentTime
+    }
+
+    const handleGlobalMouseUp = () => {
+      if (!isDragging) return
+      
+      setIsDragging(false)
+      
+      // Start momentum animation if velocity is significant
+      if (Math.abs(velocityRef.current) > 1) {
+        startMomentumAnimation(velocityRef.current)
+      } else {
+        setIsPaused(false)
+      }
+      
+      mouseStartRef.current = null
+    }
+
+    document.addEventListener('mousemove', handleGlobalMouseMove)
+    document.addEventListener('mouseup', handleGlobalMouseUp)
+
+    return () => {
+      document.removeEventListener('mousemove', handleGlobalMouseMove)
+      document.removeEventListener('mouseup', handleGlobalMouseUp)
+    }
+  }, [isDragging, applyPhysicsMovement, startMomentumAnimation])
+  
+  // Clean up momentum when it ends and resume auto-scroll
+  useEffect(() => {
+    if (!hasMomentum && !isDragging) {
+      // Resume auto-scroll after a short delay
+      const timeout = setTimeout(() => {
+        setIsPaused(false)
+      }, 500)
+      
+      return () => clearTimeout(timeout)
+    }
+  }, [hasMomentum, isDragging])
+
+  // Removed duplicate wheel handler and undefined navigation helpers
+
 
   return (
-    <div className={`relative ${className}`} style={{ minHeight: '420px' }}>
-      {/* Gradient overlays for fade effect */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 z-10 pointer-events-none"
+    <div className={`relative ${className}`} style={{ minHeight: '280px' }}>
+      {/* Mobile gradient overlays - thin and radial with proper background blending */}
+      <div className="lg:hidden absolute left-0 top-0 bottom-0 w-4 z-10 pointer-events-none"
            style={{
-             background: 'linear-gradient(to right, #f7f4ef 0%, #f5f7f4 50%, transparent 100%)'
+             background: 'radial-gradient(ellipse 200% 100% at 0% 50%, var(--color-background-primary) 0%, rgba(247, 244, 239, 0.8) 30%, rgba(247, 244, 239, 0.4) 60%, transparent 90%)'
            }} />
-      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 z-10 pointer-events-none"
+      <div className="lg:hidden absolute right-0 top-0 bottom-0 w-4 z-10 pointer-events-none"
            style={{
-             background: 'linear-gradient(to left, #f0fdf6 0%, #f5f7f4 50%, transparent 100%)'
+             background: 'radial-gradient(ellipse 200% 100% at 100% 50%, var(--color-background-primary) 0%, rgba(240, 253, 246, 0.8) 30%, rgba(240, 253, 246, 0.4) 60%, transparent 90%)'
            }} />
       
-      {/* Cards container */}
-      <div className="overflow-hidden pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-16 sm:py-20" style={{ minHeight: '420px' }}>
+      {/* Desktop gradient overlays - more complex effects */}
+      <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+           style={{
+             background: 'radial-gradient(ellipse 100% 60% at 0% 50%, rgba(247, 244, 239, 0.9) 0%, rgba(247, 244, 239, 0.6) 40%, transparent 70%)'
+           }} />
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+           style={{
+             background: 'radial-gradient(ellipse 100% 60% at 100% 50%, rgba(240, 253, 246, 0.9) 0%, rgba(240, 253, 246, 0.6) 40%, transparent 70%)'
+           }} />
+      
+      {/* Infinite scroll container with transform-based movement */}
+      <div className="overflow-hidden pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-8 sm:py-12" style={{ minHeight: '280px' }}>
         <div
           ref={scrollRef}
-          className="flex items-center gap-6"
+          className={`flex items-center gap-6 card-showreel-container ${!isPaused ? 'auto-scrolling' : ''}`}
           style={{
-            minHeight: '420px',
-            transform: `translateX(${translateX}px)`,
-            transition: isPlaying ? 'none' : 'transform 0.3s ease-out',
-            willChange: 'transform'
+            minHeight: '280px',
+            transform: `translate3d(${translateX}px, 0, 0)`,
+            willChange: isDragging || hasMomentum ? 'transform' : 'auto',
+            touchAction: 'pan-x',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden'
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -239,68 +335,37 @@ export const CardShowreel = ({
         >
           {/* Double set of cards for infinite scroll */}
           {[...Array(2)].map((_, setIndex) => 
-            featureCards.map((card, cardIndex) => (
+            featureCards.map((card, cardIndex) => {
+              const isFocused =
+                focusedCardIndex !== null &&
+                focusedCardIndex === (cardIndex % originalCardsCount)
+              return (
               <div
                 key={`${card.id}-set-${setIndex}`}
-                className="transition-transform duration-200 hover:scale-105"
+                className={`
+                  transition-all duration-300 ease-out cursor-pointer
+                  ${isFocused ? 'scale-105 z-10' : 'hover:scale-102'}
+                `}
+                style={{
+                  filter: isFocused 
+                    ? 'brightness(1.05) drop-shadow(0 8px 25px rgba(0,0,0,0.15))' 
+                    : 'brightness(1)',
+                  zIndex: isFocused ? 20 : 1
+                }}
+                onMouseEnter={() => setFocusedCardIndex(cardIndex)}
               >
-                <FeatureCard card={card} />
+                <FeatureCard
+                  card={card}
+                  isFocused={isFocused}
+                  onClick={() => handleCardClick(cardIndex)}
+                />
               </div>
-            ))
+              )
+            })
           )}
         </div>
       </div>
 
-      {/* Navigation buttons */}
-      <button
-        onClick={goToPrevious}
-        className={`
-          flex absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30
-          w-12 h-12 sm:w-14 sm:h-14 rounded-full
-          bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl
-          border-2 border-brand-dark-green/10 hover:border-brand-dark-green/20
-          items-center justify-center
-          transition-all duration-300 ease-out
-          hover:scale-110 active:scale-95
-          focus:outline-none focus:ring-2 focus:ring-brand-brandeis-blue focus:ring-offset-2
-          group hover:bg-white
-        `}
-        aria-label="Ver tarjeta anterior"
-      >
-        <svg 
-          className="w-5 h-5 sm:w-6 sm:h-6 text-brand-dark-green group-hover:text-brand-brandeis-blue transition-colors" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button
-        onClick={goToNext}
-        className={`
-          flex absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30
-          w-12 h-12 sm:w-14 sm:h-14 rounded-full
-          bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl
-          border-2 border-brand-dark-green/10 hover:border-brand-dark-green/20
-          items-center justify-center
-          transition-all duration-300 ease-out
-          hover:scale-110 active:scale-95
-          focus:outline-none focus:ring-2 focus:ring-brand-brandeis-blue focus:ring-offset-2
-          group hover:bg-white
-        `}
-        aria-label="Ver siguiente tarjeta"
-      >
-        <svg 
-          className="w-5 h-5 sm:w-6 sm:h-6 text-brand-dark-green group-hover:text-brand-brandeis-blue transition-colors" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
     </div>
   )
 }

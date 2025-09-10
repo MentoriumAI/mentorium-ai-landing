@@ -20,7 +20,7 @@ const Header = () => {
     { href: '/', label: 'Inicio' },
     { href: '#caracteristicas', label: 'Características' },
     { href: '#beneficios', label: 'Beneficios' },
-    { href: '/trusted', label: 'Confianza & Integración' },
+    // { href: '/trusted', label: 'Confianza & Integración' },
     { href: '#contacto', label: 'Contacto' },
   ]
 
