@@ -61,7 +61,7 @@ export default function PresentationRoute({
 
   // Content Measurer for accurate line counting and content analysis
   class ContentMeasurer {
-    static analyzeElement(element: Element, _context: ProcessingContext): ElementInfo {
+    static analyzeElement(element: Element, _: ProcessingContext): ElementInfo {
       const tagName = element.tagName.toLowerCase();
       const textContent = element.textContent || '';
       const charCount = textContent.length;
@@ -357,7 +357,7 @@ export default function PresentationRoute({
       heading: ElementInfo | undefined,
       contentElements: ElementInfo[], 
       divisions: number,
-      _baseSlideIndex: number
+      _: number
     ): Slide[] {
       const slides: Slide[] = [];
       const elementsPerSlide = Math.ceil(contentElements.length / divisions);

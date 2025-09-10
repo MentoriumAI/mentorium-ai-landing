@@ -46,7 +46,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
 
   // Content Measurer for accurate line counting and content analysis
   class ContentMeasurer {
-    static analyzeElement(element: Element, _context: ProcessingContext): ElementInfo {
+    static analyzeElement(element: Element, _: ProcessingContext): ElementInfo {
       const tagName = element.tagName.toLowerCase();
       const textContent = element.textContent || '';
       const charCount = textContent.length;
@@ -342,7 +342,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
       heading: ElementInfo | undefined,
       contentElements: ElementInfo[], 
       divisions: number,
-      _baseSlideIndex: number
+      _: number
     ): Slide[] {
       const slides: Slide[] = [];
       const elementsPerSlide = Math.ceil(contentElements.length / divisions);
@@ -590,13 +590,7 @@ export default function PresentationMode({ htmlContent, title = 'Presentación' 
     }
   }, [isOpen, showKeyboardHints]);
 
-  const openPresentation = () => {
-    setIsOpen(true);
-    setIsExiting(false);
-    setShowKeyboardHints(true);
-    // Hide toolbar in presentation mode
-    document.body.classList.add('presentation-active');
-  };
+  
 
   const closePresentation = () => {
     setIsExiting(true);
