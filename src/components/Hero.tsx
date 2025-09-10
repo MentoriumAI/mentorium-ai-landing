@@ -14,22 +14,22 @@ const Hero = () => {
       </div>
 
       {/* Title Section - Full width with centered content */}
-      <div className="relative z-20 w-full min-h-[100svh] flex items-center pt-16 sm:pt-20">
+      <div className="relative z-20 w-full min-h-[60vh] flex items-center pt-12 sm:pt-16">
         <div className="container">
-          <div className="text-center max-w-5xl mx-auto space-y-8 sm:space-y-12">
+          <div className="text-center max-w-5xl mx-auto space-y-4 sm:space-y-6">
             {/* Main Heading */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold" style={{ fontFamily: 'var(--font-faculty-glyphic)', lineHeight: '1.15', paddingBottom: '0.25rem' }}>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold" style={{ fontFamily: 'var(--font-faculty-glyphic)', lineHeight: '1.15', paddingBottom: '0.25rem' }}>
               <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent" style={{ display: 'inline-block', paddingBottom: '0.1em' }}>Mentorium</span><br/>
               <span className="bg-gradient-to-br from-brand-brunswick-green to-brand-dark-moss-green bg-clip-text text-transparent" style={{ display: 'inline-block', paddingBottom: '0.1em' }}>La plataforma educativa inteligente que transforma la enseñanza y el aprendizaje</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl sm:text-2xl lg:text-3xl text-brand-dark-green/80 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl lg:text-2xl text-brand-dark-green/80 max-w-4xl mx-auto leading-relaxed">
             Integra pedagogía e inteligencia artificial para convertir cada etapa educativa en una experiencia de crecimiento.
             </p>
 
             {/* CTA Button */}
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-4">
               <Link 
                 href="/start" 
                 className="btn-primary btn-large group"

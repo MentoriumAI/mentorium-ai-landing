@@ -13,7 +13,7 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
   return (
     <div
       className={`
-        flex-none w-72 sm:w-80 lg:w-96 p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl lg:rounded-3xl
+        flex-none w-72 sm:w-80 lg:w-96 p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl
         frost-main-card cursor-pointer select-none flex flex-col relative overflow-hidden
         feature-card-enhanced transition-all duration-300 ease-out
         ${isFocused 
@@ -41,12 +41,12 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
         }}
       />
       {/* Header - Fixed at top */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
           {/* Icon with enhanced styling */}
           <div 
             className={`
-              card-icon w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-lg sm:rounded-xl flex items-center justify-center text-xl sm:text-2xl lg:text-3xl flex-shrink-0
+              card-icon w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0
               transition-all duration-200 
               ${isFocused ? 'scale-110 rotate-3' : 'hover:scale-105'}
             `}
@@ -97,9 +97,9 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
       {/* Content - Flexible middle section */}
       <div className="flex-1 flex flex-col justify-between">
         {/* Title with color accent */}
-        <div className="mb-4">
+        <div className="mb-3">
           <h3 
-            className="text-lg sm:text-xl lg:text-2xl font-bold leading-tight transition-colors duration-200"
+            className="text-base sm:text-lg lg:text-xl font-bold leading-tight transition-colors duration-200"
             style={{ 
               color: isFocused ? card.accentColor : '#093b2c'
             }}
@@ -110,13 +110,13 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
 
         {/* Description with improved contrast */}
         {card.description && (
-          <p className="text-sm sm:text-base text-brand-dark-green/85 leading-relaxed mb-5 flex-1">
+          <p className="text-xs sm:text-sm text-brand-dark-green/85 leading-relaxed mb-4 flex-1">
             {card.description}
           </p>
         )}
 
         {/* Elegant progress indicator with shimmer effect */}
-        <div className="mb-5">
+        <div className="mb-3">
           <div 
             className="progress-bar h-1 rounded-full transition-all duration-300"
             style={{

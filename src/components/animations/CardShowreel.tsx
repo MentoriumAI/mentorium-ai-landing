@@ -384,7 +384,7 @@ export const CardShowreel = ({
   }, [originalCardsCount])
 
   return (
-    <div className={`relative ${className}`} style={{ minHeight: '420px' }}>
+    <div className={`relative ${className}`} style={{ minHeight: '280px' }}>
       {/* Gradient overlays for seamless infinite scroll effect - matching hero gradient-subtle */}
       <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 z-10 pointer-events-none"
            style={{
@@ -396,12 +396,12 @@ export const CardShowreel = ({
            }} />
       
       {/* Infinite scroll container with transform-based movement */}
-      <div className="overflow-hidden pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-16 sm:py-20" style={{ minHeight: '420px' }}>
+      <div className="overflow-hidden pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-8 sm:py-12" style={{ minHeight: '280px' }}>
         <div
           ref={scrollRef}
           className={`flex items-center gap-6 card-showreel-container ${isAutoScrolling ? 'auto-scrolling' : ''} ${isAnimating ? 'transition-none' : 'transition-all duration-300'}`}
           style={{
-            minHeight: '420px',
+            minHeight: '280px',
             opacity: isPreparingToResume ? 0.95 + 0.05 * resumeProgressRef.current : isAnimating ? 0.98 : 1,
             transform: `translateX(${translateX}px) ${isAnimating ? 'scale(1.01)' : 'scale(1)'}`,
             willChange: 'transform'
