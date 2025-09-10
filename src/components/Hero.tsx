@@ -11,24 +11,24 @@ const Hero = () => {
       {/* Colorful Halo/Aura Background Effects */}
       <div className="absolute inset-0 z-0">
         {/* Main central aura - largest and most prominent */}
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-brand-brandeis-blue/20 via-brand-sunglow/15 to-brand-orange-pantone/20 rounded-full filter blur-3xl animate-pulse-glow"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-brand-brandeis-blue/20 via-brand-sunglow/15 to-brand-orange-pantone/20 rounded-full filter blur-[150px] animate-pulse-glow"></div>
         
-        {/* Secondary floating orbs with different colors and positions */}
-        <div className="absolute top-1/4 right-1/5 w-80 h-80 bg-gradient-to-br from-brand-brunswick-green/25 to-brand-dark-moss-green/20 rounded-full filter blur-2xl animate-float-slow"></div>
+        {/* Secondary floating orbs positioned to avoid overlap */}
+        <div className="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-gradient-to-br from-primary-300/20 to-success-400/15 rounded-full filter blur-[100px] animate-float-slow"></div>
         
-        <div className="absolute bottom-1/3 left-1/6 w-64 h-64 bg-gradient-to-tr from-brand-sunglow/30 to-brand-orange-pantone/25 rounded-full filter blur-2xl animate-float-delayed"></div>
+        <div className="absolute bottom-[15%] left-[8%] w-[350px] h-[350px] bg-gradient-to-tr from-brand-sunglow/25 to-brand-orange-pantone/20 rounded-full filter blur-[90px] animate-float-delayed"></div>
         
-        <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-gradient-to-bl from-brand-brandeis-blue/35 to-brand-brunswick-green/20 rounded-full filter blur-xl animate-subtle-float"></div>
+        <div className="absolute top-[20%] left-[15%] w-[300px] h-[300px] bg-gradient-to-bl from-brand-brandeis-blue/30 to-primary-400/15 rounded-full filter blur-[80px] animate-subtle-float"></div>
         
-        {/* Smaller accent orbs for additional depth */}
-        <div className="absolute top-3/4 right-1/2 w-32 h-32 bg-brand-dark-moss-green/25 rounded-full filter blur-xl animate-float-slow"></div>
+        {/* Accent orbs positioned in corners and edges */}
+        <div className="absolute bottom-[25%] right-[12%] w-[250px] h-[250px] bg-primary-300/20 rounded-full filter blur-[70px] animate-float-slow"></div>
         
-        <div className="absolute top-1/6 left-1/4 w-40 h-40 bg-gradient-to-r from-brand-orange-pantone/30 to-brand-sunglow/25 rounded-full filter blur-xl animate-float-delayed"></div>
+        <div className="absolute top-[35%] right-[25%] w-[200px] h-[200px] bg-gradient-to-r from-brand-orange-pantone/25 to-brand-sunglow/20 rounded-full filter blur-[60px] animate-float-delayed"></div>
         
-        {/* Edge glow effects */}
-        <div className="absolute -top-20 -left-20 w-96 h-96 bg-gradient-to-br from-brand-brandeis-blue/15 via-transparent to-transparent rounded-full filter blur-3xl"></div>
+        {/* Edge glow effects - moved further to corners */}
+        <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-brand-brandeis-blue/10 via-transparent to-transparent rounded-full filter blur-[120px]"></div>
         
-        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-gradient-to-tl from-brand-orange-pantone/15 via-transparent to-transparent rounded-full filter blur-3xl"></div>
+        <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] bg-gradient-to-tl from-brand-orange-pantone/10 via-transparent to-transparent rounded-full filter blur-[120px]"></div>
       </div>
 
       {/* Title Section - Full width with centered content */}
