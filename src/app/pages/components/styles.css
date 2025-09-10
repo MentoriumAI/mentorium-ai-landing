@@ -108,26 +108,37 @@ a{ color: var(--celtic-blue); text-decoration: none; }
 }
 
 .print-dropdown-trigger {
-  border:1px solid #d9d4c9; 
-  background:white; 
-  padding:.45rem .7rem; 
-  border-radius:.5rem; 
-  cursor:pointer; 
-  font-size:.9rem;
+  border: 1px solid #d9d4c9; 
+  background: white; 
+  padding: .45rem .7rem; 
+  border-radius: .5rem; 
+  cursor: pointer; 
+  font-size: .9rem;
   display: flex;
   align-items: center;
   gap: .5rem;
   min-width: 140px;
   justify-content: space-between;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .print-dropdown-trigger:hover {
   background: #f8f8f8;
+  border-color: #c5c0b5;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.print-dropdown-trigger:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-arrow {
   font-size: .7rem;
   transition: transform 0.2s ease;
+  color: #666;
 }
 
 .dropdown-arrow.open {
@@ -142,10 +153,23 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   background: white;
   border: 1px solid #d9d4c9;
   border-radius: .5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
   z-index: 1000;
-  margin-top: 2px;
+  margin-top: 4px;
   overflow: hidden;
+  animation: dropdown-fade-in 0.15s ease-out;
+  padding: .4rem;
+}
+
+@keyframes dropdown-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .print-dropdown-item {
@@ -153,19 +177,30 @@ a{ color: var(--celtic-blue); text-decoration: none; }
   width: 100%;
   padding: .6rem .7rem;
   background: white;
-  border: none;
+  border: 1px solid transparent;
+  border-radius: .3rem;
   text-align: left;
   cursor: pointer;
   font-size: .9rem;
-  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.15s ease;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: .4rem;
 }
 
 .print-dropdown-item:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .print-dropdown-item:hover {
   background: #f8f8f8;
+  color: var(--brunswick-green);
+  border-color: #e5e0d7;
+  transform: translateX(2px);
+}
+
+.print-dropdown-item:active {
+  background: #f0f0f0;
 }
 
 .page{ 
