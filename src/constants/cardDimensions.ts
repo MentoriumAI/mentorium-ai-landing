@@ -1,7 +1,7 @@
 // Card dimensions constants for consistent sizing
 export const CARD_DIMENSIONS = {
   // Fixed height for all feature cards (in pixels)
-  HEIGHT: 320,
+  HEIGHT: 240,
   
   // Width constants (responsive)
   WIDTH: {
