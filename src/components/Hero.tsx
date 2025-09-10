@@ -18,7 +18,7 @@ const Hero = () => {
         <div className="container">
           <div className="text-center max-w-5xl mx-auto space-y-8 sm:space-y-12">
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight font-serif">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
               <span className="text-brand-dark-green">La plataforma educativa inteligente que transforma la enseñanza-aprendizaje y maximiza los resultados</span>
               {/* <br />
               <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">inteligente</span>
