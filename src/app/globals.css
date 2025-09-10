@@ -533,3 +533,60 @@
   animation-iteration-count: infinite;
   will-change: transform;
 }
+
+/* Feature Cards Showreel Styles */
+@keyframes cardFocusScale {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes cardHoverScale {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.02); }
+}
+
+.showreel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.showreel-gradient-left {
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
+}
+
+.showreel-gradient-right {
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
+}
+
+/* Custom utilities for card interactions */
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+/* Smooth scroll snap for cards */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced focus states for accessibility */
+.feature-card:focus-visible {
+  outline: 2px solid var(--color-brand-brandeis-blue);
+  outline-offset: 2px;
+}
+
+/* Card transition improvements */
+.feature-card-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+/* Gradient backgrounds for seamless infinite scroll */
+@media (min-width: 640px) {
+  .showreel-gradient-left {
+    width: 4rem;
+  }
+  
+  .showreel-gradient-right {
+    width: 4rem;
+  }
+}

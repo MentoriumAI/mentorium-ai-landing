@@ -1,239 +1,58 @@
 "use client"
 
 import Link from 'next/link'
-import { useState, useEffect, useCallback, useMemo } from 'react'
-import { SparklesIcon, LightBulbIcon, ArrowRightIcon } from '@/components/icons'
-import { OrbitAnimation, MobileBubbles, OrbitItem, defaultColorConfigs, shuffleArray } from '@/components/animations'
+import { ArrowRightIcon } from '@/components/icons'
+import CardShowreel from '@/components/animations/CardShowreel'
 
 const Hero = () => {
-  const colorConfigs = useMemo(() => defaultColorConfigs, [])
-
-  // Client-side state for randomized colors to avoid hydration mismatch
-  const [topRowColors, setTopRowColors] = useState(colorConfigs)
-  const [bottomRowColors, setBottomRowColors] = useState(colorConfigs)
-  const [isClient, setIsClient] = useState(false)
-
-  const items: OrbitItem[] = [
-    { key: 'book', chipClass: 'shadow-glow-orange', svg: (
-      <svg className="w-7 h-7 text-brand-orange-pantone" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
-      </svg>
-    )},
-    { key: 'sparkles', chipClass: 'shadow-glow-green', svg: (
-      <SparklesIcon className="w-7 h-7" />
-    )},
-    { key: 'bulb', chipClass: 'shadow-glow-orange', svg: (
-      <LightBulbIcon className="w-7 h-7" />
-    )},
-    { key: 'gear', chipClass: 'shadow-glow-green', svg: (
-      <svg className="w-7 h-7 text-brand-brunswick-green" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/>
-      </svg>
-    )},
-    { key: 'clock', chipClass: 'shadow-glow-orange', svg: (
-      <svg className="w-7 h-7 text-brand-orange-pantone" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/>
-      </svg>
-    )},
-    { key: 'chart', chipClass: 'shadow-glow-green', svg: (
-      <svg className="w-7 h-7 text-brand-brunswick-green" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
-      </svg>
-    )},
-    { key: 'star', chipClass: 'shadow-glow-green', svg: (
-      <svg className="w-7 h-7 text-brand-brunswick-green" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-      </svg>
-    )},
-    { key: 'rocket', chipClass: 'shadow-glow-orange', svg: (
-      <svg className="w-7 h-7 text-brand-orange-pantone" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd"/>
-      </svg>
-    )},
-  ]
-
-  const n = items.length
-
-  // Client-side effect to randomize colors after hydration
-  useEffect(() => {
-    setIsClient(true)
-    setTopRowColors(shuffleArray([...colorConfigs]))
-    setBottomRowColors(shuffleArray([...colorConfigs]))
-  }, [colorConfigs])
-
-  // Fixed icon arrangements for mobile (same icons, different colors)
-  const topRowItems = items.slice(0, 4) // First 4 icons always
-  const bottomRowItems = items.slice(4, 8) // Last 4 icons always
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center hero-gradient overflow-hidden">
+    <section id="inicio" className="relative min-h-screen hero-gradient overflow-hidden">
       {/* Subtle Background Element */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-brandeis-blue/5 rounded-full filter blur-3xl"></div>
       </div>
 
-      <div className="container relative z-20 pt-24 sm:pt-32 md:pt-40">
-        {/* Centered Hero Content */}
-        <div className="text-center max-w-5xl mx-auto space-y-8 sm:space-y-12">
-          {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight font-serif">
-            <span className="text-brand-dark-green">La plataforma educativa</span>
-            <br />
-            <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">inteligente</span>
-            <br />
-            <span className="text-brand-dark-green">que multiplica resultados</span>
-          </h1>
+      {/* Title Section - Full width with centered content */}
+      <div className="relative z-20 w-full py-24 sm:py-32 md:py-40">
+        <div className="container">
+          <div className="text-center max-w-5xl mx-auto space-y-8 sm:space-y-12">
+            {/* Main Heading */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight font-serif">
+              <span className="text-brand-dark-green">La plataforma educativa inteligente que transforma la enseñanza-aprendizaje y maximiza los resultados</span>
+              {/* <br />
+              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">inteligente</span>
+              <br />
+              <span className="text-brand-dark-green">que multiplica resultados</span> */}
+            </h1>
 
-          {/* Subtitle */}
-          <p className="text-xl sm:text-2xl lg:text-3xl text-brand-dark-green/80 max-w-4xl mx-auto leading-relaxed">
-            Optimiza la gestión académica con IA: materiales, aulas y evaluaciones en menos tiempo y a menor costo.
-          </p>
-
-          {/* CTA Button */}
-          <div className="flex flex-col items-center gap-6">
-            <Link 
-              href="#demo" 
-              className="btn-primary btn-large group"
-            >
-              <span className="text-base sm:text-lg">Comenzar con Mentorium</span>
-              <ArrowRightIcon className="ml-2 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            
-            {/* Microcopy */}
-            <p className="text-base text-brand-dark-green/60">
-              100% online, sin instalación y sin costo inicial.
+            {/* Subtitle */}
+            <p className="text-xl sm:text-2xl lg:text-3xl text-brand-dark-green/80 max-w-4xl mx-auto leading-relaxed">
+            Convierte cada etapa educativa en una oportunidad de crecimiento: Mentorium integra pedagogía e inteligencia artificial en una innovación tecnológica que impulsa mejores resultados en menos tiempo.
             </p>
-          </div>
-        </div>
 
-        {/* Animation Section Below Content */}
-        <div className="mt-16 sm:mt-20 lg:mt-24">
-          {/* Mobile Layout: Card with Bubbles */}
-          <div className="lg:hidden flex flex-col items-center justify-center relative">
-            {/* Top Row of Bubbles */}
-            <MobileBubbles 
-              items={topRowItems}
-              colorConfigs={isClient ? topRowColors : colorConfigs}
-              isClient={isClient}
-              className="mb-8"
-              delayOffset={0}
-            />
-
-            {/* Main Card */}
-            <div className="frost-main-card card-breathe p-6 sm:p-8 rounded-2xl sm:rounded-3xl w-full max-w-[90%] sm:max-w-[480px] mx-4 relative z-20">
-              <div className="space-y-4 sm:space-y-6">
-                {/* Header */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 sm:space-x-3">
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow-green">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                      </svg>
-                    </div>
-                    <span className="text-sm sm:text-base font-semibold text-brand-dark-green">Plataforma Educativa</span>
-                  </div>
-                  <div className="w-2 h-2 bg-brand-orange-pantone rounded-full animate-pulse"></div>
-                </div>
-
-                {/* Content with Green/Orange Theme */}
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="h-3 bg-gradient-to-r from-brand-brunswick-green/30 to-brand-orange-pantone/30 rounded-full"></div>
-                  <div className="h-3 bg-gradient-to-r from-brand-orange-pantone/30 to-brand-brunswick-green/30 rounded-full w-4/5"></div>
-                  <div className="h-3 bg-gradient-to-r from-brand-dark-green/30 to-brand-orange-pantone/40 rounded-full w-3/5"></div>
-                </div>
-
-                {/* Features with 4 Brand Colors as Bullets: Blue, Yellow, Orange, Green */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Automatización IA</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Cumple MINEDU</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Alertas Tempranas</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
-                    <span className="text-xs sm:text-sm text-brand-dark-green">Asistente Virtual</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Row of Bubbles */}
-            <MobileBubbles 
-              items={bottomRowItems}
-              colorConfigs={isClient ? bottomRowColors : colorConfigs}
-              isClient={isClient}
-              className="mt-8"
-              delayOffset={2}
-            />
-          </div>
-
-          {/* Desktop Layout: Card with Orbital Animation */}
-          <div className="hidden lg:block relative">
-            {/* Container for orbital animation and card */}
-            <div className="relative overflow-visible w-full max-w-4xl mx-auto aspect-[3/2] min-h-[500px]">
-              {/* Orbital Animation */}
-              <div className="absolute inset-0 z-20 overflow-visible">
-                <div className="absolute inset-0 pointer-events-none overflow-visible">
-                  <OrbitAnimation items={items} colorConfigs={colorConfigs} />
-                </div>
-              </div>
-
-              {/* Main Card Centered */}
-              <div className="absolute inset-0 z-10 flex items-center justify-center p-8">
-                <div className="frost-main-card card-breathe p-8 lg:p-12 rounded-3xl w-full max-w-[480px]">
-                  <div className="space-y-6">
-                    {/* Header */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow-green">
-                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.84l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                          </svg>
-                        </div>
-                        <span className="text-base font-semibold text-brand-dark-green">Plataforma Educativa</span>
-                      </div>
-                      <div className="w-2 h-2 bg-brand-orange-pantone rounded-full animate-pulse"></div>
-                    </div>
-
-                    {/* Content with Green/Orange Theme */}
-                    <div className="space-y-4">
-                      <div className="h-3 bg-gradient-to-r from-brand-brunswick-green/30 to-brand-orange-pantone/30 rounded-full"></div>
-                      <div className="h-3 bg-gradient-to-r from-brand-orange-pantone/30 to-brand-brunswick-green/30 rounded-full w-4/5"></div>
-                      <div className="h-3 bg-gradient-to-r from-brand-dark-green/30 to-brand-orange-pantone/40 rounded-full w-3/5"></div>
-                    </div>
-
-                    {/* Features with 4 Brand Colors as Bullets: Blue, Yellow, Orange, Green */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-brandeis-blue rounded-full flex-shrink-0"></div>
-                        <span className="text-sm text-brand-dark-green">Automatización IA</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-sunglow rounded-full flex-shrink-0"></div>
-                        <span className="text-sm text-brand-dark-green">Cumple MINEDU</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-orange-pantone rounded-full flex-shrink-0"></div>
-                        <span className="text-sm text-brand-dark-green">Alertas Tempranas</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 bg-brand-brunswick-green rounded-full flex-shrink-0"></div>
-                        <span className="text-sm text-brand-dark-green">Asistente Virtual</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* CTA Button */}
+            <div className="flex flex-col items-center gap-6">
+              <Link 
+                href="#demo" 
+                className="btn-primary btn-large group"
+              >
+                <span className="text-base sm:text-lg">Comienza hoy con Mentorium</span>
+                <ArrowRightIcon className="ml-2 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              
+              {/* Microcopy */}
+              <p className="text-base text-brand-dark-green/60">
+                100% online, sin instalación y sin costo inicial.
+              </p>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Showreel Section - Full width */}
+      <div className="relative z-20 w-full py-16 sm:py-20 lg:py-24">
+        <CardShowreel autoScrollSpeed={25} pauseOnHover={true} />
       </div>
     </section>
   )
