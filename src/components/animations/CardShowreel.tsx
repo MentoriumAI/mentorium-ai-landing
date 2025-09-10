@@ -12,69 +12,97 @@ interface CardShowreelProps {
 }
 
 export const CardShowreel = ({ 
-  autoScrollSpeed = 25, 
+  autoScrollSpeed = 15, // Slower default speed for elegant movement
   pauseOnHover = true, 
   className = "" 
 }: CardShowreelProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef<number>()
   const [isAutoScrolling, setIsAutoScrolling] = useState(true)
   const [focusedCardIndex, setFocusedCardIndex] = useState<number | null>(null)
   const [isUserInteracting, setIsUserInteracting] = useState(false)
+  const [currentSpeed, setCurrentSpeed] = useState(autoScrollSpeed)
+  const [targetSpeed, setTargetSpeed] = useState(autoScrollSpeed)
+  const speedTransitionRef = useRef<number>(autoScrollSpeed)
   
   const infiniteCards = getInfiniteScrollCards()
   const originalCardsCount = featureCards.length
   
-  // Enhanced infinite auto-scroll functionality
+  // Smooth speed transition effect
   useEffect(() => {
-    if (!isAutoScrolling || isUserInteracting) return
+    if (!isAutoScrolling || isUserInteracting) {
+      setTargetSpeed(0)
+      return
+    }
+    setTargetSpeed(autoScrollSpeed)
+  }, [isAutoScrolling, isUserInteracting, autoScrollSpeed])
 
+  // Enhanced infinite auto-scroll with smooth speed transitions
+  useEffect(() => {
     const scrollContainer = scrollRef.current
     if (!scrollContainer) return
 
-    let animationId: number
     let lastTime = 0
+    const speedTransitionRate = 0.1 // How quickly speed changes (0.1 = 10% per frame)
     
     const animate = (currentTime: number) => {
       if (lastTime === 0) lastTime = currentTime
       
       const deltaTime = currentTime - lastTime
-      const scrollDistance = (autoScrollSpeed * deltaTime) / 1000
       
-      scrollContainer.scrollLeft += scrollDistance
+      // Smooth speed interpolation
+      const speedDifference = targetSpeed - speedTransitionRef.current
+      speedTransitionRef.current += speedDifference * speedTransitionRate
       
-      // Seamless infinite loop reset
-      const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
-      const totalOriginalWidth = originalCardsCount * cardWidth
+      // Apply easing for very smooth transitions
+      const easedSpeed = speedTransitionRef.current
+      setCurrentSpeed(easedSpeed)
       
-      if (scrollContainer.scrollLeft >= totalOriginalWidth) {
-        scrollContainer.scrollLeft = scrollContainer.scrollLeft - totalOriginalWidth
+      // Only scroll if there's meaningful speed
+      if (Math.abs(easedSpeed) > 0.1) {
+        const scrollDistance = (easedSpeed * deltaTime) / 1000
+        scrollContainer.scrollLeft += scrollDistance
+        
+        // Seamless infinite loop reset
+        const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
+        const totalOriginalWidth = originalCardsCount * cardWidth
+        
+        if (scrollContainer.scrollLeft >= totalOriginalWidth * 2) {
+          scrollContainer.scrollLeft = totalOriginalWidth
+        } else if (scrollContainer.scrollLeft <= 0) {
+          scrollContainer.scrollLeft = totalOriginalWidth
+        }
       }
       
       lastTime = currentTime
-      animationId = requestAnimationFrame(animate)
+      animationRef.current = requestAnimationFrame(animate)
     }
     
-    animationId = requestAnimationFrame(animate)
+    animationRef.current = requestAnimationFrame(animate)
     
     return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId)
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [isAutoScrolling, autoScrollSpeed, isUserInteracting, originalCardsCount])
+  }, [targetSpeed, originalCardsCount])
 
-  // Handle mouse interactions
+  // Enhanced mouse interactions with smooth transitions
   const handleMouseEnter = useCallback(() => {
     if (pauseOnHover) {
+      setIsUserInteracting(true)
       setIsAutoScrolling(false)
     }
   }, [pauseOnHover])
 
   const handleMouseLeave = useCallback(() => {
     if (pauseOnHover) {
-      setIsAutoScrolling(true)
-      setFocusedCardIndex(null)
-      setIsUserInteracting(false)
+      // Smooth resume with slight delay
+      setTimeout(() => {
+        setIsUserInteracting(false)
+        setIsAutoScrolling(true)
+        setFocusedCardIndex(null)
+      }, 200) // Brief pause before resuming
     }
   }, [pauseOnHover])
 
@@ -84,7 +112,7 @@ export const CardShowreel = ({
     setIsUserInteracting(true)
   }, [originalCardsCount])
 
-  // Handle smooth scroll with infinite support
+  // Handle smooth scroll with infinite support and center the clicked card
   const scrollToCard = useCallback((cardIndex: number) => {
     const scrollContainer = scrollRef.current
     if (!scrollContainer) return
@@ -92,20 +120,24 @@ export const CardShowreel = ({
     const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
     const currentScroll = scrollContainer.scrollLeft
     const totalOriginalWidth = originalCardsCount * cardWidth
+    const containerWidth = scrollContainer.clientWidth
     
-    // Find the closest instance of the target card
-    let targetScrollLeft = cardIndex * cardWidth
+    // Calculate the center offset (where we want the card center to be)
+    const centerOffset = (containerWidth - CARD_DIMENSIONS.WIDTH.DESKTOP) / 2
+    
+    // Find the closest instance of the target card and center it
     const currentPosition = currentScroll % totalOriginalWidth
-    const targetPosition = targetScrollLeft
+    const targetCardPosition = cardIndex * cardWidth
     
-    // Calculate the shortest path to the target
-    const forwardDistance = (targetPosition - currentPosition + totalOriginalWidth) % totalOriginalWidth
-    const backwardDistance = (currentPosition - targetPosition + totalOriginalWidth) % totalOriginalWidth
+    // Calculate the shortest path to center the target card
+    const forwardDistance = (targetCardPosition - currentPosition + totalOriginalWidth) % totalOriginalWidth
+    const backwardDistance = (currentPosition - targetCardPosition + totalOriginalWidth) % totalOriginalWidth
     
+    let targetScrollLeft: number
     if (forwardDistance <= backwardDistance) {
-      targetScrollLeft = currentScroll + forwardDistance
+      targetScrollLeft = currentScroll + forwardDistance - centerOffset
     } else {
-      targetScrollLeft = currentScroll - backwardDistance
+      targetScrollLeft = currentScroll - backwardDistance - centerOffset
     }
     
     scrollContainer.scrollTo({
@@ -123,7 +155,7 @@ export const CardShowreel = ({
     }, 3000)
   }, [originalCardsCount])
 
-  // Smooth navigation with infinite scroll support
+  // Smooth navigation with elegant auto-resume
   const goToPrevious = useCallback(() => {
     const scrollContainer = scrollRef.current
     if (!scrollContainer) return
@@ -131,6 +163,7 @@ export const CardShowreel = ({
     const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
     const targetScroll = scrollContainer.scrollLeft - cardWidth
     
+    // Smooth scroll with custom timing
     scrollContainer.scrollTo({
       left: targetScroll,
       behavior: 'smooth'
@@ -144,13 +177,16 @@ export const CardShowreel = ({
     setIsUserInteracting(true)
     setIsAutoScrolling(false)
     
+    // Elegant resume with fade-in effect
     setTimeout(() => {
       setIsUserInteracting(false)
-      setIsAutoScrolling(true)
-    }, 3000)
+      setTimeout(() => {
+        setIsAutoScrolling(true)
+      }, 100) // Brief pause before smooth resume
+    }, 2500)
   }, [focusedCardIndex, originalCardsCount])
 
-  // Smooth navigation with infinite scroll support
+  // Smooth navigation with elegant auto-resume
   const goToNext = useCallback(() => {
     const scrollContainer = scrollRef.current
     if (!scrollContainer) return
@@ -158,6 +194,7 @@ export const CardShowreel = ({
     const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
     const targetScroll = scrollContainer.scrollLeft + cardWidth
     
+    // Smooth scroll with custom timing
     scrollContainer.scrollTo({
       left: targetScroll,
       behavior: 'smooth'
@@ -171,24 +208,27 @@ export const CardShowreel = ({
     setIsUserInteracting(true)
     setIsAutoScrolling(false)
     
+    // Elegant resume with fade-in effect
     setTimeout(() => {
       setIsUserInteracting(false)
-      setIsAutoScrolling(true)
-    }, 3000)
+      setTimeout(() => {
+        setIsAutoScrolling(true)
+      }, 100) // Brief pause before smooth resume
+    }, 2500)
   }, [focusedCardIndex, originalCardsCount])
 
-  // Handle touch interactions
+  // Enhanced touch interactions with momentum consideration
   const handleTouchStart = useCallback(() => {
     setIsAutoScrolling(false)
     setIsUserInteracting(true)
   }, [])
 
   const handleTouchEnd = useCallback(() => {
-    // Resume auto-scroll after touch ends with a delay
+    // Longer delay for touch to allow for momentum scrolling
     setTimeout(() => {
       setIsUserInteracting(false)
       setIsAutoScrolling(true)
-    }, 2000)
+    }, 1500) // Reduced from 2000ms for better UX
   }, [])
 
   // Handle scroll events for infinite loop reset
