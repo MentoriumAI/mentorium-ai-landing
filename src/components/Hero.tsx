@@ -14,7 +14,7 @@ const Hero = () => {
       </div>
 
       {/* Title Section - Full width with centered content */}
-      <div className="relative z-20 w-full py-24 sm:py-32 md:py-40">
+      <div className="relative z-20 w-full pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-20">
         <div className="container">
           <div className="text-center max-w-5xl mx-auto space-y-8 sm:space-y-12">
             {/* Main Heading */}
@@ -51,7 +51,7 @@ const Hero = () => {
       </div>
 
       {/* Showreel Section - Full width */}
-      <div className="relative z-20 w-full py-16 sm:py-20 lg:py-24">
+      <div className="relative z-20 w-full py-8 sm:py-12 lg:py-16">
         <CardShowreel autoScrollSpeed={25} pauseOnHover={true} />
       </div>
     </section>

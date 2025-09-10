@@ -17,8 +17,8 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
         frost-main-card cursor-pointer select-none flex flex-col
         transition-all duration-300 ease-out
         ${isFocused 
-          ? 'scale-105 shadow-2xl shadow-black/20' 
-          : 'scale-100 hover:scale-102 shadow-lg shadow-black/10'
+          ? 'scale-105 shadow-lg shadow-black/12' 
+          : 'scale-100 hover:scale-102 shadow-md shadow-black/6'
         }
       `}
       style={{

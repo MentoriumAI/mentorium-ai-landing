@@ -120,19 +120,26 @@ export const CardShowreel = ({
   }, [])
 
   return (
-    <div className={`relative ${className}`}>
-      {/* Gradient overlays for seamless infinite scroll effect */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+    <div className={`relative ${className}`} style={{ minHeight: '420px' }}>
+      {/* Gradient overlays for seamless infinite scroll effect - matching hero gradient-subtle */}
+      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 z-10 pointer-events-none"
+           style={{
+             background: 'linear-gradient(to right, #f7f4ef 0%, #f5f7f4 50%, transparent 100%)'
+           }} />
+      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 z-10 pointer-events-none"
+           style={{
+             background: 'linear-gradient(to left, #f0fdf6 0%, #f5f7f4 50%, transparent 100%)'
+           }} />
       
-      {/* Scrollable container with padding for full-width layout */}
+      {/* Scrollable container with padding and extra vertical space for hover effects */}
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8"
+        className="flex items-center gap-6 overflow-x-auto scrollbar-hide scroll-smooth pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-16 sm:py-20"
         style={{
           scrollSnapType: 'x mandatory',
           scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+          msOverflowStyle: 'none',
+          minHeight: '420px'
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
