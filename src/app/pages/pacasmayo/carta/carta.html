@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carta a Cementos Pacasmayo - Mentorium AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../components/styles.css" />
+</head>
+<body class="propuesta-doc">
+  <div class="toolbar" aria-hidden="true">
+    <button onclick="window.print()">Exportar a PDF</button>
+    <button onclick="printSinglePage()">Exportar en una página</button>
+  </div>
+
+  <script>
+    function printSinglePage() {
+      // Temporarily apply print styles to get accurate measurements
+      const tempStyle = document.createElement('style');
+      tempStyle.innerHTML = `
+        body { font-size: 11px !important; line-height: 1.3 !important; }
+        .page { max-width: 600px !important; width: 600px !important; }
+        .hero { margin-bottom: 15px !important; }
+        .section { margin-bottom: 20px !important; }
+        h3 { margin-top: 12px !important; margin-bottom: 6px !important; }
+        p { margin-bottom: 10px !important; }
+      `;
+      document.head.appendChild(tempStyle);
+      
+      // Calculate content height with print styles applied
+      const pageContent = document.querySelector('.page');
+      const contentHeight = pageContent.scrollHeight;
+      
+      // Remove temporary style
+      document.head.removeChild(tempStyle);
+      
+      // Calculate required page height with minimal buffer
+      const marginInches = 0.8; // 0.4in top + 0.4in bottom
+      const bufferInches = 0.3; // Minimal buffer
+      const contentHeightInches = (contentHeight / 96) + marginInches + bufferInches; // 96 DPI
+      
+      // Create a new style element for single page printing
+      const singlePageStyle = document.createElement('style');
+      singlePageStyle.innerHTML = `
+        @media print {
+          @page {
+            size: 8.27in ${contentHeightInches}in;
+            margin: 0.4in;
+          }
+          body {
+            font-size: 11px !important;
+            line-height: 1.3 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: flex-start !important;
+          }
+          .page {
+            page-break-inside: avoid;
+            max-width: 600px !important;
+            width: 600px !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            transform: none !important;
+          }
+          .hero, .section {
+            max-width: 600px !important;
+            width: 600px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+          }
+          .hero {
+            margin-bottom: 15px !important;
+          }
+          .section {
+            margin-bottom: 20px !important;
+          }
+          .letter-content {
+            max-width: 600px !important;
+            width: 600px !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+          }
+          h3 {
+            margin-top: 12px !important;
+            margin-bottom: 6px !important;
+          }
+          p {
+            margin-bottom: 10px !important;
+            text-align: justify !important;
+          }
+          .signature-section {
+            margin-top: 20px !important;
+          }
+          .signature-block p {
+            margin-bottom: 5px !important;
+            text-align: left !important;
+          }
+          .hero-logo {
+            max-width: 60px !important;
+          }
+          .byline, .kicker {
+            margin-bottom: 8px !important;
+          }
+        }
+      `;
+      document.head.appendChild(singlePageStyle);
+      
+      // Print
+      window.print();
+      
+      // Remove the style after printing
+      setTimeout(() => {
+        document.head.removeChild(singlePageStyle);
+      }, 1000);
+    }
+  </script>
+
+  <main class="page">
+    <section class="hero">
+      <div class="accent" aria-hidden="true"></div>
+      <img src="/logo.svg?v=3" alt="Mentorium AI" class="hero-logo">
+      <div class="kicker">Carta de Agradecimiento</div>
+      <div class="title">
+        <h1>Cementos Pacasmayo S.A.A.</h1>
+      </div>
+      <p class="byline">Lima, Perú - 10 de Septiembre de 2025</p>
+    </section>
+
+    <section class="section">
+      <div class="letter-content">
+        <p><strong>Señores<br>
+        Cementos Pacasmayo S.A.A.<br>
+        Presente.-</strong></p>
+
+        <p><strong>De nuestra consideración,</strong></p>
+
+        <p>Es grato dirigirnos a ustedes para expresar nuestro agradecimiento por la confianza depositada en Mentorium como aliado en el desarrollo de su programa de formación.</p>
+
+        <h3>¿Quiénes somos?</h3>
+        <p>Mentorium es una organización dedicada a crear experiencias de aprendizaje práctico y colaborativo, en las que profesionales y equipos de distintas áreas trabajan junto a expertos en innovación y tecnologías emergentes. Nuestro propósito es acompañar a las organizaciones en la integración de nuevas competencias digitales y el desarrollo de soluciones aplicables a su contexto real, generando resultados tangibles en el corto plazo.</p>
+
+        <h3>Nuestro compromiso con Cementos Pacasmayo</h3>
+        <p>En el marco de este programa, buscamos consolidar un espacio de práctica, colaboración y aprendizaje continuo, donde los colaboradores puedan identificar y resolver problemáticas reales de su día a día con el apoyo de la inteligencia artificial. De esta manera, no solo se diseñarán soluciones innovadoras, sino que se aplicarán directamente en sus equipos de trabajo, fortaleciendo una cultura de innovación colaborativa dentro de la organización.</p>
+
+        <p>Reiteramos nuestro compromiso de asegurar la calidad pedagógica y técnica de cada sesión, alineando el diseño del programa con los objetivos estratégicos de Cementos Pacasmayo y garantizando una experiencia formativa de alto impacto.</p>
+
+        <p>Agradecemos nuevamente la oportunidad de colaborar en este proyecto y quedamos atentos a los siguientes pasos para dar inicio al programa.</p>
+
+        <div class="signature-section">
+          <p><strong>Atentamente,</strong></p>
+          <br>
+          <div class="signature-block">
+            <p><br><br><br></p>
+            <p><strong>Moshe Ojeda Dejo</strong><br>
+            CEO - Mentorium</p>
+            <p style="font-size: 0.9em; opacity: 0.7; margin-top: 8px;">Tel: +51 953719060<br>
+            Correo: moshe@mentorium.ai, contacto@mentorium.ai</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Mentorium AI · Carta de Agradecimiento · Cementos Pacasmayo</p>
+    </footer>
+  </main>
+</body>
+</html>
