@@ -1,7 +1,7 @@
 import React from 'react';
 import ResumeHeader, { ResumeHeaderProps } from './ResumeHeader';
 import PresentationMode from './PresentationMode';
-import PrintButton from './PrintButton';
+import PrintDropdown from './PrintDropdown';
 
 export interface ResumeTemplateProps extends ResumeHeaderProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ export default function ResumeTemplate({ children, ...headerProps }: ResumeTempl
   return (
     <div>
       <div className="toolbar" aria-hidden="true">
-        <PrintButton />
+        <PrintDropdown />
       </div>
       <PresentationMode 
         htmlContent={htmlContent}

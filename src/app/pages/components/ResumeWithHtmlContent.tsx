@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import ResumeHeader, { ResumeHeaderProps } from './ResumeHeader';
-import PrintButton from './PrintButton';
+import PrintDropdown from './PrintDropdown';
 
 export interface ResumeWithHtmlContentProps extends ResumeHeaderProps {
   contentPath: string;
@@ -28,7 +28,7 @@ export default function ResumeWithHtmlContent({ contentPath, ...headerProps }: R
   return (
     <div>
       <div className="toolbar" aria-hidden="true">
-        <PrintButton />
+        <PrintDropdown />
       </div>
       <main className="page">
         <ResumeHeader {...headerProps} />
