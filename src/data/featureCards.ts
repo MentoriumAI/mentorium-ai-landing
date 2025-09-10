@@ -22,7 +22,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(0, 111, 234)',
     backgroundColor: 'rgba(0, 111, 234, 0.12)',
     borderColor: 'rgba(0, 111, 234, 0.35)',
-    chips: ['Gestión', 'Eficiencia']
+    chips: ['Eficiencia']
   },
   {
     id: 'matriculas-automaticas',
@@ -33,7 +33,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(15, 76, 56)',
     backgroundColor: 'rgba(15, 76, 56, 0.12)',
     borderColor: 'rgba(15, 76, 56, 0.35)',
-    chips: ['Gestión', 'Automatización']
+    chips: ['Automatización', 'Eficiencia']
   },
   {
     id: 'reportes-listos',
@@ -44,7 +44,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(255, 196, 0)',
     backgroundColor: 'rgba(255, 196, 0, 0.15)',
     borderColor: 'rgba(255, 196, 0, 0.4)',
-    chips: ['Gestión', 'Datos']
+    chips: ['AI', 'Datos']
   },
   {
     id: 'detecta-riesgo',
@@ -77,7 +77,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(15, 76, 56)',
     backgroundColor: 'rgba(15, 76, 56, 0.12)',
     borderColor: 'rgba(15, 76, 56, 0.35)',
-    chips: ['Comunidad', 'Gestión']
+    chips: ['Comunidad', 'Eficiencia']
   },
   {
     id: 'asistente-virtual',
@@ -88,7 +88,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(251, 97, 19)',
     backgroundColor: 'rgba(251, 97, 19, 0.12)',
     borderColor: 'rgba(251, 97, 19, 0.35)',
-    chips: ['24/7', 'AI']
+    chips: ['Soporte', 'AI']
   },
   {
     id: 'soporte-especializado',
@@ -99,7 +99,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(0, 111, 234)',
     backgroundColor: 'rgba(0, 111, 234, 0.12)',
     borderColor: 'rgba(0, 111, 234, 0.35)',
-    chips: ['Soporte', 'Local']
+    chips: ['Soporte Local']
   },
   {
     id: 'evaluaciones-flexibles',
@@ -110,7 +110,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(255, 196, 0)',
     backgroundColor: 'rgba(255, 196, 0, 0.15)',
     borderColor: 'rgba(255, 196, 0, 0.4)',
-    chips: ['Evaluación', 'Flexible']
+    chips: ['Adaptabilidad', 'AI']
   },
   {
     id: 'plataforma-estable',
@@ -121,7 +121,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(15, 76, 56)',
     backgroundColor: 'rgba(15, 76, 56, 0.12)',
     borderColor: 'rgba(15, 76, 56, 0.35)',
-    chips: ['Estable', 'Segura']
+    chips: ['Seguridad', 'Autogestión']
   },
   {
     id: 'aprendizaje-adaptado',
@@ -132,7 +132,7 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(251, 97, 19)',
     backgroundColor: 'rgba(251, 97, 19, 0.12)',
     borderColor: 'rgba(251, 97, 19, 0.35)',
-    chips: ['Adaptativo', 'Personal']
+    chips: ['Adaptabilidad', 'AI']
   },
   {
     id: 'pricing-flexible',

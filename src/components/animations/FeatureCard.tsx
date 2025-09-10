@@ -69,15 +69,25 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
                 className={`
                   px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase
                   transition-all duration-300 ease-out transform
-                  ${isFocused ? 'scale-105' : 'hover:scale-102'}
+                  backdrop-blur-sm shadow-sm hover:shadow-md
+                  ${isFocused ? 'scale-105 shadow-lg' : 'hover:scale-102'}
                 `}
                 style={{ 
                   backgroundColor: `rgba(${card.accentColor.match(/\d+/g)?.join(', ')}, 0.12)`,
                   color: card.accentColor,
-                  border: `1px solid rgba(${card.accentColor.match(/\d+/g)?.join(', ')}, 0.2)`
+                  border: `1px solid rgba(${card.accentColor.match(/\d+/g)?.join(', ')}, 0.2)`,
+                  boxShadow: `0 1px 4px rgba(${card.accentColor.match(/\d+/g)?.join(', ')}, 0.1), inset 0 1px 0 rgba(255,255,255,0.7)`,
+                  textShadow: '0 0.5px 1px rgba(255,255,255,0.9)'
                 }}
               >
-                {chip}
+                <span className="relative z-10">{chip}</span>
+                {/* Subtle gradient overlay for pill effect */}
+                <div 
+                  className="absolute inset-0 rounded-full opacity-25"
+                  style={{
+                    background: `linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05), transparent)`
+                  }}
+                />
               </div>
             ))}
           </div>
