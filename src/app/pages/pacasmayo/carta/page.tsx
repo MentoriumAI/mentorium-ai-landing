@@ -4,8 +4,8 @@ import DocsContainer from '@/app/pages/components/DocsContainer';
 import HtmlEmbedWithPresentation from '@/app/pages/components/HtmlEmbedWithPresentation';
 
 export const metadata: Metadata = {
-  title: 'Carta de Agradecimiento - Cementos Pacasmayo',
-  description: 'Carta de Agradecimiento - Mentorium × Pacasmayo',
+  title: 'Carta de Presentación - Cementos Pacasmayo',
+  description: 'Carta de Presentación - Mentorium × Pacasmayo',
 };
 
 export default function CartaPage() {
@@ -13,7 +13,7 @@ export default function CartaPage() {
     <DocsContainer>
       <HtmlEmbedWithPresentation 
         relativePath="src/app/pages/pacasmayo/carta/carta.html"
-        title="Carta de Agradecimiento - Cementos Pacasmayo S.A.A."
+        title="Carta de Presentación - Cementos Pacasmayo S.A.A."
       />
     </DocsContainer>
   );
