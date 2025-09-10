@@ -39,14 +39,15 @@ export const CardShowreel = ({
   const applyPhysicsMovement = useCallback((deltaX: number) => {
     translateXRef.current += deltaX
     
-    // Handle infinite loop boundaries
+    // Handle infinite loop boundaries - seamless wrapping
     const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
     const totalOriginalWidth = originalCardsCount * cardWidth
     
-    if (translateXRef.current <= -totalOriginalWidth * 2) {
-      translateXRef.current = -totalOriginalWidth
+    // When we've scrolled past one full set of cards, wrap back seamlessly
+    if (translateXRef.current <= -totalOriginalWidth) {
+      translateXRef.current += totalOriginalWidth
     } else if (translateXRef.current >= 0) {
-      translateXRef.current = -totalOriginalWidth
+      translateXRef.current -= totalOriginalWidth
     }
     
     setTranslateX(translateXRef.current)
@@ -192,40 +193,6 @@ export const CardShowreel = ({
     lastTimeRef.current = Date.now()
   }, [])
   
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging || !mouseStartRef.current) return
-    
-    e.preventDefault()
-    const currentTime = Date.now()
-    const deltaX = e.clientX - lastPositionRef.current
-    const deltaTime = currentTime - lastTimeRef.current
-    
-    // Apply movement
-    applyPhysicsMovement(deltaX)
-    
-    // Calculate velocity for momentum
-    if (deltaTime > 0) {
-      velocityRef.current = deltaX / deltaTime * 16 // Scale for 60fps
-    }
-    
-    lastPositionRef.current = e.clientX
-    lastTimeRef.current = currentTime
-  }, [isDragging, applyPhysicsMovement])
-  
-  const handleMouseUp = useCallback(() => {
-    if (!isDragging) return
-    
-    setIsDragging(false)
-    
-    // Start momentum animation if velocity is significant
-    if (Math.abs(velocityRef.current) > 1) {
-      startMomentumAnimation(velocityRef.current)
-    } else {
-      setIsPaused(false)
-    }
-    
-    mouseStartRef.current = null
-  }, [isDragging, startMomentumAnimation])
 
   // Scroll wheel support (both regular and with Shift modifier)
   const handleWheel = useCallback((e: React.WheelEvent) => {
