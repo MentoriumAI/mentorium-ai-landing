@@ -48,8 +48,8 @@ const Hero = () => {
       </div>
 
       {/* Showreel Section - Full width */}
-      <div className="relative z-20 w-full py-8 sm:py-12 lg:py-16">
-        <CardShowreel autoScrollSpeed={25} pauseOnHover={true} />
+      <div className="relative z-20 w-full">
+        <CardShowreel autoScrollSpeed={40} pauseOnHover={true} />
       </div>
     </section>
   )
