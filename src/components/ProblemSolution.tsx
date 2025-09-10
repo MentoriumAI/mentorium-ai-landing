@@ -23,7 +23,7 @@ const ProblemSolution = () => {
           <p className="section-subtitle">Entendemos los retos de la educación actual y los convertimos en oportunidades.</p>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start w-full max-w-5xl mx-auto">
           {/* Problem Side */}
           <div className="bg-white rounded-xl border border-red-100 shadow-lg p-6 sm:p-8 h-full flex flex-col">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-50 text-sm font-medium text-red-600 mb-4">
@@ -162,7 +162,7 @@ const ProblemSolution = () => {
                 href="#demo" 
                 className="btn-primary btn-large group"
               >
-                <span>Comenzar con Mentorium</span>
+                <span>Comienza hoy con Mentorium</span>
                 <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>

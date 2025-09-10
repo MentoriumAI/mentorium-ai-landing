@@ -29,7 +29,7 @@ const CTA = () => {
               href="#contacto" 
               className="btn-primary btn-large group hover:shadow-glow"
             >
-              <span className="text-sm sm:text-base">Comenzar con Mentorium</span>
+              <span className="text-sm sm:text-base">Comienza hoy con Mentorium</span>
               <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>

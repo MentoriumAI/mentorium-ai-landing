@@ -76,7 +76,7 @@ const Features = () => {
       <div className="container relative z-10">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="section-title">
-            Eficiencia en cada clic
+            Eficiencia en cada click
           </h2>
           <p className="section-subtitle">
             Mentorium no es solo un LMS, es un asistente inteligente que trabaja contigo
