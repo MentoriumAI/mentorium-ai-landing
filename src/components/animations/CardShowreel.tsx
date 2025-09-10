@@ -29,6 +29,8 @@ export const CardShowreel = ({
   const [translateX, setTranslateX] = useState(0)
   const translateXRef = useRef<number>(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isCardCentered, setIsCardCentered] = useState(false)
+  const [centeredCardIndex, setCenteredCardIndex] = useState<number | null>(null)
   
   const infiniteCards = getInfiniteScrollCards()
   const originalCardsCount = featureCards.length
@@ -38,9 +40,9 @@ export const CardShowreel = ({
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
   }, [])
   
-  // Enhanced speed transition effect with progressive ramp-up
+  // Enhanced speed transition effect with three-phase resume
   useEffect(() => {
-    if (!isAutoScrolling || isUserInteracting) {
+    if (!isAutoScrolling || isUserInteracting || isCardCentered) {
       setTargetSpeed(0)
       setIsPreparingToResume(false)
       resumeProgressRef.current = 0
@@ -48,13 +50,28 @@ export const CardShowreel = ({
     }
     
     if (isPreparingToResume) {
-      // Progressive ramp-up during resume
-      const rampUpSpeed = autoScrollSpeed * (0.25 + 0.75 * easeInOutCubic(resumeProgressRef.current))
+      // Three-phase resume: very slow start → gradual increase → full speed
+      const progress = resumeProgressRef.current
+      let rampUpSpeed: number
+      
+      if (progress < 0.3) {
+        // Phase 1: Very slow start (5% of normal speed)
+        rampUpSpeed = autoScrollSpeed * 0.05
+      } else if (progress < 0.7) {
+        // Phase 2: Gradual acceleration (5% to 50% speed)
+        const phaseProgress = (progress - 0.3) / 0.4
+        rampUpSpeed = autoScrollSpeed * (0.05 + 0.45 * easeInOutCubic(phaseProgress))
+      } else {
+        // Phase 3: Final acceleration to full speed
+        const phaseProgress = (progress - 0.7) / 0.3
+        rampUpSpeed = autoScrollSpeed * (0.5 + 0.5 * easeInOutCubic(phaseProgress))
+      }
+      
       setTargetSpeed(rampUpSpeed)
     } else {
       setTargetSpeed(autoScrollSpeed)
     }
-  }, [isAutoScrolling, isUserInteracting, isPreparingToResume, autoScrollSpeed, easeInOutCubic])
+  }, [isAutoScrolling, isUserInteracting, isPreparingToResume, isCardCentered, autoScrollSpeed, easeInOutCubic])
 
   // Enhanced infinite auto-scroll with smooth speed transitions
   useEffect(() => {
@@ -70,9 +87,9 @@ export const CardShowreel = ({
       
       const deltaTime = currentTime - lastTime
       
-      // Handle progressive resume ramp-up
+      // Handle progressive resume ramp-up with extended duration
       if (isPreparingToResume && resumeProgressRef.current < 1) {
-        resumeProgressRef.current = Math.min(1, resumeProgressRef.current + deltaTime / 2000) // 2 second ramp-up
+        resumeProgressRef.current = Math.min(1, resumeProgressRef.current + deltaTime / 4000) // 4 second ramp-up
         if (resumeProgressRef.current >= 1) {
           setIsPreparingToResume(false)
         }
@@ -122,14 +139,14 @@ export const CardShowreel = ({
 
   // Enhanced mouse interactions with smooth transitions
   const handleMouseEnter = useCallback(() => {
-    if (pauseOnHover) {
+    if (pauseOnHover && !isCardCentered) {
       setIsUserInteracting(true)
       setIsAutoScrolling(false)
     }
-  }, [pauseOnHover])
+  }, [pauseOnHover, isCardCentered])
 
   const handleMouseLeave = useCallback(() => {
-    if (pauseOnHover) {
+    if (pauseOnHover && !isCardCentered) {
       // Enhanced smooth resume with progressive ramp-up
       setTimeout(() => {
         setIsUserInteracting(false)
@@ -139,7 +156,7 @@ export const CardShowreel = ({
         resumeProgressRef.current = 0
       }, 500) // Longer pause before resuming for better UX
     }
-  }, [pauseOnHover])
+  }, [pauseOnHover, isCardCentered])
 
   // Handle card focus
   const handleCardFocus = useCallback((index: number) => {
@@ -147,35 +164,60 @@ export const CardShowreel = ({
     setIsUserInteracting(true)
   }, [originalCardsCount])
 
-  // Enhanced smooth transform to center the clicked card with animation
+  // Enhanced smooth transform with directional animation and persistent focus
   const scrollToCard = useCallback((cardIndex: number) => {
+    const scrollContainer = scrollRef.current
+    if (!scrollContainer) return
+    
     const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
     const totalOriginalWidth = originalCardsCount * cardWidth
     
+    // Get the actual viewport width (container's parent with overflow hidden)
+    const viewportWidth = scrollContainer.parentElement?.offsetWidth || window.innerWidth
+    
+    // Calculate current card position in viewport
+    const currentCardPosition = totalOriginalWidth + (cardIndex * cardWidth)
+    const currentCardViewportPosition = currentCardPosition + translateXRef.current
+    const viewportCenter = viewportWidth / 2
+    
+    // Detect if card is on left or right side of center
+    const isCardOnLeft = currentCardViewportPosition < viewportCenter
+    
     // Calculate target position to center the card
     const targetCardPosition = cardIndex * cardWidth
-    const containerWidth = window.innerWidth
-    const centerOffset = (containerWidth - CARD_DIMENSIONS.WIDTH.DESKTOP) / 2
+    const centerOffset = (viewportWidth - CARD_DIMENSIONS.WIDTH.DESKTOP) / 2
+    const cardActualPosition = totalOriginalWidth + targetCardPosition
+    const targetTranslateX = -cardActualPosition + centerOffset
     
-    // Calculate new translateX to center the selected card
-    const targetTranslateX = -targetCardPosition + centerOffset - totalOriginalWidth
-    
-    // Start smooth animation to target position
+    // Set persistent focus state
+    setFocusedCardIndex(cardIndex)
+    setCenteredCardIndex(cardIndex)
     setIsAnimating(true)
     setIsUserInteracting(true)
     setIsAutoScrolling(false)
     
     const startTranslateX = translateXRef.current
     const distance = targetTranslateX - startTranslateX
-    const duration = Math.min(800, Math.abs(distance) * 2) // Adaptive duration based on distance
+    const duration = Math.min(1000, Math.max(600, Math.abs(distance) * 1.5)) // Adjusted duration
     const startTime = performance.now()
     
     const animateToCenter = (currentTime: number) => {
       const elapsed = currentTime - startTime
       const progress = Math.min(elapsed / duration, 1)
       
-      // Smooth easing function (ease-out-cubic)
-      const easedProgress = 1 - Math.pow(1 - progress, 3)
+      // Directional easing based on card position
+      let easedProgress: number
+      if (isCardOnLeft) {
+        // Swipe right: ease-in-out with slight bias toward end
+        easedProgress = progress < 0.5 
+          ? 2 * progress * progress 
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2
+      } else {
+        // Swipe left: ease-in-out with slight bias toward start
+        easedProgress = progress < 0.5 
+          ? 4 * progress * progress * progress 
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2
+      }
       
       const currentTranslateX = startTranslateX + distance * easedProgress
       translateXRef.current = currentTranslateX
@@ -185,14 +227,26 @@ export const CardShowreel = ({
         requestAnimationFrame(animateToCenter)
       } else {
         setIsAnimating(false)
+        setIsCardCentered(true)
         
-        // Progressive resume after animation completes
+        // Hold in center for 3.5 seconds with enhanced focus
         setTimeout(() => {
-          setIsUserInteracting(false)
-          setIsPreparingToResume(true)
-          setIsAutoScrolling(true)
-          resumeProgressRef.current = 0
-        }, 2000)
+          setIsCardCentered(false)
+          
+          // Three-phase resume: hold → slow start → full speed
+          setTimeout(() => {
+            setIsUserInteracting(false)
+            setIsPreparingToResume(true)
+            setIsAutoScrolling(true)
+            resumeProgressRef.current = 0
+            
+            // Clear focus after resume starts
+            setTimeout(() => {
+              setFocusedCardIndex(null)
+              setCenteredCardIndex(null)
+            }, 1000)
+          }, 500) // Brief pause before starting resume
+        }, 3500) // Hold period
       }
     }
     
@@ -211,7 +265,7 @@ export const CardShowreel = ({
     
     const startTranslateX = translateXRef.current
     const distance = targetTranslateX - startTranslateX
-    const duration = 600
+    const duration = 400 // Faster response for arrow buttons
     const startTime = performance.now()
     
     const animateNavigation = (currentTime: number) => {
@@ -264,7 +318,7 @@ export const CardShowreel = ({
     
     const startTranslateX = translateXRef.current
     const distance = targetTranslateX - startTranslateX
-    const duration = 600
+    const duration = 400 // Faster response for arrow buttons
     const startTime = performance.now()
     
     const animateNavigation = (currentTime: number) => {
@@ -372,15 +426,22 @@ export const CardShowreel = ({
                 className={`
                   transition-all duration-300 ease-out cursor-pointer
                   ${isPreparingToResume ? 'scale-[0.99]' : ''}
-                  ${isFocused ? 'scale-105 z-10' : 'hover:scale-102'}
+                  ${isFocused && isCardCentered && centeredCardIndex === cardIndex ? 'scale-110 z-20' : 
+                    isFocused ? 'scale-105 z-10' : 'hover:scale-102'}
                   ${isAnimating ? 'transition-none' : ''}
+                  ${isCardCentered && centeredCardIndex === cardIndex ? 'animate-pulse' : ''}
                 `}
                 style={{
-                  filter: isFocused ? 'brightness(1.05) drop-shadow(0 8px 25px rgba(0,0,0,0.15))' : 
-                         isAnimating ? 'brightness(1.02)' : 'brightness(1)',
-                  zIndex: isFocused ? 20 : 1
+                  filter: isFocused && isCardCentered && centeredCardIndex === cardIndex 
+                    ? 'brightness(1.08) drop-shadow(0 12px 35px rgba(0,0,0,0.2)) saturate(1.1)' :
+                    isFocused ? 'brightness(1.05) drop-shadow(0 8px 25px rgba(0,0,0,0.15))' : 
+                    isAnimating ? 'brightness(1.02)' : 'brightness(1)',
+                  zIndex: isFocused && isCardCentered && centeredCardIndex === cardIndex ? 30 : 
+                         isFocused ? 20 : 1,
+                  transform: isCardCentered && centeredCardIndex === cardIndex 
+                    ? 'translateY(-2px)' : 'translateY(0px)'
                 }}
-                onMouseEnter={() => handleCardFocus(globalIndex)}
+                onMouseEnter={() => !isCardCentered && handleCardFocus(globalIndex)}
               >
                 <FeatureCard
                   card={card}
