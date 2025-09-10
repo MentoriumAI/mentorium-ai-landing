@@ -18,7 +18,7 @@ export const FeatureCard = ({ card, onClick }: FeatureCardProps) => {
       "
       style={{
         height: CARD_HEIGHT_CSS,
-        background: `linear-gradient(135deg, ${card.backgroundColor}, ${card.backgroundColor}dd)`,
+        background: `linear-gradient(135deg, ${card.backgroundColor}cc, ${card.accentColor}15, ${card.accentColor}25)`,
         borderColor: card.borderColor,
         borderWidth: '2px',
         borderStyle: 'solid',

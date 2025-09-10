@@ -1,40 +1,36 @@
 'use client'
 
-import { ClockIcon, CurrencyDollarIcon, CheckBadgeIcon, FaceSmileIcon } from '@heroicons/react/24/solid'
+import { ClockIcon, CurrencyDollarIcon, CheckBadgeIcon, FaceSmileIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
 
 const Benefits = () => {
   const benefits = [
     {
       icon: <ClockIcon className="w-8 h-8" />,
-      title: 'Ahorro de tiempo administrativo',
-      description: 'Ahorra hasta 60% de tiempo administrativo gracias a la automatización.',
-      stat: '60%',
-      statLabel: 'menos tiempo',
+      title: 'Máxima optimización',
+      description: 'Libera tiempo administrativo automatizando calificaciones, reportes y gestión de aulas para enfocarte en lo pedagógico.',
+      stat: 'Ahorro de tiempo administrativo',
       color: 'text-brand-sunglow'
     },
     {
-      icon: <CurrencyDollarIcon className="w-8 h-8" />,
-      title: 'Reducción de costos',
-      description: 'Reduce costos eliminando licencias individuales y centralizando la gestión.',
-      stat: '40%',
-      statLabel: 'menos costos',
-      color: 'text-brand-brunswick-green'
-    },
-    {
       icon: <CheckBadgeIcon className="w-8 h-8" />,
-      title: 'Cumplimiento MINEDU',
-      description: 'Cumple 100% con estándares MINEDU, evitando reprocesos.',
-      stat: '100%',
-      statLabel: 'MINEDU',
+      title: '100% cumplimiento con estándares nacionales',
+      description: 'Garantiza trazabilidad, reportes oficiales y alineación total.',
+      stat: 'Gestión académica confiable',
       color: 'text-brand-brandeis-blue'
     },
     {
       icon: <FaceSmileIcon className="w-8 h-8" />,
-      title: 'Mayor satisfacción',
-      description: 'Mayor satisfacción de docentes y padres con comunicación más ágil. Escalable y flexible.',
-      stat: '95%',
-      statLabel: 'satisfacción',
+      title: 'Gran satisfacción',
+      description: 'Comunicación ágil, retroalimentación constante y experiencia de aprendizaje más fluida para toda la institución.',
+      stat: 'Comunidad educativa',
       color: 'text-brand-orange-pantone'
+    },
+    {
+      icon: <AcademicCapIcon className="w-8 h-8" />,
+      title: 'Aprendizaje potenciado',
+      description: 'Personalización con IA, actividades interactivas y evaluaciones inteligentes para mejorar el desempeño estudiantil.',
+      stat: 'Impacto en el aula',
+      color: 'text-brand-brunswick-green'
     }
   ]
 
@@ -47,7 +43,7 @@ const Benefits = () => {
             Beneficios Clave para Instituciones
           </h2>
           <p className="section-subtitle">
-            Transforma tu institución educativa con resultados medibles y comprobados
+            Impulsa la transformación educativa de tu institución con resultados claros y medibles
           </p>
         </div>
 
@@ -61,28 +57,25 @@ const Benefits = () => {
               {/* Card */}
               <div className="bg-white rounded-xl border border-white/50 shadow-lg h-full p-6 sm:p-8 text-center hover:scale-105 transition-all duration-500">
                 {/* Icon */}
-                <div className="mb-4 sm:mb-6 flex justify-center">
-                  <div className={`${benefit.color} p-2 sm:p-3 rounded-2xl bg-white border-2 border-current group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div className="mb-6 flex justify-center">
+                  <div className={`${benefit.color} p-3 rounded-2xl bg-white border-2 border-current group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                     {benefit.icon}
                   </div>
                 </div>
 
-                {/* Stat */}
-                <div className="mb-4">
-                  <div className={`text-fluid-3xl font-bold ${benefit.color} mb-1`}>
+                {/* Stat Label */}
+                <div className="mb-6">
+                  <div className={`text-lg font-bold ${benefit.color} leading-tight`}>
                     {benefit.stat}
-                  </div>
-                  <div className="text-fluid-sm text-brand-dark-green/70 font-medium">
-                    {benefit.statLabel}
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-fluid-lg font-semibold text-brand-dark-green mb-3">
+                <h3 className="text-xl font-bold text-brand-dark-green mb-4 leading-tight">
                   {benefit.title}
                 </h3>
                 
-                <p className="text-fluid-sm text-brand-dark-green/70 leading-relaxed">
+                <p className="text-sm text-brand-dark-green/70 leading-relaxed">
                   {benefit.description}
                 </p>
 
