@@ -289,14 +289,14 @@ export const CardShowreel = ({
 
   return (
     <div className={`relative ${className}`} style={{ minHeight: '280px' }}>
-      {/* Mobile gradient overlays - simpler for performance */}
-      <div className="lg:hidden absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none"
+      {/* Mobile gradient overlays - thin and radial with proper background blending */}
+      <div className="lg:hidden absolute left-0 top-0 bottom-0 w-4 z-10 pointer-events-none"
            style={{
-             background: 'linear-gradient(to right, rgba(247, 244, 239, 0.8), transparent)'
+             background: 'radial-gradient(ellipse 200% 100% at 0% 50%, var(--color-background-primary) 0%, rgba(247, 244, 239, 0.8) 30%, rgba(247, 244, 239, 0.4) 60%, transparent 90%)'
            }} />
-      <div className="lg:hidden absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none"
+      <div className="lg:hidden absolute right-0 top-0 bottom-0 w-4 z-10 pointer-events-none"
            style={{
-             background: 'linear-gradient(to left, rgba(240, 253, 246, 0.8), transparent)'
+             background: 'radial-gradient(ellipse 200% 100% at 100% 50%, var(--color-background-primary) 0%, rgba(240, 253, 246, 0.8) 30%, rgba(240, 253, 246, 0.4) 60%, transparent 90%)'
            }} />
       
       {/* Desktop gradient overlays - more complex effects */}
