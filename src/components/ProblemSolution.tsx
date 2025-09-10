@@ -17,10 +17,10 @@ const ProblemSolution = () => {
         {/* Section Title */}
         <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-brand-brunswick-green/10 text-sm font-medium text-brand-brunswick-green mb-4">
-            🌱 Nuestro enfoque
+            Problema y Solución
           </div>
-          <h2 className="section-title">Problema y solución</h2>
-          <p className="section-subtitle">Entendemos los retos actuales y proponemos una vía clara para superarlos.</p>
+          <h2 className="section-title">El enfoque de Mentorium</h2>
+          <p className="section-subtitle">Entendemos los retos de la educación actual y los convertimos en oportunidades.</p>
         </div>
         
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
@@ -41,7 +41,7 @@ const ProblemSolution = () => {
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <p>Poco adaptadas a la realidad peruana</p>
+                <p>Interfaces complejas que hacen difícil enseñar y aprender.</p>
               </div>
               
               <div className="flex items-start space-x-3">
@@ -50,7 +50,7 @@ const ProblemSolution = () => {
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <p>Exigen mucho tiempo de carga manual</p>
+                <p>Gestión manual de alumnos y aulas que sobrecarga a los docentes.</p>
               </div>
               
               <div className="flex items-start space-x-3">
@@ -59,7 +59,7 @@ const ProblemSolution = () => {
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <p>Duplicación de esfuerzos</p>
+                <p>Calificaciones rígidas y reportes poco confiables.</p>
               </div>
               
               <div className="flex items-start space-x-3">
@@ -68,7 +68,16 @@ const ProblemSolution = () => {
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <p>Procesos administrativos complejos</p>
+                <p>Evaluaciones limitadas y poco inclusivas.</p>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-1">
+                  <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p>Materiales estáticos que no motivan ni se adaptan al estudiante.</p>
               </div>
             </div>
           </div>
@@ -86,10 +95,6 @@ const ProblemSolution = () => {
               <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent"> automatización + IA</span>
             </h2>
             
-            <p className="relative z-10 text-lg text-brand-dark-green/80 mb-6">
-              Simplificamos lo complejo: desde la creación y carga de materiales hasta la generación de evaluaciones y reportes oficiales MINEDU.
-            </p>
-            
             <div className="relative z-10 space-y-4 flex-1">
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 rounded-full bg-brand-brunswick-green flex items-center justify-center flex-shrink-0 mt-1">
@@ -98,8 +103,8 @@ const ProblemSolution = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-dark-green">Automatización inteligente</p>
-                  <p className="text-sm text-brand-dark-green/70">Carga y organización automática de materiales</p>
+                  <p className="font-semibold text-brand-dark-green">Plataforma intuitiva y fácil de usar</p>
+                  <p className="text-sm text-brand-dark-green/70">Docentes y estudiantes acceden sin fricciones</p>
                 </div>
               </div>
               
@@ -110,8 +115,8 @@ const ProblemSolution = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-dark-green">Evaluaciones instantáneas</p>
-                  <p className="text-sm text-brand-dark-green/70">Generación automática de preguntas y rúbricas</p>
+                  <p className="font-semibold text-brand-dark-green">Matrícula y aulas automatizadas</p>
+                  <p className="text-sm text-brand-dark-green/70">Sin errores ni sobrecarga administrativa</p>
                 </div>
               </div>
               
@@ -122,8 +127,32 @@ const ProblemSolution = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold text-brand-dark-green">Reportes MINEDU</p>
-                  <p className="text-sm text-brand-dark-green/70">Boletas oficiales y dashboards en un clic</p>
+                  <p className="font-semibold text-brand-dark-green">Evaluaciones en múltiples formatos</p>
+                  <p className="text-sm text-brand-dark-green/70">Inclusivas y personalizables</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 rounded-full bg-brand-brunswick-green flex items-center justify-center flex-shrink-0 mt-1">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-semibold text-brand-dark-green">Contenidos dinámicos e interactivos</p>
+                  <p className="text-sm text-brand-dark-green/70">Gamificados que motivan el aprendizaje</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 rounded-full bg-brand-brandeis-blue flex items-center justify-center flex-shrink-0 mt-1">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-semibold text-brand-dark-green">Dashboards, alertas y analíticas claras</p>
+                  <p className="text-sm text-brand-dark-green/70">Facilitan decisiones pedagógicas</p>
                 </div>
               </div>
             </div>
