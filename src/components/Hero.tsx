@@ -14,7 +14,7 @@ const Hero = () => {
       </div>
 
       {/* Title Section - Full width with centered content */}
-      <div className="relative z-20 w-full min-h-[60vh] flex items-center pt-12 sm:pt-16">
+      <div className="relative z-20 w-full pt-32 sm:pt-44 lg:pt-52 pb-8 sm:pb-12">
         <div className="container">
           <div className="text-center max-w-5xl mx-auto space-y-4 sm:space-y-6">
             {/* Main Heading */}
