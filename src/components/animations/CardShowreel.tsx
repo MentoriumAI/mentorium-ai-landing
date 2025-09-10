@@ -8,11 +8,13 @@ import { useViewport } from '@/hooks/useViewport'
 
 interface CardShowreelProps {
   pauseOnHover?: boolean
+  autoScrollSpeed?: number
   className?: string
 }
 
 export const CardShowreel = ({ 
   pauseOnHover = true, 
+  autoScrollSpeed = 60,
   className = "" 
 }: CardShowreelProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -86,8 +88,9 @@ export const CardShowreel = ({
     if (isPaused || isDragging || hasMomentum) return
     
     const animate = () => {
-      // Simple movement - 1 pixel per frame at 60fps = 60px/second
-      applyPhysicsMovement(-1)
+      // Movement derived from desired pixels/second at ~60fps
+      const perFrame = -autoScrollSpeed / 60
+      applyPhysicsMovement(perFrame)
       
       if (!isPaused && !isDragging && !hasMomentum) {
         animationRef.current = requestAnimationFrame(animate)
@@ -101,7 +104,7 @@ export const CardShowreel = ({
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [isPaused, isDragging, hasMomentum, applyPhysicsMovement])
+  }, [isPaused, isDragging, hasMomentum, applyPhysicsMovement, autoScrollSpeed])
 
   // Simple mouse interactions
   const handleMouseEnter = useCallback(() => {
