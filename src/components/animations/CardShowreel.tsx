@@ -23,19 +23,35 @@ export const CardShowreel = ({
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const [currentSpeed, setCurrentSpeed] = useState(autoScrollSpeed)
   const [targetSpeed, setTargetSpeed] = useState(autoScrollSpeed)
+  const [isPreparingToResume, setIsPreparingToResume] = useState(false)
   const speedTransitionRef = useRef<number>(autoScrollSpeed)
+  const resumeProgressRef = useRef<number>(0)
   
   const infiniteCards = getInfiniteScrollCards()
   const originalCardsCount = featureCards.length
   
-  // Smooth speed transition effect
+  // Cubic easing function for smooth transitions
+  const easeInOutCubic = (t: number): number => {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+  }
+  
+  // Enhanced speed transition effect with progressive ramp-up
   useEffect(() => {
     if (!isAutoScrolling || isUserInteracting) {
       setTargetSpeed(0)
+      setIsPreparingToResume(false)
+      resumeProgressRef.current = 0
       return
     }
-    setTargetSpeed(autoScrollSpeed)
-  }, [isAutoScrolling, isUserInteracting, autoScrollSpeed])
+    
+    if (isPreparingToResume) {
+      // Progressive ramp-up during resume
+      const rampUpSpeed = autoScrollSpeed * (0.25 + 0.75 * easeInOutCubic(resumeProgressRef.current))
+      setTargetSpeed(rampUpSpeed)
+    } else {
+      setTargetSpeed(autoScrollSpeed)
+    }
+  }, [isAutoScrolling, isUserInteracting, isPreparingToResume, autoScrollSpeed])
 
   // Enhanced infinite auto-scroll with smooth speed transitions
   useEffect(() => {
@@ -43,19 +59,29 @@ export const CardShowreel = ({
     if (!scrollContainer) return
 
     let lastTime = 0
-    const speedTransitionRate = 0.1 // How quickly speed changes (0.1 = 10% per frame)
+    const speedTransitionRate = 0.05 // Slower transition for smoother easing (5% per frame)
+    const minSpeedThreshold = 0.05 // Prevent micro-movements
     
     const animate = (currentTime: number) => {
       if (lastTime === 0) lastTime = currentTime
       
       const deltaTime = currentTime - lastTime
       
-      // Smooth speed interpolation
-      const speedDifference = targetSpeed - speedTransitionRef.current
-      speedTransitionRef.current += speedDifference * speedTransitionRate
+      // Handle progressive resume ramp-up
+      if (isPreparingToResume && resumeProgressRef.current < 1) {
+        resumeProgressRef.current = Math.min(1, resumeProgressRef.current + deltaTime / 2000) // 2 second ramp-up
+        if (resumeProgressRef.current >= 1) {
+          setIsPreparingToResume(false)
+        }
+      }
       
-      // Apply easing for very smooth transitions
-      const easedSpeed = speedTransitionRef.current
+      // Enhanced smooth speed interpolation with cubic easing
+      const speedDifference = targetSpeed - speedTransitionRef.current
+      const easingFactor = easeInOutCubic(Math.min(1, Math.abs(speedDifference) / autoScrollSpeed))
+      speedTransitionRef.current += speedDifference * speedTransitionRate * (0.5 + 0.5 * easingFactor)
+      
+      // Apply minimum threshold to prevent jerky micro-movements
+      const easedSpeed = Math.abs(speedTransitionRef.current) < minSpeedThreshold ? 0 : speedTransitionRef.current
       setCurrentSpeed(easedSpeed)
       
       // Only scroll if there's meaningful speed

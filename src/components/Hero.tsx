@@ -19,7 +19,7 @@ const Hero = () => {
           <div className="text-center max-w-5xl mx-auto space-y-8 sm:space-y-12">
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-serif">
-              <span className="text-brand-dark-green">La plataforma educativa inteligente que transforma la enseñanza-aprendizaje y maximiza los resultados</span>
+              <span className="text-brand-dark-green">Mentorium: la plataforma educativa inteligente que transforma la enseñanza y el aprendizaje</span>
               {/* <br />
               <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent">inteligente</span>
               <br />
@@ -28,7 +28,7 @@ const Hero = () => {
 
             {/* Subtitle */}
             <p className="text-xl sm:text-2xl lg:text-3xl text-brand-dark-green/80 max-w-4xl mx-auto leading-relaxed">
-            Convierte cada etapa educativa en una oportunidad de crecimiento: Mentorium integra pedagogía e inteligencia artificial en una innovación tecnológica que impulsa mejores resultados en menos tiempo.
+            Integra pedagogía e inteligencia artificial para convertir cada etapa educativa en una experiencia de crecimiento.
             </p>
 
             {/* CTA Button */}
@@ -52,7 +52,7 @@ const Hero = () => {
 
       {/* Showreel Section - Full width */}
       <div className="relative z-20 w-full py-8 sm:py-12 lg:py-16">
-        <CardShowreel autoScrollSpeed={25} pauseOnHover={true} />
+        <CardShowreel autoScrollSpeed={15} pauseOnHover={true} />
       </div>
     </section>
   )
