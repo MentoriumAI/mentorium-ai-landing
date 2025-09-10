@@ -60,24 +60,28 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
           </div>
         </div>
         
-        {/* Status badge */}
-        <div 
-          className={`
-            px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1 
-            transition-all duration-200 ${isFocused ? 'scale-105' : ''}
-          `}
-          style={{ 
-            backgroundColor: `${card.accentColor}20`,
-            color: card.accentColor,
-            border: `1px solid ${card.accentColor}40`
-          }}
-        >
-          <div 
-            className="w-1.5 h-1.5 rounded-full animate-pulse"
-            style={{ backgroundColor: card.accentColor }}
-          />
-          <span>En vivo</span>
-        </div>
+        {/* Chip badges */}
+        {card.chips && card.chips.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 justify-end">
+            {card.chips.map((chip, index) => (
+              <div 
+                key={index}
+                className={`
+                  px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase
+                  transition-all duration-300 ease-out transform
+                  ${isFocused ? 'scale-105' : 'hover:scale-102'}
+                `}
+                style={{ 
+                  backgroundColor: `rgba(${card.accentColor.match(/\d+/g)?.join(', ')}, 0.12)`,
+                  color: card.accentColor,
+                  border: `1px solid rgba(${card.accentColor.match(/\d+/g)?.join(', ')}, 0.2)`
+                }}
+              >
+                {chip}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Content - Flexible middle section */}
