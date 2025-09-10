@@ -612,13 +612,43 @@
 
 /* Auto-scroll performance optimizations */
 .card-showreel-container {
-  will-change: scroll-position;
   backface-visibility: hidden;
   perspective: 1000px;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  containment: layout style paint;
 }
 
 .card-showreel-container.auto-scrolling {
-  will-change: scroll-position, transform;
+  will-change: transform;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 1023px) {
+  .feature-card-enhanced {
+    will-change: auto;
+    transition: transform 0.2s ease-out;
+  }
+  
+  .feature-card-enhanced:hover .card-icon {
+    animation: none; /* Disable animations on mobile for performance */
+  }
+  
+  .feature-card-enhanced:hover .progress-bar::after {
+    animation: none;
+  }
+  
+  /* Reduce shadows on mobile */
+  .feature-card-enhanced {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  }
+  
+  /* Disable hover effects on touch devices */
+  @media (hover: none) {
+    .hover\:scale-102:hover {
+      transform: none;
+    }
+  }
 }
 
 /* Custom utilities for card interactions */

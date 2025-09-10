@@ -4,15 +4,14 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { FeatureCard } from './FeatureCard'
 import { featureCards } from '@/data/featureCards'
 import { CARD_DIMENSIONS } from '@/constants/cardDimensions'
+import { useViewport } from '@/hooks/useViewport'
 
 interface CardShowreelProps {
-  autoScrollSpeed?: number // pixels per second
   pauseOnHover?: boolean
   className?: string
 }
 
 export const CardShowreel = ({ 
-  autoScrollSpeed = 30,
   pauseOnHover = true, 
   className = "" 
 }: CardShowreelProps) => {
@@ -22,6 +21,7 @@ export const CardShowreel = ({
   const [focusedCardIndex, setFocusedCardIndex] = useState<number | null>(null)
   const [translateX, setTranslateX] = useState(0)
   const translateXRef = useRef<number>(0)
+  const viewport = useViewport()
   
   // Physics state
   const [isDragging, setIsDragging] = useState(false)
@@ -35,12 +35,19 @@ export const CardShowreel = ({
   const originalCardsCount = featureCards.length
   const momentumAnimationRef = useRef<number | null>(null)
   
-  // Physics calculations
+  // Get responsive card width based on viewport
+  const getCardWidth = useCallback(() => {
+    if (viewport.isMobile) return CARD_DIMENSIONS.WIDTH.MOBILE
+    if (viewport.isSmall) return CARD_DIMENSIONS.WIDTH.SMALL
+    return CARD_DIMENSIONS.WIDTH.DESKTOP
+  }, [viewport.isMobile, viewport.isSmall])
+
+  // Physics calculations with responsive dimensions
   const applyPhysicsMovement = useCallback((deltaX: number) => {
     translateXRef.current += deltaX
     
-    // Handle infinite loop boundaries - seamless wrapping
-    const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
+    // Handle infinite loop boundaries - seamless wrapping with responsive width
+    const cardWidth = getCardWidth() + CARD_DIMENSIONS.GAP
     const totalOriginalWidth = originalCardsCount * cardWidth
     
     // When we've scrolled past one full set of cards, wrap back seamlessly
@@ -51,7 +58,7 @@ export const CardShowreel = ({
     }
     
     setTranslateX(translateXRef.current)
-  }, [originalCardsCount])
+  }, [originalCardsCount, getCardWidth])
   
   const startMomentumAnimation = useCallback((initialVelocity: number) => {
     setHasMomentum(true)
@@ -60,7 +67,9 @@ export const CardShowreel = ({
     const animateMomentum = () => {
       if (Math.abs(velocityRef.current) > 0.1) {
         applyPhysicsMovement(velocityRef.current)
-        velocityRef.current *= 0.95 // Deceleration factor
+        // Stronger deceleration on mobile for better control
+        const deceleration = viewport.isMobile ? 0.92 : 0.95
+        velocityRef.current *= deceleration
         momentumAnimationRef.current = requestAnimationFrame(animateMomentum)
       } else {
         setHasMomentum(false)
@@ -69,7 +78,7 @@ export const CardShowreel = ({
     }
     
     momentumAnimationRef.current = requestAnimationFrame(animateMomentum)
-  }, [applyPhysicsMovement])
+  }, [applyPhysicsMovement, viewport.isMobile])
   
 
   // Auto-scroll that respects physics interactions
@@ -149,14 +158,15 @@ export const CardShowreel = ({
     // Apply movement
     applyPhysicsMovement(deltaX)
     
-    // Calculate velocity for momentum
+    // Calculate velocity for momentum - reduced sensitivity on mobile
     if (deltaTime > 0) {
-      velocityRef.current = deltaX / deltaTime * 16 // Scale for 60fps
+      const velocityScale = viewport.isMobile ? 12 : 16 // Reduced for mobile
+      velocityRef.current = deltaX / deltaTime * velocityScale
     }
     
     lastPositionRef.current = touch.clientX
     lastTimeRef.current = currentTime
-  }, [isDragging, applyPhysicsMovement])
+  }, [isDragging, applyPhysicsMovement, viewport.isMobile])
 
   const handleTouchEnd = useCallback(() => {
     if (!isDragging) return
@@ -279,7 +289,17 @@ export const CardShowreel = ({
 
   return (
     <div className={`relative ${className}`} style={{ minHeight: '280px' }}>
-      {/* Advanced gradient overlays for desktop - fade to transparency on all edges */}
+      {/* Mobile gradient overlays - simpler for performance */}
+      <div className="lg:hidden absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none"
+           style={{
+             background: 'linear-gradient(to right, rgba(247, 244, 239, 0.8), transparent)'
+           }} />
+      <div className="lg:hidden absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none"
+           style={{
+             background: 'linear-gradient(to left, rgba(240, 253, 246, 0.8), transparent)'
+           }} />
+      
+      {/* Desktop gradient overlays - more complex effects */}
       <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
            style={{
              background: 'radial-gradient(ellipse 100% 60% at 0% 50%, rgba(247, 244, 239, 0.9) 0%, rgba(247, 244, 239, 0.6) 40%, transparent 70%)'
@@ -293,11 +313,14 @@ export const CardShowreel = ({
       <div className="overflow-hidden pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-8 sm:py-12" style={{ minHeight: '280px' }}>
         <div
           ref={scrollRef}
-          className={`flex items-center gap-6 card-showreel-container ${!isPaused ? 'auto-scrolling' : ''} transition-all duration-300`}
+          className={`flex items-center gap-6 card-showreel-container ${!isPaused ? 'auto-scrolling' : ''}`}
           style={{
             minHeight: '280px',
-            transform: `translateX(${translateX}px)`,
-            willChange: 'transform'
+            transform: `translate3d(${translateX}px, 0, 0)`,
+            willChange: isDragging || hasMomentum ? 'transform' : 'auto',
+            touchAction: 'pan-x',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden'
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
