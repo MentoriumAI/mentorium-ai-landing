@@ -1,7 +1,7 @@
 "use client"
 
 import { FeatureCard as FeatureCardType } from '@/data/featureCards'
-import { CARD_DIMENSIONS, CARD_HEIGHT_CSS } from '@/constants/cardDimensions'
+import { CARD_HEIGHT_CSS } from '@/constants/cardDimensions'
 
 interface FeatureCardProps {
   card: FeatureCardType
