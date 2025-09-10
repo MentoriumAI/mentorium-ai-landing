@@ -31,16 +31,19 @@ export const CardShowreel = ({
   const originalCardsCount = featureCards.length
   
   // Cubic easing function for smooth transitions
-  const easeInOutCubic = (t: number): number => {
+  const easeInOutCubic = useCallback((t: number): number => {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-  }
+  }, [])
   
   // Enhanced speed transition effect with progressive ramp-up
   useEffect(() => {
+    console.log('Speed transition effect:', { isAutoScrolling, isUserInteracting, isPreparingToResume, autoScrollSpeed })
+    
     if (!isAutoScrolling || isUserInteracting) {
       setTargetSpeed(0)
       setIsPreparingToResume(false)
       resumeProgressRef.current = 0
+      console.log('Setting target speed to 0')
       return
     }
     
@@ -48,10 +51,12 @@ export const CardShowreel = ({
       // Progressive ramp-up during resume
       const rampUpSpeed = autoScrollSpeed * (0.25 + 0.75 * easeInOutCubic(resumeProgressRef.current))
       setTargetSpeed(rampUpSpeed)
+      console.log('Progressive ramp-up speed:', rampUpSpeed)
     } else {
       setTargetSpeed(autoScrollSpeed)
+      console.log('Setting target speed to autoScrollSpeed:', autoScrollSpeed)
     }
-  }, [isAutoScrolling, isUserInteracting, isPreparingToResume, autoScrollSpeed])
+  }, [isAutoScrolling, isUserInteracting, isPreparingToResume, autoScrollSpeed, easeInOutCubic])
 
   // Enhanced infinite auto-scroll with smooth speed transitions
   useEffect(() => {
@@ -84,10 +89,16 @@ export const CardShowreel = ({
       const easedSpeed = Math.abs(speedTransitionRef.current) < minSpeedThreshold ? 0 : speedTransitionRef.current
       setCurrentSpeed(easedSpeed)
       
-      // Only scroll if there's meaningful speed
+      // Only scroll if there's meaningful speed with frame skipping protection
       if (Math.abs(easedSpeed) > 0.1) {
-        const scrollDistance = (easedSpeed * deltaTime) / 1000
+        // Cap deltaTime to prevent huge jumps during frame skips
+        const cappedDeltaTime = Math.min(deltaTime, 50) // Max 50ms per frame
+        const scrollDistance = (easedSpeed * cappedDeltaTime) / 1000
         scrollContainer.scrollLeft += scrollDistance
+        
+        if (Math.random() < 0.01) { // Log occasionally to avoid spam
+          console.log('Scrolling:', { easedSpeed, scrollDistance, scrollLeft: scrollContainer.scrollLeft })
+        }
         
         // Seamless infinite loop reset
         const cardWidth = CARD_DIMENSIONS.WIDTH.DESKTOP + CARD_DIMENSIONS.GAP
@@ -111,7 +122,7 @@ export const CardShowreel = ({
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [targetSpeed, originalCardsCount])
+  }, [targetSpeed, originalCardsCount, isPreparingToResume, autoScrollSpeed])
 
   // Enhanced mouse interactions with smooth transitions
   const handleMouseEnter = useCallback(() => {
@@ -123,12 +134,14 @@ export const CardShowreel = ({
 
   const handleMouseLeave = useCallback(() => {
     if (pauseOnHover) {
-      // Smooth resume with slight delay
+      // Enhanced smooth resume with progressive ramp-up
       setTimeout(() => {
         setIsUserInteracting(false)
+        setIsPreparingToResume(true)
         setIsAutoScrolling(true)
         setFocusedCardIndex(null)
-      }, 200) // Brief pause before resuming
+        resumeProgressRef.current = 0
+      }, 500) // Longer pause before resuming for better UX
     }
   }, [pauseOnHover])
 
@@ -174,10 +187,12 @@ export const CardShowreel = ({
     setIsUserInteracting(true)
     setIsAutoScrolling(false)
     
-    // Resume auto-scroll after a delay
+    // Progressive resume after card click
     setTimeout(() => {
       setIsUserInteracting(false)
+      setIsPreparingToResume(true)
       setIsAutoScrolling(true)
+      resumeProgressRef.current = 0
     }, 3000)
   }, [originalCardsCount])
 
@@ -203,11 +218,13 @@ export const CardShowreel = ({
     setIsUserInteracting(true)
     setIsAutoScrolling(false)
     
-    // Elegant resume with fade-in effect
+    // Enhanced elegant resume with progressive ramp-up
     setTimeout(() => {
       setIsUserInteracting(false)
       setTimeout(() => {
+        setIsPreparingToResume(true)
         setIsAutoScrolling(true)
+        resumeProgressRef.current = 0
       }, 100) // Brief pause before smooth resume
     }, 2500)
   }, [focusedCardIndex, originalCardsCount])
@@ -234,11 +251,13 @@ export const CardShowreel = ({
     setIsUserInteracting(true)
     setIsAutoScrolling(false)
     
-    // Elegant resume with fade-in effect
+    // Enhanced elegant resume with progressive ramp-up
     setTimeout(() => {
       setIsUserInteracting(false)
       setTimeout(() => {
+        setIsPreparingToResume(true)
         setIsAutoScrolling(true)
+        resumeProgressRef.current = 0
       }, 100) // Brief pause before smooth resume
     }, 2500)
   }, [focusedCardIndex, originalCardsCount])
@@ -250,11 +269,13 @@ export const CardShowreel = ({
   }, [])
 
   const handleTouchEnd = useCallback(() => {
-    // Longer delay for touch to allow for momentum scrolling
+    // Enhanced touch resume with progressive ramp-up
     setTimeout(() => {
       setIsUserInteracting(false)
+      setIsPreparingToResume(true)
       setIsAutoScrolling(true)
-    }, 1500) // Reduced from 2000ms for better UX
+      resumeProgressRef.current = 0
+    }, 1500) // Allows for momentum scrolling before progressive resume
   }, [])
 
   // Handle scroll events for infinite loop reset
@@ -308,14 +329,15 @@ export const CardShowreel = ({
              background: 'linear-gradient(to left, #f0fdf6 0%, #f5f7f4 50%, transparent 100%)'
            }} />
       
-      {/* Infinite scroll container */}
+      {/* Infinite scroll container with performance optimizations */}
       <div
         ref={scrollRef}
-        className="flex items-center gap-6 overflow-x-auto scrollbar-hide pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-16 sm:py-20"
+        className={`flex items-center gap-6 overflow-x-auto scrollbar-hide pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-16 sm:py-20 card-showreel-container ${isAutoScrolling ? 'auto-scrolling' : ''} transition-opacity duration-300`}
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
-          minHeight: '420px'
+          minHeight: '420px',
+          opacity: isPreparingToResume ? 0.95 + 0.05 * resumeProgressRef.current : 1
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -331,6 +353,7 @@ export const CardShowreel = ({
             return (
               <div
                 key={`${card.id}-set-${setIndex}`}
+                className={`transition-transform duration-300 ${isPreparingToResume ? 'scale-[0.99]' : ''}`}
                 onMouseEnter={() => handleCardFocus(globalIndex)}
               >
                 <FeatureCard

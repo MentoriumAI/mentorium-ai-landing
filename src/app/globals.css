@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic:wght@400;700&display=swap');
 @import '../styles/theme-variables.css';
 
 @tailwind base;
@@ -578,9 +579,17 @@
   background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
 }
 
-/* Enhanced card animations */
+/* Enhanced card animations with performance optimizations */
+.feature-card-enhanced {
+  will-change: transform, opacity;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .feature-card-enhanced:hover .card-icon {
   animation: iconBounce 0.6s ease-in-out;
+  will-change: transform;
 }
 
 .feature-card-enhanced:hover .progress-bar::after {
@@ -592,11 +601,24 @@
   bottom: 0;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   animation: progressShimmer 1s ease-in-out;
+  will-change: transform;
 }
 
 .feature-card-enhanced .progress-bar {
   position: relative;
   overflow: hidden;
+  will-change: transform;
+}
+
+/* Auto-scroll performance optimizations */
+.card-showreel-container {
+  will-change: scroll-position;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.card-showreel-container.auto-scrolling {
+  will-change: scroll-position, transform;
 }
 
 /* Custom utilities for card interactions */

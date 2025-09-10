@@ -91,6 +91,7 @@
   --font-family-primary: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-family-heading: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-family-mono: ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace;
+  --font-faculty-glyphic: 'Faculty Glyphic', ui-serif, Georgia, Times, serif;
   
   /* Fluid Typography */
   --font-size-fluid-sm: clamp(0.875rem, 2vw, 1rem);
