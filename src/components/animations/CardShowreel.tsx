@@ -312,6 +312,15 @@ export const CardShowreel = ({
 
   return (
     <div className={`relative ${className}`} style={{ minHeight: '280px' }}>
+      {/* Advanced gradient overlays for desktop - fade to transparency on all edges */}
+      <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+           style={{
+             background: 'radial-gradient(ellipse 100% 60% at 0% 50%, rgba(247, 244, 239, 0.9) 0%, rgba(247, 244, 239, 0.6) 40%, transparent 70%)'
+           }} />
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
+           style={{
+             background: 'radial-gradient(ellipse 100% 60% at 100% 50%, rgba(240, 253, 246, 0.9) 0%, rgba(240, 253, 246, 0.6) 40%, transparent 70%)'
+           }} />
       
       {/* Infinite scroll container with transform-based movement */}
       <div className="overflow-hidden pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-8 lg:pr-8 py-8 sm:py-12" style={{ minHeight: '280px' }}>
