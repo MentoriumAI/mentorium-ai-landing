@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { FeatureCard } from './FeatureCard'
-import { featureCards, getInfiniteScrollCards } from '@/data/featureCards'
+import { featureCards } from '@/data/featureCards'
 import { CARD_DIMENSIONS } from '@/constants/cardDimensions'
 
 interface CardShowreelProps {
@@ -21,7 +21,6 @@ export const CardShowreel = ({
   const [isAutoScrolling, setIsAutoScrolling] = useState(true)
   const [focusedCardIndex, setFocusedCardIndex] = useState<number | null>(null)
   const [isUserInteracting, setIsUserInteracting] = useState(false)
-  const [currentSpeed, setCurrentSpeed] = useState(autoScrollSpeed)
   const [targetSpeed, setTargetSpeed] = useState(autoScrollSpeed)
   const [isPreparingToResume, setIsPreparingToResume] = useState(false)
   const speedTransitionRef = useRef<number>(autoScrollSpeed)
@@ -32,7 +31,6 @@ export const CardShowreel = ({
   const [isCardCentered, setIsCardCentered] = useState(false)
   const [centeredCardIndex, setCenteredCardIndex] = useState<number | null>(null)
   
-  const infiniteCards = getInfiniteScrollCards()
   const originalCardsCount = featureCards.length
   
   // Cubic easing function for smooth transitions
@@ -102,7 +100,6 @@ export const CardShowreel = ({
       
       // Apply minimum threshold to prevent jerky micro-movements
       const easedSpeed = Math.abs(speedTransitionRef.current) < minSpeedThreshold ? 0 : speedTransitionRef.current
-      setCurrentSpeed(easedSpeed)
       
       // Only move if there's meaningful speed with frame skipping protection
       if (Math.abs(easedSpeed) > 0.1) {
@@ -135,7 +132,7 @@ export const CardShowreel = ({
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [targetSpeed, originalCardsCount, isPreparingToResume, autoScrollSpeed])
+  }, [targetSpeed, originalCardsCount, isPreparingToResume, autoScrollSpeed, easeInOutCubic])
 
   // Enhanced mouse interactions with smooth transitions
   const handleMouseEnter = useCallback(() => {
