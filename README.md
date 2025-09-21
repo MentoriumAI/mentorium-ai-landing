@@ -66,4 +66,3 @@ The site uses modern CSS features and should work in all modern browsers:
 ## License
 
 MIT License - feel free to use this code for your own projects!
-
