@@ -142,6 +142,7 @@ jobs:
           echo "Building image: $IMAGE_TAG"
           
           docker build \
+            --build-arg NEXT_PUBLIC_ENVIRONMENT=${{ needs.determine-environment.outputs.environment == 'dev' && 'development' || 'production' }} \
             --label org.opencontainers.image.source="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
             --label org.opencontainers.image.revision="${GITHUB_SHA}" \
             --label org.opencontainers.image.version="${{ steps.version.outputs.version }}" \
@@ -235,6 +236,7 @@ jobs:
             --concurrency="$CONCURRENCY" \
             --execution-environment=gen2 \
             --service-account="${{ needs.determine-environment.outputs.project_number }}-compute@developer.gserviceaccount.com" \
+            --set-env-vars="NEXT_PUBLIC_ENVIRONMENT=${{ needs.determine-environment.outputs.environment == 'dev' && 'development' || 'production' }}" \
             --labels="environment=${{ needs.determine-environment.outputs.environment }},service=$SERVICE_TYPE,version=${{ steps.version.outputs.version }}" \
             --timeout=300 \
             --quiet

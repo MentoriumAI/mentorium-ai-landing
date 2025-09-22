@@ -3,6 +3,9 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Accept build argument for environment
+ARG NEXT_PUBLIC_ENVIRONMENT
+
 # Copy package files
 COPY package*.json ./
 
@@ -11,6 +14,9 @@ RUN npm ci --no-audit --no-fund
 
 # Copy source code
 COPY . .
+
+# Set environment variable for Next.js build
+ENV NEXT_PUBLIC_ENVIRONMENT=${NEXT_PUBLIC_ENVIRONMENT}
 
 # Build the application
 RUN npm run build
