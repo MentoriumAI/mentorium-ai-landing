@@ -3,8 +3,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRightIcon } from '@/components/icons'
+import { getAppUrl } from '@/config/app'
 
 export default function StartPage() {
+  const appUrl = getAppUrl()
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-isabelline via-white to-brand-isabelline/50 relative overflow-hidden py-8">
       {/* Enhanced Background Elements */}
@@ -29,14 +32,14 @@ export default function StartPage() {
                 priority
               />
             </div>
-            <span className="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text group-hover:scale-105 transition-transform duration-300">
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text group-hover:scale-105 transition-transform duration-300">
               Mentorium
             </span>
           </Link>
         </div>
 
         {/* CTA Options */}
-        <div className="grid gap-8 max-w-xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           {/* Schedule Meeting */}
           <Link 
             href="https://cal.com/mentorium-ai-moshe-ojeda/30min"
@@ -61,64 +64,54 @@ export default function StartPage() {
                   </svg>
                 </div>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-brand-dark-green mb-3 group-hover:text-brand-brunswick-green transition-colors duration-300">
+              <h2 className="text-lg sm:text-xl font-bold text-brand-dark-green mb-3 group-hover:text-brand-brunswick-green transition-colors duration-300">
                 Agendar una reunión
               </h2>
               <p className="text-brand-dark-green/70 text-sm sm:text-base leading-relaxed">
                 Agenda una demostración personalizada de 30 minutos con nuestro equipo y descubre cómo Mentorium puede transformar tu proceso educativo
               </p>
-              
-              {/* Badge */}
-              <div className="mt-6">
-                <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-brand-brunswick-green/10 text-brand-brunswick-green border border-brand-brunswick-green/20">
-                  ✨ Recomendado
-                </span>
-              </div>
             </div>
           </Link>
 
-          {/* Platform Access - Disabled */}
-          <div className="relative">
-            {/* Coming Soon Badge */}
-            <div className="absolute -top-3 -right-3 z-20">
-              <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-brand-sunglow text-brand-dark-green shadow-lg border-2 border-white">
-                🚀 Próximamente
-              </span>
-            </div>
-            
-            <div className="relative bg-white/50 backdrop-blur-sm border-2 border-brand-brandeis-blue/15 rounded-3xl p-8 sm:p-10 text-left opacity-70 cursor-not-allowed overflow-hidden">
-              {/* Subtle pattern overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-brandeis-blue/5 via-transparent to-brand-brandeis-blue/10 rounded-3xl"></div>
-              
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-brandeis-blue/40 to-brand-brandeis-blue/30 flex items-center justify-center shadow-lg">
-                    <svg className="w-8 h-8 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                    </svg>
-                  </div>
-                  <div className="flex items-center space-x-2 opacity-50">
-                    <svg className="w-6 h-6 text-brand-dark-green/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                  </div>
+          {/* Platform Access */}
+          <Link
+            href={appUrl}
+            className="group relative bg-white/90 backdrop-blur-sm border-2 border-brand-brandeis-blue/20 hover:border-brand-brandeis-blue/50 rounded-3xl p-8 sm:p-10 text-left transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-brandeis-blue/10 transform-gpu"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {/* Gradient overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-brandeis-blue/5 via-transparent to-brand-brandeis-blue/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div className="relative z-10">
+              <div className="flex items-start justify-between mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-brandeis-blue to-brand-brandeis-blue/80 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                  </svg>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-brand-dark-green/60 mb-3">
-                  Ingresar a la plataforma
-                </h2>
-                <p className="text-brand-dark-green/50 text-sm sm:text-base leading-relaxed">
-                  Accede directamente a Mentorium para visualizar un proyecto de demostración y explorar todas las funcionalidades disponibles
-                </p>
+                <div className="flex items-center space-x-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                  <ArrowRightIcon className="w-6 h-6 text-brand-dark-green group-hover:text-brand-brandeis-blue group-hover:translate-x-2 transition-all duration-300" />
+                  <svg className="w-5 h-5 text-brand-dark-green group-hover:text-brand-brandeis-blue transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </div>
               </div>
+              <h2 className="text-lg sm:text-xl font-bold text-brand-dark-green mb-3 group-hover:text-brand-brandeis-blue transition-colors duration-300">
+                Ingresar a la plataforma
+              </h2>
+              <p className="text-brand-dark-green/70 text-sm sm:text-base leading-relaxed">
+                Accede directamente a Mentorium para visualizar un proyecto de demostración y explorar todas las funcionalidades disponibles
+              </p>
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Back to Home */}
         <div className="mt-16">
           <Link 
             href="/"
-            className="group text-brand-dark-green/60 hover:text-brand-dark-green transition-colors duration-300 text-base inline-flex items-center space-x-3 px-4 py-2 rounded-xl hover:bg-white/30 backdrop-blur-sm"
+            className="group text-brand-dark-green/60 hover:text-brand-dark-green transition-colors duration-300 text-sm sm:text-base inline-flex items-center space-x-3 px-4 py-2 rounded-xl hover:bg-white/30 backdrop-blur-sm"
           >
             <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
