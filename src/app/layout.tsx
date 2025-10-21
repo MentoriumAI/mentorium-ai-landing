@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Faculty_Glyphic } from 'next/font/google'
 import { ThemeProvider } from '@/context/ThemeContext'
+import StructuredData from '@/components/StructuredData'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
+import GoogleSearchConsole from '@/components/GoogleSearchConsole'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -23,20 +26,36 @@ export const viewport = 'width=device-width, initial-scale=1'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mentorium.ai'),
-  title: 'Mentorium: Plataforma educativa con IA en Perú | Automatización y eficiencia para instituciones',
-  description: 'Mentorium es la primera plataforma educativa con IA diseñada para instituciones en Perú. Automatiza materiales, evaluaciones, notas y reportes oficiales MINEDU. Ahorra tiempo, reduce costos y mejora la gestión escolar con inteligencia artificial y soporte local.',
-  keywords: 'plataforma educativa Perú, LMS con inteligencia artificial, software educativo automatización, gestión escolar digital, automatización evaluaciones MINEDU, sistema académico con IA, reducción de costos educativos, innovación educativa Perú, Mentorium plataforma educativa, eficiencia en instituciones educativas',
+  title: {
+    default: 'Mentorium - Plataforma Educativa con IA para Colegios | Software de Gestión Escolar',
+    template: '%s | Mentorium',
+  },
+  description: 'Mentorium es una plataforma educativa para colegios en Perú que automatiza la gestión escolar con inteligencia artificial. Software de gestión escolar digital que optimiza tareas administrativas, automatización de procesos educativos, notas, asistencia y reportes MINEDU. ¡Conoce este software educativo innovador!',
+  keywords: 'plataforma educativa para colegios, software de gestión escolar, plataforma educativa virtual, sistema de gestión escolar digital, automatización de procesos educativos, inteligencia artificial en educación, plataforma educativa con inteligencia artificial, software educativo para colegios, ERP para colegios, gestión escolar digital, automatización escolar, aula virtual integrada, control de asistencia automatizado, sistema de notas automatizado, software académico para institutos, IA para colegios, mejor software educativo en Perú',
   authors: [{ name: 'Mentorium' }],
   creator: 'Mentorium',
   publisher: 'Mentorium',
-  robots: 'index, follow',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://mentorium.ai',
+  },
   openGraph: {
     type: 'website',
     locale: 'es_ES',
     url: 'https://mentorium.ai',
     siteName: 'Mentorium',
-    title: 'Mentorium: Plataforma educativa con IA en Perú | Automatización y eficiencia para instituciones',
-    description: 'Mentorium es la primera plataforma educativa con IA diseñada para instituciones en Perú. Automatiza materiales, evaluaciones, notas y reportes oficiales MINEDU. Ahorra tiempo, reduce costos y mejora la gestión escolar con inteligencia artificial y soporte local.',
+    title: 'Mentorium - Plataforma Educativa con IA para Colegios | Software de Gestión Escolar',
+    description: 'Plataforma educativa para colegios en Perú que automatiza la gestión escolar con inteligencia artificial. Optimiza tareas administrativas, automatización de procesos educativos, notas y asistencia.',
     images: [
       {
         url: '/og-image.png',
@@ -48,8 +67,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mentorium: Plataforma educativa con IA en Perú',
-    description: 'Automatiza materiales, evaluaciones, notas y reportes oficiales MINEDU con IA. Ahorra tiempo y costos con soporte local en Perú.',
+    title: 'Mentorium - Plataforma Educativa con IA para Colegios',
+    description: 'Software de gestión escolar con automatización de procesos educativos. Gestiona notas, asistencia y reportes MINEDU con inteligencia artificial.',
     images: ['/og-image.png'],
   },
   icons: {
@@ -60,6 +79,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
+  verification: {
+    // Add Google Search Console verification
+    // google: 'your-verification-code', // This will be set via env var in GoogleSearchConsole component
+  },
 }
 
 export default function RootLayout({
@@ -69,7 +92,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="scroll-smooth">
+      <head>
+        <GoogleSearchConsole />
+        <StructuredData />
+      </head>
       <body className={`${inter.className} ${inter.variable} ${facultyGlyphic.variable}`}>
+        <GoogleAnalytics />
         <ThemeProvider>
           {children}
         </ThemeProvider>
