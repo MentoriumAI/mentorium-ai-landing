@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { ExclamationTriangleIcon, SparklesIcon } from '@heroicons/react/24/solid'
 
 const ProblemSolution = () => {
   return (
@@ -26,8 +27,9 @@ const ProblemSolution = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start w-full max-w-5xl mx-auto">
           {/* Problem Side */}
           <div className="bg-white rounded-xl border border-red-100 shadow-lg p-6 sm:p-8 h-full flex flex-col">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-50 text-sm font-medium text-red-600 mb-4">
-              ⚠️ El problema actual
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-50 text-sm font-medium text-red-600 mb-4 gap-2">
+              <ExclamationTriangleIcon className="w-4 h-4" />
+              <span>El problema actual</span>
             </div>
             
             <h2 className="text-3xl lg:text-4xl font-bold text-brand-dark-green mb-6">
@@ -83,11 +85,10 @@ const ProblemSolution = () => {
           </div>
 
           {/* Solution Side */}
-          <div tabIndex={0} className="group relative overflow-hidden bg-gradient-to-br from-brand-brunswick-green/5 to-brand-brandeis-blue/5 rounded-xl border border-brand-brunswick-green/20 shadow-lg p-6 sm:p-8 h-full flex flex-col transform-gpu transition-all duration-500 hover:shadow-2xl hover:border-brand-brunswick-green/40 hover:scale-105 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-brand-brunswick-green/7 hover:to-brand-brandeis-blue/7 ring-0 ring-transparent hover:ring-2 hover:ring-brand-brunswick-green/40 hover:ring-offset-2 hover:ring-offset-white focus:outline-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-brunswick-green/50 focus-visible:ring-offset-0">
-            {/* Glow overlay for hover highlight */}
-            <div className="pointer-events-none absolute -inset-px rounded-[0.75rem] bg-gradient-to-r from-brand-brunswick-green/10 to-brand-brandeis-blue/10 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-80 z-0"></div>
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-brunswick-green/10 text-sm font-medium text-brand-brunswick-green mb-4">
-              ✨ La solución
+          <div tabIndex={0} className="group relative overflow-hidden bg-gradient-to-br from-brand-brunswick-green/5 to-brand-brandeis-blue/5 rounded-xl border border-brand-brunswick-green/20 shadow-lg p-6 sm:p-8 h-full flex flex-col transition-shadow duration-200 hover:shadow-xl focus:outline-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-brunswick-green/50 focus-visible:ring-offset-0">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-brunswick-green/10 text-sm font-medium text-brand-brunswick-green mb-4 gap-2">
+              <SparklesIcon className="w-4 h-4" />
+              <span>La solución</span>
             </div>
             
             <h2 className="relative z-10 text-3xl lg:text-4xl font-bold text-brand-dark-green mb-6">

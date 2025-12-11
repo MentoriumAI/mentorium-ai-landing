@@ -8,28 +8,8 @@ const Hero = () => {
 
   return (
     <section id="inicio" className="relative min-h-screen hero-gradient overflow-hidden">
-      {/* Colorful Halo/Aura Background Effects */}
-      <div className="absolute inset-0 z-0">
-        {/* Main central aura - largest and most prominent */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-brand-brandeis-blue/20 via-brand-sunglow/15 to-brand-orange-pantone/20 rounded-full filter blur-[150px] animate-pulse-glow"></div>
-        
-        {/* Secondary floating orbs positioned to avoid overlap */}
-        <div className="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-gradient-to-br from-primary-300/20 to-success-400/15 rounded-full filter blur-[100px] animate-float-slow"></div>
-        
-        <div className="absolute bottom-[15%] left-[8%] w-[350px] h-[350px] bg-gradient-to-tr from-brand-sunglow/25 to-brand-orange-pantone/20 rounded-full filter blur-[90px] animate-float-delayed"></div>
-        
-        <div className="absolute top-[20%] left-[15%] w-[300px] h-[300px] bg-gradient-to-bl from-brand-brandeis-blue/30 to-primary-400/15 rounded-full filter blur-[80px] animate-subtle-float"></div>
-        
-        {/* Accent orbs positioned in corners and edges */}
-        <div className="absolute bottom-[25%] right-[12%] w-[250px] h-[250px] bg-primary-300/20 rounded-full filter blur-[70px] animate-float-slow"></div>
-        
-        <div className="absolute top-[35%] right-[25%] w-[200px] h-[200px] bg-gradient-to-r from-brand-orange-pantone/25 to-brand-sunglow/20 rounded-full filter blur-[60px] animate-float-delayed"></div>
-        
-        {/* Edge glow effects - moved further to corners */}
-        <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-brand-brandeis-blue/10 via-transparent to-transparent rounded-full filter blur-[120px]"></div>
-        
-        <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] bg-gradient-to-tl from-brand-orange-pantone/10 via-transparent to-transparent rounded-full filter blur-[120px]"></div>
-      </div>
+      {/* Subtle Background Gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-50/50 to-transparent"></div>
 
       {/* Title Section - Full width with centered content */}
       <div className="relative z-20 w-full pt-32 sm:pt-44 lg:pt-52 pb-8 sm:pb-12">

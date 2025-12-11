@@ -109,15 +109,12 @@
   }
   
   .card {
-    @apply rounded-2xl border border-slate-200/50 p-6 sm:p-8 bg-white/80 backdrop-blur-sm;
-    box-shadow: var(--shadow-elegant);
-    transition: all var(--animation-duration-default) var(--animation-easing-default);
-    border-radius: var(--border-radius-2xl);
+    @apply rounded-xl border border-slate-200 p-6 sm:p-8 bg-white shadow;
+    transition: box-shadow 0.2s ease;
   }
-  
+
   .card:hover {
-    box-shadow: var(--shadow-floating);
-    @apply border-slate-300/50;
+    @apply shadow-md;
   }
   
   .card-icon {
@@ -136,8 +133,8 @@
   }
   
   .btn-primary {
-    @apply btn bg-brand-orange-pantone text-white shadow-lg hover:shadow-xl hover:scale-105;
-    @apply focus:ring-warning-500 hover:bg-warning-600;
+    @apply btn bg-primary-500 text-white shadow hover:bg-primary-600;
+    @apply focus:ring-primary-500;
     font-size: var(--font-size-fluid-sm);
   }
   
@@ -152,34 +149,6 @@
     font-size: var(--font-size-fluid-base);
   }
   
-  .floating-element {
-    @apply animate-float;
-  }
-  
-  .floating-element-slow {
-    @apply animate-float-slow;
-  }
-  
-  .floating-element-delayed {
-    @apply animate-float-delayed;
-  }
-  
-  
-  .floating-element-sparkle {
-    @apply animate-sparkle;
-  }
-  
-  .subtle-float {
-    @apply animate-subtle-float;
-  }
-  
-  .subtle-float-delayed {
-    @apply animate-subtle-float-delayed;
-  }
-  
-  .hero-glow-static {
-    box-shadow: 0 0 25px rgba(251, 97, 19, 0.2), 0 0 50px rgba(15, 76, 56, 0.1);
-  }
   
   .gradient-text {
     @apply bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent;
@@ -188,7 +157,7 @@
   }
   
   .glass-card {
-    @apply bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl shadow-elegant;
+    @apply bg-white/90 border border-slate-200 rounded-xl shadow;
   }
   
   .nav-link {
@@ -317,49 +286,17 @@
   box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.2);
 }
 
-/* Solid frosted glass effect - fully opaque */
+/* Simple card styling */
 .frost-glass {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(248, 250, 252, 0.98) 50%, 
-    rgba(241, 245, 249, 0.95) 100%);
-  backdrop-filter: blur(20px) saturate(1.8);
-  -webkit-backdrop-filter: blur(20px) saturate(1.8);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 
-    0 8px 32px 0 rgba(31, 38, 135, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1px 0 rgba(148, 163, 184, 0.2);
+  @apply bg-white border border-slate-200 rounded-xl shadow;
 }
 
 .frost-glass:hover {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.98) 0%, 
-    rgba(248, 250, 252, 1) 50%, 
-    rgba(241, 245, 249, 0.98) 100%);
-  border-color: rgba(203, 213, 225, 0.9);
-  transform: scale(1.05);
-  box-shadow: 
-    0 12px 40px 0 rgba(31, 38, 135, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    inset 0 -1px 0 rgba(148, 163, 184, 0.3);
+  @apply shadow-md;
 }
 
-/* Enhanced main card - solid with frosted styling */
 .frost-main-card {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.96) 0%, 
-    rgba(248, 250, 252, 0.98) 30%, 
-    rgba(241, 245, 249, 0.96) 70%, 
-    rgba(226, 232, 240, 0.94) 100%);
-  backdrop-filter: blur(24px) saturate(1.8);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
-  border: 1px solid rgba(203, 213, 225, 0.9);
-  box-shadow: 
-    0 16px 40px 0 rgba(31, 38, 135, 0.2),
-    0 0 60px 0 rgba(251, 97, 19, 0.1),
-    inset 0 2px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -2px 0 rgba(148, 163, 184, 0.25);
+  @apply bg-white border border-slate-200 rounded-xl shadow;
 }
 
 /* Entrance animations with stagger effect */
@@ -419,16 +356,9 @@
   contain: paint;
 }
 
-/* Breathing animation for main card */
-@keyframes cardBreathe {
-  0%   { transform: translateY(0px) scale(1); }
-  50%  { transform: translateY(-5px) scale(1.0025); }
-  100% { transform: translateY(0px) scale(1); }
-}
-
+/* Card breathe disabled */
 .card-breathe {
-  animation: cardBreathe 5s ease-in-out infinite;
-  will-change: transform;
+  /* Animation removed for cleaner look */
 }
 
 /* Pulsing scale to keep ~3 icons big at a time (assuming ~8 icons)

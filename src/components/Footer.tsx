@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { HeartIcon } from '@heroicons/react/24/solid'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -189,7 +190,9 @@ const Footer = () => {
               © {currentYear} Mentorium. Todos los derechos reservados.
             </div>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <span>Hecho con ❤️ para educadores</span>
+              <span className="inline-flex items-center gap-1">
+                Hecho con <HeartIcon className="w-4 h-4 text-red-500" /> para educadores
+              </span>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span>Todo bien, todo correcto</span>

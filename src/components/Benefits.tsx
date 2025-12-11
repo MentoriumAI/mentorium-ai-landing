@@ -1,6 +1,6 @@
 'use client'
 
-import { ClockIcon, CurrencyDollarIcon, CheckBadgeIcon, FaceSmileIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
+import { ClockIcon, CheckBadgeIcon, FaceSmileIcon, AcademicCapIcon } from '@heroicons/react/24/solid'
 
 const Benefits = () => {
   const benefits = [
@@ -51,44 +51,30 @@ const Benefits = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="group relative"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className="card h-full text-center"
             >
-              {/* Card */}
-              <div className="bg-white rounded-xl border border-white/50 shadow-lg h-full p-6 sm:p-8 text-center hover:scale-105 transition-all duration-500">
-                {/* Icon */}
-                <div className="mb-6 flex justify-center">
-                  <div className={`${benefit.color} p-3 rounded-2xl bg-white border-2 border-current group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    {benefit.icon}
-                  </div>
+              {/* Icon */}
+              <div className="mb-6 flex justify-center">
+                <div className={`${benefit.color} p-3 rounded-2xl bg-white border-2 border-current shadow-lg`}>
+                  {benefit.icon}
                 </div>
-
-                {/* Stat Label */}
-                <div className="mb-6">
-                  <div className={`text-lg font-bold ${benefit.color} leading-tight`}>
-                    {benefit.stat}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-bold text-brand-dark-green mb-4 leading-tight">
-                  {benefit.title}
-                </h3>
-                
-                <p className="text-sm text-brand-dark-green/70 leading-relaxed">
-                  {benefit.description}
-                </p>
-
-                {/* Hover Effect */}
-                <div className="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </div>
 
-              {/* Floating Indicator */}
-              <div className="absolute -top-3 -right-3 w-6 h-6 bg-brand-orange-pantone rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-0 group-hover:scale-100">
-                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
+              {/* Stat Label */}
+              <div className="mb-6">
+                <div className={`text-lg font-bold ${benefit.color} leading-tight`}>
+                  {benefit.stat}
+                </div>
               </div>
+
+              {/* Content */}
+              <h3 className="text-xl font-bold text-brand-dark-green mb-4 leading-tight">
+                {benefit.title}
+              </h3>
+
+              <p className="text-sm text-brand-dark-green/70 leading-relaxed">
+                {benefit.description}
+              </p>
             </div>
           ))}
         </div>
