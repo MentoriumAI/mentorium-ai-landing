@@ -148,8 +148,46 @@
     padding: clamp(0.75rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
     font-size: var(--font-size-fluid-base);
   }
-  
-  
+
+  /* HDR Glow CTA Button - Plain green, glows orange on hover */
+  .btn-hdr-cta {
+    @apply btn text-white font-bold;
+    background: var(--gradient-primary);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-hdr-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-brand-orange-pantone-p3);
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .btn-hdr-cta > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-hdr-cta:hover {
+    box-shadow: var(--shadow-glow-orange-p3);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .btn-hdr-cta:hover::before {
+    opacity: 1;
+  }
+
+  .btn-hdr-cta:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--shadow-glow-strong-p3);
+  }
+
   .gradient-text {
     @apply bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent;
     font-family: var(--font-faculty-glyphic), ui-serif, Georgia, Times, serif;

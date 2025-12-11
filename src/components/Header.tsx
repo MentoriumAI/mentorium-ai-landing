@@ -67,11 +67,11 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link 
-              href="/start" 
-              className="btn-primary btn-large group hover:shadow-glow"
+            <Link
+              href="/start"
+              className="btn-primary group hover:shadow-glow"
             >
-              <span className="text-sm sm:text-base">Solicitar Demo</span>
+              <span className="text-sm">Solicitar Demo</span>
               <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -128,17 +128,17 @@ const Header = () => {
               </Link>
             ))}
             <div className="px-4 pt-3">
-              <Link 
-                href="/start" 
-                className={`btn-primary btn-large group w-full justify-center transform transition-all duration-300 ${
+              <Link
+                href="/start"
+                className={`btn-primary group w-full justify-center transform transition-all duration-300 ${
                   isMobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                 }`}
-                style={{ 
-                  transitionDelay: isMobileMenuOpen ? `${navItems.length * 50}ms` : '0ms' 
+                style={{
+                  transitionDelay: isMobileMenuOpen ? `${navItems.length * 50}ms` : '0ms'
                 }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="text-sm sm:text-base">Solicitar Demo</span>
+                <span className="text-sm">Solicitar Demo</span>
                 <svg className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
