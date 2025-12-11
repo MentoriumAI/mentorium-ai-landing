@@ -15,37 +15,37 @@ const Features = () => {
       icon: <CursorArrowRaysIcon className="w-6 h-6" />,
       title: 'Usabilidad y accesibilidad',
       description: 'Entorno intuitivo y rápido para docentes y estudiantes, sin necesidad de capacitación.',
-      color: 'text-brand-brandeis-blue'
+      color: 'text-brand-p3-brandeis-blue'
     },
     {
       icon: <UserGroupIcon className="w-6 h-6" />,
       title: 'Gestión de alumnos y aulas',
       description: 'Automatiza matrículas y aulas, reduciendo carga administrativa y errores.',
-      color: 'text-brand-brunswick-green'
+      color: 'text-brand-p3-brunswick-green'
     },
     {
       icon: <ChartBarIcon className="w-6 h-6" />,
       title: 'Calificaciones y evaluaciones inteligentes',
       description: 'Escalas alineadas al MINEDU, rúbricas integradas y reportes automáticos.',
-      color: 'text-brand-sunglow-dark'
+      color: 'text-brand-p3-sunglow'
     },
     {
       icon: <BookOpenIcon className="w-6 h-6" />,
       title: 'Gestión de materiales y contenidos interactivos',
       description: 'Contenidos gamificados, personalizados y dinámicos con IA.',
-      color: 'text-brand-orange-pantone'
+      color: 'text-brand-p3-orange-pantone'
     },
     {
       icon: <PresentationChartLineIcon className="w-6 h-6" />,
       title: 'Seguimiento académico en tiempo real',
       description: 'Dashboards, alertas tempranas y analíticas para intervenciones oportunas.',
-      color: 'text-brand-brandeis-blue'
+      color: 'text-brand-p3-brandeis-blue'
     },
     {
       icon: <CurrencyDollarIcon className="w-6 h-6" />,
       title: 'Optimización de costos y valor percibido',
       description: 'Inversión rentable que maximiza resultados educativos y eficiencia.',
-      color: 'text-brand-brunswick-green'
+      color: 'text-brand-p3-brunswick-green'
     }
   ]
 
@@ -87,7 +87,7 @@ const Features = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <div className="inline-flex items-center px-6 py-3 rounded-full bg-brand-sunglow/20 text-brand-dark-green font-medium">
-            <span className="w-2 h-2 bg-brand-orange-pantone rounded-full mr-3 animate-pulse"></span>
+            <span className="w-2 h-2 bg-brand-p3-orange-pantone rounded-full mr-3 animate-pulse"></span>
             ¿Listo para automatizar tu gestión educativa con IA?
           </div>
         </div>

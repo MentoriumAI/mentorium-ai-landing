@@ -78,7 +78,7 @@ const Testimonials = () => {
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <svg
                     key={i}
-                    className="w-4 h-4 sm:w-5 sm:h-5 text-brand-sunglow"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-brand-p3-sunglow"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -94,7 +94,7 @@ const Testimonials = () => {
 
               {/* Author */}
               <div className="flex items-center">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-brand-brunswick-green flex items-center justify-center text-white font-bold text-sm sm:text-xl mr-3 sm:mr-4 ring-4 ring-accent-400/20 flex-shrink-0">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-p3-green flex items-center justify-center text-white font-bold text-sm sm:text-xl mr-3 sm:mr-4 ring-4 ring-accent-400/20 flex-shrink-0">
                   {testimonial.avatar}
                 </div>
                 <div className="min-w-0">
@@ -119,19 +119,19 @@ const Testimonials = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="text-center">
-            <div className="text-fluid-3xl font-bold text-brand-brandeis-blue mb-2">500+</div>
+            <div className="text-fluid-3xl font-bold text-brand-p3-brandeis-blue mb-2">500+</div>
             <div className="text-fluid-sm text-brand-dark-green font-medium">Instituciones</div>
           </div>
           <div className="text-center">
-            <div className="text-fluid-3xl font-bold text-brand-orange-pantone mb-2">50K+</div>
+            <div className="text-fluid-3xl font-bold text-brand-p3-orange-pantone mb-2">50K+</div>
             <div className="text-fluid-sm text-brand-dark-green font-medium">Usuarios Activos</div>
           </div>
           <div className="text-center">
-            <div className="text-fluid-3xl font-bold text-brand-dark-moss-green mb-2">99.8%</div>
+            <div className="text-fluid-3xl font-bold text-brand-p3-dark-moss-green mb-2">99.8%</div>
             <div className="text-fluid-sm text-brand-dark-green font-medium">Uptime</div>
           </div>
           <div className="text-center">
-            <div className="text-fluid-3xl font-bold text-brand-sunglow mb-2">4.9/5</div>
+            <div className="text-fluid-3xl font-bold text-brand-p3-sunglow mb-2">4.9/5</div>
             <div className="text-fluid-sm text-brand-dark-green font-medium">Satisfacción</div>
           </div>
         </div>
@@ -144,13 +144,13 @@ const Testimonials = () => {
             </div>
             <div className="flex flex-wrap justify-center items-center gap-8 text-brand-dark-green/70">
               <div className="flex items-center space-x-2">
-                <svg className="w-6 h-6 text-brand-dark-moss-green" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-brand-p3-dark-moss-green" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>ISO 27001</span>
               </div>
               <div className="flex items-center space-x-2">
-                <svg className="w-6 h-6 text-brand-brandeis-blue" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-6 h-6 text-brand-p3-brandeis-blue" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>GDPR Compliant</span>

@@ -32,6 +32,17 @@ const config: Config = {
           'dark-moss-green': '#536c03',
           'orange-pantone': '#fb6113',
         },
+        // P3 Wide-Gamut Colors (with sRGB fallbacks)
+        'brand-p3': {
+          'brunswick-green': 'var(--color-brand-brunswick-green-p3)',
+          'dark-green': 'var(--color-brand-dark-green-p3)',
+          'brandeis-blue': 'var(--color-brand-brandeis-blue-p3)',
+          'sunglow': 'var(--color-brand-sunglow-p3)',
+          'orange-pantone': 'var(--color-brand-orange-pantone-p3)',
+          'dark-moss-green': 'var(--color-brand-dark-moss-green-p3)',
+        },
+        // HDR Ultra-white
+        'ultra-white': 'var(--color-ultra-white)',
         // Primary palette (greens) - based on brand greens
         primary: {
           50: '#f0fdf6',
@@ -107,6 +118,11 @@ const config: Config = {
         'gradient-primary': 'linear-gradient(135deg, #0f4c38, #093b2c)',
         'gradient-cta': 'linear-gradient(135deg, #fb6113, #536c03)',
         'gradient-subtle': 'linear-gradient(135deg, #f7f4ef, #f0fdf6)',
+        // P3 Wide-Gamut Gradients
+        'gradient-primary-p3': 'linear-gradient(135deg, var(--color-brand-brunswick-green-p3), var(--color-brand-dark-green-p3))',
+        'gradient-hero-text-p3': 'linear-gradient(to right, var(--color-brand-brunswick-green-p3), var(--color-brand-brandeis-blue-p3))',
+        'gradient-green-p3': 'linear-gradient(135deg, var(--color-gradient-green-start), var(--color-gradient-green-end))',
+        'gradient-blue-p3': 'linear-gradient(135deg, var(--color-gradient-blue-start), var(--color-gradient-blue-end))',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
@@ -246,6 +262,11 @@ const config: Config = {
         'glow-green': '0 0 20px rgba(15, 76, 56, 0.4), 0 0 40px rgba(15, 76, 56, 0.1)',
         'glow-orange': '0 0 20px rgba(251, 97, 19, 0.4), 0 0 40px rgba(251, 97, 19, 0.1)',
         'glow-strong': '0 0 30px rgba(251, 97, 19, 0.5), 0 0 60px rgba(15, 76, 56, 0.2)',
+        // P3 Wide-Gamut Shadows
+        'glow-green-p3': 'var(--shadow-glow-green-p3, 0 0 20px rgba(15, 76, 56, 0.4), 0 0 40px rgba(15, 76, 56, 0.1))',
+        'glow-orange-p3': 'var(--shadow-glow-orange-p3, 0 0 20px rgba(251, 97, 19, 0.4), 0 0 40px rgba(251, 97, 19, 0.1))',
+        'glow-blue-p3': 'var(--shadow-glow-blue-p3, 0 0 20px rgba(0, 111, 234, 0.4), 0 0 40px rgba(0, 111, 234, 0.1))',
+        'glow-strong-p3': 'var(--shadow-glow-strong-p3, 0 0 30px rgba(251, 97, 19, 0.5), 0 0 60px rgba(15, 76, 56, 0.2))',
       },
       aspectRatio: {
         '4/3': '4 / 3',

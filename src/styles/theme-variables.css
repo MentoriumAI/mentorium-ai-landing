@@ -128,4 +128,204 @@
   --shadow-glow-green: 0 0 20px rgba(15, 76, 56, 0.4), 0 0 40px rgba(15, 76, 56, 0.1);
   --shadow-glow-orange: 0 0 20px rgba(251, 97, 19, 0.4), 0 0 40px rgba(251, 97, 19, 0.1);
   --shadow-glow-strong: 0 0 30px rgba(251, 97, 19, 0.5), 0 0 60px rgba(15, 76, 56, 0.2);
+
+  /* ================================================
+     HDR & Wide Gamut Color Enhancement
+     Display P3 / Rec.2020 Support with sRGB Fallbacks
+     ================================================ */
+
+  /* P3 Brand Colors (sRGB fallbacks) */
+  --color-brand-brunswick-green-p3: #0f4c38;
+  --color-brand-dark-green-p3: #093b2c;
+  --color-brand-brandeis-blue-p3: #006fea;
+  --color-brand-sunglow-p3: #fac827;
+  --color-brand-orange-pantone-p3: #fb6113;
+  --color-brand-dark-moss-green-p3: #536c03;
+
+  /* Ultra-white for HDR text highlights (sRGB fallback) */
+  --color-ultra-white: #ffffff;
+
+  /* ================================================
+     Hybrid sRGB→HDR Gradient System
+     Gradients start with sRGB and highlight with HDR
+     ================================================ */
+
+  /* Hero Gradient: Brunswick Green (sRGB) → Brandeis Blue (HDR highlight) */
+  --gradient-hero-text: linear-gradient(to right, #0f4c38, #006fea);
+
+  /* Primary Gradient: Dark Green (sRGB) → Brunswick Green (HDR highlight) */
+  --gradient-primary: linear-gradient(135deg, #093b2c, #0f4c38);
+
+  /* CTA Gradient: Dark Moss Green (sRGB) → Orange Pantone (HDR highlight) */
+  --gradient-cta: linear-gradient(to right, #536c03, #fb6113);
+
+  /* Accent Gradient: Brunswick Green (sRGB) → Sunglow (HDR highlight) */
+  --gradient-accent: linear-gradient(to right, #0f4c38, #fac827);
+
+  /* Cool Gradient: Dark Green (sRGB) → Brandeis Blue (HDR highlight) */
+  --gradient-cool: linear-gradient(to right, #093b2c, #006fea);
+
+  /* Warm Gradient: Dark Moss Green (sRGB) → Sunglow (HDR highlight) */
+  --gradient-warm: linear-gradient(to right, #536c03, #fac827);
+}
+
+/* ================================================
+   Display P3 Color Space Support
+   Enhanced colors for wide-gamut displays
+   ================================================ */
+@media (color-gamut: p3) {
+  @supports (color: color(display-p3 1 1 1)) {
+    :root {
+      /* Enhanced P3 Brand Colors - Intensified saturation */
+      --color-brand-brunswick-green-p3: color(display-p3 0.02 0.42 0.28);
+      --color-brand-dark-green-p3: color(display-p3 0.00 0.32 0.22);
+      --color-brand-brandeis-blue-p3: color(display-p3 0 0.55 1.0);
+      --color-brand-sunglow-p3: color(display-p3 1 0.82 0.12);
+      --color-brand-orange-pantone-p3: color(display-p3 1 0.38 0.05);
+      --color-brand-dark-moss-green-p3: color(display-p3 0.45 0.55 0.02);
+
+      /* Ultra-white for text highlights */
+      --color-ultra-white: color(display-p3 1 1 1);
+
+      /* ================================================
+         Hybrid sRGB→P3 Gradients
+         Start with sRGB, highlight ends with P3 colors
+         ================================================ */
+
+      /* Hero Gradient: Brunswick Green (sRGB) → Brandeis Blue (P3 highlight) */
+      --gradient-hero-text: linear-gradient(
+        to right,
+        #0f4c38,
+        color(display-p3 0 0.55 1.0)
+      );
+
+      /* Primary Gradient: Dark Green (sRGB) → Brunswick Green (P3 highlight) */
+      --gradient-primary: linear-gradient(
+        135deg,
+        #093b2c,
+        color(display-p3 0.02 0.42 0.28)
+      );
+
+      /* CTA Gradient: Dark Moss Green (sRGB) → Orange Pantone (P3 highlight) */
+      --gradient-cta: linear-gradient(
+        to right,
+        #536c03,
+        color(display-p3 1 0.38 0.05)
+      );
+
+      /* Accent Gradient: Brunswick Green (sRGB) → Sunglow (P3 highlight) */
+      --gradient-accent: linear-gradient(
+        to right,
+        #0f4c38,
+        color(display-p3 1 0.82 0.12)
+      );
+
+      /* Cool Gradient: Dark Green (sRGB) → Brandeis Blue (P3 highlight) */
+      --gradient-cool: linear-gradient(
+        to right,
+        #093b2c,
+        color(display-p3 0 0.55 1.0)
+      );
+
+      /* Warm Gradient: Dark Moss Green (sRGB) → Sunglow (P3 highlight) */
+      --gradient-warm: linear-gradient(
+        to right,
+        #536c03,
+        color(display-p3 1 0.82 0.12)
+      );
+
+      /* P3 Shadow Enhancements - stronger glows */
+      --shadow-glow-green-p3: 0 0 25px color(display-p3 0.02 0.50 0.35 / 0.6),
+                              0 0 50px color(display-p3 0.02 0.50 0.35 / 0.2);
+      --shadow-glow-orange-p3: 0 0 25px color(display-p3 1 0.45 0.10 / 0.6),
+                               0 0 50px color(display-p3 1 0.45 0.10 / 0.2);
+      --shadow-glow-blue-p3: 0 0 25px color(display-p3 0 0.55 1.0 / 0.6),
+                             0 0 50px color(display-p3 0 0.55 1.0 / 0.2);
+      --shadow-glow-strong-p3: 0 0 35px color(display-p3 1 0.45 0.10 / 0.7),
+                               0 0 70px color(display-p3 0.02 0.50 0.35 / 0.3);
+    }
+  }
+}
+
+/* ================================================
+   HDR High Dynamic Range Support
+   Ultra-saturated colors for HDR displays
+   ================================================ */
+@media (dynamic-range: high) {
+  @supports (color: color(display-p3 1 1 1)) {
+    :root {
+      /* Ultra-saturated HDR variants - MAXIMUM intensity */
+      --color-brand-brunswick-green-hdr: color(display-p3 0.00 0.55 0.38);
+      --color-brand-dark-green-hdr: color(display-p3 0.00 0.40 0.28);
+      --color-brand-brandeis-blue-hdr: color(display-p3 0 0.50 1.0);
+      --color-brand-sunglow-hdr: color(display-p3 1 0.78 0.00);
+      --color-brand-orange-pantone-hdr: color(display-p3 1 0.32 0.00);
+      --color-brand-dark-moss-green-hdr: color(display-p3 0.50 0.62 0.00);
+
+      /* Use HDR variants for primary colors */
+      --color-brand-brunswick-green-p3: var(--color-brand-brunswick-green-hdr);
+      --color-brand-dark-green-p3: var(--color-brand-dark-green-hdr);
+      --color-brand-brandeis-blue-p3: var(--color-brand-brandeis-blue-hdr);
+      --color-brand-sunglow-p3: var(--color-brand-sunglow-hdr);
+      --color-brand-orange-pantone-p3: var(--color-brand-orange-pantone-hdr);
+      --color-brand-dark-moss-green-p3: var(--color-brand-dark-moss-green-hdr);
+
+      /* ================================================
+         Hybrid sRGB→HDR Gradients
+         Start with sRGB, ULTRA-INTENSE HDR highlight ends
+         ================================================ */
+
+      /* Hero Gradient: Brunswick Green (sRGB) → Brandeis Blue (HDR ULTRA highlight) */
+      --gradient-hero-text: linear-gradient(
+        to right,
+        #0f4c38,
+        color(display-p3 0 0.50 1.0)
+      );
+
+      /* Primary Gradient: Dark Green (sRGB) → Brunswick Green (HDR highlight) */
+      --gradient-primary: linear-gradient(
+        135deg,
+        #093b2c,
+        color(display-p3 0.00 0.55 0.38)
+      );
+
+      /* CTA Gradient: Dark Moss Green (sRGB) → Orange Pantone (HDR ULTRA highlight) */
+      --gradient-cta: linear-gradient(
+        to right,
+        #536c03,
+        color(display-p3 1 0.32 0.00)
+      );
+
+      /* Accent Gradient: Brunswick Green (sRGB) → Sunglow (HDR ULTRA highlight) */
+      --gradient-accent: linear-gradient(
+        to right,
+        #0f4c38,
+        color(display-p3 1 0.78 0.00)
+      );
+
+      /* Cool Gradient: Dark Green (sRGB) → Brandeis Blue (HDR ULTRA highlight) */
+      --gradient-cool: linear-gradient(
+        to right,
+        #093b2c,
+        color(display-p3 0 0.50 1.0)
+      );
+
+      /* Warm Gradient: Dark Moss Green (sRGB) → Sunglow (HDR ULTRA highlight) */
+      --gradient-warm: linear-gradient(
+        to right,
+        #536c03,
+        color(display-p3 1 0.78 0.00)
+      );
+
+      /* HDR Shadow Enhancements - intense glows */
+      --shadow-glow-green-p3: 0 0 30px color(display-p3 0.00 0.60 0.42 / 0.7),
+                              0 0 60px color(display-p3 0.00 0.60 0.42 / 0.25);
+      --shadow-glow-orange-p3: 0 0 30px color(display-p3 1 0.40 0.05 / 0.7),
+                               0 0 60px color(display-p3 1 0.40 0.05 / 0.25);
+      --shadow-glow-blue-p3: 0 0 30px color(display-p3 0 0.50 1.0 / 0.7),
+                             0 0 60px color(display-p3 0 0.50 1.0 / 0.25);
+      --shadow-glow-strong-p3: 0 0 40px color(display-p3 1 0.40 0.05 / 0.8),
+                               0 0 80px color(display-p3 0.00 0.60 0.42 / 0.35);
+    }
+  }
 }

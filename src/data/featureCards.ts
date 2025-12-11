@@ -8,6 +8,10 @@ export interface FeatureCard {
   accentColor: string
   backgroundColor: string
   borderColor: string
+  // P3 Wide-Gamut color variants (used on HDR/P3 displays)
+  p3AccentColor?: string
+  p3BackgroundColor?: string
+  p3BorderColor?: string
   chips: string[]
 }
 
@@ -21,6 +25,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(0, 111, 234)',
     backgroundColor: 'rgba(0, 111, 234, 0.12)',
     borderColor: 'rgba(0, 111, 234, 0.35)',
+    p3AccentColor: 'color(display-p3 0 0.52 0.95)',
+    p3BackgroundColor: 'color(display-p3 0 0.52 0.95 / 0.12)',
+    p3BorderColor: 'color(display-p3 0 0.52 0.95 / 0.35)',
     chips: ['Eficiencia']
   },
   {
@@ -32,6 +39,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(15, 76, 56)',
     backgroundColor: 'rgba(15, 76, 56, 0.12)',
     borderColor: 'rgba(15, 76, 56, 0.35)',
+    p3AccentColor: 'color(display-p3 0.08 0.35 0.26)',
+    p3BackgroundColor: 'color(display-p3 0.08 0.35 0.26 / 0.12)',
+    p3BorderColor: 'color(display-p3 0.08 0.35 0.26 / 0.35)',
     chips: ['Automatización', 'Eficiencia']
   },
   {
@@ -43,6 +53,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(255, 196, 0)',
     backgroundColor: 'rgba(255, 196, 0, 0.15)',
     borderColor: 'rgba(255, 196, 0, 0.4)',
+    p3AccentColor: 'color(display-p3 1 0.85 0.25)',
+    p3BackgroundColor: 'color(display-p3 1 0.85 0.25 / 0.15)',
+    p3BorderColor: 'color(display-p3 1 0.85 0.25 / 0.4)',
     chips: ['AI', 'Datos']
   },
   {
@@ -54,6 +67,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(251, 97, 19)',
     backgroundColor: 'rgba(251, 97, 19, 0.12)',
     borderColor: 'rgba(251, 97, 19, 0.35)',
+    p3AccentColor: 'color(display-p3 1 0.45 0.15)',
+    p3BackgroundColor: 'color(display-p3 1 0.45 0.15 / 0.12)',
+    p3BorderColor: 'color(display-p3 1 0.45 0.15 / 0.35)',
     chips: ['Seguimiento', 'AI']
   },
   {
@@ -65,6 +81,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(0, 111, 234)',
     backgroundColor: 'rgba(0, 111, 234, 0.12)',
     borderColor: 'rgba(0, 111, 234, 0.35)',
+    p3AccentColor: 'color(display-p3 0 0.52 0.95)',
+    p3BackgroundColor: 'color(display-p3 0 0.52 0.95 / 0.12)',
+    p3BorderColor: 'color(display-p3 0 0.52 0.95 / 0.35)',
     chips: ['Aprendizaje', 'AI']
   },
   {
@@ -76,6 +95,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(15, 76, 56)',
     backgroundColor: 'rgba(15, 76, 56, 0.12)',
     borderColor: 'rgba(15, 76, 56, 0.35)',
+    p3AccentColor: 'color(display-p3 0.08 0.35 0.26)',
+    p3BackgroundColor: 'color(display-p3 0.08 0.35 0.26 / 0.12)',
+    p3BorderColor: 'color(display-p3 0.08 0.35 0.26 / 0.35)',
     chips: ['Comunidad', 'Eficiencia']
   },
   {
@@ -87,6 +109,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(251, 97, 19)',
     backgroundColor: 'rgba(251, 97, 19, 0.12)',
     borderColor: 'rgba(251, 97, 19, 0.35)',
+    p3AccentColor: 'color(display-p3 1 0.45 0.15)',
+    p3BackgroundColor: 'color(display-p3 1 0.45 0.15 / 0.12)',
+    p3BorderColor: 'color(display-p3 1 0.45 0.15 / 0.35)',
     chips: ['Soporte', 'AI']
   },
   {
@@ -98,6 +123,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(0, 111, 234)',
     backgroundColor: 'rgba(0, 111, 234, 0.12)',
     borderColor: 'rgba(0, 111, 234, 0.35)',
+    p3AccentColor: 'color(display-p3 0 0.52 0.95)',
+    p3BackgroundColor: 'color(display-p3 0 0.52 0.95 / 0.12)',
+    p3BorderColor: 'color(display-p3 0 0.52 0.95 / 0.35)',
     chips: ['Soporte Local']
   },
   {
@@ -109,6 +137,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(255, 196, 0)',
     backgroundColor: 'rgba(255, 196, 0, 0.15)',
     borderColor: 'rgba(255, 196, 0, 0.4)',
+    p3AccentColor: 'color(display-p3 1 0.85 0.25)',
+    p3BackgroundColor: 'color(display-p3 1 0.85 0.25 / 0.15)',
+    p3BorderColor: 'color(display-p3 1 0.85 0.25 / 0.4)',
     chips: ['Adaptabilidad', 'AI']
   },
   {
@@ -120,6 +151,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(15, 76, 56)',
     backgroundColor: 'rgba(15, 76, 56, 0.12)',
     borderColor: 'rgba(15, 76, 56, 0.35)',
+    p3AccentColor: 'color(display-p3 0.08 0.35 0.26)',
+    p3BackgroundColor: 'color(display-p3 0.08 0.35 0.26 / 0.12)',
+    p3BorderColor: 'color(display-p3 0.08 0.35 0.26 / 0.35)',
     chips: ['Seguridad', 'Autogestión']
   },
   {
@@ -131,6 +165,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(251, 97, 19)',
     backgroundColor: 'rgba(251, 97, 19, 0.12)',
     borderColor: 'rgba(251, 97, 19, 0.35)',
+    p3AccentColor: 'color(display-p3 1 0.45 0.15)',
+    p3BackgroundColor: 'color(display-p3 1 0.45 0.15 / 0.12)',
+    p3BorderColor: 'color(display-p3 1 0.45 0.15 / 0.35)',
     chips: ['Adaptabilidad', 'AI']
   },
   {
@@ -142,6 +179,9 @@ export const featureCards: FeatureCard[] = [
     accentColor: 'rgb(0, 111, 234)',
     backgroundColor: 'rgba(0, 111, 234, 0.12)',
     borderColor: 'rgba(0, 111, 234, 0.35)',
+    p3AccentColor: 'color(display-p3 0 0.52 0.95)',
+    p3BackgroundColor: 'color(display-p3 0 0.52 0.95 / 0.12)',
+    p3BorderColor: 'color(display-p3 0 0.52 0.95 / 0.35)',
     chips: ['Online', 'Flexible']
   }
 ]

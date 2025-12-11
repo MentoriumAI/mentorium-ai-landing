@@ -184,14 +184,329 @@
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* P3 Wide-Gamut Color Utilities */
+  .text-p3-green {
+    color: var(--color-brand-brunswick-green-p3);
+  }
+
+  .text-p3-blue {
+    color: var(--color-brand-brandeis-blue-p3);
+  }
+
+  .text-p3-orange {
+    color: var(--color-brand-orange-pantone-p3);
+  }
+
+  .text-p3-sunglow {
+    color: var(--color-brand-sunglow-p3);
+  }
+
+  .bg-p3-green {
+    background-color: var(--color-brand-brunswick-green-p3);
+  }
+
+  .bg-p3-blue {
+    background-color: var(--color-brand-brandeis-blue-p3);
+  }
+
+  .bg-p3-orange {
+    background-color: var(--color-brand-orange-pantone-p3);
+  }
+
+  /* P3 Gradient Text - for hero headlines (legacy - uses P3 on both ends) */
+  .p3-gradient-text {
+    background: linear-gradient(
+      to right,
+      var(--color-brand-brunswick-green-p3),
+      var(--color-brand-brandeis-blue-p3)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ================================================
+     Hybrid sRGB→HDR Gradient Utilities
+     Start with sRGB colors, end with HDR highlights
+     ================================================ */
+
+  /* Hero Text Gradient: sRGB Green → HDR Blue highlight */
+  .hdr-gradient-hero-text {
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Primary Gradient Background */
+  .hdr-gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  /* CTA Gradient: sRGB Moss → HDR Orange highlight */
+  .hdr-gradient-cta {
+    background: var(--gradient-cta);
+  }
+
+  /* CTA Gradient Text */
+  .hdr-gradient-cta-text {
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Accent Gradient: sRGB Green → HDR Gold highlight */
+  .hdr-gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  /* Accent Gradient Text */
+  .hdr-gradient-accent-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Cool Gradient: sRGB Dark → HDR Blue highlight */
+  .hdr-gradient-cool {
+    background: var(--gradient-cool);
+  }
+
+  /* Cool Gradient Text */
+  .hdr-gradient-cool-text {
+    background: var(--gradient-cool);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Warm Gradient: sRGB Moss → HDR Gold highlight */
+  .hdr-gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  /* Warm Gradient Text */
+  .hdr-gradient-warm-text {
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ================================================
+     HDR Gradient Text with White Outline
+     Uses text-shadow for outer glow - preserves letterforms
+     Brighter on HDR displays
+     ================================================ */
+
+  /* HDR white outline shadow - creates outer glow without eating into text */
+  .hdr-gradient-hero-outline {
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      0 0 2px var(--color-ultra-white),
+      0 0 4px var(--color-ultra-white),
+      0 0 8px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-cta-outline {
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      0 0 2px var(--color-ultra-white),
+      0 0 4px var(--color-ultra-white),
+      0 0 8px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-accent-outline {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      0 0 2px var(--color-ultra-white),
+      0 0 4px var(--color-ultra-white),
+      0 0 8px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-cool-outline {
+    background: var(--gradient-cool);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      0 0 2px var(--color-ultra-white),
+      0 0 4px var(--color-ultra-white),
+      0 0 8px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-warm-outline {
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      0 0 2px var(--color-ultra-white),
+      0 0 4px var(--color-ultra-white),
+      0 0 8px var(--color-ultra-white);
+  }
+
+  /* Crisp outline variant - sharper edges using offset shadows */
+  .hdr-gradient-hero-outline-crisp {
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      -1px -1px 0 var(--color-ultra-white),
+       1px -1px 0 var(--color-ultra-white),
+      -1px  1px 0 var(--color-ultra-white),
+       1px  1px 0 var(--color-ultra-white);
+  }
+
+  .hdr-gradient-cta-outline-crisp {
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      -1px -1px 0 var(--color-ultra-white),
+       1px -1px 0 var(--color-ultra-white),
+      -1px  1px 0 var(--color-ultra-white),
+       1px  1px 0 var(--color-ultra-white);
+  }
+
+  .hdr-gradient-accent-outline-crisp {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      -1px -1px 0 var(--color-ultra-white),
+       1px -1px 0 var(--color-ultra-white),
+      -1px  1px 0 var(--color-ultra-white),
+       1px  1px 0 var(--color-ultra-white);
+  }
+
+  .hdr-gradient-cool-outline-crisp {
+    background: var(--gradient-cool);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      -1px -1px 0 var(--color-ultra-white),
+       1px -1px 0 var(--color-ultra-white),
+      -1px  1px 0 var(--color-ultra-white),
+       1px  1px 0 var(--color-ultra-white);
+  }
+
+  .hdr-gradient-warm-outline-crisp {
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow:
+      -1px -1px 0 var(--color-ultra-white),
+       1px -1px 0 var(--color-ultra-white),
+      -1px  1px 0 var(--color-ultra-white),
+       1px  1px 0 var(--color-ultra-white);
+  }
+
+  /* Legacy border classes - kept for backwards compatibility */
+  .hdr-gradient-hero-border {
+    background: var(--gradient-hero-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-cta-border {
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-accent-border {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-cool-border {
+    background: var(--gradient-cool);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-ultra-white);
+  }
+
+  .hdr-gradient-warm-border {
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-ultra-white);
+  }
+
+  /* Icon P3 enhancement classes */
+  .icon-p3-green {
+    color: var(--color-brand-brunswick-green-p3);
+  }
+
+  .icon-p3-blue {
+    color: var(--color-brand-brandeis-blue-p3);
+  }
+
+  .icon-p3-orange {
+    color: var(--color-brand-orange-pantone-p3);
+  }
+
+  /* P3 Glow effects */
+  .p3-glow-green {
+    box-shadow: var(--shadow-glow-green-p3, 0 0 20px rgba(15, 76, 56, 0.4));
+  }
+
+  .p3-glow-blue {
+    box-shadow: var(--shadow-glow-blue-p3, 0 0 20px rgba(0, 111, 234, 0.4));
+  }
+
+  .p3-glow-orange {
+    box-shadow: var(--shadow-glow-orange-p3, 0 0 20px rgba(251, 97, 19, 0.4));
+  }
+
+  /* HDR-enhanced ultra-white backgrounds */
+  .bg-ultra-white {
+    background-color: var(--color-ultra-white);
+  }
+
+  /* P3 border utilities */
+  .border-p3-green {
+    border-color: var(--color-brand-brunswick-green-p3);
+  }
+
+  .border-p3-blue {
+    border-color: var(--color-brand-brandeis-blue-p3);
   }
 }
 

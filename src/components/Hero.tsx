@@ -5,7 +5,6 @@ import { ArrowRightIcon } from '@/components/icons'
 import CardShowreel from '@/components/animations/CardShowreel'
 
 const Hero = () => {
-
   return (
     <section id="inicio" className="relative min-h-screen hero-gradient overflow-hidden">
       {/* Subtle Background Gradient */}
@@ -17,8 +16,8 @@ const Hero = () => {
           <div className="text-center max-w-5xl mx-auto space-y-4 sm:space-y-6">
             {/* Main Heading */}
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold" style={{ fontFamily: 'var(--font-faculty-glyphic)', lineHeight: '1.15', paddingBottom: '0.25rem' }}>
-              <span className="bg-gradient-to-r from-brand-brunswick-green to-brand-brandeis-blue bg-clip-text text-transparent" style={{ display: 'inline-block', paddingBottom: '0.1em' }}>Mentorium</span><br/>
-              <span className="bg-gradient-to-br from-brand-brunswick-green to-brand-dark-moss-green bg-clip-text text-transparent" style={{ display: 'inline-block', paddingBottom: '0.1em' }}>La plataforma educativa inteligente que transforma la enseñanza y el aprendizaje</span>
+              <span className="p3-gradient-text" style={{ display: 'inline-block', paddingBottom: '0.1em' }}>Mentorium</span><br/>
+              <span className="bg-gradient-to-br from-brand-p3-brunswick-green to-brand-p3-dark-moss-green bg-clip-text text-transparent" style={{ display: 'inline-block', paddingBottom: '0.1em' }}>La plataforma educativa inteligente que transforma la enseñanza y el aprendizaje</span>
             </h1>
 
             {/* Subtitle */}
@@ -28,14 +27,14 @@ const Hero = () => {
 
             {/* CTA Button */}
             <div className="flex flex-col items-center gap-4">
-              <Link 
-                href="/start" 
+              <Link
+                href="/start"
                 className="btn-primary btn-large group"
               >
                 <span className="text-base sm:text-lg">Comienza hoy con Mentorium</span>
                 <ArrowRightIcon className="ml-2 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
               </Link>
-              
+
               {/* Microcopy */}
               <p className="text-base text-brand-dark-green/60">
                 100% online, sin instalación y sin costo inicial.

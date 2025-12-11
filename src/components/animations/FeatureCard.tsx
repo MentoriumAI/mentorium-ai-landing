@@ -2,6 +2,7 @@
 
 import { FeatureCard as FeatureCardType } from '@/data/featureCards'
 import { CARD_HEIGHT_CSS } from '@/constants/cardDimensions'
+import { useP3Support } from '@/hooks/useP3Support'
 
 interface FeatureCardProps {
   card: FeatureCardType
@@ -10,6 +11,12 @@ interface FeatureCardProps {
 }
 
 export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardProps) => {
+  const { supportsP3 } = useP3Support()
+
+  // Use P3 colors when supported, with sRGB fallbacks
+  const accentColor = supportsP3 && card.p3AccentColor ? card.p3AccentColor : card.accentColor
+  const backgroundColor = supportsP3 && card.p3BackgroundColor ? card.p3BackgroundColor : card.backgroundColor
+  const borderColor = supportsP3 && card.p3BorderColor ? card.p3BorderColor : card.borderColor
   return (
     <div
       className={`
@@ -19,8 +26,8 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
       `}
       style={{
         height: CARD_HEIGHT_CSS,
-        background: `linear-gradient(135deg, ${card.backgroundColor}cc, ${card.accentColor}15, ${card.accentColor}25)`,
-        borderColor: card.borderColor,
+        background: `linear-gradient(135deg, ${backgroundColor}, ${accentColor}15, ${accentColor}25)`,
+        borderColor: borderColor,
         borderWidth: '2px',
         borderStyle: 'solid',
         boxShadow: `0 4px 16px ${card.accentColor}10, 0 0 0 1px ${card.accentColor}15`
@@ -28,24 +35,24 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
       onClick={onClick}
     >
       {/* Color accent strip */}
-      <div 
+      <div
         className="absolute top-0 left-0 w-full h-1"
-        style={{ 
-          background: `linear-gradient(90deg, ${card.accentColor}, ${card.accentColor}80, transparent)` 
+        style={{
+          background: `linear-gradient(90deg, ${accentColor}, ${card.accentColor}80, transparent)`
         }}
       />
       {/* Header - Fixed at top */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
           {/* Icon with enhanced styling */}
-          <div 
+          <div
             className={`
               card-icon w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl lg:text-2xl flex-shrink-0
-              transition-all duration-200 
+              transition-all duration-200
               ${isFocused ? 'scale-110 rotate-3' : 'hover:scale-105'}
             `}
             style={{
-              backgroundColor: card.accentColor,
+              backgroundColor: accentColor,
               color: 'white',
               boxShadow: `0 4px 12px ${card.accentColor}40, inset 0 1px 0 rgba(255,255,255,0.2)`
             }}
@@ -87,10 +94,10 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
       <div className="flex-1 flex flex-col justify-between">
         {/* Title with color accent */}
         <div className="mb-3">
-          <h3 
+          <h3
             className="text-base sm:text-lg lg:text-xl font-bold leading-tight transition-colors duration-200"
-            style={{ 
-              color: isFocused ? card.accentColor : '#093b2c'
+            style={{
+              color: isFocused ? accentColor : '#093b2c'
             }}
           >
             {card.title}
@@ -106,10 +113,10 @@ export const FeatureCard = ({ card, isFocused = false, onClick }: FeatureCardPro
 
         {/* Elegant progress indicator with shimmer effect */}
         <div className="mb-3">
-          <div 
+          <div
             className="progress-bar h-1 rounded-full"
             style={{
-              background: `linear-gradient(to right, ${card.accentColor}, ${card.accentColor}60, ${card.accentColor}20)`
+              background: `linear-gradient(to right, ${accentColor}, ${card.accentColor}60, ${card.accentColor}20)`
             }}
           />
         </div>
